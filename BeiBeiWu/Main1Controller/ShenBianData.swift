@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 class ShenBianData{
     
+    var userID: String
     var userPortrait:String
     var userNickName: String
     var userAge: String
@@ -19,7 +20,8 @@ class ShenBianData{
     var userRegion: String
     var userVIP: String
     
-    init(userPortrait:String,userNickName:String,userAge: String,userGender: String,userProperty: String,userDistance: String,userRegion: String,userVIP: String) {
+    init(userID: String,userPortrait:String,userNickName:String,userAge: String,userGender: String,userProperty: String,userDistance: String,userRegion: String,userVIP: String) {
+        self.userID = userID
         self.userPortrait = userPortrait
         self.userNickName = userNickName
         self.userAge = userAge

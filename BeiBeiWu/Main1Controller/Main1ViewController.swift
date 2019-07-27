@@ -17,6 +17,18 @@ struct SliderImages: Codable {
     let slideurl:String?
 }
 
+struct TuiJianUserInfo: Codable {
+    let id: String
+    let portrait: String?
+    let nickname: String?
+    let age: String?
+    let gender: String?
+    let property: String?
+    let region: String?
+    let vip: String?
+    let location: String?
+}
+
 
 class Main1ViewController: UIViewController {
 
@@ -28,6 +40,8 @@ class Main1ViewController: UIViewController {
     var counter = 0
     
     //列表
+    
+    @IBOutlet weak var shenBianTableView: UITableView!
     var dataList:[ShenBianData] = []
     
     override func viewDidLoad() {
@@ -57,30 +71,54 @@ class Main1ViewController: UIViewController {
             
             
             //获取幻灯片数据
-            let parameters: Parameters = ["type": "getSlide"]
-            Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: parameters).response { response in
+            let getSlide: Parameters = ["type": "getSlide"]
+            Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getSlide).response { response in
                 if let data = response.data {
                     let decoder = JSONDecoder()
                     do {
                         let jsonModel = try decoder.decode([SliderImages].self, from: data)
                         for index in 0..<jsonModel.count{
                             let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
-                            self.imageArr.removeAll()
                             self.imageArr.append(UIImage(data: data)!)
-                            self.pageView.numberOfPages = self.imageArr.count
-                            self.pageView.currentPage = 0
-                            DispatchQueue.main.async {
-                                self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
-                            }
                         }
-                        
+                        self.sliderCollectionView.reloadData()
+                        self.pageView.numberOfPages = self.imageArr.count
+                        self.pageView.currentPage = 0
+                        DispatchQueue.main.async {
+                            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
+                        }
+                    } catch {
+                        print("解析 JSON 失败")
+                    }
+                }
+            }
+            
+            //获取推荐列表
+            var getUserInfo: Parameters
+            if let latitude = UserDefaults().string(forKey: "latitude"),let longitude = UserDefaults().string(forKey: "longitude"){
+                getUserInfo = ["type": "getUserInfo","latitude":latitude,"longitude":longitude]
+            }else{
+                getUserInfo = ["type": "getUserInfo"]
+            }
+            
+            Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getUserInfo).response { response in
+                if let data = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        let jsonModel = try decoder.decode([TuiJianUserInfo].self, from: data)
+                        for index in 0..<jsonModel.count{
+                            let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
+                                , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
+                            self.dataList.append(cell)
+                        }
+                        self.shenBianTableView.reloadData()
                     } catch {
                         print("解析 JSON 失败")
                     }
                 }
             }
         }
-        
+
     }
     
     
