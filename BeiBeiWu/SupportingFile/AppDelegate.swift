@@ -7,16 +7,49 @@
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let locationManager = CLLocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        checkLocationServices()
         return true
+    }
+    func checkLocationServices(){
+        if CLLocationManager.locationServicesEnabled(){
+            setupLocationManager()
+            checkLocationAuthorization()
+        }else{
+            
+        }
+    }
+    
+    func setupLocationManager(){
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func checkLocationAuthorization(){
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+            break
+        case .denied:
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            break
+        case .authorizedAlways:
+            break
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -44,3 +77,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else{return}
+        //判断是否为空
+        if(location.horizontalAccuracy > 0){
+            let lat = Double(String(format: "%.1f", location.coordinate.latitude))
+            let long = Double(String(format: "%.1f", location.coordinate.longitude))
+            print("纬度:\(long!)")
+            print("经度:\(lat!)")
+    
+            let userInfo = UserDefaults()
+            userInfo.setValue(lat!, forKey: "latitude")
+            userInfo.setValue(long!, forKey: "longitude")
+            
+            //停止定位
+            locationManager.stopUpdatingLocation()
+        }
+    }
+}

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		053F3EE922ECD760004C4864 /* TableViewCellShenbian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053F3EE822ECD760004C4864 /* TableViewCellShenbian.swift */; };
+		053F3EEB22ECD788004C4864 /* ShenBianData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053F3EEA22ECD788004C4864 /* ShenBianData.swift */; };
 		0542B99A22E77CBD00E1AC34 /* Main1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0542B99922E77CBD00E1AC34 /* Main1.storyboard */; };
 		0542B99C22E77CCF00E1AC34 /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0542B99B22E77CCF00E1AC34 /* Main2.storyboard */; };
 		0542B99E22E77CDD00E1AC34 /* Main3.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0542B99D22E77CDD00E1AC34 /* Main3.storyboard */; };
@@ -20,6 +22,8 @@
 		057B1FD622EA9096000B8811 /* Main3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B1FD522EA9096000B8811 /* Main3ViewController.swift */; };
 		057B1FD922EA90AE000B8811 /* Main4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B1FD822EA90AE000B8811 /* Main4ViewController.swift */; };
 		057B1FDC22EA90ED000B8811 /* Main5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B1FDB22EA90ED000B8811 /* Main5ViewController.swift */; };
+		057B1FDE22EA99A2000B8811 /* AlterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B1FDD22EA99A2000B8811 /* AlterButton.swift */; };
+		057B1FE022EB9523000B8811 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057B1FDF22EB9523000B8811 /* CoreLocation.framework */; };
 		05C9B86922E6D6A90075364D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9B86822E6D6A90075364D /* AppDelegate.swift */; };
 		05C9B86B22E6D6A90075364D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9B86A22E6D6A90075364D /* ViewController.swift */; };
 		05C9B86E22E6D6A90075364D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C9B86C22E6D6A90075364D /* Main.storyboard */; };
@@ -29,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		053F3EE822ECD760004C4864 /* TableViewCellShenbian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellShenbian.swift; sourceTree = "<group>"; };
+		053F3EEA22ECD788004C4864 /* ShenBianData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShenBianData.swift; sourceTree = "<group>"; };
 		0542B99922E77CBD00E1AC34 /* Main1.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main1.storyboard; sourceTree = "<group>"; };
 		0542B99B22E77CCF00E1AC34 /* Main2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		0542B99D22E77CDD00E1AC34 /* Main3.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main3.storyboard; sourceTree = "<group>"; };
@@ -42,6 +48,8 @@
 		057B1FD522EA9096000B8811 /* Main3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main3ViewController.swift; sourceTree = "<group>"; };
 		057B1FD822EA90AE000B8811 /* Main4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main4ViewController.swift; sourceTree = "<group>"; };
 		057B1FDB22EA90ED000B8811 /* Main5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main5ViewController.swift; sourceTree = "<group>"; };
+		057B1FDD22EA99A2000B8811 /* AlterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlterButton.swift; sourceTree = "<group>"; };
+		057B1FDF22EB9523000B8811 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		05C9B86522E6D6A90075364D /* BeiBeiWu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeiBeiWu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C9B86822E6D6A90075364D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05C9B86A22E6D6A90075364D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				057B1FE022EB9523000B8811 /* CoreLocation.framework in Frameworks */,
 				740B4CAEF0DF76821B768B06 /* Pods_BeiBeiWu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +104,8 @@
 				057B1FCB22EA8E18000B8811 /* SignInViewController.swift */,
 				057B1FCD22EA8E27000B8811 /* SignUpViewController.swift */,
 				057B1FCF22EA8E36000B8811 /* UserSetViewController.swift */,
+				053F3EE822ECD760004C4864 /* TableViewCellShenbian.swift */,
+				053F3EEA22ECD788004C4864 /* ShenBianData.swift */,
 			);
 			path = Main1Controller;
 			sourceTree = "<group>";
@@ -162,6 +173,7 @@
 				05C9B86C22E6D6A90075364D /* Main.storyboard */,
 				0542B99722E77BED00E1AC34 /* SupportingFile */,
 				05C9B87422E6D6AA0075364D /* Info.plist */,
+				057B1FDD22EA99A2000B8811 /* AlterButton.swift */,
 			);
 			path = BeiBeiWu;
 			sourceTree = "<group>";
@@ -178,6 +190,7 @@
 		D1907FE0D47A39E8F0BDBD60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				057B1FDF22EB9523000B8811 /* CoreLocation.framework */,
 				EF485232730B18E4C7AEA4B8 /* Pods_BeiBeiWu.framework */,
 			);
 			name = Frameworks;
@@ -303,13 +316,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				053F3EEB22ECD788004C4864 /* ShenBianData.swift in Sources */,
 				057B1FD022EA8E36000B8811 /* UserSetViewController.swift in Sources */,
 				057B1FCC22EA8E18000B8811 /* SignInViewController.swift in Sources */,
 				057B1FCA22EA8DFA000B8811 /* Main1ViewController.swift in Sources */,
 				057B1FD622EA9096000B8811 /* Main3ViewController.swift in Sources */,
 				05C9B86B22E6D6A90075364D /* ViewController.swift in Sources */,
+				053F3EE922ECD760004C4864 /* TableViewCellShenbian.swift in Sources */,
 				05C9B86922E6D6A90075364D /* AppDelegate.swift in Sources */,
 				057B1FD322EA9072000B8811 /* Main2ViewController.swift in Sources */,
+				057B1FDE22EA99A2000B8811 /* AlterButton.swift in Sources */,
 				057B1FDC22EA90ED000B8811 /* Main5ViewController.swift in Sources */,
 				057B1FD922EA90AE000B8811 /* Main4ViewController.swift in Sources */,
 				057B1FCE22EA8E27000B8811 /* SignUpViewController.swift in Sources */,
