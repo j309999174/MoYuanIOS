@@ -38,5 +38,7 @@ class TableViewCellShenbian: UITableViewCell {
         userRegion.text = shenBianData.userRegion
         userVIP.text = shenBianData.userVIP
     }
+    
+    
 
 }

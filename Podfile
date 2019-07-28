@@ -7,5 +7,6 @@ target 'BeiBeiWu' do
 
   # Pods for sliderview
 pod 'Alamofire', '~> 4.7'
+pod 'FSPagerView'
 
 end
