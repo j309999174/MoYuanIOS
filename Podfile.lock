@@ -1,20 +1,27 @@
 PODS:
   - Alamofire (4.8.2)
   - FSPagerView (0.8.2)
+  - RongCloudIM/IMKit (2.8.32):
+    - RongCloudIM/IMLib
+  - RongCloudIM/IMLib (2.8.32)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - FSPagerView
+  - RongCloudIM/IMKit (~> 2.8.3)
+  - RongCloudIM/IMLib (~> 2.8.3)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - FSPagerView
+    - RongCloudIM
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
+  RongCloudIM: 48bfc2fcb8d7cae8ce1e19cb5fb26d6d90616375
 
-PODFILE CHECKSUM: c5b0665c0ebdca342dcc4fcd449c1c745ccf54c9
+PODFILE CHECKSUM: cddf76f35adabd6ce2e559c8fdf3a01e55d03970
 
-COCOAPODS: 1.7.2
+COCOAPODS: 1.7.5

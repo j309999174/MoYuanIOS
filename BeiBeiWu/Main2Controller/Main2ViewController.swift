@@ -8,14 +8,34 @@
 
 import UIKit
 
-class Main2ViewController: UIViewController {
+class Main2ViewController: RCConversationListViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        let type1:RCConversationType = .ConversationType_PRIVATE
+//        let type2:RCConversationType = .ConversationType_DISCUSSION
+//        let type3:RCConversationType = .ConversationType_CHATROOM
+//        let type4:RCConversationType = .ConversationType_GROUP
+//        let type5:RCConversationType = .ConversationType_APPSERVICE
+//        let type6:RCConversationType = .ConversationType_SYSTEM
+        
+        setDisplayConversationTypes([1,2,3,4,6,7])
+        
+        setCollectionConversationType([7])
         // Do any additional setup after loading the view.
     }
     
+    
+    override
+    func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
+        let vc = RCConversationViewController()
+        vc.conversationType = model.conversationType
+        vc.targetId = model.targetId
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
 
     /*
     // MARK: - Navigation
@@ -28,3 +48,5 @@ class Main2ViewController: UIViewController {
     */
 
 }
+
+

@@ -8,5 +8,7 @@ target 'BeiBeiWu' do
   # Pods for sliderview
 pod 'Alamofire', '~> 4.7'
 pod 'FSPagerView'
+pod 'RongCloudIM/IMLib', '~> 2.8.3'
+pod 'RongCloudIM/IMKit', '~> 2.8.3'
 
 end

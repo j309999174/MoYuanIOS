@@ -1,14 +1,14 @@
 //
-//  TableViewCellShenbian.swift
+//  SousuoTableViewCell.swift
 //  BeiBeiWu
 //
-//  Created by 江东 on 2019/7/27.
+//  Created by 江东 on 2019/7/30.
 //  Copyright © 2019 江东. All rights reserved.
 //
 
 import UIKit
 
-class TableViewCellShenbian: UITableViewCell {
+class SousuoTableViewCell: UITableViewCell {
     @IBOutlet weak var userPortrait: UIImageView!
     @IBOutlet weak var userNickName: UILabel!
     @IBOutlet weak var userAge: UILabel!
@@ -40,7 +40,6 @@ class TableViewCellShenbian: UITableViewCell {
         userVIP.text = data.userVIP
         userID.text = data.userID
     }
-    
     
 
 }
