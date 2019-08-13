@@ -134,7 +134,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3K-1U-PSz">
-                                                            <rect key="frame" x="116" y="19" width="109" height="15"/>
+                                                            <rect key="frame" x="116" y="19" width="244" height="15"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
@@ -192,7 +192,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JE0-B4-FPP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="626.39999999999998" y="104.1871921182266"/>
+            <point key="canvasLocation" x="626.39999999999998" y="103.89805097451276"/>
         </scene>
         <!--Sousuo View Controller-->
         <scene sceneID="jD4-he-Iv9">
@@ -652,7 +652,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WrD-C1-frE">
                                 <rect key="frame" x="87.5" y="75.5" width="200" height="516"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oxZ-hG-IYm">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="oxZ-hG-IYm">
                                         <rect key="frame" x="40" y="0.0" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="7qV-2M-fM6"/>
@@ -758,6 +758,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" width="201" height="200"/>
         <image name="shenbian" width="25" height="25"/>
     </resources>
 </document>

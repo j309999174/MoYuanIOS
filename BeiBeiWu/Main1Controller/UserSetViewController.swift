@@ -147,7 +147,7 @@ extension UserSetViewController:UIImagePickerControllerDelegate,UINavigationCont
         let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                            .userDomainMask, true)[0] as String
         let filePath = "\(rootPath)/pickedimage.jpg"
-        let imageData = image.jpegData(compressionQuality: 0.0)
+        let imageData = image.jpegData(compressionQuality: 0.1)
         fileManager.createFile(atPath: filePath, contents: imageData, attributes: nil)
         
         picker.dismiss(animated: true, completion: nil)

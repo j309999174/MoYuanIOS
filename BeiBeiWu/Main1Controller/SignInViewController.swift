@@ -89,6 +89,17 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
+        //删除文件
+        let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                           .userDomainMask, true)[0] as String
+        let filePath = "\(rootPath)/pickedimage.jpg"
+        let fileManager = FileManager.default
+        do{
+            try fileManager.removeItem(atPath: filePath)
+            print("Success to remove file.")
+        }catch{
+            print("Failed to remove file.")
+        }
         // Do any additional setup after loading the view.
     }
     
