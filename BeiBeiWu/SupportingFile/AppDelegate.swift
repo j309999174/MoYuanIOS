@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -19,7 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         checkLocationServices()
+        //注册融云
         RCIM.shared()?.initWithAppKey("3argexb63qxke")
+        //注册微信
+        WXApi.registerApp("wxc7ff179d403b7a51")
         return true
     }
     func checkLocationServices(){
@@ -53,6 +57,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        //支付宝回调
+        if url.host == "safepay"{
+            AlipaySDK.defaultService().processOrder(withPaymentResult: url){
+                value in
+                let code = value!
+                let resultStatus = code["resultStatus"] as!String
+                var content = ""
+                switch resultStatus {
+                case "9000":
+                    content = "支付成功"
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PaySuccessNotification"), object: nil)
+                case "8000":
+                    content = "订单正在处理中"
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "aliPayUnknowStatus"), object: content)
+                case "4000":
+                    content = "支付失败"
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
+                case "5000":
+                    content = "重复请求"
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
+                case "6001":
+                    content = "中途取消"
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
+                case "6002":
+                    content = "网络连接出错"
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "aliPayDefault"), object: content)
+                case "6004":
+                    content = "支付结果未知"
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "aliPayUnknowStatus"), object: content)
+                default:
+                    content = "支付失败"
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
+                    break
+                }
+            }
+        }
+        return true
+    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -94,6 +137,47 @@ extension AppDelegate: CLLocationManagerDelegate{
             
             //停止定位
             locationManager.stopUpdatingLocation()
+        }
+    }
+}
+
+
+extension AppDelegate: WXApiDelegate{
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        return WXApi.handleOpen(url, delegate: self)
+    }
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+         return WXApi.handleOpen(url, delegate: self)
+    }
+    func onReq(_ req: BaseReq) {
+        
+    }
+    func onResp(_ resp: BaseResp) {
+        //微信支付回调
+        print(resp.errCode)
+        //  微信支付回调
+        if resp.isKind(of: PayResp.self)
+        {
+            print("retcode = \(resp.errCode), retstr = \(resp.errStr)")
+            switch resp.errCode
+            {
+            //  支付成功
+            case 0 :
+               NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PaySuccessNotification"), object: nil)
+               break
+            //  支付失败
+            default:
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
+                break
+                
+            }
+        }else{
+        //  微信登录回调
+        if resp.errCode == 0 && resp.type == 0{//授权成功
+            let response = resp as! SendAuthResp
+            //  微信登录成功通知
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WXLoginSuccessNotification"), object: response.code)
+           }
         }
     }
 }

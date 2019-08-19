@@ -194,7 +194,6 @@ class Main1ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //判断是否登录
-        
         if UserDefaults().string(forKey: "userID") == nil{
             let sb = UIStoryboard(name: "Main1", bundle:nil)
             let vc = sb.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
@@ -347,3 +346,4 @@ extension Main1ViewController:FSPagerViewDataSource,FSPagerViewDelegate{
        
     }
 }
+

@@ -24,6 +24,14 @@
 		05115BDD22FE056A00D7632A /* NewFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05115BDC22FE056A00D7632A /* NewFriendViewController.swift */; };
 		05115BDF22FE076000D7632A /* NewFriendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05115BDE22FE076000D7632A /* NewFriendData.swift */; };
 		05115BE122FE097C00D7632A /* NewFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05115BE022FE097C00D7632A /* NewFriendTableViewCell.swift */; };
+		05119F272307622F00545CF3 /* BuyvipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05119F262307622F00545CF3 /* BuyvipViewController.swift */; };
+		05119F292307624D00545CF3 /* BuyvipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05119F282307624D00545CF3 /* BuyvipTableViewCell.swift */; };
+		05119F2B230762F100545CF3 /* BuyvipData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05119F2A230762F100545CF3 /* BuyvipData.swift */; };
+		0512F530230380F200237ABC /* CircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512F52F230380F200237ABC /* CircleViewController.swift */; };
+		0512F532230388B100237ABC /* SawmeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512F531230388B100237ABC /* SawmeViewController.swift */; };
+		0512F5342303A4BE00237ABC /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512F5332303A4BE00237ABC /* ResetViewController.swift */; };
+		0512F5362303A69000237ABC /* ResetPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512F5352303A69000237ABC /* ResetPersonalInfoViewController.swift */; };
+		0512F5382306748400237ABC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512F5372306748400237ABC /* SettingViewController.swift */; };
 		0522B1192300184B00D710C5 /* FabudongtaiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0522B1182300184B00D710C5 /* FabudongtaiViewController.swift */; };
 		053F3EE922ECD760004C4864 /* TableViewCellShenbian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053F3EE822ECD760004C4864 /* TableViewCellShenbian.swift */; };
 		053F3EEB22ECD788004C4864 /* ShenBianData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053F3EEA22ECD788004C4864 /* ShenBianData.swift */; };
@@ -75,6 +83,14 @@
 		05115BDC22FE056A00D7632A /* NewFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFriendViewController.swift; sourceTree = "<group>"; };
 		05115BDE22FE076000D7632A /* NewFriendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFriendData.swift; sourceTree = "<group>"; };
 		05115BE022FE097C00D7632A /* NewFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFriendTableViewCell.swift; sourceTree = "<group>"; };
+		05119F262307622F00545CF3 /* BuyvipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyvipViewController.swift; sourceTree = "<group>"; };
+		05119F282307624D00545CF3 /* BuyvipTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyvipTableViewCell.swift; sourceTree = "<group>"; };
+		05119F2A230762F100545CF3 /* BuyvipData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyvipData.swift; sourceTree = "<group>"; };
+		0512F52F230380F200237ABC /* CircleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleViewController.swift; sourceTree = "<group>"; };
+		0512F531230388B100237ABC /* SawmeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SawmeViewController.swift; sourceTree = "<group>"; };
+		0512F5332303A4BE00237ABC /* ResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetViewController.swift; sourceTree = "<group>"; };
+		0512F5352303A69000237ABC /* ResetPersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPersonalInfoViewController.swift; sourceTree = "<group>"; };
+		0512F5372306748400237ABC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		0522B1182300184B00D710C5 /* FabudongtaiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabudongtaiViewController.swift; sourceTree = "<group>"; };
 		0530FD8022EE3B3F00E312D5 /* FSPagerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FSPagerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		053F3EE822ECD760004C4864 /* TableViewCellShenbian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellShenbian.swift; sourceTree = "<group>"; };
@@ -212,6 +228,14 @@
 			isa = PBXGroup;
 			children = (
 				057B1FDB22EA90ED000B8811 /* Main5ViewController.swift */,
+				0512F52F230380F200237ABC /* CircleViewController.swift */,
+				0512F531230388B100237ABC /* SawmeViewController.swift */,
+				0512F5352303A69000237ABC /* ResetPersonalInfoViewController.swift */,
+				0512F5332303A4BE00237ABC /* ResetViewController.swift */,
+				0512F5372306748400237ABC /* SettingViewController.swift */,
+				05119F262307622F00545CF3 /* BuyvipViewController.swift */,
+				05119F282307624D00545CF3 /* BuyvipTableViewCell.swift */,
+				05119F2A230762F100545CF3 /* BuyvipData.swift */,
 			);
 			path = Main5Controller;
 			sourceTree = "<group>";
@@ -413,6 +437,7 @@
 			files = (
 				05115BD222F03CF600D7632A /* SousuoResult.swift in Sources */,
 				053F3EEB22ECD788004C4864 /* ShenBianData.swift in Sources */,
+				0512F5362303A69000237ABC /* ResetPersonalInfoViewController.swift in Sources */,
 				050C87DA22FEE7040019D9B0 /* DongtaiTableViewCell.swift in Sources */,
 				05A77F55230168FE0010BC83 /* PostheadTableViewCell.swift in Sources */,
 				058218952300EA5D0032B86C /* LuntanTableViewCell.swift in Sources */,
@@ -420,9 +445,11 @@
 				057B1FD022EA8E36000B8811 /* UserSetViewController.swift in Sources */,
 				05115BD622FC1E0F00D7632A /* FriendsTableViewCell.swift in Sources */,
 				0522B1192300184B00D710C5 /* FabudongtaiViewController.swift in Sources */,
+				0512F530230380F200237ABC /* CircleViewController.swift in Sources */,
 				05115BCC22F031BE00D7632A /* SousuoViewController.swift in Sources */,
 				057B1FCC22EA8E18000B8811 /* SignInViewController.swift in Sources */,
 				057B1FCA22EA8DFA000B8811 /* Main1ViewController.swift in Sources */,
+				0512F5342303A4BE00237ABC /* ResetViewController.swift in Sources */,
 				057B1FD622EA9096000B8811 /* Main3ViewController.swift in Sources */,
 				05C9B86B22E6D6A90075364D /* ViewController.swift in Sources */,
 				05115BCA22EF855B00D7632A /* PersonalViewController.swift in Sources */,
@@ -434,6 +461,7 @@
 				057B1FD322EA9072000B8811 /* Main2ViewController.swift in Sources */,
 				05025319230201C800E8F3FE /* FabutieziViewController.swift in Sources */,
 				057B1FDE22EA99A2000B8811 /* AlterButton.swift in Sources */,
+				0512F532230388B100237ABC /* SawmeViewController.swift in Sources */,
 				05115BD022F03CBC00D7632A /* SousuoTableViewCell.swift in Sources */,
 				05E3C58323004AF700BB8B05 /* LuntanData.swift in Sources */,
 				057B1FDC22EA90ED000B8811 /* Main5ViewController.swift in Sources */,
@@ -443,8 +471,12 @@
 				05A77F572301690D0010BC83 /* PostlistTableViewCell.swift in Sources */,
 				0502531B230201D700E8F3FE /* FabugentieViewController.swift in Sources */,
 				05A77F5923016D540010BC83 /* PostlistViewController.swift in Sources */,
+				05119F2B230762F100545CF3 /* BuyvipData.swift in Sources */,
 				05115BDD22FE056A00D7632A /* NewFriendViewController.swift in Sources */,
 				05115BCE22F03C5400D7632A /* SousuoResultViewController.swift in Sources */,
+				0512F5382306748400237ABC /* SettingViewController.swift in Sources */,
+				05119F292307624D00545CF3 /* BuyvipTableViewCell.swift in Sources */,
+				05119F272307622F00545CF3 /* BuyvipViewController.swift in Sources */,
 				050C87D822FE6B2A0019D9B0 /* LuntanViewController.swift in Sources */,
 				057B1FCE22EA8E27000B8811 /* SignUpViewController.swift in Sources */,
 			);
@@ -600,7 +632,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = xin.banghua.BeiBeiWu;
+				PRODUCT_BUNDLE_IDENTIFIER = xin.banghua.beiyuan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jiangdong/Desktop/BeiBeiWu/BeiBeiWu/SupportingFile/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
@@ -620,7 +652,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = xin.banghua.BeiBeiWu;
+				PRODUCT_BUNDLE_IDENTIFIER = xin.banghua.beiyuan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jiangdong/Desktop/BeiBeiWu/BeiBeiWu/SupportingFile/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;

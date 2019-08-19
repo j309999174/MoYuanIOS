@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class SousuoViewController: UIViewController {
     var userGenderString = "不限"
@@ -37,13 +38,40 @@ class SousuoViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBOutlet weak var viptime: UILabel!
+    @IBOutlet weak var property_segment: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
         // Do any additional setup after loading the view.
+        initViptime()
     }
     
+    
+    func initViptime(){
+        //获取会员时间
+        let userInfo = UserDefaults()
+        let userID = userInfo.string(forKey: "userID")
+        let parameters: Parameters = ["id": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=viptimeinsousuo&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                self.viptime.text = utf8Text
+                if utf8Text == "会员已到期"{
+                    self.property_segment.setEnabled(false, forSegmentAt: 0)
+                    self.property_segment.setEnabled(false, forSegmentAt: 1)
+                    self.property_segment.setEnabled(false, forSegmentAt: 2)
+                    self.property_segment.setEnabled(false, forSegmentAt: 3)
+                    self.userRegion.isUserInteractionEnabled = false
+                }
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

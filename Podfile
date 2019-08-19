@@ -12,5 +12,7 @@ pod 'RongCloudIM/IMLib', '~> 2.8.3'
 pod 'RongCloudIM/IMKit', '~> 2.8.3'
 pod 'Toast-Swift', '~> 5.0.0'
 pod 'MarqueeLabel'
+pod 'WechatOpenSDK'
+pod 'AlipaySDK-iOS'
 
 end

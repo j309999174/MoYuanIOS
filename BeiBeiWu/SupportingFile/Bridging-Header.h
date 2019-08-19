@@ -13,3 +13,11 @@
 #endif /* Bridging_Header_h */
 
 #import <RongIMKit/RongIMKit.h>
+#import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
+
+@interface AppDelegate : UIResponder<UIApplicationDelegate, WXApiDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
+
+@end

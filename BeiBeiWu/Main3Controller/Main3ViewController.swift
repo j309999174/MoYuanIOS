@@ -9,9 +9,9 @@
 import UIKit
 import Alamofire
 struct FriendsStruct: Codable {
-    let yourid: String
-    let yournickname: String
-    let yourportrait: String
+    let id: String
+    let nickname: String
+    let portrait: String
 }
 
 class Main3ViewController: UIViewController {
@@ -26,6 +26,8 @@ class Main3ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.viewDidLoad()
     }
+    
+    @IBOutlet weak var newFriend_label: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +56,7 @@ class Main3ViewController: UIViewController {
                     let jsonModel = try decoder.decode([FriendsStruct].self, from: data)
                     self.dataList.removeAll()
                     for index in 0..<jsonModel.count{
-                        let cell = FriendsData(userID:jsonModel[index].yourid,userNickName: jsonModel[index].yournickname,userPortrait: jsonModel[index].yourportrait)
+                        let cell = FriendsData(userID:jsonModel[index].id,userNickName: jsonModel[index].nickname,userPortrait: jsonModel[index].portrait)
                         self.dataList.append(cell)
                     }
                     self.currentDataList = self.dataList
@@ -62,6 +64,18 @@ class Main3ViewController: UIViewController {
                 } catch {
                     print("解析 JSON 失败")
                 }
+            }
+        }
+        
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                self.newFriend_label.setTitle("+新朋友 \(utf8Text)", for: UIControl.State.normal)
+                
             }
         }
     }

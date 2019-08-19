@@ -122,6 +122,7 @@
                     <navigationItem key="navigationItem" id="Lob-99-6ya"/>
                     <connections>
                         <outlet property="friendsTableView" destination="zMp-0V-XTg" id="CV3-vX-mbm"/>
+                        <outlet property="newFriend_label" destination="MrF-cY-jRK" id="6I7-Fq-aEC"/>
                         <outlet property="searchBar" destination="ZvO-YC-DQB" id="Ygo-N1-lRt"/>
                     </connections>
                 </viewController>

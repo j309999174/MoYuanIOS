@@ -24,6 +24,7 @@ class Main2ViewController: RCConversationListViewController {
         
         setCollectionConversationType([7])
         // Do any additional setup after loading the view.
+        
     }
     
     
@@ -33,10 +34,25 @@ class Main2ViewController: RCConversationListViewController {
         vc.conversationType = model.conversationType
         vc.targetId = model.targetId
         vc.hidesBottomBarWhenPushed = true
+        print("vc.unReadMessage\(vc.unReadMessage)")
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
 
+    override
+    func notifyUpdateUnreadMessageCount() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            // back to the main thread
+            DispatchQueue.main.async {
+                //角标
+//                let root = self.tabBarController
+//                var tabBarItem = UITabBarItem()
+//                tabBarItem = root!.tabBar.items![1]
+//                tabBarItem.badgeValue = "1"
+            }
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
