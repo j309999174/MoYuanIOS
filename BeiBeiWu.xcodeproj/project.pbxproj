@@ -32,6 +32,9 @@
 		0512F5342303A4BE00237ABC /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512F5332303A4BE00237ABC /* ResetViewController.swift */; };
 		0512F5362303A69000237ABC /* ResetPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512F5352303A69000237ABC /* ResetPersonalInfoViewController.swift */; };
 		0512F5382306748400237ABC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512F5372306748400237ABC /* SettingViewController.swift */; };
+		051509CA230DF62B00D7DAEA /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051509C9230DF62B00D7DAEA /* FindPasswordViewController.swift */; };
+		051FD029230F888400A374D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05C9B86F22E6D6AA0075364D /* Assets.xcassets */; };
+		051FD02B230FD9CF00A374D3 /* PersonalPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051FD02A230FD9CF00A374D3 /* PersonalPostViewController.swift */; };
 		0522B1192300184B00D710C5 /* FabudongtaiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0522B1182300184B00D710C5 /* FabudongtaiViewController.swift */; };
 		053F3EE922ECD760004C4864 /* TableViewCellShenbian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053F3EE822ECD760004C4864 /* TableViewCellShenbian.swift */; };
 		053F3EEB22ECD788004C4864 /* ShenBianData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053F3EEA22ECD788004C4864 /* ShenBianData.swift */; };
@@ -58,8 +61,9 @@
 		05C9B86922E6D6A90075364D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9B86822E6D6A90075364D /* AppDelegate.swift */; };
 		05C9B86B22E6D6A90075364D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9B86A22E6D6A90075364D /* ViewController.swift */; };
 		05C9B86E22E6D6A90075364D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C9B86C22E6D6A90075364D /* Main.storyboard */; };
-		05C9B87022E6D6AA0075364D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05C9B86F22E6D6AA0075364D /* Assets.xcassets */; };
 		05C9B87322E6D6AA0075364D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C9B87122E6D6AA0075364D /* LaunchScreen.storyboard */; };
+		05CB09C32326494C004036E6 /* addr_china.json in Resources */ = {isa = PBXBuildFile; fileRef = 05CB09C12326494B004036E6 /* addr_china.json */; };
+		05CB09C42326494C004036E6 /* addr_china_selected.json in Resources */ = {isa = PBXBuildFile; fileRef = 05CB09C22326494C004036E6 /* addr_china_selected.json */; };
 		05E3C58323004AF700BB8B05 /* LuntanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E3C58223004AF700BB8B05 /* LuntanData.swift */; };
 		740B4CAEF0DF76821B768B06 /* Pods_BeiBeiWu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF485232730B18E4C7AEA4B8 /* Pods_BeiBeiWu.framework */; };
 /* End PBXBuildFile section */
@@ -86,11 +90,14 @@
 		05119F262307622F00545CF3 /* BuyvipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyvipViewController.swift; sourceTree = "<group>"; };
 		05119F282307624D00545CF3 /* BuyvipTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyvipTableViewCell.swift; sourceTree = "<group>"; };
 		05119F2A230762F100545CF3 /* BuyvipData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyvipData.swift; sourceTree = "<group>"; };
+		05119F2C230AE30E00545CF3 /* BeiBeiWu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeiBeiWu.entitlements; sourceTree = "<group>"; };
 		0512F52F230380F200237ABC /* CircleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleViewController.swift; sourceTree = "<group>"; };
 		0512F531230388B100237ABC /* SawmeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SawmeViewController.swift; sourceTree = "<group>"; };
 		0512F5332303A4BE00237ABC /* ResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetViewController.swift; sourceTree = "<group>"; };
 		0512F5352303A69000237ABC /* ResetPersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPersonalInfoViewController.swift; sourceTree = "<group>"; };
 		0512F5372306748400237ABC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		051509C9230DF62B00D7DAEA /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
+		051FD02A230FD9CF00A374D3 /* PersonalPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPostViewController.swift; sourceTree = "<group>"; };
 		0522B1182300184B00D710C5 /* FabudongtaiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabudongtaiViewController.swift; sourceTree = "<group>"; };
 		0530FD8022EE3B3F00E312D5 /* FSPagerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FSPagerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		053F3EE822ECD760004C4864 /* TableViewCellShenbian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellShenbian.swift; sourceTree = "<group>"; };
@@ -122,6 +129,8 @@
 		05C9B86F22E6D6AA0075364D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05C9B87222E6D6AA0075364D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05C9B87422E6D6AA0075364D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05CB09C12326494B004036E6 /* addr_china.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = addr_china.json; sourceTree = "<group>"; };
+		05CB09C22326494C004036E6 /* addr_china_selected.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = addr_china_selected.json; sourceTree = "<group>"; };
 		05E3C58223004AF700BB8B05 /* LuntanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuntanData.swift; sourceTree = "<group>"; };
 		15C42B00886E99ADF178D9E6 /* Pods-BeiBeiWu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeiBeiWu.debug.xcconfig"; path = "Target Support Files/Pods-BeiBeiWu/Pods-BeiBeiWu.debug.xcconfig"; sourceTree = "<group>"; };
 		3C099B84176829EE3B77CD43 /* Pods-BeiBeiWu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeiBeiWu.release.xcconfig"; path = "Target Support Files/Pods-BeiBeiWu/Pods-BeiBeiWu.release.xcconfig"; sourceTree = "<group>"; };
@@ -178,6 +187,7 @@
 				05115BCD22F03C5400D7632A /* SousuoResultViewController.swift */,
 				05115BCF22F03CBC00D7632A /* SousuoTableViewCell.swift */,
 				05115BD122F03CF600D7632A /* SousuoResult.swift */,
+				051509C9230DF62B00D7DAEA /* FindPasswordViewController.swift */,
 			);
 			path = Main1Controller;
 			sourceTree = "<group>";
@@ -261,6 +271,9 @@
 		05C9B86722E6D6A90075364D /* BeiBeiWu */ = {
 			isa = PBXGroup;
 			children = (
+				05CB09C22326494C004036E6 /* addr_china_selected.json */,
+				05CB09C12326494B004036E6 /* addr_china.json */,
+				05119F2C230AE30E00545CF3 /* BeiBeiWu.entitlements */,
 				057B1FC822EA8DB3000B8811 /* Main1Controller */,
 				057B1FD122EA904A000B8811 /* Main2Controller */,
 				057B1FD422EA9083000B8811 /* Main3Controller */,
@@ -273,6 +286,7 @@
 				05C9B86A22E6D6A90075364D /* ViewController.swift */,
 				05C9B86C22E6D6A90075364D /* Main.storyboard */,
 				05115BC922EF855B00D7632A /* PersonalViewController.swift */,
+				051FD02A230FD9CF00A374D3 /* PersonalPostViewController.swift */,
 			);
 			path = BeiBeiWu;
 			sourceTree = "<group>";
@@ -331,6 +345,11 @@
 				TargetAttributes = {
 					05C9B86422E6D6A90075364D = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -359,12 +378,14 @@
 			files = (
 				05C9B87322E6D6AA0075364D /* LaunchScreen.storyboard in Resources */,
 				0542B9A222E77CF400E1AC34 /* Main5.storyboard in Resources */,
+				05CB09C42326494C004036E6 /* addr_china_selected.json in Resources */,
 				0542B99A22E77CBD00E1AC34 /* Main1.storyboard in Resources */,
-				05C9B87022E6D6AA0075364D /* Assets.xcassets in Resources */,
 				0542B99E22E77CDD00E1AC34 /* Main3.storyboard in Resources */,
+				05CB09C32326494C004036E6 /* addr_china.json in Resources */,
 				0542B9A022E77CE900E1AC34 /* Main4.storyboard in Resources */,
 				05115BC822EF853C00D7632A /* Personal.storyboard in Resources */,
 				0542B99C22E77CCF00E1AC34 /* Main2.storyboard in Resources */,
+				051FD029230F888400A374D3 /* Assets.xcassets in Resources */,
 				05C9B86E22E6D6A90075364D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +460,7 @@
 				053F3EEB22ECD788004C4864 /* ShenBianData.swift in Sources */,
 				0512F5362303A69000237ABC /* ResetPersonalInfoViewController.swift in Sources */,
 				050C87DA22FEE7040019D9B0 /* DongtaiTableViewCell.swift in Sources */,
+				051FD02B230FD9CF00A374D3 /* PersonalPostViewController.swift in Sources */,
 				05A77F55230168FE0010BC83 /* PostheadTableViewCell.swift in Sources */,
 				058218952300EA5D0032B86C /* LuntanTableViewCell.swift in Sources */,
 				05A57E6A2301D5F3001BC0F0 /* PostlistData.swift in Sources */,
@@ -451,6 +473,7 @@
 				057B1FCA22EA8DFA000B8811 /* Main1ViewController.swift in Sources */,
 				0512F5342303A4BE00237ABC /* ResetViewController.swift in Sources */,
 				057B1FD622EA9096000B8811 /* Main3ViewController.swift in Sources */,
+				051509CA230DF62B00D7DAEA /* FindPasswordViewController.swift in Sources */,
 				05C9B86B22E6D6A90075364D /* ViewController.swift in Sources */,
 				05115BCA22EF855B00D7632A /* PersonalViewController.swift in Sources */,
 				05115BD922FCD4DF00D7632A /* ChatViewController.swift in Sources */,
@@ -625,16 +648,22 @@
 			baseConfigurationReference = 15C42B00886E99ADF178D9E6 /* Pods-BeiBeiWu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BeiBeiWu/BeiBeiWu.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y683GGLLBM;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BeiBeiWu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "DRUNTIME_IL2CPP=1";
 				PRODUCT_BUNDLE_IDENTIFIER = xin.banghua.beiyuan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jiangdong/Desktop/BeiBeiWu/BeiBeiWu/SupportingFile/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -645,16 +674,23 @@
 			baseConfigurationReference = 3C099B84176829EE3B77CD43 /* Pods-BeiBeiWu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BeiBeiWu/BeiBeiWu.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y683GGLLBM;
+				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = BeiBeiWu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "DRUNTIME_IL2CPP=1";
 				PRODUCT_BUNDLE_IDENTIFIER = xin.banghua.beiyuan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jiangdong/Desktop/BeiBeiWu/BeiBeiWu/SupportingFile/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -52,7 +52,7 @@ class LuntanTableViewCell: UITableViewCell {
             for index in 0..<arrayStrings.count{
                 print(arrayStrings[index])
             }
-            if arrayStrings[0] != ""{
+            if arrayStrings.count > 0{
                 let data = try Data(contentsOf: URL(string: arrayStrings[0])!)
                 postpicture.image = UIImage(data: data)
             }else{

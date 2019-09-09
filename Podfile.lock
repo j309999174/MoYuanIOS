@@ -3,9 +3,17 @@ PODS:
   - AlipaySDK-iOS (15.5.9)
   - FSPagerView (0.8.2)
   - MarqueeLabel (4.0.0)
-  - RongCloudIM/IMKit (2.8.32):
+  - RongCloudIM/IMKit (2.9.20):
     - RongCloudIM/IMLib
-  - RongCloudIM/IMLib (2.8.32)
+  - RongCloudIM/IMLib (2.9.20)
+  - RongCloudIM/Sight (2.9.20):
+    - RongCloudIM/IMLib
+  - RongCloudRTC/RongCallKit (2.9.20):
+    - RongCloudIM/IMKit (~> 2.9.20)
+    - RongCloudIM/IMLib (~> 2.9.20)
+    - RongCloudRTC/RongCallLib
+  - RongCloudRTC/RongCallLib (2.9.20):
+    - RongCloudIM/IMLib (~> 2.9.20)
   - Toast-Swift (5.0.0)
   - WechatOpenSDK (1.8.4)
 
@@ -14,8 +22,11 @@ DEPENDENCIES:
   - AlipaySDK-iOS
   - FSPagerView
   - MarqueeLabel
-  - RongCloudIM/IMKit (~> 2.8.3)
-  - RongCloudIM/IMLib (~> 2.8.3)
+  - RongCloudIM/IMKit (~> 2.9.20)
+  - RongCloudIM/IMLib (~> 2.9.20)
+  - RongCloudIM/Sight (~> 2.9.20)
+  - RongCloudRTC/RongCallKit (~> 2.9.20)
+  - RongCloudRTC/RongCallLib (~> 2.9.20)
   - Toast-Swift (~> 5.0.0)
   - WechatOpenSDK
 
@@ -26,6 +37,7 @@ SPEC REPOS:
     - FSPagerView
     - MarqueeLabel
     - RongCloudIM
+    - RongCloudRTC
     - Toast-Swift
     - WechatOpenSDK
 
@@ -34,10 +46,11 @@ SPEC CHECKSUMS:
   AlipaySDK-iOS: 1c5283b30977a24acecc0114662697f7dc78f618
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
   MarqueeLabel: b55b26e690b6ad41faedd95cbf5eae6f1d1735b4
-  RongCloudIM: 48bfc2fcb8d7cae8ce1e19cb5fb26d6d90616375
+  RongCloudIM: 431486c630f375f74fa90d2c24f58a52b86ad76b
+  RongCloudRTC: f7e38a746e2d78c71f45df121513beed926d7fc5
   Toast-Swift: 36f4720243c8582c2be243a60a51e193c761f541
   WechatOpenSDK: 9b721089507c895d05f997408c30bb6e6f5f9b60
 
-PODFILE CHECKSUM: 388c7bd77d11a4c9ed29bcd57b8a905a679db0c8
+PODFILE CHECKSUM: b492dea3ad3c0dbc58c18d8e72a07a4d8b222b06
 
 COCOAPODS: 1.7.5

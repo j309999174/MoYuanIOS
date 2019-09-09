@@ -10,6 +10,19 @@ import UIKit
 import Alamofire
 
 class UserSetViewController: UIViewController {
+    // MARK: - Country
+    struct Country: Codable {
+        let 城市代码: [城市代码]
+    }
+    // MARK: - 城市代码
+    struct 城市代码: Codable {
+        let 省: String
+        let 市: [市]
+    }
+    // MARK: - 市
+    struct 市: Codable {
+        let 市名, 编码: String
+    }
 
     var userPhone: String = ""
     var userPassword: String = ""
@@ -22,6 +35,8 @@ class UserSetViewController: UIViewController {
     var userSignatureString = ""
     var userReferralString = ""
     
+    @IBOutlet weak var agepickview: UIPickerView!
+    @IBOutlet weak var citypickview: UIPickerView!
     
     @IBOutlet weak var userPortrait: UIImageView!
     
@@ -89,15 +104,48 @@ class UserSetViewController: UIViewController {
           }
         )
     }
-    
+    var ageArray:[String] = ["15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"]
+    var countriesarray:[String] = Array()
+    var states:[[市]] = Array()
     override func viewDidLoad() {
         super.viewDidLoad()
+        //textfield图
+        let userNickNameImage = UIImage(named: "nickname")!
+        addLeftImageTo(txtField: userNickName, andImage: userNickNameImage)
+        let userAgeImage = UIImage(named: "age")!
+        addLeftImageTo(txtField: userAge, andImage: userAgeImage)
+        let userRegionImage = UIImage(named: "region")!
+        addLeftImageTo(txtField: userRegion, andImage: userRegionImage)
+        let userSignatureImage = UIImage(named: "signature")!
+        addLeftImageTo(txtField: userSignature, andImage: userSignatureImage)
+        let userReferralImage = UIImage(named: "Promotion code")!
+        addLeftImageTo(txtField: userReferral, andImage: userReferralImage)
+        
         userPortrait.image = UIImage(named: "plus.png")
         // Do any additional setup after loading the view.
         let imgClick = UITapGestureRecognizer(target: self, action: #selector(imAction))
         userPortrait.addGestureRecognizer(imgClick)
         //开启 isUserInteractionEnabled 手势否则点击事件会没有反应
         userPortrait.isUserInteractionEnabled = true
+        
+        let path = Bundle.main.path(forResource: "addr_china", ofType: "json")
+        let url = URL(fileURLWithPath: path!)
+        // 带throws的方法需要抛异常
+        do {
+            /*
+             * try 和 try! 的区别
+             * try 发生异常会跳到catch代码中
+             * try! 发生异常程序会直接crash
+             */
+            let data = try Data(contentsOf: url)
+            let country = try? JSONDecoder().decode(Country.self, from: data)
+            for index in 0..<country!.城市代码.count{
+                countriesarray.append(country!.城市代码[index].省)
+                states.append(country!.城市代码[index].市)
+            }
+        } catch let error as Error? {
+            print("读取本地数据出现错误!",error ?? "")
+        }
 
     }
     
@@ -124,6 +172,15 @@ class UserSetViewController: UIViewController {
         actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
         self.present(actionSheet, animated: true, completion: nil)
 
+    }
+    
+    
+    
+    func addLeftImageTo(txtField:UITextField,andImage img:UIImage){
+        let leftImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 30, height: 30))
+        leftImageView.image = img
+        txtField.leftView = leftImageView
+        txtField.leftViewMode = .always
     }
     /*
     // MARK: - Navigation
@@ -155,5 +212,48 @@ extension UserSetViewController:UIImagePickerControllerDelegate,UINavigationCont
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+
+extension UserSetViewController:UIPickerViewDelegate,UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if pickerView == agepickview {
+            return 1
+        }
+        return 2
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == agepickview {
+            return ageArray.count
+        }
+        if component == 0 {
+            return countriesarray.count
+        }
+        return states[pickerView.selectedRow(inComponent: 0)].count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == agepickview {
+            return ageArray[row]
+        }
+        if component == 0 {
+            return countriesarray[row]
+        }
+        return states[pickerView.selectedRow(inComponent: 0)][row].市名
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == agepickview {
+            userAge.text = ageArray[row]
+        }else{
+        if component == 0 {
+            pickerView.reloadComponent(1)
+            pickerView.selectRow(0, inComponent: 1, animated: true)
+            userRegion.text = countriesarray[pickerView.selectedRow(inComponent: 0)] + "-" + states[pickerView.selectedRow(inComponent: 0)][pickerView.selectedRow(inComponent: 1)].市名
+            print("\(countriesarray[pickerView.selectedRow(inComponent: 0)])")
+        }else{
+            userRegion.text = countriesarray[pickerView.selectedRow(inComponent: 0)] + "-" + states[pickerView.selectedRow(inComponent: 0)][pickerView.selectedRow(inComponent: 1)].市名
+            print("\(states[pickerView.selectedRow(inComponent: 0)][pickerView.selectedRow(inComponent: 1)].市名)")
+        }
+        }
     }
 }

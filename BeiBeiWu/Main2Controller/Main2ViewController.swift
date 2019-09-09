@@ -44,7 +44,7 @@ class Main2ViewController: RCConversationListViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             // back to the main thread
             DispatchQueue.main.async {
-                //角标
+//                角标
 //                let root = self.tabBarController
 //                var tabBarItem = UITabBarItem()
 //                tabBarItem = root!.tabBar.items![1]

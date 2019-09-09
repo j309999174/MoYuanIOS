@@ -35,7 +35,28 @@ struct TuiJianUserInfo: Codable {
 
 class Main1ViewController: UIViewController {
    
-    @IBAction func tuijian_btn(_ sender: Any) {
+    @IBAction func menuAction(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            tuijian_btn()
+            break
+        case 1:
+            fujin_btn()
+            break
+        case 2:
+        let sb = UIStoryboard(name: "Main1", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SousuoViewIdentity") as! SousuoViewController
+        //vc.hidesBottomBarWhenPushed = true
+        self.show(vc, sender: nil)
+            break
+        default:
+            break
+        }
+    }
+    
+    
+    
+    func tuijian_btn() {
         
         //获取幻灯片数据
         let getSlide: Parameters = ["type": "getSlide"]
@@ -100,7 +121,7 @@ class Main1ViewController: UIViewController {
         }
     }
     
-    @IBAction func fujin_btn(_ sender: Any) {
+    func fujin_btn() {
         //获取幻灯片数据
         let getSlide: Parameters = ["type": "getSlide"]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=fujin&m=socialchat", method: .post, parameters: getSlide).response { response in
@@ -165,11 +186,6 @@ class Main1ViewController: UIViewController {
     }
     
     
-    @IBAction func sousuo_btn(_ sender: Any) {
-        
-    }
-    
-    
     
     var imageArr = [UIImage]()
     var imageNameArr = [String]()
@@ -193,11 +209,13 @@ class Main1ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //判断是否登录
         if UserDefaults().string(forKey: "userID") == nil{
             let sb = UIStoryboard(name: "Main1", bundle:nil)
             let vc = sb.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
-            self.present(vc, animated: true, completion: nil)
+            vc.hidesBottomBarWhenPushed = true
+            self.show(vc, sender: nil)
             
         }else{
             //保存定位
@@ -273,6 +291,8 @@ class Main1ViewController: UIViewController {
                     }
                 }
             }
+            
+            //角标
         }
         
         let userInfo = UserDefaults()
@@ -286,6 +306,14 @@ class Main1ViewController: UIViewController {
             print("token不对")
         })
 
+    }
+    
+    
+    func addLeftImageTo(txtField:UITextField,andImage img:UIImage){
+        let leftImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: img.size.width, height: img.size.height))
+        leftImageView.image = img
+        txtField.leftView = leftImageView
+        txtField.leftViewMode = .always
     }
 }
 
@@ -314,7 +342,8 @@ extension Main1ViewController: UITableViewDataSource,UITableViewDelegate{
         let sb = UIStoryboard(name: "Personal", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
         vc.userID = dataList[indexPath.row].userID
-        self.present(vc, animated: true, completion: nil)
+        vc.hidesBottomBarWhenPushed = true
+        self.show(vc, sender: nil)
     }
 }
 

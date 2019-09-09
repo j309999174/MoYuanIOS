@@ -52,7 +52,8 @@ class SettingViewController: UIViewController {
     @IBAction func lougout_btn(_ sender: Any) {
         let sb = UIStoryboard(name: "Main1", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
-        self.present(vc, animated: true, completion: nil)
+        vc.hidesBottomBarWhenPushed = true
+        self.show(vc, sender: nil)
     }
     
     override func viewDidLoad() {

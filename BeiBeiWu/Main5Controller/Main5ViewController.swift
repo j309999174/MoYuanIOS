@@ -22,7 +22,20 @@ class Main5ViewController: UIViewController {
         
     }
     @IBAction func scoreQuery(_ sender: UIButton) {
-        self.view.makeToast("共拥有500积分")
+        let userInfo = UserDefaults()
+        let userID = userInfo.string(forKey: "userID")
+        let parameters: Parameters = ["userid": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=getscore&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                self.view.makeToast("共拥有\(utf8Text)积分")
+            }
+        }
+        
     }
     @IBAction func myPromotionCode(_ sender: UIButton) {
         self.view.makeToast("您的推广码是\(userID!)")

@@ -43,11 +43,24 @@ class SousuoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //textfield图
+        let ageImage = UIImage(named: "age")!
+        addLeftImageTo(txtField: userAge, andImage: ageImage)
+        let regionImage = UIImage(named: "region")!
+        addLeftImageTo(txtField: userRegion, andImage: regionImage)
+        
+        
         searchBar.delegate = self
         // Do any additional setup after loading the view.
         initViptime()
     }
-    
+    func addLeftImageTo(txtField:UITextField,andImage img:UIImage){
+        let leftImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 30, height: 30))
+        leftImageView.image = img
+        txtField.leftView = leftImageView
+        txtField.leftViewMode = .always
+    }
     
     func initViptime(){
         //获取会员时间

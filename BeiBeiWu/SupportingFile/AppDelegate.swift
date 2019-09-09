@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreLocation
-
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RCIM.shared()?.initWithAppKey("3argexb63qxke")
         //注册微信
         WXApi.registerApp("wxc7ff179d403b7a51")
+        //请求通知权限
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .sound, .badge]) {
+                (accepted, error) in
+                if !accepted {
+                    print("用户不允许消息通知。")
+                }
+        }
+        //向APNs请求token
+        UIApplication.shared.registerForRemoteNotifications()
         return true
     }
     func checkLocationServices(){
@@ -56,7 +66,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             break
         }
     }
-
+    
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let token = deviceToken.description.replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "").replacingOccurrences(of: " ", with: "")
+        print("推送token是\(token.utf8)")
+        RCIMClient.shared()?.setDeviceToken(token)
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         //支付宝回调
         if url.host == "safepay"{

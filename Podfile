@@ -8,11 +8,14 @@ target 'BeiBeiWu' do
   # Pods for sliderview
 pod 'Alamofire', '~> 4.7'
 pod 'FSPagerView'
-pod 'RongCloudIM/IMLib', '~> 2.8.3'
-pod 'RongCloudIM/IMKit', '~> 2.8.3'
 pod 'Toast-Swift', '~> 5.0.0'
 pod 'MarqueeLabel'
 pod 'WechatOpenSDK'
 pod 'AlipaySDK-iOS'
+pod 'RongCloudIM/IMLib', '~> 2.9.20'
+pod 'RongCloudIM/IMKit', '~> 2.9.20'  
+pod 'RongCloudRTC/RongCallLib', '~> 2.9.20'
+pod 'RongCloudRTC/RongCallKit', '~> 2.9.20'
+pod 'RongCloudIM/Sight', '~> 2.9.20'
 
 end

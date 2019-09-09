@@ -65,6 +65,18 @@ class SignInViewController: UIViewController {
         WXApi.send(req)
     }
     @IBAction func signUp_btn(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpIdentity") as! SignUpViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    @IBAction func findPassword(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "FindPasswordIdentity") as! FindPasswordViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    @IBAction func signIn_btn(_ sender: Any) {
         let parameters: Parameters = ["userAccount": userAccount_tf.text!,"userPassword": password_tf.text!]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=signin&m=socialchat", method: .post, parameters: parameters).response { response in
             
@@ -91,25 +103,9 @@ class SignInViewController: UIViewController {
                     print("解析 JSON 失败")
                 }
             }
-            
-            
-            
-//            print("Request: \(String(describing: response.request))")
-//            print("Response: \(String(describing: response.response))")
-//            print("Error: \(String(describing: response.error))")
-//
-//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-//                print("Data: \(utf8Text)")
-//            }
+
         }
-        
-    }
-    
-    
-    @IBAction func signIn_btn(_ sender: Any) {
-        let sb = UIStoryboard(name: "Main1", bundle:nil)
-        let vc = sb.instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
-        self.present(vc, animated: true, completion: nil)
+
     }
     //  微信成功通知
     @objc func WXLoginSuccess(notification:Notification) {
@@ -187,6 +183,14 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //textfield图
+        let phoneImage = UIImage(named: "phone")!
+        addLeftImageTo(txtField: userAccount_tf, andImage: phoneImage)
+        let passwordImage = UIImage(named: "password")!
+        addLeftImageTo(txtField: password_tf, andImage: passwordImage)
+        
+        
         self.navigationItem.hidesBackButton = true
         //通知调用
         NotificationCenter.default.addObserver(self,selector: #selector(WXLoginSuccess(notification:)),name: NSNotification.Name(rawValue: "WXLoginSuccessNotification"),object: nil)
@@ -238,6 +242,13 @@ class SignInViewController: UIViewController {
         }
     }
 
+    
+    func addLeftImageTo(txtField:UITextField,andImage img:UIImage){
+        let leftImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 30, height: 30))
+        leftImageView.image = img
+        txtField.leftView = leftImageView
+        txtField.leftViewMode = .always
+    }
     /*
     // MARK: - Navigation
 

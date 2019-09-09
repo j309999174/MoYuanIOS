@@ -53,6 +53,13 @@ class PersonalViewController: UIViewController {
     
     @IBOutlet weak var leaveWords: UITextField!
     
+    @IBAction func personalPost_btn(_ sender: Any) {
+        let sb = UIStoryboard(name: "Personal", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "PersonalPostIdentity") as! PersonalPostViewController
+        //vc.hidesBottomBarWhenPushed = true
+        vc.authid = userID!
+        self.show(vc, sender: nil)
+    }
     
     @IBAction func addFriend(_ sender: Any) {
         let userInfo = UserDefaults()
