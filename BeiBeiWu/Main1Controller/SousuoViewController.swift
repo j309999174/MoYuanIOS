@@ -20,6 +20,9 @@ class SousuoViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var agepickview: UIPickerView!
+    @IBOutlet weak var regionpickview: UIPickerView!
+    
     @IBAction func userProperty(_ sender: UISegmentedControl) {
         userPropertyString = sender.titleForSegment(at: sender.selectedSegmentIndex)!
     }
@@ -41,6 +44,9 @@ class SousuoViewController: UIViewController {
     @IBOutlet weak var viptime: UILabel!
     @IBOutlet weak var property_segment: UISegmentedControl!
     
+    var ageArray:[String] = ["不限","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"]
+    var countriesarray:[String] = Array()
+    var states:[[市]] = Array()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,6 +60,25 @@ class SousuoViewController: UIViewController {
         searchBar.delegate = self
         // Do any additional setup after loading the view.
         initViptime()
+        
+        let path = Bundle.main.path(forResource: "addr_china_selected", ofType: "json")
+        let url = URL(fileURLWithPath: path!)
+        // 带throws的方法需要抛异常
+        do {
+            /*
+             * try 和 try! 的区别
+             * try 发生异常会跳到catch代码中
+             * try! 发生异常程序会直接crash
+             */
+            let data = try Data(contentsOf: url)
+            let country = try? JSONDecoder().decode(Country.self, from: data)
+            for index in 0..<country!.城市代码.count{
+                countriesarray.append(country!.城市代码[index].省)
+                states.append(country!.城市代码[index].市)
+            }
+        } catch let error as Error? {
+            print("读取本地数据出现错误!",error ?? "")
+        }
     }
     func addLeftImageTo(txtField:UITextField,andImage img:UIImage){
         let leftImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 30, height: 30))
@@ -105,5 +130,58 @@ extension SousuoViewController:UISearchBarDelegate{
         vc.type = "direct"
         vc.nameOrPhone = searchBar.text
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+
+extension SousuoViewController:UIPickerViewDelegate,UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if pickerView == agepickview {
+            return 1
+        }
+        return 2
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == agepickview {
+            return ageArray.count
+        }
+        if component == 0 {
+            return countriesarray.count
+        }
+        return states[pickerView.selectedRow(inComponent: 0)].count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == agepickview {
+            return ageArray[row]
+        }
+        if component == 0 {
+            return countriesarray[row]
+        }
+        return states[pickerView.selectedRow(inComponent: 0)][row].市名
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == agepickview {
+            userAge.text = ageArray[row]
+        }else{
+            if component == 0 {
+                pickerView.reloadComponent(1)
+                pickerView.selectRow(0, inComponent: 1, animated: true)
+                let statescity = states[pickerView.selectedRow(inComponent: 0)][pickerView.selectedRow(inComponent: 1)].市名
+                if statescity == "不限"{
+                    userRegion.text = countriesarray[pickerView.selectedRow(inComponent: 0)]
+                }else{
+                    userRegion.text = countriesarray[pickerView.selectedRow(inComponent: 0)] + "-" + states[pickerView.selectedRow(inComponent: 0)][pickerView.selectedRow(inComponent: 1)].市名
+                }
+                print("\(countriesarray[pickerView.selectedRow(inComponent: 0)])")
+            }else{
+                let statescity = states[pickerView.selectedRow(inComponent: 0)][pickerView.selectedRow(inComponent: 1)].市名
+                if statescity == "不限"{
+                    userRegion.text = countriesarray[pickerView.selectedRow(inComponent: 0)]
+                }else{
+                    userRegion.text = countriesarray[pickerView.selectedRow(inComponent: 0)] + "-" + states[pickerView.selectedRow(inComponent: 0)][pickerView.selectedRow(inComponent: 1)].市名
+                }
+                print("\(states[pickerView.selectedRow(inComponent: 0)][pickerView.selectedRow(inComponent: 1)].市名)")
+            }
+        }
     }
 }

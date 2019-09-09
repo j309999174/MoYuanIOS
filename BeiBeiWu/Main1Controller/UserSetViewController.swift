@@ -8,21 +8,22 @@
 
 import UIKit
 import Alamofire
+// MARK: - Country
+struct Country: Codable {
+    let 城市代码: [城市代码]
+}
+// MARK: - 城市代码
+struct 城市代码: Codable {
+    let 省: String
+    let 市: [市]
+}
+// MARK: - 市
+struct 市: Codable {
+    let 市名, 编码: String
+}
 
 class UserSetViewController: UIViewController {
-    // MARK: - Country
-    struct Country: Codable {
-        let 城市代码: [城市代码]
-    }
-    // MARK: - 城市代码
-    struct 城市代码: Codable {
-        let 省: String
-        let 市: [市]
-    }
-    // MARK: - 市
-    struct 市: Codable {
-        let 市名, 编码: String
-    }
+    
 
     var userPhone: String = ""
     var userPassword: String = ""
