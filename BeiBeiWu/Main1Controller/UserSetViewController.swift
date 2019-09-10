@@ -24,7 +24,9 @@ struct 市: Codable {
 
 class UserSetViewController: UIViewController {
     
-
+    var logtype: String = ""
+    var openid: String = ""
+    
     var userPhone: String = ""
     var userPassword: String = ""
     
@@ -63,6 +65,7 @@ class UserSetViewController: UIViewController {
     
     
     @IBAction func submit(_ sender: Any) {
+        if logtype == "1" {
         
         let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                            .userDomainMask, true)[0] as String
@@ -104,6 +107,27 @@ class UserSetViewController: UIViewController {
             }
           }
         )
+        }else{
+            print("进入微信注册")
+            userAgeString = self.userAge.text!
+            userRegionString = self.userRegion.text!
+            userSignatureString = self.userSignature.text!
+            userReferralString = self.userReferral.text!
+            print(openid+userAgeString+userRegionString+userSignatureString+userReferralString)
+            let parameters: Parameters = ["openid": openid,"userAge": userAgeString,"userGender": userGenderString,"userProperty": userPropertyString,"userRegion": userRegionString,"userSignature": userSignatureString,"referral": userReferralString]
+            Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=signupwx&m=socialchat", method: .post, parameters: parameters).response { response in
+                print("Request: \(String(describing: response.request))")
+                print("Response: \(String(describing: response.response))")
+                print("Error: \(String(describing: response.error))")
+                
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Data: \(utf8Text)")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            
+        }
     }
     var ageArray:[String] = ["15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"]
     var countriesarray:[String] = Array()
@@ -121,6 +145,12 @@ class UserSetViewController: UIViewController {
         addLeftImageTo(txtField: userSignature, andImage: userSignatureImage)
         let userReferralImage = UIImage(named: "Promotion code")!
         addLeftImageTo(txtField: userReferral, andImage: userReferralImage)
+        
+        print("logtype=\(logtype)")
+        if logtype == "2"{
+            userPortrait.isHidden = true
+            userNickName.isHidden = true
+        }
         
         userPortrait.image = UIImage(named: "plus.png")
         // Do any additional setup after loading the view.

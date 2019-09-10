@@ -75,6 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("urlhost")
+        print(url.host ?? "")
+        if url.host == "oauth" {
+            WXApi.handleOpen(url, delegate: self)
+        }
         //支付宝回调
         if url.host == "safepay"{
             AlipaySDK.defaultService().processOrder(withPaymentResult: url){
@@ -170,12 +175,13 @@ extension AppDelegate: WXApiDelegate{
         
     }
     func onResp(_ resp: BaseResp) {
+        print("微信回调")
         //微信支付回调
         print(resp.errCode)
         //  微信支付回调
         if resp.isKind(of: PayResp.self)
         {
-            print("retcode = \(resp.errCode), retstr = \(resp.errStr)")
+            print("微信回调retcode = \(resp.errCode), retstr = \(resp.errStr)")
             switch resp.errCode
             {
             //  支付成功
@@ -193,8 +199,22 @@ extension AppDelegate: WXApiDelegate{
         if resp.errCode == 0 && resp.type == 0{//授权成功
             let response = resp as! SendAuthResp
             //  微信登录成功通知
+            print("微信登录回调")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WXLoginSuccessNotification"), object: response.code)
            }
+        }
+    }
+}
+
+//所有组件在storyboard中增加圆角栏
+extension UIView {
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        // also  set(newValue)
+        set {
+            layer.cornerRadius = newValue
         }
     }
 }

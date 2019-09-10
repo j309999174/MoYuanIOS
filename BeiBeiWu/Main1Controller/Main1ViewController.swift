@@ -209,12 +209,13 @@ class Main1ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.hidesBackButton = true
+        self.tabBarController?.tabBar.isHidden = false
         //判断是否登录
         if UserDefaults().string(forKey: "userID") == nil{
             let sb = UIStoryboard(name: "Main1", bundle:nil)
             let vc = sb.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
-            vc.hidesBottomBarWhenPushed = true
+            vc.hidesBottomBarWhenPushed = false
             self.show(vc, sender: nil)
             
         }else{
@@ -375,4 +376,6 @@ extension Main1ViewController:FSPagerViewDataSource,FSPagerViewDelegate{
        
     }
 }
+
+
 

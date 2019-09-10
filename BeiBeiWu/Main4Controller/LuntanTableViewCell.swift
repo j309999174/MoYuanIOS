@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol LuntanTableViewCellDelegate{
+    func like(postid:String,likebtn:UIButton)
+    func personpage(userID:String)
+    func threepoints(postid:String,userID:String)
+}
 class LuntanTableViewCell: UITableViewCell {
 
     @IBOutlet weak var postid: UILabel!
@@ -24,6 +29,23 @@ class LuntanTableViewCell: UITableViewCell {
     @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var like: UIButton!
     
+    
+    @IBOutlet weak var posttip1: UIImageView!
+    @IBOutlet weak var posttip2: UIImageView!
+    @IBOutlet weak var attributes: UILabel!
+    
+    @IBAction func threePoints(_ sender: Any) {
+        print("论坛的菜单")
+        delegate?.threepoints(postid: postid.text!, userID: authid.text!)
+    }
+    
+
+    @IBAction func like(_ sender: UIButton) {
+        print("论坛的like")
+        delegate?.like(postid: postid.text!,likebtn:sender)
+    }
+    
+    var delegate:LuntanTableViewCellDelegate?
     func setData(data:LuntanData){
         postid.text = data.id
         plateid.text = data.plateid
@@ -47,7 +69,7 @@ class LuntanTableViewCell: UITableViewCell {
         posttext.numberOfLines = 0
         posttext.text = data.posttext
         do {
-            let arraySubstrings: [Substring] = data.postpicture.split(separator: ",")
+            let arraySubstrings: [Substring] = (data.postpicture?.split(separator: ","))!
             let arrayStrings: [String] = arraySubstrings.compactMap { "\($0)" }
             for index in 0..<arrayStrings.count{
                 print(arrayStrings[index])
@@ -61,5 +83,19 @@ class LuntanTableViewCell: UITableViewCell {
         }catch let err{
             print(err)
         }
+        
+        like.setTitle("赞:\(data.like ?? "0")", for: UIControl.State.normal)
+        //头像点击
+        let imgClick = UITapGestureRecognizer(target: self, action: #selector(imAction))
+        authportrait.addGestureRecognizer(imgClick)
+        authportrait.isUserInteractionEnabled = true
+    }
+    
+    //点击事件方法
+    @objc func imAction() -> Void {
+        print("图片点击事件")
+        delegate?.personpage(userID: authid.text!)
     }
 }
+
+

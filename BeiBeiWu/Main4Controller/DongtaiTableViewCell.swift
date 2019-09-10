@@ -10,8 +10,9 @@ import UIKit
 
 protocol DongtaiTableViewCellDelegate{
     func like(circleid:String,likebtn:UIButton)
+    func personpage(userID:String)
+    func threepoints(circleid:String,userID:String)
 }
-
 class DongtaiTableViewCell: UITableViewCell {
     @IBOutlet weak var userID: UILabel!
     @IBOutlet weak var userPortrait: UIImageView!
@@ -21,7 +22,15 @@ class DongtaiTableViewCell: UITableViewCell {
     @IBOutlet weak var dongtaiTime: UILabel!
 
     @IBOutlet weak var dongtaiLike: UIButton!
+    
+    @IBOutlet weak var attributes: UILabel!
+    
+    @IBAction func threePoints(_ sender: UIButton) {
+        print("朋友圈的菜单")
+        delegate?.threepoints(circleid: circleid!, userID: userID.text!)
+    }
     @IBAction func dongtaiLike(_ sender: UIButton) {
+        print("朋友圈的like")
         delegate?.like(circleid: circleid!,likebtn: dongtaiLike)
     }
     
@@ -31,6 +40,10 @@ class DongtaiTableViewCell: UITableViewCell {
     
     func setData(data:DongtaiData){
         circleid = data.circleid
+        var attributesString = data.age! + " | " + data.gender!
+        attributesString = attributesString + " | " + data.region!
+        attributesString = attributesString + " | " + data.property!
+        attributes.text = attributesString
         do {
             let data = try Data(contentsOf: URL(string: data.userPortrait)!)
             userPortrait.image = UIImage(data: data)
@@ -57,6 +70,17 @@ class DongtaiTableViewCell: UITableViewCell {
         }
         dongtaiTime.text = data.dongtaiTime
         dongtaiLike.setTitle("赞:\(data.dongtaiLike)", for: UIControl.State.normal)
+        
+        //头像点击
+        let imgClick = UITapGestureRecognizer(target: self, action: #selector(imAction))
+        userPortrait.addGestureRecognizer(imgClick)
+        userPortrait.isUserInteractionEnabled = true
+
+    }
+    //点击事件方法
+    @objc func imAction() -> Void {
+        print("图片点击事件")
+        delegate?.personpage(userID: userID.text!)
     }
     
     

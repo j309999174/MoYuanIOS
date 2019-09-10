@@ -19,7 +19,12 @@ class DongtaiData{
     var dongtaiTime:String
     var dongtaiLike:String
     
-    init(circleid:String,userID:String,userPortrait:String,userNickName: String,dongtaiWord:String,dongtaiPicture:String,dongtaiTime:String,dongtaiLike:String) {
+    var age:String?
+    var gender:String?
+    var region:String?
+    var property:String?
+    
+    init(circleid:String,userID:String,userPortrait:String,userNickName: String,dongtaiWord:String,dongtaiPicture:String,dongtaiTime:String,dongtaiLike:String,age:String,gender:String,region:String,property:String) {
         self.circleid = circleid
         self.userID = userID
         self.userPortrait = userPortrait
@@ -29,5 +34,9 @@ class DongtaiData{
         self.dongtaiTime = dongtaiTime
         self.dongtaiLike = dongtaiLike
         
+        self.age = age
+        self.gender = gender
+        self.region = region
+        self.property = property
     }
 }

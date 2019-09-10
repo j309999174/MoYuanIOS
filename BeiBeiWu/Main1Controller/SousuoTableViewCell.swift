@@ -19,6 +19,8 @@ class SousuoTableViewCell: UITableViewCell {
     @IBOutlet weak var userVIP: UILabel!
     @IBOutlet weak var userID: UILabel!
     
+    @IBOutlet weak var vipImage: UIImageView!
+    @IBOutlet weak var genderImage: UIImageView!
     func setData(data: ShenBianData){
         do {
             let data = try Data(contentsOf: URL(string: data.userPortrait)!)
@@ -39,6 +41,16 @@ class SousuoTableViewCell: UITableViewCell {
         userRegion.text = data.userRegion
         userVIP.text = data.userVIP
         userID.text = data.userID
+        if data.userGender == "男" {
+            genderImage.image = UIImage(named: "male")
+        }else{
+            genderImage.image = UIImage(named: "female")
+        }
+        if data.userVIP == "普通" {
+            vipImage.image = UIImage(named: "member")
+        }else{
+            vipImage.image = UIImage(named: "vip")
+        }
     }
     
 

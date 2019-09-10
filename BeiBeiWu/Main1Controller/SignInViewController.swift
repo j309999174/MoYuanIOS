@@ -49,6 +49,15 @@ struct WXUserinfo: Codable {
     let unionid:String?
 }
 
+struct WXLogin: Codable {
+    let type:String?
+    let id:String?
+    let nickname:String?
+    let portrait:String?
+    let openid:String?
+    let forbidtime:String?
+}
+
 class SignInViewController: UIViewController {
 
     @IBOutlet weak var userAccount_tf: UITextField!
@@ -57,7 +66,7 @@ class SignInViewController: UIViewController {
     var userID:String?
     var userNickName:String?
     var userPortrait:String?
-    
+    var openid:String?
     @IBAction func weixinBtn(_ sender: Any) {
         let req = SendAuthReq()
         req.scope = "snsapi_userinfo"
@@ -109,6 +118,7 @@ class SignInViewController: UIViewController {
     }
     //  微信成功通知
     @objc func WXLoginSuccess(notification:Notification) {
+        self.view.makeToast("微信成功通知")
         let code = notification.object as! String
         let url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxc7ff179d403b7a51&secret=1cac4e740d7d91d2c8a76eaf00acad02&code=\(code)&grant_type=authorization_code"
         //获取access_token
@@ -122,6 +132,7 @@ class SignInViewController: UIViewController {
                 let decoder = JSONDecoder()
                 do {
                     let jsonModel = try decoder.decode(WXToken.self, from: data)
+                    print("获取微信用户信息")
                     self.getWXUserinfo(token: jsonModel.access_token!, openid: jsonModel.openid!)
                 } catch {
                     print("解析 JSON 失败")
@@ -148,6 +159,7 @@ class SignInViewController: UIViewController {
                     var portrait:String = jsonModel.headimgurl!
                     portrait.insert("s", at: (portrait.index(portrait.startIndex, offsetBy: 4)))
                     //微信已获取到用户信息，现在需要保存到数据库
+                    self.openid = jsonModel.openid!
                     self.uploadWXUserinfo(openid: jsonModel.openid!, nickname: jsonModel.nickname!, portrait: portrait)
                     
                     
@@ -167,16 +179,56 @@ class SignInViewController: UIViewController {
             
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)")
-                //保存用户信息
-                let userInfo = UserDefaults()
-                userInfo.setValue(utf8Text, forKey: "userID")
-                userInfo.setValue(nickname, forKey: "userNickName")
-                userInfo.setValue(portrait, forKey: "userPortrait")
-                //调用融云，获取token
-                self.getRongyunToken(userid: utf8Text, nickname: nickname, portrait: portrait)
-                //跳转
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
-                self.navigationController?.pushViewController(vc, animated: true)
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+//                self.navigationController?.pushViewController(vc, animated: true)
+                //根据返回值判断跳转哪
+                let decoder = JSONDecoder()
+                do {
+                    let jsonModel = try decoder.decode(WXLogin.self, from: data)
+                    //保存用户信息
+                    let userInfo = UserDefaults()
+                    userInfo.setValue(jsonModel.id, forKey: "userID")
+                    userInfo.setValue(nickname, forKey: "userNickName")
+                    userInfo.setValue(portrait, forKey: "userPortrait")
+                    //调用融云，获取token
+                    self.getRongyunToken(userid:jsonModel.id!, nickname: nickname, portrait: portrait)
+                    
+                    switch jsonModel.type {
+                    case "1":
+                        let userInfo = UserDefaults()
+                        userInfo.setValue(jsonModel.id, forKey: "userID")
+                        userInfo.setValue(jsonModel.nickname, forKey: "userNickName")
+                        userInfo.setValue(jsonModel.portrait, forKey: "userPortrait")
+                        //已存在，直接跳转
+//                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+//                        self.navigationController?.show(vc, sender: true)
+                        let sb = UIStoryboard(name: "Main1", bundle:nil)
+                        let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+                        vc.tabBarController?.tabBar.isHidden = false
+                        self.show(vc, sender: nil)
+                        break
+                    case "2":
+                        let userInfo = UserDefaults()
+                        userInfo.setValue(jsonModel.id, forKey: "userID")
+                        userInfo.setValue(jsonModel.nickname, forKey: "userNickName")
+                        userInfo.setValue(jsonModel.portrait, forKey: "userPortrait")
+                        //不存在，需要跳转设置页
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserSetIdentity") as! UserSetViewController
+                        vc.logtype = "2"
+                        vc.openid = self.openid!
+                        self.navigationController?.pushViewController(vc, animated: true)
+                        break
+                    case "3":
+                        //被禁言
+                        break
+                    default :
+                        break
+                    }
+
+                } catch {
+                    print("解析 JSON 失败")
+                }
+                
             }
         }
     }
@@ -190,7 +242,7 @@ class SignInViewController: UIViewController {
         let passwordImage = UIImage(named: "password")!
         addLeftImageTo(txtField: password_tf, andImage: passwordImage)
         
-        
+        self.tabBarController?.tabBar.isHidden = true
         self.navigationItem.hidesBackButton = true
         //通知调用
         NotificationCenter.default.addObserver(self,selector: #selector(WXLoginSuccess(notification:)),name: NSNotification.Name(rawValue: "WXLoginSuccessNotification"),object: nil)
@@ -260,3 +312,4 @@ class SignInViewController: UIViewController {
     */
 
 }
+

@@ -72,6 +72,7 @@ class SignUpViewController: UIViewController {
         
             if (authCode?.text) == smscode {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserSetIdentity") as! UserSetViewController
+                vc.logtype = "1"
                 vc.userPhone = userPhone.text!
                 vc.userPassword = userPassword.text!
                 self.navigationController?.pushViewController(vc, animated: true)
