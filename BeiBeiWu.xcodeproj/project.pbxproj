@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		05025319230201C800E8F3FE /* FabutieziViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05025318230201C800E8F3FE /* FabutieziViewController.swift */; };
 		0502531B230201D700E8F3FE /* FabugentieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0502531A230201D700E8F3FE /* FabugentieViewController.swift */; };
+		05090C5E2328F90C00DAB476 /* SomeonesluntanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05090C5D2328F90C00DAB476 /* SomeonesluntanViewController.swift */; };
+		05090C6023295CF600DAB476 /* BlackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05090C5F23295CF600DAB476 /* BlackListViewController.swift */; };
+		05090C622329675300DAB476 /* BlackListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05090C612329675300DAB476 /* BlackListData.swift */; };
+		05090C64232967FF00DAB476 /* BlackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05090C63232967FF00DAB476 /* BlackListTableViewCell.swift */; };
+		05090C6623298F9B00DAB476 /* Uniquelogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05090C6523298F9B00DAB476 /* Uniquelogin.swift */; };
+		05090C6A232A3CFF00DAB476 /* HelpCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05090C69232A3CFF00DAB476 /* HelpCenterViewController.swift */; };
+		05090C6C232A3F4A00DAB476 /* SliderWebviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05090C6B232A3F4A00DAB476 /* SliderWebviewViewController.swift */; };
 		050C87D822FE6B2A0019D9B0 /* LuntanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050C87D722FE6B2A0019D9B0 /* LuntanViewController.swift */; };
 		050C87DA22FEE7040019D9B0 /* DongtaiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050C87D922FEE7040019D9B0 /* DongtaiTableViewCell.swift */; };
 		050C87DC22FF12A50019D9B0 /* DongtaiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050C87DB22FF12A50019D9B0 /* DongtaiData.swift */; };
@@ -72,6 +79,13 @@
 /* Begin PBXFileReference section */
 		05025318230201C800E8F3FE /* FabutieziViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabutieziViewController.swift; sourceTree = "<group>"; };
 		0502531A230201D700E8F3FE /* FabugentieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabugentieViewController.swift; sourceTree = "<group>"; };
+		05090C5D2328F90C00DAB476 /* SomeonesluntanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeonesluntanViewController.swift; sourceTree = "<group>"; };
+		05090C5F23295CF600DAB476 /* BlackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListViewController.swift; sourceTree = "<group>"; };
+		05090C612329675300DAB476 /* BlackListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListData.swift; sourceTree = "<group>"; };
+		05090C63232967FF00DAB476 /* BlackListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListTableViewCell.swift; sourceTree = "<group>"; };
+		05090C6523298F9B00DAB476 /* Uniquelogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uniquelogin.swift; sourceTree = "<group>"; };
+		05090C69232A3CFF00DAB476 /* HelpCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCenterViewController.swift; sourceTree = "<group>"; };
+		05090C6B232A3F4A00DAB476 /* SliderWebviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderWebviewViewController.swift; sourceTree = "<group>"; };
 		050C87D722FE6B2A0019D9B0 /* LuntanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuntanViewController.swift; sourceTree = "<group>"; };
 		050C87D922FEE7040019D9B0 /* DongtaiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DongtaiTableViewCell.swift; sourceTree = "<group>"; };
 		050C87DB22FF12A50019D9B0 /* DongtaiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DongtaiData.swift; sourceTree = "<group>"; };
@@ -212,6 +226,9 @@
 				05115BDC22FE056A00D7632A /* NewFriendViewController.swift */,
 				05115BDE22FE076000D7632A /* NewFriendData.swift */,
 				05115BE022FE097C00D7632A /* NewFriendTableViewCell.swift */,
+				05090C5F23295CF600DAB476 /* BlackListViewController.swift */,
+				05090C612329675300DAB476 /* BlackListData.swift */,
+				05090C63232967FF00DAB476 /* BlackListTableViewCell.swift */,
 			);
 			path = Main3Controller;
 			sourceTree = "<group>";
@@ -249,6 +266,8 @@
 				05119F262307622F00545CF3 /* BuyvipViewController.swift */,
 				05119F282307624D00545CF3 /* BuyvipTableViewCell.swift */,
 				05119F2A230762F100545CF3 /* BuyvipData.swift */,
+				05090C5D2328F90C00DAB476 /* SomeonesluntanViewController.swift */,
+				05090C69232A3CFF00DAB476 /* HelpCenterViewController.swift */,
 			);
 			path = Main5Controller;
 			sourceTree = "<group>";
@@ -290,6 +309,8 @@
 				05C9B86C22E6D6A90075364D /* Main.storyboard */,
 				05115BC922EF855B00D7632A /* PersonalViewController.swift */,
 				051FD02A230FD9CF00A374D3 /* PersonalPostViewController.swift */,
+				05090C6523298F9B00DAB476 /* Uniquelogin.swift */,
+				05090C6B232A3F4A00DAB476 /* SliderWebviewViewController.swift */,
 			);
 			path = BeiBeiWu;
 			sourceTree = "<group>";
@@ -459,21 +480,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05090C6623298F9B00DAB476 /* Uniquelogin.swift in Sources */,
 				05115BD222F03CF600D7632A /* SousuoResult.swift in Sources */,
 				053F3EEB22ECD788004C4864 /* ShenBianData.swift in Sources */,
 				0512F5362303A69000237ABC /* ResetPersonalInfoViewController.swift in Sources */,
+				05090C5E2328F90C00DAB476 /* SomeonesluntanViewController.swift in Sources */,
 				050C87DA22FEE7040019D9B0 /* DongtaiTableViewCell.swift in Sources */,
 				051FD02B230FD9CF00A374D3 /* PersonalPostViewController.swift in Sources */,
 				05A77F55230168FE0010BC83 /* PostheadTableViewCell.swift in Sources */,
+				05090C6023295CF600DAB476 /* BlackListViewController.swift in Sources */,
 				058218952300EA5D0032B86C /* LuntanTableViewCell.swift in Sources */,
 				05A57E6A2301D5F3001BC0F0 /* PostlistData.swift in Sources */,
 				057B1FD022EA8E36000B8811 /* UserSetViewController.swift in Sources */,
+				05090C622329675300DAB476 /* BlackListData.swift in Sources */,
 				05115BD622FC1E0F00D7632A /* FriendsTableViewCell.swift in Sources */,
 				0522B1192300184B00D710C5 /* FabudongtaiViewController.swift in Sources */,
 				0512F530230380F200237ABC /* CircleViewController.swift in Sources */,
 				05115BCC22F031BE00D7632A /* SousuoViewController.swift in Sources */,
 				057B1FCC22EA8E18000B8811 /* SignInViewController.swift in Sources */,
+				05090C6A232A3CFF00DAB476 /* HelpCenterViewController.swift in Sources */,
 				057B1FCA22EA8DFA000B8811 /* Main1ViewController.swift in Sources */,
+				05090C64232967FF00DAB476 /* BlackListTableViewCell.swift in Sources */,
 				0512F5342303A4BE00237ABC /* ResetViewController.swift in Sources */,
 				057B1FD622EA9096000B8811 /* Main3ViewController.swift in Sources */,
 				051509CA230DF62B00D7DAEA /* FindPasswordViewController.swift in Sources */,
@@ -492,6 +519,7 @@
 				05115BD022F03CBC00D7632A /* SousuoTableViewCell.swift in Sources */,
 				05E3C58323004AF700BB8B05 /* LuntanData.swift in Sources */,
 				057B1FDC22EA90ED000B8811 /* Main5ViewController.swift in Sources */,
+				05090C6C232A3F4A00DAB476 /* SliderWebviewViewController.swift in Sources */,
 				050C87DC22FF12A50019D9B0 /* DongtaiData.swift in Sources */,
 				057B1FD922EA90AE000B8811 /* Main4ViewController.swift in Sources */,
 				05115BE122FE097C00D7632A /* NewFriendTableViewCell.swift in Sources */,

@@ -36,7 +36,7 @@ class BuyvipViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.title = "购买会员"
         initViplist()
         //支付通知
         NotificationCenter.default.addObserver(self, selector: #selector(successnotify), name: NSNotification.Name(rawValue: "PaySuccessNotification"), object: nil)

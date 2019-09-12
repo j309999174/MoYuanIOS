@@ -56,8 +56,8 @@ class FabugentieViewController: UIViewController {
         
         Alamofire.upload( multipartFormData: { multipartFormData in
             multipartFormData.append(userID!.data(using: String.Encoding.utf8)!, withName: "authid")
-            multipartFormData.append(self.postid!.data(using: String.Encoding.utf8)!, withName: "posttitle")
-            multipartFormData.append(self.followContent!.data(using: String.Encoding.utf8)!, withName: "posttext")
+            multipartFormData.append(self.id!.data(using: String.Encoding.utf8)!, withName: "postid")
+            multipartFormData.append(self.followContent!.data(using: String.Encoding.utf8)!, withName: "followtext")
             if exist1 {
                 multipartFormData.append(imageURL1, withName: "followpicture1", fileName: "postpicture1.jpg", mimeType: "image/*")
             }

@@ -565,7 +565,6 @@
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="NG1-wf-7oN" firstAttribute="leading" secondItem="UBa-bb-QoD" secondAttribute="trailing" id="QXA-ZG-3of"/>
                                                         <constraint firstAttribute="trailing" secondItem="NG1-wf-7oN" secondAttribute="trailing" id="UDf-zI-Gtf"/>
                                                         <constraint firstAttribute="bottom" secondItem="NG1-wf-7oN" secondAttribute="bottom" id="c3w-Iw-hSU"/>
                                                         <constraint firstItem="NG1-wf-7oN" firstAttribute="top" secondItem="5Ia-aw-Cpj" secondAttribute="top" id="cT2-L5-KIN"/>
@@ -749,7 +748,9 @@
                     <navigationItem key="navigationItem" id="Uat-i7-Ogf"/>
                     <connections>
                         <outlet property="password_tf" destination="UON-UE-ggi" id="TIc-OW-d4p"/>
+                        <outlet property="thirdparty_label" destination="jQ6-Jj-7h9" id="nUX-NJ-Huq"/>
                         <outlet property="userAccount_tf" destination="p9D-V8-wZn" id="vxe-bs-ZB6"/>
+                        <outlet property="weixin_btn" destination="IQM-Mz-Ufq" id="TAg-Lo-xCW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f22-Yh-Uzu" userLabel="First Responder" sceneMemberID="firstResponder"/>

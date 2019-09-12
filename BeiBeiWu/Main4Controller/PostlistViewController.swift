@@ -51,6 +51,23 @@ class PostlistViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func fabugentie_btn(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Fabugentie") as! FabugentieViewController
+        vc.id = id
+        vc.plateid = plateid
+        vc.platename = platename
+        vc.authid = authid
+        vc.authnickname = authnickname
+        vc.authportrait = authportrait
+        vc.posttip = posttip
+        vc.posttitle = posttitle
+        vc.posttext = posttext
+        vc.postpicture = postpicture
+        vc.like = like
+        vc.favorite = favorite
+        vc.time = time
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     func initPostlist(){
         let parameters: Parameters = ["type": "getDataFollowlist","postid": id!]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=postdetail&m=socialchat", method: .post, parameters: parameters).response { response in

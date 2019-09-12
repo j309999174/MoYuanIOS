@@ -62,11 +62,14 @@ class SignInViewController: UIViewController {
 
     @IBOutlet weak var userAccount_tf: UITextField!
     @IBOutlet weak var password_tf: UITextField!
-    
+    @IBOutlet weak var weixin_btn: UIButton!
+    @IBOutlet weak var thirdparty_label: UILabel!
     var userID:String?
     var userNickName:String?
     var userPortrait:String?
     var openid:String?
+    
+    var isuniquetoken:Bool?
     @IBAction func weixinBtn(_ sender: Any) {
         let req = SendAuthReq()
         req.scope = "snsapi_userinfo"
@@ -86,7 +89,7 @@ class SignInViewController: UIViewController {
     
     
     @IBAction func signIn_btn(_ sender: Any) {
-        let parameters: Parameters = ["userAccount": userAccount_tf.text!,"userPassword": password_tf.text!]
+        let parameters: Parameters = ["userAccount": userAccount_tf.text!,"userPassword": password_tf.text!,"uniquelogintoken":Uniquelogin.saveToken]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=signin&m=socialchat", method: .post, parameters: parameters).response { response in
             
             if let data = response.data {
@@ -171,7 +174,7 @@ class SignInViewController: UIViewController {
     }
     
     func uploadWXUserinfo(openid:String,nickname:String,portrait:String){
-        let parameters: Parameters = ["openid": openid,"nickname":nickname,"portrait":portrait]
+        let parameters: Parameters = ["openid": openid,"nickname":nickname,"portrait":portrait,"uniquelogintoken":Uniquelogin.saveToken]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=weinxinregister&m=socialchat", method: .post, parameters: parameters).response { response in
             print("Request: \(String(describing: response.request))")
             print("Response: \(String(describing: response.response))")
@@ -235,7 +238,14 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if WXApi.isWXAppInstalled(){
+            thirdparty_label.isHidden = true
+            weixin_btn.isHidden = true
+        }
         
+        if !(isuniquetoken ?? true) {
+            self.view.makeToast("您的账号在其他设备登录，强制退出")
+        }
         //textfield图
         let phoneImage = UIImage(named: "phone")!
         addLeftImageTo(txtField: userAccount_tf, andImage: phoneImage)

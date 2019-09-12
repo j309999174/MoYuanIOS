@@ -12,6 +12,11 @@ struct FriendsStruct: Codable {
     let id: String
     let nickname: String
     let portrait: String
+    
+    let age:String?
+    let gender:String?
+    let region:String?
+    let property:String?
 }
 
 class Main3ViewController: UIViewController {
@@ -29,9 +34,10 @@ class Main3ViewController: UIViewController {
     
     @IBOutlet weak var newFriend_label: UIButton!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        Uniquelogin.compareUniqueLoginToken(view: self)
         RCIM.shared()?.userInfoDataSource = self
         //设置融云当前用户信息
         let userInfo = UserDefaults()
@@ -56,7 +62,7 @@ class Main3ViewController: UIViewController {
                     let jsonModel = try decoder.decode([FriendsStruct].self, from: data)
                     self.dataList.removeAll()
                     for index in 0..<jsonModel.count{
-                        let cell = FriendsData(userID:jsonModel[index].id,userNickName: jsonModel[index].nickname,userPortrait: jsonModel[index].portrait)
+                        let cell = FriendsData(userID:jsonModel[index].id,userNickName: jsonModel[index].nickname,userPortrait: jsonModel[index].portrait,age: jsonModel[index].age  ?? "?",gender: jsonModel[index].gender  ?? "?",region: jsonModel[index].region  ?? "?",property: jsonModel[index].property ?? "?")
                         self.dataList.append(cell)
                     }
                     self.currentDataList = self.dataList
@@ -93,7 +99,7 @@ extension Main3ViewController:UITableViewDataSource,UITableViewDelegate{
         let oneOfList = currentDataList[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell") as! FriendsTableViewCell
-        
+        cell.delegate = self
         cell.setData(data: oneOfList)
         
         return cell
@@ -134,3 +140,16 @@ extension Main3ViewController:RCIMUserInfoDataSource {
         }
     }
 }
+
+extension Main3ViewController:FriendsTableViewCellDelegate{
+    func personpage(userID:String){
+        //跳转个人
+        let sb = UIStoryboard(name: "Personal", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
+        vc.userID = userID
+        vc.hidesBottomBarWhenPushed = true
+        self.show(vc, sender: nil)
+    }
+
+}
+

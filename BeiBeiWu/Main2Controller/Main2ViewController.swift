@@ -12,7 +12,7 @@ class Main2ViewController: RCConversationListViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Uniquelogin.compareUniqueLoginToken(view: self)
 //        let type1:RCConversationType = .ConversationType_PRIVATE
 //        let type2:RCConversationType = .ConversationType_DISCUSSION
 //        let type3:RCConversationType = .ConversationType_CHATROOM

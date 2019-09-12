@@ -52,6 +52,7 @@ class LuntanViewController: UIViewController {
         dataList.removeAll()
         imageArr.removeAll()
         imageNameArr.removeAll()
+        imageUrl.removeAll()
         initData()
     }
     @IBOutlet weak var luntanTableView: UITableView!
@@ -69,6 +70,7 @@ class LuntanViewController: UIViewController {
     }
     var imageArr = [UIImage]()
     var imageNameArr = [String]()
+    var imageUrl = [String]()
     var subNav = "首页"
     var dataList:[LuntanData] = []
     var gonggao = ""
@@ -132,6 +134,7 @@ class LuntanViewController: UIViewController {
                         let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
                         self.imageArr.append(UIImage(data: data)!)
                         self.imageNameArr.append(jsonModel[index].slidename)
+                        self.imageUrl.append(jsonModel[index].slideurl ?? "")
                     }
                     self.pagerView.reloadData()
                 } catch {
@@ -207,6 +210,13 @@ extension LuntanViewController:FSPagerViewDataSource,FSPagerViewDelegate{
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         pagerView.deselectItem(at: index, animated: true)
         pagerView.scrollToItem(at: index, animated: true)
+        if  self.imageUrl[index] != "" {
+            let sb = UIStoryboard(name: "Personal", bundle:nil)
+            let vc = sb.instantiateViewController(withIdentifier: "SliderWebview") as! SliderWebviewViewController
+            vc.url = self.imageUrl[index]
+            vc.hidesBottomBarWhenPushed = true
+            self.show(vc, sender: nil)
+        }
     }
     
     func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {

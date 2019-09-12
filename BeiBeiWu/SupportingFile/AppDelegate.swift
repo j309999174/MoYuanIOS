@@ -20,8 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         checkLocationServices()
+       
+
         //注册融云
         RCIM.shared()?.initWithAppKey("3argexb63qxke")
+        RCIM.shared()?.enableMessageRecall = true
+        RCIM.shared()?.enableTypingStatus = true
         //注册微信
         WXApi.registerApp("wxc7ff179d403b7a51")
         //请求通知权限
@@ -206,6 +210,9 @@ extension AppDelegate: WXApiDelegate{
     }
 }
 
+
+
+
 //所有组件在storyboard中增加圆角栏
 extension UIView {
     @IBInspectable var cornerRadius: CGFloat {
@@ -216,5 +223,22 @@ extension UIView {
         set {
             layer.cornerRadius = newValue
         }
+    }
+}
+//扩展日期，返回时间戳
+extension Date {
+    
+    /// 获取当前 秒级 时间戳 - 10位
+    var timeStamp : String {
+        let timeInterval: TimeInterval = self.timeIntervalSince1970
+        let timeStamp = Int(timeInterval)
+        return "\(timeStamp)"
+    }
+    
+    /// 获取当前 毫秒级 时间戳 - 13位
+    var milliStamp : String {
+        let timeInterval: TimeInterval = self.timeIntervalSince1970
+        let millisecond = CLongLong(round(timeInterval*1000))
+        return "\(millisecond)"
     }
 }

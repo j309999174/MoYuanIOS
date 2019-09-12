@@ -30,9 +30,30 @@ class Main5ViewController: UIViewController {
             print("Response: \(String(describing: response.response))")
             print("Error: \(String(describing: response.error))")
             
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)")
-                self.view.makeToast("共拥有\(utf8Text)积分")
+            if let data = response.data, let allscore = String(data: data, encoding: .utf8) {
+                print("Data: \(allscore)")
+                //self.view.makeToast("共拥有\(allscore)积分")
+                
+                let actionSheet = UIAlertController(title: "您共有\(allscore)积分！", message: "", preferredStyle: .actionSheet)
+                
+                actionSheet.addAction(UIAlertAction(title: "兑换一天会员", style: .default, handler: {(action: UIAlertAction) in
+                    let parameters: Parameters = ["myid": userID!,"allscore": allscore]
+                    Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=sorttovip&m=socialchat", method: .post, parameters: parameters).response { response in
+                        print("Request: \(String(describing: response.request))")
+                        print("Response: \(String(describing: response.response))")
+                        print("Error: \(String(describing: response.error))")
+                        
+                        if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                            print("Data: \(utf8Text)")
+                            self.view.makeToast(utf8Text)
+                        }
+                    }
+                }))
+                
+                actionSheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+                actionSheet.popoverPresentationController!.sourceView = self.view
+                actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+                self.present(actionSheet, animated: true, completion: nil)
             }
         }
         
@@ -52,6 +73,9 @@ class Main5ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Uniquelogin.compareUniqueLoginToken(view: self)
+        
         let userInfo = UserDefaults()
         userID = userInfo.string(forKey: "userID")
         userNickName = userInfo.string(forKey: "userNickName")

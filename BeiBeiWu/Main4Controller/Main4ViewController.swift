@@ -62,9 +62,11 @@ class Main4ViewController: UIViewController {
     
     var imageArr = [UIImage]()
     var imageNameArr = [String]()
+    var imageUrl = [String]()
     var dataList:[DongtaiData] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        Uniquelogin.compareUniqueLoginToken(view: self)
         self.navigationItem.hidesBackButton = true
         //删除文件
         let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
@@ -88,6 +90,7 @@ class Main4ViewController: UIViewController {
                         let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
                         self.imageArr.append(UIImage(data: data)!)
                         self.imageNameArr.append(jsonModel[index].slidename)
+                        self.imageUrl.append(jsonModel[index].slideurl ?? "")
                     }
                     self.pagerView.reloadData()
                 } catch {
@@ -162,6 +165,13 @@ extension Main4ViewController:FSPagerViewDataSource,FSPagerViewDelegate{
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         pagerView.deselectItem(at: index, animated: true)
         pagerView.scrollToItem(at: index, animated: true)
+        if  self.imageUrl[index] != "" {
+            let sb = UIStoryboard(name: "Personal", bundle:nil)
+            let vc = sb.instantiateViewController(withIdentifier: "SliderWebview") as! SliderWebviewViewController
+            vc.url = self.imageUrl[index]
+            vc.hidesBottomBarWhenPushed = true
+            self.show(vc, sender: nil)
+        }
     }
     
     func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {

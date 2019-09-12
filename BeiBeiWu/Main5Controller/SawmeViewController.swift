@@ -11,11 +11,43 @@ import Alamofire
 class SawmeViewController: UIViewController {
     @IBOutlet weak var sawmeTableView: UITableView!
     var dataList:[ShenBianData] = []
+    
+    var userID:String?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.title = "谁看过我"
         // Do any additional setup after loading the view.
-        initSawme()
+        let userInfo = UserDefaults()
+        userID = userInfo.string(forKey: "userID")
+        
+        getvip()
+    }
+    
+    
+    func getvip(){
+        let parameters: Parameters = ["id": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=viptimeinsousuo&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "会员已到期"{
+                    let actionSheet = UIAlertController(title: "查看本页需要购买会员权限哦！", message: "", preferredStyle: .actionSheet)
+                    actionSheet.addAction(UIAlertAction(title: "购买会员", style: .default, handler: {(action: UIAlertAction) in
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "BuyVip") as! BuyvipViewController
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }))
+                    actionSheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+                    actionSheet.popoverPresentationController!.sourceView = self.view
+                    actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+                    self.present(actionSheet, animated: true, completion: nil)
+                }else{
+                    self.initSawme()
+                }
+            }
+        }
     }
     
     func initSawme(){
@@ -85,6 +117,6 @@ extension SawmeViewController: UITableViewDataSource,UITableViewDelegate{
         let sb = UIStoryboard(name: "Personal", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
         vc.userID = dataList[indexPath.row].userID
-        self.present(vc, animated: true, completion: nil)
+        self.show(vc, sender: nil)
     }
 }

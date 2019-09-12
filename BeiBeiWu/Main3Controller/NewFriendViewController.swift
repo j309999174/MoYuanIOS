@@ -76,6 +76,15 @@ extension NewFriendViewController:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //不同的StoryBoard下
+        let sb = UIStoryboard(name: "Personal", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
+        vc.userID = dataList[indexPath.row].userID
+        vc.hidesBottomBarWhenPushed = true
+        self.show(vc, sender: nil)
+    }
+    
 }
 
 

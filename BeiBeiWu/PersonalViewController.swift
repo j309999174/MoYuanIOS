@@ -49,23 +49,57 @@ class PersonalViewController: UIViewController {
     
     @IBOutlet weak var userSignature: UILabel!
     
-    
+    @IBOutlet weak var userinfobackground: UIView!
+    var yourid:String?
+    var yournickname:String?
+    var yourportrait:String?
     
     @IBOutlet weak var leaveWords: UITextField!
     
     @IBAction func personalPost_btn(_ sender: Any) {
-        let sb = UIStoryboard(name: "Personal", bundle:nil)
-        let vc = sb.instantiateViewController(withIdentifier: "PersonalPostIdentity") as! PersonalPostViewController
+        let sb = UIStoryboard(name: "Main5", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "Someonesluntan") as! SomeonesluntanViewController
         //vc.hidesBottomBarWhenPushed = true
-        vc.authid = userID!
         self.show(vc, sender: nil)
     }
     
     @IBAction func addFriend(_ sender: Any) {
-        let userInfo = UserDefaults()
-        let yourid = userInfo.string(forKey: "userID")
-        let yournickname = userInfo.string(forKey: "userNickName")
-        let yourportrait = userInfo.string(forKey: "userPortrait")
+        getFriendNumber()
+    }
+    
+    @IBAction func addblacklist(_ sender: Any) {
+        let parameters: Parameters = ["myid":yourid!,"yourid":userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=addblacklist&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                self.view.makeToast("拉黑成功")
+            }
+        }
+    }
+    
+    func getFriendNumber(){
+        let parameters: Parameters = ["myid": yourid!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsnumber&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "好友人数未超过限制"{
+                    self.makefriend()
+                }else{
+                    self.view.makeToast(utf8Text)
+                }
+            }
+        }
+    }
+    
+    func makefriend(){
         let yourwords = leaveWords.text
         let parameters: Parameters = ["myid": userID!,"yourid":yourid!,"yournickname":yournickname!,"yourportrait":yourportrait!,"yourwords":yourwords ?? ""]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=addfriend&m=socialchat", method: .post, parameters: parameters).response { response in
@@ -75,16 +109,22 @@ class PersonalViewController: UIViewController {
             
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)")
+                self.view.makeToast("好友申请成功")
             }
             
             self.presentingViewController?.dismiss(animated:true)
         }
-        
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        userinfobackground.layer.contents = UIImage.init(named: "hover")?.cgImage
+        userinfobackground.contentMode = UIView.ContentMode.scaleToFill
+        
+        let userInfo = UserDefaults()
+        yourid = userInfo.string(forKey: "userID")
+        yournickname = userInfo.string(forKey: "userNickName")
+        yourportrait = userInfo.string(forKey: "userPortrait")
+        
         let parameters: Parameters = ["userid": userID!]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=personage&m=socialchat", method: .post, parameters: parameters).response { response in
             print("Request: \(String(describing: response.request))")

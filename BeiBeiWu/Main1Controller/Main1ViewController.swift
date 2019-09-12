@@ -68,11 +68,13 @@ class Main1ViewController: UIViewController {
                     //清零
                     self.imageArr.removeAll()
                     self.imageNameArr.removeAll()
+                    self.imageUrl.removeAll()
                     self.dataList.removeAll()
                     for index in 0..<jsonModel.count{
                         let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
                         self.imageArr.append(UIImage(data: data)!)
                         self.imageNameArr.append(jsonModel[index].slidename)
+                        self.imageUrl.append(jsonModel[index].slideurl ?? "")
                     }
                     self.pagerView.reloadData()
                 } catch {
@@ -132,11 +134,13 @@ class Main1ViewController: UIViewController {
                     //清零
                     self.imageArr.removeAll()
                     self.imageNameArr.removeAll()
+                    self.imageUrl.removeAll()
                     self.dataList.removeAll()
                     for index in 0..<jsonModel.count{
                         let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
                         self.imageArr.append(UIImage(data: data)!)
                         self.imageNameArr.append(jsonModel[index].slidename)
+                        self.imageUrl.append(jsonModel[index].slideurl ?? "")
                     }
                     self.pagerView.reloadData()
                 } catch {
@@ -189,6 +193,7 @@ class Main1ViewController: UIViewController {
     
     var imageArr = [UIImage]()
     var imageNameArr = [String]()
+    var imageUrl = [String]()
 
 
     @IBOutlet weak var pagerView: FSPagerView!{
@@ -209,8 +214,14 @@ class Main1ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
+        
         self.navigationItem.hidesBackButton = true
         self.tabBarController?.tabBar.isHidden = false
+        
+        
+        
         //判断是否登录
         if UserDefaults().string(forKey: "userID") == nil{
             let sb = UIStoryboard(name: "Main1", bundle:nil)
@@ -219,6 +230,7 @@ class Main1ViewController: UIViewController {
             self.show(vc, sender: nil)
             
         }else{
+            Uniquelogin.compareUniqueLoginToken(view: self)
             //保存定位
             let userInfo = UserDefaults()
             if let latitude = userInfo.string(forKey: "latitude"),let longitude = userInfo.string(forKey: "longitude"),let userID = userInfo.string(forKey: "userID") {
@@ -246,6 +258,7 @@ class Main1ViewController: UIViewController {
                             let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
                             self.imageArr.append(UIImage(data: data)!)
                             self.imageNameArr.append(jsonModel[index].slidename)
+                            self.imageUrl.append(jsonModel[index].slideurl ?? "")
                         }
                         self.pagerView.reloadData()
                     } catch {
@@ -366,6 +379,15 @@ extension Main1ViewController:FSPagerViewDataSource,FSPagerViewDelegate{
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         pagerView.deselectItem(at: index, animated: true)
         pagerView.scrollToItem(at: index, animated: true)
+        print("点了我\(self.imageUrl[index])")
+        if  self.imageUrl[index] != "" {
+            let sb = UIStoryboard(name: "Personal", bundle:nil)
+            let vc = sb.instantiateViewController(withIdentifier: "SliderWebview") as! SliderWebviewViewController
+            vc.url = self.imageUrl[index]
+            vc.hidesBottomBarWhenPushed = true
+            self.show(vc, sender: nil)
+        }
+        
     }
     
     func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
@@ -375,7 +397,9 @@ extension Main1ViewController:FSPagerViewDataSource,FSPagerViewDelegate{
     func pagerViewDidEndScrollAnimation(_ pagerView: FSPagerView) {
        
     }
+
 }
+
 
 
 

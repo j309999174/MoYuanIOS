@@ -47,6 +47,11 @@ class LuntanTableViewCell: UITableViewCell {
     
     var delegate:LuntanTableViewCellDelegate?
     func setData(data:LuntanData){
+        var attributesString = data.age! + " | " + data.gender!
+        attributesString = attributesString + " | " + data.region!
+        attributesString = attributesString + " | " + data.property!
+        attributes.text = attributesString
+        
         postid.text = data.id
         plateid.text = data.plateid
         platename.text = data.platename
@@ -65,6 +70,17 @@ class LuntanTableViewCell: UITableViewCell {
         authnickname.text = data.authnickname
         time.text = data.time
         posttip.text = data.posttip
+        if data.posttip == "置顶" {
+            posttip1.image = UIImage(named: "ontop")
+        }else if data.posttip == "加精"{
+            posttip1.image = UIImage(named: "essence")
+        }else if data.posttip == "置顶,加精"{
+            posttip1.image = UIImage(named: "ontop")
+            posttip2.image = UIImage(named: "essence")
+        }else{
+            posttip1.image = UIImage(named: "")
+            posttip2.image = UIImage(named: "")
+        }
         posttitle.text = data.posttitle
         posttext.numberOfLines = 0
         posttext.text = data.posttext

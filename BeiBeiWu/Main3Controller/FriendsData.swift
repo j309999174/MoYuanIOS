@@ -12,9 +12,19 @@ class FriendsData {
     var userPortrait:String
     var userNickName: String
     
-    init(userID: String,userNickName:String,userPortrait:String) {
+    var age:String?
+    var gender:String?
+    var region:String?
+    var property:String?
+    
+    init(userID: String,userNickName:String,userPortrait:String,age:String,gender:String,region:String,property:String) {
         self.userID = userID
         self.userNickName = userNickName
         self.userPortrait = userPortrait
+        
+        self.age = age
+        self.gender = gender
+        self.region = region
+        self.property = property
     }
 }

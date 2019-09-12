@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+protocol FriendsTableViewCellDelegate{
+    func personpage(userID:String)
+}
 class FriendsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userPortrait_img: UIImageView!
@@ -15,8 +17,16 @@ class FriendsTableViewCell: UITableViewCell {
     @IBOutlet weak var userID_label: UILabel!
     @IBOutlet weak var userNickName_label: UILabel!
     
-    
+    @IBAction func personpage(_ sender: Any) {
+        delegate?.personpage(userID: userID_label.text!)
+    }
+    var delegate:FriendsTableViewCellDelegate?
+    @IBOutlet weak var attributes: UILabel!
     func setData(data: FriendsData){
+        var attributesString = data.age! + " | " + data.gender!
+        attributesString = attributesString + " | " + data.region!
+        attributesString = attributesString + " | " + data.property!
+        attributes.text = attributesString
         do {
             let data = try Data(contentsOf: URL(string: data.userPortrait)!)
             userPortrait_img.image = UIImage(data: data)
