@@ -67,18 +67,7 @@ class Main4ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Uniquelogin.compareUniqueLoginToken(view: self)
-        self.navigationItem.hidesBackButton = true
-        //删除文件
-        let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                           .userDomainMask, true)[0] as String
-        let filePath = "\(rootPath)/pickedimage.jpg"
-        let fileManager = FileManager.default
-        do{
-            try fileManager.removeItem(atPath: filePath)
-            print("Success to remove file.")
-        }catch{
-            print("Failed to remove file.")
-        }
+        
         //获取幻灯片数据
         let getSlide: Parameters = ["type": "getSlide"]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=guangchang&m=socialchat", method: .post, parameters: getSlide).response { response in
@@ -254,8 +243,10 @@ extension Main4ViewController:DongtaiTableViewCellDelegate{
         }))
         
         actionSheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        actionSheet.popoverPresentationController!.sourceView = self.view
-        actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            actionSheet.popoverPresentationController!.sourceView = self.view
+            actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+        }
         self.present(actionSheet, animated: true, completion: nil)
 
     }

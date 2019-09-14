@@ -105,6 +105,8 @@ class FabugentieViewController: UIViewController {
     var pictureIndex = 1
     override func viewDidLoad() {
         super.viewDidLoad()
+        //删除文件
+        removePictureFile()
         //图片点击事件
         let imgClick1 = UITapGestureRecognizer(target: self, action: #selector(picture1Action))
         imageView1.addGestureRecognizer(imgClick1)
@@ -150,8 +152,10 @@ class FabugentieViewController: UIViewController {
         }))
         
         actionSheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        actionSheet.popoverPresentationController!.sourceView = self.view
-        actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            actionSheet.popoverPresentationController!.sourceView = self.view
+            actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+        }
         self.present(actionSheet, animated: true, completion: nil)
     }
     /*
@@ -179,9 +183,11 @@ extension FabugentieViewController: UIImagePickerControllerDelegate,UINavigation
         case 1:
             imageView1.image = image
             filePath = "\(rootPath)/pickedimage1.jpg"
+            imageView2.isHidden = false
         case 2:
             imageView2.image = image
             filePath = "\(rootPath)/pickedimage2.jpg"
+            imageView3.isHidden = false
         case 3:
             imageView3.image = image
             filePath = "\(rootPath)/pickedimage3.jpg"

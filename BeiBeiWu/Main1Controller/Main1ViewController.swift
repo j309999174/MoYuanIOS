@@ -34,27 +34,79 @@ struct TuiJianUserInfo: Codable {
 
 
 class Main1ViewController: UIViewController {
-   
+    
     @IBAction func menuAction(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
             tuijian_btn()
+            seewho_segment.selectedSegmentIndex = 0
             break
         case 1:
             fujin_btn()
+            seewho_segment.selectedSegmentIndex = 0
             break
         case 2:
-        let sb = UIStoryboard(name: "Main1", bundle:nil)
-        let vc = sb.instantiateViewController(withIdentifier: "SousuoViewIdentity") as! SousuoViewController
-        //vc.hidesBottomBarWhenPushed = true
-        self.show(vc, sender: nil)
+            let sb = UIStoryboard(name: "Main1", bundle:nil)
+            let vc = sb.instantiateViewController(withIdentifier: "SousuoViewIdentity") as! SousuoViewController
+            //vc.hidesBottomBarWhenPushed = true
+            self.show(vc, sender: nil)
+        case 3:
+            if seewho_segment.isHidden {
+                seewho_segment.isHidden = false
+            }else{
+                seewho_segment.isHidden = true
+            }
             break
         default:
             break
         }
     }
     
+    @IBOutlet weak var seewho_segment: UISegmentedControl!
     
+    @IBAction func seewho(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            print("看全部")
+            self.dataList.removeAll()
+            for index in 0..<userID.count{
+                print(userGender[index])
+                    let cell = ShenBianData(userID:userID[index],userPortrait: userPortrait[index] , userNickName: userNickName[index] , userAge: userAge[index] , userGender: userGender[index] , userProperty: userProperty[index] , userDistance: userDistance[index]
+                        , userRegion: userRegion[index] , userVIP: userVIP[index] )
+                    self.dataList.append(cell)
+            }
+            self.shenBianTableView.reloadData()
+            break
+        case 1:
+            print("只看女")
+            self.dataList.removeAll()
+            for index in 0..<userID.count{
+                print(userGender[index])
+                if userGender[index].elementsEqual("女") {
+                    let cell = ShenBianData(userID:userID[index],userPortrait: userPortrait[index] , userNickName: userNickName[index] , userAge: userAge[index] , userGender: userGender[index] , userProperty: userProperty[index] , userDistance: userDistance[index]
+                        , userRegion: userRegion[index] , userVIP: userVIP[index] )
+                    self.dataList.append(cell)
+                }
+            }
+            self.shenBianTableView.reloadData()
+            break
+        case 2:
+            print("只看男")
+            self.dataList.removeAll()
+            for index in 0..<userID.count{
+                print(userGender[index])
+                if userGender[index].elementsEqual("男") {
+                    let cell = ShenBianData(userID:userID[index],userPortrait: userPortrait[index] , userNickName: userNickName[index] , userAge: userAge[index] , userGender: userGender[index] , userProperty: userProperty[index] , userDistance: userDistance[index]
+                        , userRegion: userRegion[index] , userVIP: userVIP[index] )
+                    self.dataList.append(cell)
+                }
+            }
+            self.shenBianTableView.reloadData()
+            break
+        default:
+            break
+        }
+    }
     
     func tuijian_btn() {
         
@@ -110,7 +162,26 @@ class Main1ViewController: UIViewController {
                 let decoder = JSONDecoder()
                 do {
                     let jsonModel = try decoder.decode([TuiJianUserInfo].self, from: data)
+                    self.userID.removeAll()
+                    self.userPortrait.removeAll()
+                    self.userNickName.removeAll()
+                    self.userAge.removeAll()
+                    self.userGender.removeAll()
+                    self.userProperty.removeAll()
+                    self.userDistance.removeAll()
+                    self.userRegion.removeAll()
+                    self.userVIP.removeAll()
                     for index in 0..<jsonModel.count{
+                        
+                        self.userID.append(jsonModel[index].id)
+                        self.userPortrait.append(jsonModel[index].portrait ?? "")
+                        self.userNickName.append(jsonModel[index].nickname ?? "未知")
+                        self.userAge.append(jsonModel[index].age ?? "未知")
+                        self.userGender.append(jsonModel[index].gender ?? "未知")
+                        self.userProperty.append(jsonModel[index].property ?? "未知")
+                        self.userDistance.append(jsonModel[index].location ?? "未知")
+                        self.userRegion.append(jsonModel[index].region ?? "未知")
+                        self.userVIP.append(jsonModel[index].vip ?? "未知")
                         let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
                             , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
                         self.dataList.append(cell)
@@ -176,7 +247,25 @@ class Main1ViewController: UIViewController {
                 let decoder = JSONDecoder()
                 do {
                     let jsonModel = try decoder.decode([TuiJianUserInfo].self, from: data)
+                    self.userID.removeAll()
+                    self.userPortrait.removeAll()
+                    self.userNickName.removeAll()
+                    self.userAge.removeAll()
+                    self.userGender.removeAll()
+                    self.userProperty.removeAll()
+                    self.userDistance.removeAll()
+                    self.userRegion.removeAll()
+                    self.userVIP.removeAll()
                     for index in 0..<jsonModel.count{
+                        self.userID.append(jsonModel[index].id)
+                        self.userPortrait.append(jsonModel[index].portrait ?? "")
+                        self.userNickName.append(jsonModel[index].nickname ?? "未知")
+                        self.userAge.append(jsonModel[index].age ?? "未知")
+                        self.userGender.append(jsonModel[index].gender ?? "未知")
+                        self.userProperty.append(jsonModel[index].property ?? "未知")
+                        self.userDistance.append(jsonModel[index].location ?? "未知")
+                        self.userRegion.append(jsonModel[index].region ?? "未知")
+                        self.userVIP.append(jsonModel[index].vip ?? "未知")
                         let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
                             , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
                         self.dataList.append(cell)
@@ -194,8 +283,8 @@ class Main1ViewController: UIViewController {
     var imageArr = [UIImage]()
     var imageNameArr = [String]()
     var imageUrl = [String]()
-
-
+    
+    
     @IBOutlet weak var pagerView: FSPagerView!{
         didSet {
             pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -211,11 +300,21 @@ class Main1ViewController: UIViewController {
     
     @IBOutlet weak var shenBianTableView: UITableView!
     var dataList:[ShenBianData] = []
+    var userID = [String]()
+    var userPortrait = [String]()
+    var userNickName = [String]()
+    var userAge = [String]()
+    var userGender = [String]()
+    var userProperty = [String]()
+    var userDistance = [String]()
+    var userRegion = [String]()
+    var userVIP = [String]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        
         
         self.navigationItem.hidesBackButton = true
         self.tabBarController?.tabBar.isHidden = false
@@ -264,13 +363,13 @@ class Main1ViewController: UIViewController {
                     } catch {
                         print("解析 JSON 失败")
                     }
-//                    print("Request: \(String(describing: response.request))")
-//                    print("Response: \(String(describing: response.response))")
-//                    print("Error: \(String(describing: response.error))")
-//
-//                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-//                        print("Data: \(utf8Text)")
-//                    }
+                    //                    print("Request: \(String(describing: response.request))")
+                    //                    print("Response: \(String(describing: response.response))")
+                    //                    print("Error: \(String(describing: response.error))")
+                    //
+                    //                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    //                        print("Data: \(utf8Text)")
+                    //                    }
                 }
             }
             
@@ -283,18 +382,27 @@ class Main1ViewController: UIViewController {
             }
             
             Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getUserInfo).response { response in
-                                    print("Request: \(String(describing: response.request))")
-                                    print("Response: \(String(describing: response.response))")
-                                    print("Error: \(String(describing: response.error))")
+                print("Request: \(String(describing: response.request))")
+                print("Response: \(String(describing: response.response))")
+                print("Error: \(String(describing: response.error))")
                 
-                                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                                        print("Data: \(utf8Text)")
-                                    }
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Data: \(utf8Text)")
+                }
                 if let data = response.data {
                     let decoder = JSONDecoder()
                     do {
                         let jsonModel = try decoder.decode([TuiJianUserInfo].self, from: data)
                         for index in 0..<jsonModel.count{
+                            self.userID.append(jsonModel[index].id)
+                            self.userPortrait.append(jsonModel[index].portrait ?? "")
+                            self.userNickName.append(jsonModel[index].nickname ?? "未知")
+                            self.userAge.append(jsonModel[index].age ?? "未知")
+                            self.userGender.append(jsonModel[index].gender ?? "未知")
+                            self.userProperty.append(jsonModel[index].property ?? "未知")
+                            self.userDistance.append(jsonModel[index].location ?? "未知")
+                            self.userRegion.append(jsonModel[index].region ?? "未知")
+                            self.userVIP.append(jsonModel[index].vip ?? "未知")
                             let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
                                 , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
                             self.dataList.append(cell)
@@ -319,7 +427,7 @@ class Main1ViewController: UIViewController {
         }, tokenIncorrect: {
             print("token不对")
         })
-
+        
     }
     
     
@@ -391,13 +499,13 @@ extension Main1ViewController:FSPagerViewDataSource,FSPagerViewDelegate{
     }
     
     func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
-       
+        
     }
     
     func pagerViewDidEndScrollAnimation(_ pagerView: FSPagerView) {
-       
+        
     }
-
+    
 }
 
 

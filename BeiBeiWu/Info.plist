@@ -2,12 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>允许使用麦克风</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>贝贝屋</string>
+	<string>小贝乐园</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -51,6 +49,8 @@
 	<string>允许使用定位信息</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>允许使用定位信息</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>允许使用麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>允许读取本地图片</string>
 	<key>UILaunchStoryboardName</key>

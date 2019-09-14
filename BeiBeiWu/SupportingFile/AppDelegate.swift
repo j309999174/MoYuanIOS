@@ -242,3 +242,26 @@ extension Date {
         return "\(millisecond)"
     }
 }
+
+
+extension UIViewController{
+    func removePictureFile(){
+        //删除文件
+        let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                           .userDomainMask, true)[0] as String
+        let filePath = "\(rootPath)/pickedimage.jpg"
+        let filePath1 = "\(rootPath)/pickedimage1.jpg"
+        let filePath2 = "\(rootPath)/pickedimage2.jpg"
+        let filePath3 = "\(rootPath)/pickedimage3.jpg"
+        let fileManager = FileManager.default
+        do{
+            try fileManager.removeItem(atPath: filePath)
+            try fileManager.removeItem(atPath: filePath1)
+            try fileManager.removeItem(atPath: filePath2)
+            try fileManager.removeItem(atPath: filePath3)
+            print("Success to remove file.")
+        }catch{
+            print("Failed to remove file.")
+        }
+    }
+}

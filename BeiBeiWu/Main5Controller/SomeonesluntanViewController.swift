@@ -74,7 +74,9 @@ extension SomeonesluntanViewController:UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //同一个StoryBoard下
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostlistView") as! PostlistViewController
+        let sb = UIStoryboard(name: "Main4", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "PostlistView") as! PostlistViewController
+        //vc.hidesBottomBarWhenPushed = true
         vc.id = dataList[indexPath.row].id
         vc.plateid = dataList[indexPath.row].plateid
         vc.platename = dataList[indexPath.row].platename
@@ -88,7 +90,7 @@ extension SomeonesluntanViewController:UITableViewDelegate,UITableViewDataSource
         vc.like = dataList[indexPath.row].like
         vc.favorite = dataList[indexPath.row].favorite
         vc.time = dataList[indexPath.row].time
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.show(vc, sender: nil)
     }
     
     
@@ -150,8 +152,10 @@ extension SomeonesluntanViewController:LuntanTableViewCellDelegate{
         }))
         
         actionSheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        actionSheet.popoverPresentationController!.sourceView = self.view
-        actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            actionSheet.popoverPresentationController!.sourceView = self.view
+            actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+        }
         self.present(actionSheet, animated: true, completion: nil)
         
     }

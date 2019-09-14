@@ -134,6 +134,8 @@ class UserSetViewController: UIViewController {
     var states:[[市]] = Array()
     override func viewDidLoad() {
         super.viewDidLoad()
+        //删除文件
+        removePictureFile()
         //textfield图
         let userNickNameImage = UIImage(named: "nickname")!
         addLeftImageTo(txtField: userNickName, andImage: userNickNameImage)

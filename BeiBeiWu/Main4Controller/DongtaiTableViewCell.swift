@@ -18,7 +18,11 @@ class DongtaiTableViewCell: UITableViewCell {
     @IBOutlet weak var userPortrait: UIImageView!
     @IBOutlet weak var userNickName: UILabel!
     @IBOutlet weak var dongtaiWord: UILabel!
-    @IBOutlet weak var dongtaiPicture: UIImageView!
+    
+    @IBOutlet weak var dongtaiPicture1: UIImageView!
+    @IBOutlet weak var dongtaiPicture2: UIImageView!
+    @IBOutlet weak var dongtaiPicture3: UIImageView!
+    
     @IBOutlet weak var dongtaiTime: UILabel!
 
     @IBOutlet weak var dongtaiLike: UIButton!
@@ -63,8 +67,47 @@ class DongtaiTableViewCell: UITableViewCell {
         dongtaiWord.text = data.dongtaiWord
         dongtaiWord.numberOfLines = 0
         do {
-            let data = try Data(contentsOf: URL(string: data.dongtaiPicture)!)
-            dongtaiPicture.image = UIImage(data: data)
+            //let data = try Data(contentsOf: URL(string: data.dongtaiPicture)!)
+            //dongtaiPicture1.image = UIImage(data: data)
+            
+            let arraySubstrings: [Substring] = data.dongtaiPicture.split(separator: ",")
+            let arrayStrings: [String] = arraySubstrings.compactMap { "\($0)" }
+            for index in 0..<arrayStrings.count{
+                print(arrayStrings[index])
+            }
+            switch arrayStrings.count {
+            case 1:
+                if arrayStrings[0] != ""{
+                    let data1 = try Data(contentsOf: URL(string: arrayStrings[0])!)
+                    self.dongtaiPicture1.image = UIImage(data: data1)
+                    self.dongtaiPicture1.isHidden = false
+                }
+                self.dongtaiPicture2.isHidden = true
+                self.dongtaiPicture3.isHidden = true
+                break
+            case 2:
+                let data1 = try Data(contentsOf: URL(string: arrayStrings[0])!)
+                self.dongtaiPicture1.image = UIImage(data: data1)
+                self.dongtaiPicture1.isHidden = false
+                let data2 = try Data(contentsOf: URL(string: arrayStrings[1])!)
+                self.dongtaiPicture2.image = UIImage(data: data2)
+                self.dongtaiPicture2.isHidden = false
+                
+                self.dongtaiPicture3.isHidden = true
+                break
+            case 3:
+                let data1 = try Data(contentsOf: URL(string: arrayStrings[0])!)
+                self.dongtaiPicture1.image = UIImage(data: data1)
+                self.dongtaiPicture1.isHidden = false
+                let data2 = try Data(contentsOf: URL(string: arrayStrings[1])!)
+                self.dongtaiPicture2.image = UIImage(data: data2)
+                self.dongtaiPicture2.isHidden = false
+                let data3 = try Data(contentsOf: URL(string: arrayStrings[1])!)
+                self.dongtaiPicture3.image = UIImage(data: data3)
+                self.dongtaiPicture3.isHidden = false
+                break
+            default: break
+            }
         }catch let err{
             print(err)
         }

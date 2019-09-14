@@ -68,6 +68,8 @@ class SignInViewController: UIViewController {
     var userNickName:String?
     var userPortrait:String?
     var openid:String?
+    //登陆类型，判断是手机还是微信
+    var logintype:String?
     
     var isuniquetoken:Bool?
     @IBAction func weixinBtn(_ sender: Any) {
@@ -194,8 +196,10 @@ class SignInViewController: UIViewController {
                     userInfo.setValue(nickname, forKey: "userNickName")
                     userInfo.setValue(portrait, forKey: "userPortrait")
                     //调用融云，获取token
+                    self.logintype = "weixinlogin"
                     self.getRongyunToken(userid:jsonModel.id!, nickname: nickname, portrait: portrait)
                     
+                    //判断是否首次登陆
                     switch jsonModel.type {
                     case "1":
                         let userInfo = UserDefaults()
@@ -244,7 +248,7 @@ class SignInViewController: UIViewController {
         }
         
         if !(isuniquetoken ?? true) {
-            self.view.makeToast("您的账号在其他设备登录，强制退出")
+            self.view.makeToast("您的账号已被禁用或在其他设备登录，强制退出")
         }
         //textfield图
         let phoneImage = UIImage(named: "phone")!
@@ -289,10 +293,12 @@ class SignInViewController: UIViewController {
                     let userInfo = UserDefaults()
                     userInfo.setValue(jsonModel.token, forKey: "rongyunToken")
                     
-                    //跳转首页
-                    let sb = UIStoryboard(name: "Main", bundle:nil)
-                    let vc = sb.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
-                    self.present(vc, animated: true, completion: nil)
+                    //手机则跳转首页
+                    if self.logintype != "weixinlogin"{
+                       let sb = UIStoryboard(name: "Main", bundle:nil)
+                       let vc = sb.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
+                       self.present(vc, animated: true, completion: nil)
+                    }
                 } catch {
                     print("解析 JSON 失败")
                 }

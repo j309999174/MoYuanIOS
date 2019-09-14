@@ -38,15 +38,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="iMf-FO-tL6">
-                                <rect key="frame" x="0.0" y="64" width="375" height="34"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iMf-FO-tL6">
+                                <rect key="frame" x="0.0" y="64" width="375" height="28"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YhA-Do-A6q">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="29"/>
                                         <segments>
                                             <segment title="推荐"/>
                                             <segment title="附近"/>
                                             <segment title="搜索"/>
+                                            <segment title="---"/>
                                         </segments>
                                         <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
@@ -54,7 +55,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1G-7L-uJM">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                         <color key="tintColor" red="1" green="0.36007281940563252" blue="0.20421595482706045" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="推荐">
@@ -63,29 +64,40 @@
                                         <state key="selected" backgroundImage="rc_btn_voice_hover"/>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xq8-DC-yqc">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <state key="normal" title="附近">
                                             <color key="titleColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <state key="selected" backgroundImage="rc_btn_voice_hover"/>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEK-nn-x7r">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <state key="normal" title="搜索">
                                             <color key="titleColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
+                                    <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JmI-vz-Qw4">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                        <segments>
+                                            <segment title="看全部"/>
+                                            <segment title="只看女"/>
+                                            <segment title="只看男"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="seewho:" destination="SDL-rb-JS9" eventType="valueChanged" id="Oip-ZY-Lvf"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ucn-wq-vbH">
-                                <rect key="frame" x="0.0" y="98" width="375" height="520"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="526"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="130" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hns-pS-m8m">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="520"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="526"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="separatorColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <view key="tableHeaderView" contentMode="scaleToFill" id="auv-sy-G7L" customClass="FSPagerView" customModule="FSPagerView">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
@@ -95,7 +107,7 @@
                                         </view>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" id="viq-Fy-zuv" customClass="TableViewCellShenbian" customModule="BeiBeiWu" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="127" width="375" height="130"/>
+                                                <rect key="frame" x="0.0" y="128" width="375" height="130"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="viq-Fy-zuv" id="e5p-om-bDW">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
@@ -266,6 +278,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="pagerView" destination="auv-sy-G7L" id="usx-OD-4ns"/>
+                        <outlet property="seewho_segment" destination="JmI-vz-Qw4" id="fJ2-qI-IEV"/>
                         <outlet property="shenBianTableView" destination="hns-pS-m8m" id="Q2F-zb-Tk3"/>
                     </connections>
                 </viewController>
@@ -352,8 +365,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高级选项（VIP）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZc-yu-v0t">
-                                        <rect key="frame" x="149" y="321.5" width="77.5" height="12"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高级选项（会员专享）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZc-yu-v0t">
+                                        <rect key="frame" x="136.5" y="321.5" width="102.5" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
