@@ -1,8 +1,11 @@
 PODS:
   - Alamofire (4.8.2)
   - AlipaySDK-iOS (15.5.9)
+  - DynamicBlurView (3.0.1)
   - FSPagerView (0.8.2)
   - MarqueeLabel (4.0.0)
+  - PopupDialog (1.1.0):
+    - DynamicBlurView (~> 3.0.1)
   - RongCloudIM/IMKit (2.9.20):
     - RongCloudIM/IMLib
   - RongCloudIM/IMLib (2.9.20)
@@ -22,6 +25,7 @@ DEPENDENCIES:
   - AlipaySDK-iOS
   - FSPagerView
   - MarqueeLabel
+  - PopupDialog (~> 1.1)
   - RongCloudIM/IMKit (~> 2.9.20)
   - RongCloudIM/IMLib (~> 2.9.20)
   - RongCloudIM/Sight (~> 2.9.20)
@@ -34,8 +38,10 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlipaySDK-iOS
+    - DynamicBlurView
     - FSPagerView
     - MarqueeLabel
+    - PopupDialog
     - RongCloudIM
     - RongCloudRTC
     - Toast-Swift
@@ -44,13 +50,15 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlipaySDK-iOS: 1c5283b30977a24acecc0114662697f7dc78f618
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
   MarqueeLabel: b55b26e690b6ad41faedd95cbf5eae6f1d1735b4
+  PopupDialog: 42fb7a0bc4fafdf89fef8b5b2b127a6023f3e1cc
   RongCloudIM: 431486c630f375f74fa90d2c24f58a52b86ad76b
   RongCloudRTC: f7e38a746e2d78c71f45df121513beed926d7fc5
   Toast-Swift: 36f4720243c8582c2be243a60a51e193c761f541
   WechatOpenSDK: 9b721089507c895d05f997408c30bb6e6f5f9b60
 
-PODFILE CHECKSUM: b492dea3ad3c0dbc58c18d8e72a07a4d8b222b06
+PODFILE CHECKSUM: 800b731d8ea46b4a05c0d6f68336ea07296fd183
 
 COCOAPODS: 1.7.5

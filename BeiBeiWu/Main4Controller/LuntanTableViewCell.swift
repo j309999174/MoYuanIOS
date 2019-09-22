@@ -12,6 +12,8 @@ protocol LuntanTableViewCellDelegate{
     func like(postid:String,likebtn:UIButton)
     func personpage(userID:String)
     func threepoints(postid:String,userID:String)
+    func pictureClick(pictureData:Data)
+    func detail_content(posttext:UILabel!,post_detail_text:String!,sender:UIButton)
 }
 class LuntanTableViewCell: UITableViewCell {
 
@@ -29,10 +31,25 @@ class LuntanTableViewCell: UITableViewCell {
     @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var like: UIButton!
     
+    @IBOutlet weak var post_full_text: UITextView!
     
     @IBOutlet weak var posttip1: UIImageView!
     @IBOutlet weak var posttip2: UIImageView!
     @IBOutlet weak var attributes: UILabel!
+    
+    @IBOutlet weak var postpicture1: UIImageView!
+    @IBOutlet weak var postpicture2: UIImageView!
+    @IBOutlet weak var postpicture3: UIImageView!
+    
+    
+    @IBAction func detail_content(_ sender: UIButton) {
+        print("内部")
+        sender.isHidden = true
+        posttext.text = post_detail_text
+        
+        delegate?.detail_content(posttext: posttext,post_detail_text: post_detail_text,sender: sender)
+    }
+    @IBOutlet weak var detail_btn: UIButton!
     
     @IBAction func threePoints(_ sender: Any) {
         print("论坛的菜单")
@@ -46,6 +63,10 @@ class LuntanTableViewCell: UITableViewCell {
     }
     
     var delegate:LuntanTableViewCellDelegate?
+    var data1:Data?
+    var data2:Data?
+    var data3:Data?
+    var post_detail_text:String?
     func setData(data:LuntanData){
         var attributesString = data.age! + " | " + data.gender!
         attributesString = attributesString + " | " + data.region!
@@ -82,19 +103,59 @@ class LuntanTableViewCell: UITableViewCell {
             posttip2.image = UIImage(named: "")
         }
         posttitle.text = data.posttitle
+        
+        posttext.lineBreakMode = NSLineBreakMode.byWordWrapping
         posttext.numberOfLines = 0
-        posttext.text = data.posttext
+        post_detail_text = data.posttext
+        //posttext.text = data.posttext
+        detail_btn.isEnabled = false
+        detail_btn.setTitleColor(UIColor?.init(UIColor.init(red: 0, green: 0, blue: 255, alpha: 1)), for: UIControl.State.normal)
+        if data.posttext?.count ?? 0 == 56 {
+            posttext.text = data.posttext
+            //posttext.text = String((data.posttext?.prefix(50))!) + "......"
+            detail_btn.isHidden = false
+        }else{
+            posttext.text = data.posttext
+            detail_btn.isHidden = true
+        }
         do {
             let arraySubstrings: [Substring] = (data.postpicture?.split(separator: ","))!
             let arrayStrings: [String] = arraySubstrings.compactMap { "\($0)" }
             for index in 0..<arrayStrings.count{
                 print(arrayStrings[index])
             }
-            if arrayStrings.count > 0{
-                let data = try Data(contentsOf: URL(string: arrayStrings[0])!)
-                postpicture.image = UIImage(data: data)
+            if arrayStrings.count < 1{
+                postpicture1.isHidden = true
             }else{
-                postpicture.isHidden = true
+                postpicture1.isHidden = false
+                data1 = try Data(contentsOf: URL(string: arrayStrings[0])!)
+                postpicture1.image = UIImage(data: data1!)
+                //图一点击
+                let imgClick1 = UITapGestureRecognizer(target: self, action: #selector(imAction1))
+                postpicture1.addGestureRecognizer(imgClick1)
+                postpicture1.isUserInteractionEnabled = true
+            }
+            if arrayStrings.count < 2{
+                postpicture2.isHidden = true
+            }else{
+                postpicture2.isHidden = false
+                data2 = try Data(contentsOf: URL(string: arrayStrings[1])!)
+                postpicture2.image = UIImage(data: data2!)
+                //图一点击
+                let imgClick2 = UITapGestureRecognizer(target: self, action: #selector(imAction2))
+                postpicture2.addGestureRecognizer(imgClick2)
+                postpicture2.isUserInteractionEnabled = true
+            }
+            if arrayStrings.count < 3{
+                postpicture3.isHidden = true
+            }else{
+                postpicture3.isHidden = false
+                data3 = try Data(contentsOf: URL(string: arrayStrings[2])!)
+                postpicture3.image = UIImage(data: data3!)
+                //图一点击
+                let imgClick3 = UITapGestureRecognizer(target: self, action: #selector(imAction3))
+                postpicture3.addGestureRecognizer(imgClick3)
+                postpicture3.isUserInteractionEnabled = true
             }
         }catch let err{
             print(err)
@@ -111,6 +172,21 @@ class LuntanTableViewCell: UITableViewCell {
     @objc func imAction() -> Void {
         print("图片点击事件")
         delegate?.personpage(userID: authid.text!)
+    }
+    //图一点击事件方法
+    @objc func imAction1() -> Void {
+        print("图片点击事件")
+        delegate?.pictureClick(pictureData: data1!)
+    }
+    //图二点击事件方法
+    @objc func imAction2() -> Void {
+        print("图片点击事件")
+        delegate?.pictureClick(pictureData: data2!)
+    }
+    //图三点击事件方法
+    @objc func imAction3() -> Void {
+        print("图片点击事件")
+        delegate?.pictureClick(pictureData: data3!)
     }
 }
 

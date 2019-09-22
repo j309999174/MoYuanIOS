@@ -7,11 +7,50 @@
 //
 
 import UIKit
-
+import Alamofire
 class Main2ViewController: RCConversationListViewController {
-
+    var dataList:[FriendsData] = [];
     override func viewDidLoad() {
         super.viewDidLoad()
+        //设置融云当前用户信息
+        let userInfo = UserDefaults()
+        let userID = userInfo.string(forKey: "userID")
+        let userNickName = userInfo.string(forKey: "userNickName")!
+        let userPortrait = userInfo.string(forKey: "userPortrait")!
+        let myinfo = RCUserInfo.init(userId: userID, name: userNickName, portrait: userPortrait)
+        RCIM.shared()?.currentUserInfo = myinfo
+        
+        // Do any additional setup after loading the view.
+        RCIM.shared()?.userInfoDataSource = self
+        
+        let parameters: Parameters = ["myid": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friends&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+            }
+            if let data = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let jsonModel = try decoder.decode([FriendsStruct].self, from: data)
+                    self.dataList.removeAll()
+                    for index in 0..<jsonModel.count{
+                        let cell = FriendsData(userID:jsonModel[index].id,userNickName: jsonModel[index].nickname,userPortrait: jsonModel[index].portrait,age: jsonModel[index].age  ?? "?",gender: jsonModel[index].gender  ?? "?",region: jsonModel[index].region  ?? "?",property: jsonModel[index].property ?? "?")
+                        self.dataList.append(cell)
+                        let userinfo = RCUserInfo.init(userId: jsonModel[index].id, name: jsonModel[index].nickname, portrait: jsonModel[index].portrait)
+                        RCIM.shared()?.refreshUserInfoCache(userinfo, withUserId: jsonModel[index].id)
+                    }
+                    
+                } catch {
+                    print("解析 JSON 失败")
+                }
+            }
+        }
+        self.setDisplayConversationTypes([1,2,3,4,6,7])
+        
+        self.setCollectionConversationType([7])
         Uniquelogin.compareUniqueLoginToken(view: self)
 //        let type1:RCConversationType = .ConversationType_PRIVATE
 //        let type2:RCConversationType = .ConversationType_DISCUSSION
@@ -20,10 +59,6 @@ class Main2ViewController: RCConversationListViewController {
 //        let type5:RCConversationType = .ConversationType_APPSERVICE
 //        let type6:RCConversationType = .ConversationType_SYSTEM
         
-        setDisplayConversationTypes([1,2,3,4,6,7])
-        
-        setCollectionConversationType([7])
-        // Do any additional setup after loading the view.
         
     }
     
@@ -66,3 +101,13 @@ class Main2ViewController: RCConversationListViewController {
 }
 
 
+extension Main2ViewController:RCIMUserInfoDataSource {
+    func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
+        for index in 0..<dataList.count{
+            if dataList[index].userID == userId{
+                let userinfo = RCUserInfo.init(userId: dataList[index].userID, name: dataList[index].userNickName, portrait: dataList[index].userPortrait)
+                completion(userinfo)
+            }
+        }
+    }
+}

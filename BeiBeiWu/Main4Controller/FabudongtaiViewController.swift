@@ -98,7 +98,7 @@ class FabudongtaiViewController: UIViewController {
     var pictureIndex = 1
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
+        self.navigationItem.hidesBackButton = false
         //删除文件
         removePictureFile()
         // 图片点击事件

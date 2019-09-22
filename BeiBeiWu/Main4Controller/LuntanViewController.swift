@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import FSPagerView
 import MarqueeLabel
-
+import PopupDialog
 
 struct GonggaoStruct:Codable {
     let id:String
@@ -49,11 +49,17 @@ class LuntanViewController: UIViewController {
     
     @IBAction func plateMenu(_ sender: UISegmentedControl) {
         subNav = sender.titleForSegment(at: sender.selectedSegmentIndex)!
-        dataList.removeAll()
-        imageArr.removeAll()
-        imageNameArr.removeAll()
-        imageUrl.removeAll()
-        initData()
+        
+        if subNav == "大圈" {
+            initViptime()
+        }else{
+            dataList.removeAll()
+            imageArr.removeAll()
+            imageNameArr.removeAll()
+            imageUrl.removeAll()
+            initData()
+        }
+        
     }
     @IBOutlet weak var luntanTableView: UITableView!
     @IBOutlet weak var marqueeLabel: MarqueeLabel!
@@ -74,6 +80,8 @@ class LuntanViewController: UIViewController {
     var subNav = "首页"
     var dataList:[LuntanData] = []
     var gonggao = ""
+    var isopen:[Bool] = []
+    var post_full_text = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
@@ -163,6 +171,7 @@ class LuntanViewController: UIViewController {
                     for index in 0..<jsonModel.count{
                         let cell = LuntanData(id: jsonModel[index].id, plateid: jsonModel[index].plateid, platename: jsonModel[index].platename, authid: jsonModel[index].authid, authnickname: jsonModel[index].authnickname, authportrait: jsonModel[index].authportrait, posttip: jsonModel[index].posttip ?? "", posttitle: jsonModel[index].posttitle, posttext: jsonModel[index].posttext ?? "", postpicture: jsonModel[index].postpicture ?? "", like: jsonModel[index].like ?? "", favorite: jsonModel[index].favorite ?? "", time: jsonModel[index].time,age: jsonModel[index].age  ?? "?",gender: jsonModel[index].gender  ?? "?",region: jsonModel[index].region  ?? "?",property: jsonModel[index].property ?? "?")
                         self.dataList.append(cell)
+                        self.isopen.append(false)
                     }
                     self.luntanTableView.reloadData()
                 } catch {
@@ -188,7 +197,30 @@ class LuntanViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    func initViptime(){
+        //获取会员时间
+        let userInfo = UserDefaults()
+        let userID = userInfo.string(forKey: "userID")
+        let parameters: Parameters = ["id": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=viptimeinsousuo&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "会员已到期"{
+                    self.view.makeToast("此版块需要开通会员")
+                }else{
+                    self.dataList.removeAll()
+                    self.imageArr.removeAll()
+                    self.imageNameArr.removeAll()
+                    self.imageUrl.removeAll()
+                    self.initData()
+                }
+            }
+        }
+    }
 }
 
 
@@ -235,38 +267,92 @@ extension LuntanViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let oneOfList = dataList[indexPath.row]
-        
+        print(indexPath.row)
+        let oneOfList = LuntanData(id: dataList[indexPath.row].id, plateid: dataList[indexPath.row].plateid, platename: dataList[indexPath.row].platename, authid: dataList[indexPath.row].authid, authnickname: dataList[indexPath.row].authnickname, authportrait: dataList[indexPath.row].authportrait, posttip: dataList[indexPath.row].posttip ?? "", posttitle: dataList[indexPath.row].posttitle!, posttext: dataList[indexPath.row].posttext ?? "", postpicture: dataList[indexPath.row].postpicture ?? "", like: dataList[indexPath.row].like ?? "", favorite: dataList[indexPath.row].favorite ?? "", time: dataList[indexPath.row].time!,age: dataList[indexPath.row].age  ?? "?",gender: dataList[indexPath.row].gender  ?? "?",region: dataList[indexPath.row].region  ?? "?",property: dataList[indexPath.row].property ?? "?")
+        let oneOfList1 = dataList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "luntanCell") as! LuntanTableViewCell
-        cell.delegate = self
-        cell.setData(data: oneOfList)
+        if oneOfList.posttext?.count ?? 0 > 50 && isopen[indexPath.row] == false {
+            print("省了\(String(describing: oneOfList.posttext))")
+            oneOfList.posttext = String((oneOfList.posttext?.prefix(50) ?? "")) + "......"
+            cell.delegate = self
+            cell.setData(data: oneOfList)
+        }else{
+            print("不省略\(String(describing: oneOfList1.posttext))")
+            print("全文\(String(describing: dataList[indexPath.row].posttext))")
+            cell.delegate = self
+            cell.setData(data: oneOfList1)
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isopen[indexPath.row] == false {
+            isopen[indexPath.row] = true
+        }else{
+            isopen[indexPath.row] = false
+        }
+        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         //同一个StoryBoard下
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostlistView") as! PostlistViewController
-        vc.id = dataList[indexPath.row].id
-        vc.plateid = dataList[indexPath.row].plateid
-        vc.platename = dataList[indexPath.row].platename
-        vc.authid = dataList[indexPath.row].authid
-        vc.authnickname = dataList[indexPath.row].authnickname
-        vc.authportrait = dataList[indexPath.row].authportrait
-        vc.posttip = dataList[indexPath.row].posttip
-        vc.posttitle = dataList[indexPath.row].posttitle
-        vc.posttext = dataList[indexPath.row].posttext
-        vc.postpicture = dataList[indexPath.row].postpicture
-        vc.like = dataList[indexPath.row].like
-        vc.favorite = dataList[indexPath.row].favorite
-        vc.time = dataList[indexPath.row].time
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostlistView") as! PostlistViewController
+//        vc.id = dataList[indexPath.row].id
+//        vc.plateid = dataList[indexPath.row].plateid
+//        vc.platename = dataList[indexPath.row].platename
+//        vc.authid = dataList[indexPath.row].authid
+//        vc.authnickname = dataList[indexPath.row].authnickname
+//        vc.authportrait = dataList[indexPath.row].authportrait
+//        vc.posttip = dataList[indexPath.row].posttip
+//        vc.posttitle = dataList[indexPath.row].posttitle
+//        vc.posttext = dataList[indexPath.row].posttext
+//        vc.postpicture = dataList[indexPath.row].postpicture
+//        vc.like = dataList[indexPath.row].like
+//        vc.favorite = dataList[indexPath.row].favorite
+//        vc.time = dataList[indexPath.row].time
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if dataList.count - 1 == indexPath.row {
+            print("到底了")
+        }
+    }
 }
 
 
 extension LuntanViewController:LuntanTableViewCellDelegate{
+    func detail_content(posttext: UILabel!, post_detail_text: String!,sender:UIButton) {
+//        print("全文")
+//                if post_detail_text?.count ?? 0 > 50 {
+//                    posttext.text = String((post_detail_text?.prefix(50))!) + "......"
+//                    sender.isHidden = false
+//                }else{
+//                    posttext.text = post_detail_text
+//                    sender.isHidden = true
+//                    
+//                }
+//        posttext.text = post_detail_text
+//        sender.isHidden = true
+        
+        
+    }
+    
+    func pictureClick(pictureData: Data) {
+            let image = UIImage(data: pictureData)
+            // Create the dialog
+            let popup = PopupDialog(title: nil, message: nil, image: image)
+            // Create buttons
+            let buttonOne = CancelButton(title: "取消") {
+                print("You canceled the car dialog.")
+            }
+            // Add buttons to dialog
+            // Alternatively, you can use popup.addButton(buttonOne)
+            // to add a single button
+            popup.addButtons([buttonOne])
+            
+            // Present dialog
+            self.present(popup, animated: true, completion: nil)
+    }
+    
     func like(postid: String,likebtn: UIButton) {
         print("论坛喜欢")
         let parameters: Parameters = ["postid": postid]
@@ -319,6 +405,23 @@ extension LuntanViewController:LuntanTableViewCellDelegate{
                 }
             }
         }))
+        
+        if myid! == userID {
+            actionSheet.addAction(UIAlertAction(title: "删除", style: .default, handler: {(action: UIAlertAction) in
+                print("开始删除")
+                let parameters: Parameters = ["postid":postid]
+                Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=deletepost&m=socialchat", method: .post, parameters: parameters).response { response in
+                    print("Request: \(String(describing: response.request))")
+                    print("Response: \(String(describing: response.response))")
+                    print("Error: \(String(describing: response.error))")
+                    
+                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                        print("Data: \(utf8Text)")
+                        self.view.makeToast("删除已提交")
+                    }
+                }
+            }))
+        }
         
         actionSheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         if UIDevice.current.userInterfaceIdiom == .pad {

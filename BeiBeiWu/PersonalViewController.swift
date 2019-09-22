@@ -60,11 +60,15 @@ class PersonalViewController: UIViewController {
         let sb = UIStoryboard(name: "Main5", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "Someonesluntan") as! SomeonesluntanViewController
         //vc.hidesBottomBarWhenPushed = true
+        vc.personid = userID
         self.show(vc, sender: nil)
     }
     
+    @IBOutlet weak var addFriendBtn: UIButton!
     @IBAction func addFriend(_ sender: Any) {
         getFriendNumber()
+        addFriendBtn.isEnabled = false
+        addFriendBtn.setTitle("已申请，等待对方同意", for: UIControl.State.normal)
     }
     
     @IBAction func addblacklist(_ sender: Any) {
@@ -79,6 +83,8 @@ class PersonalViewController: UIViewController {
                 self.view.makeToast("拉黑成功")
             }
         }
+        addFriendBtn.isEnabled = false
+        addFriendBtn.setTitle("已加入黑名单", for: UIControl.State.normal)
     }
     
     func getFriendNumber(){
@@ -117,6 +123,10 @@ class PersonalViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = false
+        
+        
+        
         userinfobackground.layer.contents = UIImage.init(named: "hover")?.cgImage
         userinfobackground.contentMode = UIView.ContentMode.scaleToFill
         
@@ -124,6 +134,8 @@ class PersonalViewController: UIViewController {
         yourid = userInfo.string(forKey: "userID")
         yournickname = userInfo.string(forKey: "userNickName")
         yourportrait = userInfo.string(forKey: "userPortrait")
+        
+        ifFriend()
         
         let parameters: Parameters = ["userid": userID!]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=personage&m=socialchat", method: .post, parameters: parameters).response { response in
@@ -165,5 +177,21 @@ class PersonalViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    func ifFriend(){
+        let parameters: Parameters = ["myid": userID!,"yourid":yourid!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=iffriend&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text != "还未申请好友" {
+                    self.addFriendBtn.isEnabled = false
+                    self.addFriendBtn.setTitle(utf8Text, for: UIControl.State.normal)
+                    self.view.makeToast(utf8Text)
+                }
+            }
+        }
+    }
 }

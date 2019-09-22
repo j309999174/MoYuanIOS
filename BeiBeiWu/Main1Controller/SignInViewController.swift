@@ -251,10 +251,10 @@ class SignInViewController: UIViewController {
             self.view.makeToast("您的账号已被禁用或在其他设备登录，强制退出")
         }
         //textfield图
-        let phoneImage = UIImage(named: "phone")!
-        addLeftImageTo(txtField: userAccount_tf, andImage: phoneImage)
-        let passwordImage = UIImage(named: "password")!
-        addLeftImageTo(txtField: password_tf, andImage: passwordImage)
+//        let phoneImage = UIImage(named: "phone")!
+//        addLeftImageTo(txtField: userAccount_tf, andImage: phoneImage)
+//        let passwordImage = UIImage(named: "password")!
+//        addLeftImageTo(txtField: password_tf, andImage: passwordImage)
         
         self.tabBarController?.tabBar.isHidden = true
         self.navigationItem.hidesBackButton = true

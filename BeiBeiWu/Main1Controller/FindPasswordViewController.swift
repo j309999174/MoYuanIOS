@@ -94,10 +94,10 @@ class FindPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //textfield图
-        let phoneImage = UIImage(named: "phone")!
-        addLeftImageTo(txtField: userPhone, andImage: phoneImage)
-        let passwordImage = UIImage(named: "password")!
-        addLeftImageTo(txtField: userPassword, andImage: passwordImage)
+//        let phoneImage = UIImage(named: "phone")!
+//        addLeftImageTo(txtField: userPhone, andImage: phoneImage)
+//        let passwordImage = UIImage(named: "password")!
+//        addLeftImageTo(txtField: userPassword, andImage: passwordImage)
         
         // Do any additional setup after loading the view.
     }

@@ -131,13 +131,13 @@ extension PostlistViewController:UITableViewDataSource,UITableViewDelegate{
             let sb = UIStoryboard(name: "Personal", bundle:nil)
             let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
             vc.userID = self.authid
-            self.present(vc, animated: true, completion: nil)
+            self.show(vc, sender: nil)
         }else{
             //不同的StoryBoard下
             let sb = UIStoryboard(name: "Personal", bundle:nil)
             let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
             vc.userID = dataList[indexPath.row - 1].authid
-            self.present(vc, animated: true, completion: nil)
+            self.show(vc, sender: nil)
         }
         
     }
