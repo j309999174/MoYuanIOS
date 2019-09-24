@@ -10,15 +10,15 @@ import UIKit
 import Alamofire
 
 struct UserInfo: Codable {
-    let error: String
-    let info: String
-    let userID: String
-    let userNickName:String
-    let userPortrait:String
-    let userAge: String
-    let userGender: String
-    let userProperty: String
-    let userRegion: String
+    let error: String?
+    let info: String?
+    let userID: String?
+    let userNickName:String?
+    let userPortrait:String?
+    let userAge: String?
+    let userGender: String?
+    let userProperty: String?
+    let userRegion: String?
 }
 
 struct RongyunToken: Codable {
@@ -98,20 +98,25 @@ class SignInViewController: UIViewController {
                 let decoder = JSONDecoder()
                 do {
                     let jsonModel = try decoder.decode(UserInfo.self, from: data)
-                    print(jsonModel.userNickName)
+
+                    
+                    if jsonModel.error == "0" {
+                        self.userID = jsonModel.userID
+                        self.userNickName = jsonModel.userNickName
+                        self.userPortrait = jsonModel.userPortrait
+                        //保存用户ID，名字，头像
+                        let userInfo = UserDefaults()
+                        userInfo.setValue(self.userID, forKey: "userID")
+                        userInfo.setValue(self.userNickName, forKey: "userNickName")
+                        userInfo.setValue(self.userPortrait, forKey: "userPortrait")
+                        
+                        //调用融云，获取token
+                        self.getRongyunToken(userid: self.userID!, nickname: self.userNickName!, portrait: self.userPortrait!)
+                    }else{
+                        self.view.makeToast(jsonModel.info)
+                    }
                     
                     
-                    self.userID = jsonModel.userID
-                    self.userNickName = jsonModel.userNickName
-                    self.userPortrait = jsonModel.userPortrait
-                    //保存用户ID，名字，头像
-                    let userInfo = UserDefaults()
-                    userInfo.setValue(self.userID, forKey: "userID")
-                    userInfo.setValue(self.userNickName, forKey: "userNickName")
-                    userInfo.setValue(self.userPortrait, forKey: "userPortrait")
-                    
-                    //调用融云，获取token
-                    self.getRongyunToken(userid: self.userID!, nickname: self.userNickName!, portrait: self.userPortrait!)
                     
                 } catch {
                     print("解析 JSON 失败")
@@ -242,7 +247,11 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("微信是否安装\(WXApi.isWXAppInstalled())")
         if WXApi.isWXAppInstalled(){
+            thirdparty_label.isHidden = false
+            weixin_btn.isHidden = false
+        }else{
             thirdparty_label.isHidden = true
             weixin_btn.isHidden = true
         }

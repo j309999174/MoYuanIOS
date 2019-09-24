@@ -742,7 +742,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="43" translatesAutoresizingMaskIntoConstraints="NO" id="rwY-DW-Z1a">
-                                <rect key="frame" x="100" y="164" width="175" height="97"/>
+                                <rect key="frame" x="100" y="164" width="175" height="133"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvd-VY-OQQ">
                                         <rect key="frame" x="63.666666666666657" y="0.0" width="48" height="24"/>
@@ -813,16 +813,29 @@
                                             <outlet property="delegate" destination="zBT-Rt-pM5" id="itI-qp-uob"/>
                                         </connections>
                                     </pickerView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEe-vu-tv2">
-                                        <rect key="frame" x="12.666666666666671" y="67" width="150" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="JQy-LG-4Dl"/>
-                                        </constraints>
-                                        <state key="normal" title="提交"/>
-                                        <connections>
-                                            <action selector="submitBtn:" destination="zBT-Rt-pM5" eventType="touchUpInside" id="NHa-lY-x8Q"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="erA-lx-gvt">
+                                        <rect key="frame" x="12.666666666666671" y="67" width="150" height="66"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="submit" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-pB-DBA">
+                                                <rect key="frame" x="59.999999999999986" y="0.0" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="i1c-AC-HYv"/>
+                                                    <constraint firstAttribute="width" constant="30" id="viZ-vW-LDz"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEe-vu-tv2">
+                                                <rect key="frame" x="0.0" y="30" width="150" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="JQy-LG-4Dl"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="提交"/>
+                                                <connections>
+                                                    <action selector="submitBtn:" destination="zBT-Rt-pM5" eventType="touchUpInside" id="NHa-lY-x8Q"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -1233,10 +1246,10 @@
             </objects>
             <point key="canvasLocation" x="1558" y="760"/>
         </scene>
-        <!--View Controller-->
+        <!--Private Setting View Controller-->
         <scene sceneID="XaG-fK-qT6">
             <objects>
-                <viewController id="CYJ-yf-U4g" sceneMemberID="viewController">
+                <viewController id="CYJ-yf-U4g" customClass="PrivateSettingViewController" customModule="BeiBeiWu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tiN-wb-YLc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1287,15 +1300,27 @@
                                                 <subviews>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gw7-c0-Hf0">
                                                         <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="switch1:" destination="CYJ-yf-U4g" eventType="valueChanged" id="v1z-xf-kM3"/>
+                                                        </connections>
                                                     </switch>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lH1-Yr-5D2">
                                                         <rect key="frame" x="0.0" y="106.99999999999997" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="switch2:" destination="CYJ-yf-U4g" eventType="valueChanged" id="iIf-Dv-FQ3"/>
+                                                        </connections>
                                                     </switch>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="smb-pt-8WW">
                                                         <rect key="frame" x="0.0" y="213.99999999999997" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="switch3:" destination="CYJ-yf-U4g" eventType="valueChanged" id="2Zz-ua-zUc"/>
+                                                        </connections>
                                                     </switch>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HB2-iD-0R9">
                                                         <rect key="frame" x="0.0" y="321" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="switch4:" destination="CYJ-yf-U4g" eventType="valueChanged" id="jYX-LL-PFZ"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                             </stackView>
@@ -1320,6 +1345,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UbQ-Of-GOU"/>
                     </view>
+                    <connections>
+                        <outlet property="switch_btn1" destination="gw7-c0-Hf0" id="nDE-hg-tfM"/>
+                        <outlet property="switch_btn2" destination="lH1-Yr-5D2" id="XRA-gu-T8m"/>
+                        <outlet property="switch_btn3" destination="smb-pt-8WW" id="c3q-in-mlr"/>
+                        <outlet property="switch_btn4" destination="HB2-iD-0R9" id="ox6-3r-Qne"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MP3-Nh-S7K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1333,31 +1364,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="115" translatesAutoresizingMaskIntoConstraints="NO" id="pyi-7L-zs6">
-                                <rect key="frame" x="5" y="163" width="365" height="314"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="115" translatesAutoresizingMaskIntoConstraints="NO" id="pyi-7L-zs6">
+                                <rect key="frame" x="141.66666666666666" y="219" width="92" height="374"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通用设置" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JH0-Cg-0m7">
-                                        <rect key="frame" x="0.0" y="0.0" width="365" height="24"/>
+                                        <rect key="frame" x="5" y="0.0" width="81.666666666666671" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EP-kw-eUn">
-                                        <rect key="frame" x="0.0" y="139" width="365" height="30"/>
-                                        <state key="normal" title="清除缓存"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BA0-7J-Pr4">
-                                        <rect key="frame" x="0.0" y="284" width="365" height="30"/>
-                                        <state key="normal" title="清除聊天记录"/>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Nrj-vP-Z3W">
+                                        <rect key="frame" x="15" y="139" width="62" height="60"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cleancache" translatesAutoresizingMaskIntoConstraints="NO" id="Hcn-Hx-J8E">
+                                                <rect key="frame" x="16" y="0.0" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="hfy-Zu-jQP"/>
+                                                    <constraint firstAttribute="height" constant="30" id="ygv-Ja-K3b"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EP-kw-eUn">
+                                                <rect key="frame" x="0.0" y="30" width="62" height="30"/>
+                                                <state key="normal" title="清除缓存"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0Oo-d1-AXo">
+                                        <rect key="frame" x="0.0" y="314" width="92" height="60"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cleanrecord" translatesAutoresizingMaskIntoConstraints="NO" id="FwO-Hd-hRe">
+                                                <rect key="frame" x="31" y="0.0" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="6wb-9t-whA"/>
+                                                    <constraint firstAttribute="height" constant="30" id="wC2-l2-JbV"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BA0-7J-Pr4">
+                                                <rect key="frame" x="0.0" y="30" width="92" height="30"/>
+                                                <state key="normal" title="清除聊天记录"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="pyi-7L-zs6" firstAttribute="top" secondItem="d1E-K7-a9Z" secondAttribute="top" constant="75" id="NEP-XA-QOv"/>
-                            <constraint firstItem="d1E-K7-a9Z" firstAttribute="trailing" secondItem="pyi-7L-zs6" secondAttribute="trailing" constant="5" id="Tiy-2w-CFr"/>
-                            <constraint firstItem="pyi-7L-zs6" firstAttribute="leading" secondItem="d1E-K7-a9Z" secondAttribute="leading" constant="5" id="q6l-Jl-WJG"/>
+                            <constraint firstItem="pyi-7L-zs6" firstAttribute="centerX" secondItem="te9-1B-tPa" secondAttribute="centerX" id="TbY-8x-cHA"/>
+                            <constraint firstItem="pyi-7L-zs6" firstAttribute="centerY" secondItem="te9-1B-tPa" secondAttribute="centerY" id="kB7-f1-Oei"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d1E-K7-a9Z"/>
                     </view>
@@ -2226,6 +2280,8 @@
         <image name="advice" width="164" height="150"/>
         <image name="age" width="150" height="150"/>
         <image name="beiyuanhao" width="150" height="150"/>
+        <image name="cleancache" width="150" height="150"/>
+        <image name="cleanrecord" width="150" height="150"/>
         <image name="common" width="150" height="150"/>
         <image name="current_version" width="150" height="150"/>
         <image name="email" width="150" height="150"/>
@@ -2248,6 +2304,7 @@
         <image name="right" width="150" height="150"/>
         <image name="sawme" width="193" height="150"/>
         <image name="setting" width="150" height="150"/>
+        <image name="submit" width="150" height="150"/>
         <image name="threepoints" width="150" height="150"/>
         <image name="time" width="150" height="150"/>
         <image name="vip" width="150" height="150"/>

@@ -10,8 +10,10 @@ import UIKit
 import Alamofire
 class Main2ViewController: RCConversationListViewController {
     var dataList:[FriendsData] = [];
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("展示")
         //设置融云当前用户信息
         let userInfo = UserDefaults()
         let userID = userInfo.string(forKey: "userID")
@@ -52,12 +54,16 @@ class Main2ViewController: RCConversationListViewController {
         
         self.setCollectionConversationType([7])
         Uniquelogin.compareUniqueLoginToken(view: self)
-//        let type1:RCConversationType = .ConversationType_PRIVATE
-//        let type2:RCConversationType = .ConversationType_DISCUSSION
-//        let type3:RCConversationType = .ConversationType_CHATROOM
-//        let type4:RCConversationType = .ConversationType_GROUP
-//        let type5:RCConversationType = .ConversationType_APPSERVICE
-//        let type6:RCConversationType = .ConversationType_SYSTEM
+        //        let type1:RCConversationType = .ConversationType_PRIVATE
+        //        let type2:RCConversationType = .ConversationType_DISCUSSION
+        //        let type3:RCConversationType = .ConversationType_CHATROOM
+        //        let type4:RCConversationType = .ConversationType_GROUP
+        //        let type5:RCConversationType = .ConversationType_APPSERVICE
+        //        let type6:RCConversationType = .ConversationType_SYSTEM
+        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         
     }

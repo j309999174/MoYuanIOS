@@ -118,7 +118,7 @@ class PersonalViewController: UIViewController {
                 self.view.makeToast("好友申请成功")
             }
             
-            self.presentingViewController?.dismiss(animated:true)
+            //self.presentingViewController?.dismiss(animated:true)
         }
     }
     override func viewDidLoad() {

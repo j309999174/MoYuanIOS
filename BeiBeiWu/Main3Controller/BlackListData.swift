@@ -23,7 +23,7 @@ class BlackListData {
         self.portrait = portrait
         self.age = age
         self.gender = gender
-        self.region = gender
-        self.property = gender
+        self.region = region
+        self.property = property
     }
 }

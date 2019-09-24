@@ -50,6 +50,7 @@
 		0542B99E22E77CDD00E1AC34 /* Main3.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0542B99D22E77CDD00E1AC34 /* Main3.storyboard */; };
 		0542B9A022E77CE900E1AC34 /* Main4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0542B99F22E77CE900E1AC34 /* Main4.storyboard */; };
 		0542B9A222E77CF400E1AC34 /* Main5.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0542B9A122E77CF400E1AC34 /* Main5.storyboard */; };
+		055A55AB2339A142008A341D /* PrivateSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055A55AA2339A142008A341D /* PrivateSettingViewController.swift */; };
 		057B1FCA22EA8DFA000B8811 /* Main1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B1FC922EA8DFA000B8811 /* Main1ViewController.swift */; };
 		057B1FCC22EA8E18000B8811 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B1FCB22EA8E18000B8811 /* SignInViewController.swift */; };
 		057B1FCE22EA8E27000B8811 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B1FCD22EA8E27000B8811 /* SignUpViewController.swift */; };
@@ -122,6 +123,7 @@
 		0542B99D22E77CDD00E1AC34 /* Main3.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main3.storyboard; sourceTree = "<group>"; };
 		0542B99F22E77CE900E1AC34 /* Main4.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main4.storyboard; sourceTree = "<group>"; };
 		0542B9A122E77CF400E1AC34 /* Main5.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main5.storyboard; sourceTree = "<group>"; };
+		055A55AA2339A142008A341D /* PrivateSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateSettingViewController.swift; sourceTree = "<group>"; };
 		057B1FC922EA8DFA000B8811 /* Main1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main1ViewController.swift; sourceTree = "<group>"; };
 		057B1FCB22EA8E18000B8811 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		057B1FCD22EA8E27000B8811 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				05119F2A230762F100545CF3 /* BuyvipData.swift */,
 				05090C5D2328F90C00DAB476 /* SomeonesluntanViewController.swift */,
 				05090C69232A3CFF00DAB476 /* HelpCenterViewController.swift */,
+				055A55AA2339A142008A341D /* PrivateSettingViewController.swift */,
 			);
 			path = Main5Controller;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				057B1FDC22EA90ED000B8811 /* Main5ViewController.swift in Sources */,
 				05090C6C232A3F4A00DAB476 /* SliderWebviewViewController.swift in Sources */,
 				050C87DC22FF12A50019D9B0 /* DongtaiData.swift in Sources */,
+				055A55AB2339A142008A341D /* PrivateSettingViewController.swift in Sources */,
 				057B1FD922EA90AE000B8811 /* Main4ViewController.swift in Sources */,
 				05115BE122FE097C00D7632A /* NewFriendTableViewCell.swift in Sources */,
 				05A77F572301690D0010BC83 /* PostlistTableViewCell.swift in Sources */,

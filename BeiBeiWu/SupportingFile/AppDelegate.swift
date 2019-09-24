@@ -21,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         checkLocationServices()
        
-
+        let nav = UINavigationController()
+        //设置导航栏背景颜色
+        nav.navigationBar.tintColor = UIColor.blue
         //注册融云
         RCIM.shared()?.initWithAppKey("3argexb63qxke")
         RCIM.shared()?.enableMessageRecall = true
