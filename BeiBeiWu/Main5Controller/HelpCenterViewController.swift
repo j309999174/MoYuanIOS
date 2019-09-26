@@ -16,6 +16,7 @@ class HelpCenterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         // Do any additional setup after loading the view.
         // Do any additional setup after loading the view.
         webView = WKWebView(frame: webContainerView.frame)
@@ -23,7 +24,7 @@ class HelpCenterViewController: UIViewController {
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         webContainerView.addSubview(webView)
-        
+        webView.scrollView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
         let mapwayURL = URL(string: url)!
         let mapwayRequest = URLRequest(url: mapwayURL)
         webView.load(mapwayRequest)

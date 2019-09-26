@@ -14,6 +14,8 @@ class Main2ViewController: RCConversationListViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("展示")
+        self.navigationItem.title = "会话列表"
+    
         //设置融云当前用户信息
         let userInfo = UserDefaults()
         let userID = userInfo.string(forKey: "userID")

@@ -50,7 +50,7 @@ class TableViewCellShenbian: UITableViewCell {
         if data.userVIP == "普通" {
             vipImage.image = UIImage(named: "member")
         }else{
-            vipImage.image = UIImage(named: "vip")
+            vipImage.image = UIImage(named: "vip_image")
         }
     }
     

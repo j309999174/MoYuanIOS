@@ -79,6 +79,8 @@ class FabutieziViewController: UIViewController {
     var pictureIndex = 1
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.endEditing(true)
         //删除文件
         removePictureFile()
         //图片点击事件

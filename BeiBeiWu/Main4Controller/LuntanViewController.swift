@@ -49,15 +49,69 @@ class LuntanViewController: UIViewController {
     
     @IBAction func plateMenu(_ sender: UISegmentedControl) {
         subNav = sender.titleForSegment(at: sender.selectedSegmentIndex)!
-        
+        post_ScrollBottom = false
+        pageIndex = 1
         if subNav == "大圈" {
             initViptime()
         }else{
+            switch self.subNav {
+            case "首页":
+                if imageArr_1.count > 0 {
+                    imageArr = imageArr_1
+                    imageNameArr = imageNameArr_1
+                    imageUrl = imageUrl_1
+                    self.pagerView.reloadData()
+                }else{
+                    initSlider()
+                }
+                break
+            case "自拍":
+                if imageArr_2.count > 0 {
+                    imageArr = imageArr_2
+                    imageNameArr = imageNameArr_2
+                    imageUrl = imageUrl_2
+                    self.pagerView.reloadData()
+                }else{
+                    initSlider()
+                }
+                break
+            case "真实":
+                if imageArr_3.count > 0 {
+                    imageArr = imageArr_3
+                    imageNameArr = imageNameArr_3
+                    imageUrl = imageUrl_3
+                    self.pagerView.reloadData()
+                }else{
+                    initSlider()
+                }
+                break
+            case "情感":
+                if imageArr_4.count > 0 {
+                    imageArr = imageArr_4
+                    imageNameArr = imageNameArr_4
+                    imageUrl = imageUrl_4
+                    self.pagerView.reloadData()
+                }else{
+                    initSlider()
+                }
+                break
+            case "大圈":
+                if imageArr_5.count > 0 {
+                    imageArr = imageArr_5
+                    imageNameArr = imageNameArr_5
+                    imageUrl = imageUrl_5
+                    self.pagerView.reloadData()
+                }else{
+                    initSlider()
+                }
+                break
+            default:
+                break
+            }
+            dataList_original.removeAll()
             dataList.removeAll()
-            imageArr.removeAll()
-            imageNameArr.removeAll()
-            imageUrl.removeAll()
-            initData()
+        
+            initPost(pageindex: 1)
         }
         
     }
@@ -77,8 +131,26 @@ class LuntanViewController: UIViewController {
     var imageArr = [UIImage]()
     var imageNameArr = [String]()
     var imageUrl = [String]()
+    var imageArr_1 = [UIImage]()
+    var imageNameArr_1 = [String]()
+    var imageUrl_1 = [String]()
+    var imageArr_2 = [UIImage]()
+    var imageNameArr_2 = [String]()
+    var imageUrl_2 = [String]()
+    var imageArr_3 = [UIImage]()
+    var imageNameArr_3 = [String]()
+    var imageUrl_3 = [String]()
+    var imageArr_4 = [UIImage]()
+    var imageNameArr_4 = [String]()
+    var imageUrl_4 = [String]()
+    var imageArr_5 = [UIImage]()
+    var imageNameArr_5 = [String]()
+    var imageUrl_5 = [String]()
+    
+
     var subNav = "首页"
     var dataList:[LuntanData] = []
+    var dataList_original:[LuntanData] = []
     var gonggao = ""
     var isopen:[Bool] = []
     var post_full_text = ""
@@ -124,13 +196,14 @@ class LuntanViewController: UIViewController {
         }
         
         
-        initData()
+        initSlider()
+        initPost(pageindex: 1)
         // Do any additional setup after loading the view.
     }
     
     
     
-    func initData(){
+    func initSlider(){
         //获取幻灯片数据
         let getSlide: Parameters = ["type": "getSlide","slidesort":subNav]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat", method: .post, parameters: getSlide).response { response in
@@ -143,6 +216,35 @@ class LuntanViewController: UIViewController {
                         self.imageArr.append(UIImage(data: data)!)
                         self.imageNameArr.append(jsonModel[index].slidename)
                         self.imageUrl.append(jsonModel[index].slideurl ?? "")
+                        switch self.subNav {
+                        case "首页":
+                            self.imageArr_1.append(UIImage(data: data)!)
+                            self.imageNameArr_1.append(jsonModel[index].slidename)
+                            self.imageUrl_1.append(jsonModel[index].slideurl ?? "")
+                            break
+                        case "自拍":
+                            self.imageArr_2.append(UIImage(data: data)!)
+                            self.imageNameArr_2.append(jsonModel[index].slidename)
+                            self.imageUrl_2.append(jsonModel[index].slideurl ?? "")
+                            break
+                        case "真实":
+                            self.imageArr_3.append(UIImage(data: data)!)
+                            self.imageNameArr_3.append(jsonModel[index].slidename)
+                            self.imageUrl_3.append(jsonModel[index].slideurl ?? "")
+                            break
+                        case "情感":
+                            self.imageArr_4.append(UIImage(data: data)!)
+                            self.imageNameArr_4.append(jsonModel[index].slidename)
+                            self.imageUrl_4.append(jsonModel[index].slideurl ?? "")
+                            break
+                        case "大圈":
+                            self.imageArr_5.append(UIImage(data: data)!)
+                            self.imageNameArr_5.append(jsonModel[index].slidename)
+                            self.imageUrl_5.append(jsonModel[index].slideurl ?? "")
+                            break
+                        default:
+                            break
+                        }
                     }
                     self.pagerView.reloadData()
                 } catch {
@@ -158,11 +260,13 @@ class LuntanViewController: UIViewController {
             }
         }
         
-        
-        
-        
+    }
+    
+    var post_ScrollBottom = false
+    var pageIndex = 1
+    func initPost(pageindex:Int){
         //获取帖子数据
-        let getPost: Parameters = ["type": "getPostlist","platename":subNav]
+        let getPost: Parameters = ["type": "getPostlist","platename":subNav,"pageindex":pageindex]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat", method: .post, parameters: getPost).response { response in
             if let data = response.data {
                 let decoder = JSONDecoder()
@@ -170,9 +274,10 @@ class LuntanViewController: UIViewController {
                     let jsonModel = try decoder.decode([LuntanStruct].self, from: data)
                     for index in 0..<jsonModel.count{
                         let cell = LuntanData(id: jsonModel[index].id, plateid: jsonModel[index].plateid, platename: jsonModel[index].platename, authid: jsonModel[index].authid, authnickname: jsonModel[index].authnickname, authportrait: jsonModel[index].authportrait, posttip: jsonModel[index].posttip ?? "", posttitle: jsonModel[index].posttitle, posttext: jsonModel[index].posttext ?? "", postpicture: jsonModel[index].postpicture ?? "", like: jsonModel[index].like ?? "", favorite: jsonModel[index].favorite ?? "", time: jsonModel[index].time,age: jsonModel[index].age  ?? "?",gender: jsonModel[index].gender  ?? "?",region: jsonModel[index].region  ?? "?",property: jsonModel[index].property ?? "?")
-                        self.dataList.append(cell)
+                        self.dataList_original.append(cell)
                         self.isopen.append(false)
                     }
+                    self.dataList = self.dataList_original
                     self.luntanTableView.reloadData()
                 } catch {
                     print("解析 JSON 失败")
@@ -180,9 +285,13 @@ class LuntanViewController: UIViewController {
                 print("Request: \(String(describing: response.request))")
                 print("Response: \(String(describing: response.response))")
                 print("Error: \(String(describing: response.error))")
-
+                
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print("Data: \(utf8Text)")
+                    if utf8Text == "[]" {
+                        self.post_ScrollBottom = true
+                        return
+                    }
                 }
             }
         }
@@ -216,7 +325,8 @@ class LuntanViewController: UIViewController {
                     self.imageArr.removeAll()
                     self.imageNameArr.removeAll()
                     self.imageUrl.removeAll()
-                    self.initData()
+                    self.initSlider()
+                    self.initPost(pageindex: 1)
                 }
             }
         }
@@ -312,8 +422,10 @@ extension LuntanViewController:UITableViewDelegate,UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if dataList.count - 1 == indexPath.row {
+        if dataList.count - 1 == indexPath.row && post_ScrollBottom == false {
             print("到底了")
+            pageIndex = pageIndex + 1
+            initPost(pageindex: pageIndex)
         }
     }
 }

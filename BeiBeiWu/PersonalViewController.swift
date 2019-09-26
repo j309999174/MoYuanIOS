@@ -56,6 +56,12 @@ class PersonalViewController: UIViewController {
     
     @IBOutlet weak var leaveWords: UITextField!
     
+    @IBOutlet weak var viewClick_post: UIView!
+    
+    @IBOutlet weak var viewClick_friend: UIView!
+    
+    @IBOutlet weak var viewClick_blacklist: UIView!
+    
     @IBAction func personalPost_btn(_ sender: Any) {
         let sb = UIStoryboard(name: "Main5", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "Someonesluntan") as! SomeonesluntanViewController
@@ -121,11 +127,45 @@ class PersonalViewController: UIViewController {
             //self.presentingViewController?.dismiss(animated:true)
         }
     }
+    //点击事件方法
+    @objc func postClickFunc() -> Void {
+        let sb = UIStoryboard(name: "Main5", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "Someonesluntan") as! SomeonesluntanViewController
+        //vc.hidesBottomBarWhenPushed = true
+        vc.personid = userID
+        self.show(vc, sender: nil)
+    }
+    @objc func friendClickFunc() -> Void {
+        getFriendNumber()
+        addFriendBtn.isEnabled = false
+        addFriendBtn.setTitle("已申请，等待对方同意", for: UIControl.State.normal)
+    }
+    @objc func blacklistClickFunc() -> Void {
+        let parameters: Parameters = ["myid":yourid!,"yourid":userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=addblacklist&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                self.view.makeToast("拉黑成功")
+            }
+        }
+        addFriendBtn.isEnabled = false
+        addFriendBtn.setTitle("已加入黑名单", for: UIControl.State.normal)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = false
         
-        
+        //帖子，h好友，黑名单的view点击事件
+        let postClick = UITapGestureRecognizer(target: self, action: #selector(postClickFunc))
+        viewClick_post.addGestureRecognizer(postClick)
+        let friendClick = UITapGestureRecognizer(target: self, action: #selector(friendClickFunc))
+        viewClick_friend.addGestureRecognizer(friendClick)
+        let blacklistClick = UITapGestureRecognizer(target: self, action: #selector(blacklistClickFunc))
+        viewClick_blacklist.addGestureRecognizer(blacklistClick)
         
         userinfobackground.layer.contents = UIImage.init(named: "hover")?.cgImage
         userinfobackground.contentMode = UIView.ContentMode.scaleToFill
@@ -165,6 +205,9 @@ class PersonalViewController: UIViewController {
             
         }
         // Do any additional setup after loading the view.
+        
+        
+        
     }
     
 

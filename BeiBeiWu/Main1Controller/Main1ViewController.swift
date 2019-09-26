@@ -35,6 +35,7 @@ struct TuiJianUserInfo: Codable {
 
 class Main1ViewController: UIViewController {
     
+    
     @IBAction func menuAction(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -109,92 +110,117 @@ class Main1ViewController: UIViewController {
     }
     
     func tuijian_btn() {
+        //更新幻灯片
+        imageArr = imageArr_tuijian
+        imageNameArr = imageNameArr_tuijian
+        imageUrl = imageUrl_tuijian
+        self.pagerView.reloadData()
+        //更新用户
+        tuijian_fujin = "tuijian"
+        dataList = dataList_tuijian
+        //只刷新tableview
+        self.shenBianTableView.reloadData()
         
+        
+        
+        //初始化时获取一次就够了
         //获取幻灯片数据
-        let getSlide: Parameters = ["type": "getSlide"]
-        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getSlide).response { response in
-            if let data = response.data {
-                let decoder = JSONDecoder()
-                do {
-                    let jsonModel = try decoder.decode([SliderImages].self, from: data)
-                    //清零
-                    self.imageArr.removeAll()
-                    self.imageNameArr.removeAll()
-                    self.imageUrl.removeAll()
-                    self.dataList.removeAll()
-                    for index in 0..<jsonModel.count{
-                        let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
-                        self.imageArr.append(UIImage(data: data)!)
-                        self.imageNameArr.append(jsonModel[index].slidename)
-                        self.imageUrl.append(jsonModel[index].slideurl ?? "")
-                    }
-                    self.pagerView.reloadData()
-                } catch {
-                    print("解析 JSON 失败")
-                }
-                //                    print("Request: \(String(describing: response.request))")
-                //                    print("Response: \(String(describing: response.response))")
-                //                    print("Error: \(String(describing: response.error))")
-                //
-                //                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                //                        print("Data: \(utf8Text)")
-                //                    }
-            }
-        }
+//        let getSlide: Parameters = ["type": "getSlide"]
+//        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getSlide).response { response in
+//            if let data = response.data {
+//                let decoder = JSONDecoder()
+//                do {
+//                    let jsonModel = try decoder.decode([SliderImages].self, from: data)
+//                    //清零
+//                    self.imageArr.removeAll()
+//                    self.imageNameArr.removeAll()
+//                    self.imageUrl.removeAll()
+//                    self.dataList.removeAll()
+//                    for index in 0..<jsonModel.count{
+//                        let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
+//                        self.imageArr.append(UIImage(data: data)!)
+//                        self.imageNameArr.append(jsonModel[index].slidename)
+//                        self.imageUrl.append(jsonModel[index].slideurl ?? "")
+//                    }
+//                    self.pagerView.reloadData()
+//                } catch {
+//                    print("解析 JSON 失败")
+//                }
+//                //                    print("Request: \(String(describing: response.request))")
+//                //                    print("Response: \(String(describing: response.response))")
+//                //                    print("Error: \(String(describing: response.error))")
+//                //
+//                //                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                //                        print("Data: \(utf8Text)")
+//                //                    }
+//            }
+//        }
         
         //获取推荐列表
-        var getUserInfo: Parameters
-        if let latitude = UserDefaults().string(forKey: "latitude"),let longitude = UserDefaults().string(forKey: "longitude"){
-            getUserInfo = ["type": "getUserInfo","latitude":latitude,"longitude":longitude]
-        }else{
-            getUserInfo = ["type": "getUserInfo"]
-        }
-        
-        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getUserInfo).response { response in
-            print("Request: \(String(describing: response.request))")
-            print("Response: \(String(describing: response.response))")
-            print("Error: \(String(describing: response.error))")
-            
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)")
-            }
-            if let data = response.data {
-                let decoder = JSONDecoder()
-                do {
-                    let jsonModel = try decoder.decode([TuiJianUserInfo].self, from: data)
-                    self.userID.removeAll()
-                    self.userPortrait.removeAll()
-                    self.userNickName.removeAll()
-                    self.userAge.removeAll()
-                    self.userGender.removeAll()
-                    self.userProperty.removeAll()
-                    self.userDistance.removeAll()
-                    self.userRegion.removeAll()
-                    self.userVIP.removeAll()
-                    for index in 0..<jsonModel.count{
-                        
-                        self.userID.append(jsonModel[index].id)
-                        self.userPortrait.append(jsonModel[index].portrait ?? "")
-                        self.userNickName.append(jsonModel[index].nickname ?? "未知")
-                        self.userAge.append(jsonModel[index].age ?? "未知")
-                        self.userGender.append(jsonModel[index].gender ?? "未知")
-                        self.userProperty.append(jsonModel[index].property ?? "未知")
-                        self.userDistance.append(jsonModel[index].location ?? "未知")
-                        self.userRegion.append(jsonModel[index].region ?? "未知")
-                        self.userVIP.append(jsonModel[index].vip ?? "未知")
-                        let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
-                            , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
-                        self.dataList.append(cell)
-                    }
-                    self.shenBianTableView.reloadData()
-                } catch {
-                    print("解析 JSON 失败")
-                }
-            }
-        }
+//        var getUserInfo: Parameters
+//        if let latitude = UserDefaults().string(forKey: "latitude"),let longitude = UserDefaults().string(forKey: "longitude"){
+//            getUserInfo = ["type": "getUserInfo","latitude":latitude,"longitude":longitude]
+//        }else{
+//            getUserInfo = ["type": "getUserInfo"]
+//        }
+//
+//        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getUserInfo).response { response in
+//            print("Request: \(String(describing: response.request))")
+//            print("Response: \(String(describing: response.response))")
+//            print("Error: \(String(describing: response.error))")
+//
+//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                print("Data: \(utf8Text)")
+//            }
+//            if let data = response.data {
+//                let decoder = JSONDecoder()
+//                do {
+//                    let jsonModel = try decoder.decode([TuiJianUserInfo].self, from: data)
+//                    self.userID.removeAll()
+//                    self.userPortrait.removeAll()
+//                    self.userNickName.removeAll()
+//                    self.userAge.removeAll()
+//                    self.userGender.removeAll()
+//                    self.userProperty.removeAll()
+//                    self.userDistance.removeAll()
+//                    self.userRegion.removeAll()
+//                    self.userVIP.removeAll()
+//                    for index in 0..<jsonModel.count{
+//
+//                        self.userID.append(jsonModel[index].id)
+//                        self.userPortrait.append(jsonModel[index].portrait ?? "")
+//                        self.userNickName.append(jsonModel[index].nickname ?? "未知")
+//                        self.userAge.append(jsonModel[index].age ?? "未知")
+//                        self.userGender.append(jsonModel[index].gender ?? "未知")
+//                        self.userProperty.append(jsonModel[index].property ?? "未知")
+//                        self.userDistance.append(jsonModel[index].location ?? "未知")
+//                        self.userRegion.append(jsonModel[index].region ?? "未知")
+//                        self.userVIP.append(jsonModel[index].vip ?? "未知")
+//                        let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
+//                            , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
+//                        self.dataList.append(cell)
+//                    }
+//                    self.shenBianTableView.reloadData()
+//                } catch {
+//                    print("解析 JSON 失败")
+//                }
+//            }
+//        }
     }
     
     func fujin_btn() {
+        tuijian_fujin = "fujin"
+        if dataList_fujin.count > 0 {
+            //更新幻灯片
+            imageArr = imageArr_fujin
+            imageNameArr = imageNameArr_fujin
+            imageUrl = imageUrl_fujin
+            self.pagerView.reloadData()
+            //更新用户
+            dataList = dataList_fujin
+            self.shenBianTableView.reloadData()
+            return
+        }
         //获取幻灯片数据
         let getSlide: Parameters = ["type": "getSlide"]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=fujin&m=socialchat", method: .post, parameters: getSlide).response { response in
@@ -209,10 +235,13 @@ class Main1ViewController: UIViewController {
                     self.dataList.removeAll()
                     for index in 0..<jsonModel.count{
                         let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
-                        self.imageArr.append(UIImage(data: data)!)
-                        self.imageNameArr.append(jsonModel[index].slidename)
-                        self.imageUrl.append(jsonModel[index].slideurl ?? "")
+                        self.imageArr_fujin.append(UIImage(data: data)!)
+                        self.imageNameArr_fujin.append(jsonModel[index].slidename)
+                        self.imageUrl_fujin.append(jsonModel[index].slideurl ?? "")
                     }
+                    self.imageArr = self.imageArr_fujin
+                    self.imageNameArr = self.imageNameArr_fujin
+                    self.imageUrl = self.imageUrl_fujin
                     self.pagerView.reloadData()
                 } catch {
                     print("解析 JSON 失败")
@@ -239,7 +268,7 @@ class Main1ViewController: UIViewController {
             print("Request: \(String(describing: response.request))")
             print("Response: \(String(describing: response.response))")
             print("Error: \(String(describing: response.error))")
-            
+            self.dataList.removeAll()
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)")
             }
@@ -268,8 +297,9 @@ class Main1ViewController: UIViewController {
                         self.userVIP.append(jsonModel[index].vip ?? "未知")
                         let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
                             , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
-                        self.dataList.append(cell)
+                        self.dataList_fujin.append(cell)
                     }
+                    self.dataList = self.dataList_fujin
                     self.shenBianTableView.reloadData()
                 } catch {
                     print("解析 JSON 失败")
@@ -280,9 +310,7 @@ class Main1ViewController: UIViewController {
     
     
     
-    var imageArr = [UIImage]()
-    var imageNameArr = [String]()
-    var imageUrl = [String]()
+    
     
     
     @IBOutlet weak var pagerView: FSPagerView!{
@@ -299,7 +327,13 @@ class Main1ViewController: UIViewController {
     //列表
     
     @IBOutlet weak var shenBianTableView: UITableView!
+    //判断哪个n按钮被点击了，上拉加载就调用不同方法
+    var tuijian_fujin = "tuijian"
+    
     var dataList:[ShenBianData] = []
+    var dataList_tuijian:[ShenBianData] = []
+    var dataList_fujin:[ShenBianData] = []
+    
     var userID = [String]()
     var userPortrait = [String]()
     var userNickName = [String]()
@@ -310,6 +344,16 @@ class Main1ViewController: UIViewController {
     var userRegion = [String]()
     var userVIP = [String]()
 
+    var imageArr = [UIImage]()
+    var imageNameArr = [String]()
+    var imageUrl = [String]()
+    var imageArr_tuijian = [UIImage]()
+    var imageNameArr_tuijian = [String]()
+    var imageUrl_tuijian = [String]()
+    var imageArr_fujin = [UIImage]()
+    var imageNameArr_fujin = [String]()
+    var imageUrl_fujin = [String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -355,10 +399,13 @@ class Main1ViewController: UIViewController {
                         let jsonModel = try decoder.decode([SliderImages].self, from: data)
                         for index in 0..<jsonModel.count{
                             let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
-                            self.imageArr.append(UIImage(data: data)!)
-                            self.imageNameArr.append(jsonModel[index].slidename)
-                            self.imageUrl.append(jsonModel[index].slideurl ?? "")
+                            self.imageArr_tuijian.append(UIImage(data: data)!)
+                            self.imageNameArr_tuijian.append(jsonModel[index].slidename)
+                            self.imageUrl_tuijian.append(jsonModel[index].slideurl ?? "")
                         }
+                        self.imageArr = self.imageArr_tuijian
+                        self.imageNameArr = self.imageNameArr_tuijian
+                        self.imageUrl = self.imageUrl_tuijian
                         self.pagerView.reloadData()
                     } catch {
                         print("解析 JSON 失败")
@@ -376,9 +423,9 @@ class Main1ViewController: UIViewController {
             //获取推荐列表
             var getUserInfo: Parameters
             if let latitude = UserDefaults().string(forKey: "latitude"),let longitude = UserDefaults().string(forKey: "longitude"){
-                getUserInfo = ["type": "getUserInfo","latitude":latitude,"longitude":longitude]
+                getUserInfo = ["type": "getUserInfo","latitude":latitude,"longitude":longitude,"pageindex":1]
             }else{
-                getUserInfo = ["type": "getUserInfo"]
+                getUserInfo = ["type": "getUserInfo","pageindex":1]
             }
             
             Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getUserInfo).response { response in
@@ -405,16 +452,15 @@ class Main1ViewController: UIViewController {
                             self.userVIP.append(jsonModel[index].vip ?? "未知")
                             let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
                                 , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
-                            self.dataList.append(cell)
+                            self.dataList_tuijian.append(cell)
                         }
+                        self.dataList = self.dataList_tuijian
                         self.shenBianTableView.reloadData()
                     } catch {
                         print("解析 JSON 失败")
                     }
                 }
             }
-            
-            //角标
         }
         
         let userInfo = UserDefaults()
@@ -436,6 +482,108 @@ class Main1ViewController: UIViewController {
         leftImageView.image = img
         txtField.leftView = leftImageView
         txtField.leftViewMode = .always
+    }
+    
+    var tuijian_pageindex = 1
+    var tuijian_ScrollBottom = false
+    func tuijianPage(pageindex:Int) {
+        print("页码数\(pageindex)")
+        //获取推荐列表
+        var getUserInfo: Parameters
+        if let latitude = UserDefaults().string(forKey: "latitude"),let longitude = UserDefaults().string(forKey: "longitude"){
+            getUserInfo = ["type": "getUserInfo","latitude":latitude,"longitude":longitude,"pageindex":pageindex]
+        }else{
+            getUserInfo = ["type": "getUserInfo","pageindex":pageindex]
+        }
+        
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getUserInfo).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "[]" {
+                    self.tuijian_ScrollBottom = true
+                    return
+                }
+            }
+            if let data = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let jsonModel = try decoder.decode([TuiJianUserInfo].self, from: data)
+                    for index in 0..<jsonModel.count{
+                        self.userID.append(jsonModel[index].id)
+                        self.userPortrait.append(jsonModel[index].portrait ?? "")
+                        self.userNickName.append(jsonModel[index].nickname ?? "未知")
+                        self.userAge.append(jsonModel[index].age ?? "未知")
+                        self.userGender.append(jsonModel[index].gender ?? "未知")
+                        self.userProperty.append(jsonModel[index].property ?? "未知")
+                        self.userDistance.append(jsonModel[index].location ?? "未知")
+                        self.userRegion.append(jsonModel[index].region ?? "未知")
+                        self.userVIP.append(jsonModel[index].vip ?? "未知")
+                        let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
+                            , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
+                        self.dataList_tuijian.append(cell)
+                    }
+                    self.dataList = self.dataList_tuijian
+                    self.shenBianTableView.reloadData()
+                } catch {
+                    print("解析 JSON 失败")
+                }
+            }
+        }
+    }
+    
+    var fujin_pageindex = 1
+    var fujin_ScrollBottom = false
+    func fujinPage(pageindex:Int) {
+        print("页码数\(pageindex)")
+        //获取推荐列表
+        var getUserInfo: Parameters
+        if let latitude = UserDefaults().string(forKey: "latitude"),let longitude = UserDefaults().string(forKey: "longitude"){
+            getUserInfo = ["type": "getUserInfo","latitude":latitude,"longitude":longitude,"pageindex":pageindex]
+        }else{
+            getUserInfo = ["type": "getUserInfo","pageindex":pageindex]
+        }
+        
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=fujin&m=socialchat", method: .post, parameters: getUserInfo).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "[]" {
+                    self.fujin_ScrollBottom = true
+                    return
+                }
+            }
+            if let data = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let jsonModel = try decoder.decode([TuiJianUserInfo].self, from: data)
+                    for index in 0..<jsonModel.count{
+                        self.userID.append(jsonModel[index].id)
+                        self.userPortrait.append(jsonModel[index].portrait ?? "")
+                        self.userNickName.append(jsonModel[index].nickname ?? "未知")
+                        self.userAge.append(jsonModel[index].age ?? "未知")
+                        self.userGender.append(jsonModel[index].gender ?? "未知")
+                        self.userProperty.append(jsonModel[index].property ?? "未知")
+                        self.userDistance.append(jsonModel[index].location ?? "未知")
+                        self.userRegion.append(jsonModel[index].region ?? "未知")
+                        self.userVIP.append(jsonModel[index].vip ?? "未知")
+                        let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
+                            , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
+                        self.dataList_fujin.append(cell)
+                    }
+                    self.dataList = self.dataList_fujin
+                    self.shenBianTableView.reloadData()
+                } catch {
+                    print("解析 JSON 失败")
+                }
+            }
+        }
     }
 }
 
@@ -466,6 +614,20 @@ extension Main1ViewController: UITableViewDataSource,UITableViewDelegate{
         vc.userID = dataList[indexPath.row].userID
         vc.hidesBottomBarWhenPushed = true
         self.show(vc, sender: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if dataList.count - 1 == indexPath.row {
+            print("身边到底了")
+            
+            if tuijian_fujin == "tuijian" && tuijian_ScrollBottom == false{
+                tuijian_pageindex = tuijian_pageindex + 1
+                tuijianPage(pageindex: tuijian_pageindex)
+            }else if tuijian_fujin == "fujin" && fujin_ScrollBottom == false{
+                fujin_pageindex = fujin_pageindex + 1
+                fujinPage(pageindex: fujin_pageindex)
+            }
+        }
     }
 }
 

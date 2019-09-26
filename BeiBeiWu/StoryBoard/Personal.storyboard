@@ -296,6 +296,9 @@
                         <outlet property="userRegion" destination="DDB-gr-7Hn" id="MgH-Ef-fwb"/>
                         <outlet property="userSignature" destination="S9P-lQ-OMa" id="Mwp-q5-nWh"/>
                         <outlet property="userinfobackground" destination="krQ-ME-5hz" id="1nz-yu-z4y"/>
+                        <outlet property="viewClick_blacklist" destination="2DD-CE-CuQ" id="Umm-1i-qav"/>
+                        <outlet property="viewClick_friend" destination="2hh-5q-uWn" id="ayq-ai-MvQ"/>
+                        <outlet property="viewClick_post" destination="X8p-9o-eWz" id="sbc-d0-6YS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFX-KA-vNM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -522,21 +525,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Aj-g2-0rK">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Gyk-wT-mLE">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
+                                <subviews>
+                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Aj-g2-0rK">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="2Aj-g2-0rK" firstAttribute="leading" secondItem="Gyk-wT-mLE" secondAttribute="leading" id="9BL-na-ZsX"/>
+                                    <constraint firstItem="2Aj-g2-0rK" firstAttribute="top" secondItem="Gyk-wT-mLE" secondAttribute="top" id="Jb2-pn-mPI"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Aj-g2-0rK" secondAttribute="trailing" id="Rw7-85-Tgg"/>
+                                    <constraint firstAttribute="bottom" secondItem="2Aj-g2-0rK" secondAttribute="bottom" id="SXi-Wo-2is"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="2Aj-g2-0rK" firstAttribute="leading" secondItem="O0t-Uo-i0J" secondAttribute="leading" id="AxX-mR-JLu"/>
-                            <constraint firstItem="O0t-Uo-i0J" firstAttribute="bottom" secondItem="2Aj-g2-0rK" secondAttribute="bottom" id="HfY-5M-5bA"/>
-                            <constraint firstItem="2Aj-g2-0rK" firstAttribute="top" secondItem="O0t-Uo-i0J" secondAttribute="top" id="cUI-ti-Tm6"/>
-                            <constraint firstItem="O0t-Uo-i0J" firstAttribute="trailing" secondItem="2Aj-g2-0rK" secondAttribute="trailing" id="gyX-59-HvZ"/>
+                            <constraint firstItem="Gyk-wT-mLE" firstAttribute="trailing" secondItem="O0t-Uo-i0J" secondAttribute="trailing" id="DpA-Ty-qy5"/>
+                            <constraint firstItem="Gyk-wT-mLE" firstAttribute="bottom" secondItem="O0t-Uo-i0J" secondAttribute="bottom" id="En4-fN-TAC"/>
+                            <constraint firstItem="Gyk-wT-mLE" firstAttribute="leading" secondItem="O0t-Uo-i0J" secondAttribute="leading" id="Iob-sE-bHo"/>
+                            <constraint firstItem="Gyk-wT-mLE" firstAttribute="top" secondItem="O0t-Uo-i0J" secondAttribute="top" id="kCH-km-GkZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O0t-Uo-i0J"/>
                     </view>

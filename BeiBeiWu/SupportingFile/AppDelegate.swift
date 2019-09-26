@@ -21,9 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         checkLocationServices()
        
-        let nav = UINavigationController()
-        //设置导航栏背景颜色
-        nav.navigationBar.tintColor = UIColor.blue
+        UINavigationBar.appearance().backgroundColor = UIColor.orange
+        
         //注册融云
         RCIM.shared()?.initWithAppKey("3argexb63qxke")
         RCIM.shared()?.enableMessageRecall = true
@@ -154,14 +153,16 @@ extension AppDelegate: CLLocationManagerDelegate{
         guard let location = locations.last else{return}
         //判断是否为空
         if(location.horizontalAccuracy > 0){
-            let lat = Double(String(format: "%.1f", location.coordinate.latitude))
-            let long = Double(String(format: "%.1f", location.coordinate.longitude))
-            print("纬度:\(long!)")
-            print("经度:\(lat!)")
+            //let lat = Double(String(format: "%.1f", location.coordinate.latitude))
+            //let long = Double(String(format: "%.1f", location.coordinate.longitude))
+            let lat = location.coordinate.latitude
+            let long = location.coordinate.longitude
+            print("纬度:\(long)")
+            print("经度:\(lat)")
     
             let userInfo = UserDefaults()
-            userInfo.setValue(lat!, forKey: "latitude")
-            userInfo.setValue(long!, forKey: "longitude")
+            userInfo.setValue(lat, forKey: "latitude")
+            userInfo.setValue(long, forKey: "longitude")
             
             //停止定位
             locationManager.stopUpdatingLocation()
