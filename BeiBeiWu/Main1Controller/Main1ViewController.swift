@@ -234,8 +234,9 @@ class Main1ViewController: UIViewController {
                     self.imageUrl.removeAll()
                     self.dataList.removeAll()
                     for index in 0..<jsonModel.count{
-                        let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
-                        self.imageArr_fujin.append(UIImage(data: data)!)
+                        //let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
+                        //self.imageArr_fujin.append(UIImage(data: data)!)
+                        self.imageArr_fujin.append(jsonModel[index].slidepicture)
                         self.imageNameArr_fujin.append(jsonModel[index].slidename)
                         self.imageUrl_fujin.append(jsonModel[index].slideurl ?? "")
                     }
@@ -344,13 +345,13 @@ class Main1ViewController: UIViewController {
     var userRegion = [String]()
     var userVIP = [String]()
 
-    var imageArr = [UIImage]()
+    var imageArr = [String]()
     var imageNameArr = [String]()
     var imageUrl = [String]()
-    var imageArr_tuijian = [UIImage]()
+    var imageArr_tuijian = [String]()
     var imageNameArr_tuijian = [String]()
     var imageUrl_tuijian = [String]()
-    var imageArr_fujin = [UIImage]()
+    var imageArr_fujin = [String]()
     var imageNameArr_fujin = [String]()
     var imageUrl_fujin = [String]()
     
@@ -398,8 +399,9 @@ class Main1ViewController: UIViewController {
                     do {
                         let jsonModel = try decoder.decode([SliderImages].self, from: data)
                         for index in 0..<jsonModel.count{
-                            let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
-                            self.imageArr_tuijian.append(UIImage(data: data)!)
+                            //let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
+                            //self.imageArr_tuijian.append(UIImage(data: data)!)
+                            self.imageArr_tuijian.append(jsonModel[index].slidepicture)
                             self.imageNameArr_tuijian.append(jsonModel[index].slidename)
                             self.imageUrl_tuijian.append(jsonModel[index].slideurl ?? "")
                         }
@@ -640,7 +642,8 @@ extension Main1ViewController:FSPagerViewDataSource,FSPagerViewDelegate{
     }
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
-        cell.imageView?.image = self.imageArr[index]
+        //cell.imageView?.image = self.imageArr[index]
+        cell.imageView?.sd_setImage(with: URL(string: self.imageArr[index]), placeholderImage: UIImage(named: "placeholder.png"))
         cell.imageView?.contentMode = .scaleAspectFill
         cell.imageView?.clipsToBounds = true
         cell.textLabel?.text = imageNameArr[index]

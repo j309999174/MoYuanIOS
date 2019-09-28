@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SDWebImage
+
 protocol FriendsTableViewCellDelegate{
     func personpage(userID:String)
 }
@@ -28,8 +30,9 @@ class FriendsTableViewCell: UITableViewCell {
         attributesString = attributesString + " | " + data.property!
         attributes.text = attributesString
         do {
-            let data = try Data(contentsOf: URL(string: data.userPortrait)!)
-            userPortrait_img.image = UIImage(data: data)
+            //let data = try Data(contentsOf: URL(string: data.userPortrait)!)
+            //userPortrait_img.image = UIImage(data: data)
+            userPortrait_img.sd_setImage(with: URL(string: data.userPortrait), placeholderImage: UIImage(named: "placeholder.png"))
             userPortrait_img.contentMode = .scaleAspectFill
             //设置遮罩
             userPortrait_img.layer.masksToBounds = true

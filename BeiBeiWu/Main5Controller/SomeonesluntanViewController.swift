@@ -25,7 +25,7 @@ class SomeonesluntanViewController: UIViewController {
         }else{
             userID = personid
         }
-        let getPost: Parameters = ["authid": userID!]
+        let getPost: Parameters = ["authid": userID!,"pageindex":1]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=someonesluntan&m=socialchat", method: .post, parameters: getPost).response { response in
             if let data = response.data {
                 let decoder = JSONDecoder()
@@ -52,6 +52,37 @@ class SomeonesluntanViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    var post_ScrollBottom = false
+    var pageIndex = 1
+    func initPost(pageindex:Int){
+        //获取帖子数据
+        let getPost: Parameters = ["authid": userID!,"pageindex":pageindex]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=someonesluntan&m=socialchat", method: .post, parameters: getPost).response { response in
+            if let data = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let jsonModel = try decoder.decode([LuntanStruct].self, from: data)
+                    for index in 0..<jsonModel.count{
+                        let cell = LuntanData(id: jsonModel[index].id, plateid: jsonModel[index].plateid, platename: jsonModel[index].platename, authid: jsonModel[index].authid, authnickname: jsonModel[index].authnickname, authportrait: jsonModel[index].authportrait, posttip: jsonModel[index].posttip ?? "", posttitle: jsonModel[index].posttitle, posttext: jsonModel[index].posttext ?? "", postpicture: jsonModel[index].postpicture ?? "", like: jsonModel[index].like ?? "", favorite: jsonModel[index].favorite ?? "", time: jsonModel[index].time,age: jsonModel[index].age  ?? "?",gender: jsonModel[index].gender  ?? "?",region: jsonModel[index].region  ?? "?",property: jsonModel[index].property ?? "?")
+                        self.dataList.append(cell)
+                        self.isopen.append(false)
+                    }
+                    self.someoneslluntanTableView.reloadData()
+                } catch {
+                    print("解析 JSON 失败")
+                }
+                print("Request: \(String(describing: response.request))")
+                print("Response: \(String(describing: response.response))")
+                print("Error: \(String(describing: response.error))")
+                
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Data: \(utf8Text)")
+                    self.post_ScrollBottom = true
+                    return
+                }
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -114,7 +145,13 @@ extension SomeonesluntanViewController:UITableViewDelegate,UITableViewDataSource
 //        vc.time = dataList[indexPath.row].time
 //        self.show(vc, sender: nil)
     }
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if dataList.count - 1 == indexPath.row && post_ScrollBottom == false {
+            print("到底了")
+            pageIndex = pageIndex + 1
+            initPost(pageindex: pageIndex)
+        }
+    }
     
 }
 
@@ -126,7 +163,9 @@ extension SomeonesluntanViewController:LuntanTableViewCellDelegate{
 //        sender.isHidden = true
     }
     
-    func pictureClick(pictureData: Data) {
+    func pictureClick(pictureurl: String) {
+        do {
+        let pictureData = try Data(contentsOf: URL(string: pictureurl)!)
         let image = UIImage(data: pictureData)
         // Create the dialog
         let popup = PopupDialog(title: nil, message: nil, image: image)
@@ -141,6 +180,9 @@ extension SomeonesluntanViewController:LuntanTableViewCellDelegate{
         
         // Present dialog
         self.present(popup, animated: true, completion: nil)
+        }catch let err{
+            print(err)
+        }
     }
     func like(postid: String,likebtn: UIButton) {
         print("论坛喜欢")

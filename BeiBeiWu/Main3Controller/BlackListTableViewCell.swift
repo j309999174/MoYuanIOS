@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol BlackListTableViewCellDelegate {
     func delete(yourid:String)
@@ -31,8 +32,9 @@ class BlackListTableViewCell: UITableViewCell {
         attributesString = attributesString + " | " + data.property!
         attributes.text = attributesString
         do {
-            let data = try Data(contentsOf: URL(string: data.portrait!)!)
-            portrait.image = UIImage(data: data)
+            //let data = try Data(contentsOf: URL(string: data.portrait!)!)
+            //portrait.image = UIImage(data: data)
+            portrait.sd_setImage(with: URL(string: data.portrait!), placeholderImage: UIImage(named: "placeholder.png"))
             portrait.contentMode = .scaleAspectFill
             //设置遮罩
             portrait.layer.masksToBounds = true

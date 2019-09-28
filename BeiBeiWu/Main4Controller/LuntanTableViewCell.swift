@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol LuntanTableViewCellDelegate{
     func like(postid:String,likebtn:UIButton)
     func personpage(userID:String)
     func threepoints(postid:String,userID:String)
-    func pictureClick(pictureData:Data)
+    func pictureClick(pictureurl:String)
     func detail_content(posttext:UILabel!,post_detail_text:String!,sender:UIButton)
 }
 class LuntanTableViewCell: UITableViewCell {
@@ -63,9 +64,12 @@ class LuntanTableViewCell: UITableViewCell {
     }
     
     var delegate:LuntanTableViewCellDelegate?
-    var data1:Data?
-    var data2:Data?
-    var data3:Data?
+//    var data1:Data?
+//    var data2:Data?
+//    var data3:Data?
+    var pictureurl1:String?
+    var pictureurl2:String?
+    var pictureurl3:String?
     var post_detail_text:String?
     func setData(data:LuntanData){
         var attributesString = data.age! + " | " + data.gender!
@@ -78,8 +82,9 @@ class LuntanTableViewCell: UITableViewCell {
         platename.text = data.platename
         authid.text = data.authid
         do {
-            let data = try Data(contentsOf: URL(string: data.authportrait)!)
-            authportrait.image = UIImage(data: data)
+            //let data = try Data(contentsOf: URL(string: data.authportrait)!)
+            //authportrait.image = UIImage(data: data)
+            authportrait.sd_setImage(with: URL(string: data.authportrait), placeholderImage: UIImage(named: "placeholder.png"))
             authportrait.contentMode = .scaleAspectFill
             //设置遮罩
             authportrait.layer.masksToBounds = true
@@ -128,8 +133,10 @@ class LuntanTableViewCell: UITableViewCell {
                 postpicture1.isHidden = true
             }else{
                 postpicture1.isHidden = false
-                data1 = try Data(contentsOf: URL(string: arrayStrings[0])!)
-                postpicture1.image = UIImage(data: data1!)
+                //data1 = try Data(contentsOf: URL(string: arrayStrings[0])!)
+                //postpicture1.image = UIImage(data: data1!)
+                pictureurl1 = arrayStrings[0]
+                postpicture1.sd_setImage(with: URL(string: arrayStrings[0]), placeholderImage: UIImage(named: "placeholder.png"))
                 //图一点击
                 let imgClick1 = UITapGestureRecognizer(target: self, action: #selector(imAction1))
                 postpicture1.addGestureRecognizer(imgClick1)
@@ -139,8 +146,10 @@ class LuntanTableViewCell: UITableViewCell {
                 postpicture2.isHidden = true
             }else{
                 postpicture2.isHidden = false
-                data2 = try Data(contentsOf: URL(string: arrayStrings[1])!)
-                postpicture2.image = UIImage(data: data2!)
+                //data2 = try Data(contentsOf: URL(string: arrayStrings[1])!)
+                //postpicture2.image = UIImage(data: data2!)
+                pictureurl2 = arrayStrings[1]
+                postpicture2.sd_setImage(with: URL(string: arrayStrings[1]), placeholderImage: UIImage(named: "placeholder.png"))
                 //图一点击
                 let imgClick2 = UITapGestureRecognizer(target: self, action: #selector(imAction2))
                 postpicture2.addGestureRecognizer(imgClick2)
@@ -150,8 +159,10 @@ class LuntanTableViewCell: UITableViewCell {
                 postpicture3.isHidden = true
             }else{
                 postpicture3.isHidden = false
-                data3 = try Data(contentsOf: URL(string: arrayStrings[2])!)
-                postpicture3.image = UIImage(data: data3!)
+                //data3 = try Data(contentsOf: URL(string: arrayStrings[2])!)
+                //postpicture3.image = UIImage(data: data3!)
+                pictureurl3 = arrayStrings[2]
+                postpicture3.sd_setImage(with: URL(string: arrayStrings[2]), placeholderImage: UIImage(named: "placeholder.png"))
                 //图一点击
                 let imgClick3 = UITapGestureRecognizer(target: self, action: #selector(imAction3))
                 postpicture3.addGestureRecognizer(imgClick3)
@@ -176,17 +187,17 @@ class LuntanTableViewCell: UITableViewCell {
     //图一点击事件方法
     @objc func imAction1() -> Void {
         print("图片点击事件")
-        delegate?.pictureClick(pictureData: data1!)
+        delegate?.pictureClick(pictureurl: pictureurl1!)
     }
     //图二点击事件方法
     @objc func imAction2() -> Void {
         print("图片点击事件")
-        delegate?.pictureClick(pictureData: data2!)
+        delegate?.pictureClick(pictureurl: pictureurl2!)
     }
     //图三点击事件方法
     @objc func imAction3() -> Void {
         print("图片点击事件")
-        delegate?.pictureClick(pictureData: data3!)
+        delegate?.pictureClick(pictureurl: pictureurl3!)
     }
 }
 

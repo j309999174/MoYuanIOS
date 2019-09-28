@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
+
 struct FriendsStruct: Codable {
     let id: String
     let nickname: String

@@ -18,5 +18,6 @@ pod 'RongCloudRTC/RongCallLib', '~> 2.9.20'
 pod 'RongCloudRTC/RongCallKit', '~> 2.9.20'
 pod 'RongCloudIM/Sight', '~> 2.9.20'
 pod 'PopupDialog', '~> 1.1'
+pod 'SDWebImage', '~> 5.0'
 
 end

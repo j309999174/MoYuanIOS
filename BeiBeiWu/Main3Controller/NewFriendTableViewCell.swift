@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol NewFriendTableViewCellDelegate {
     func didAgree(yourid:String,yournickname:String,yourportrait:String,agreebtn:UIButton)
@@ -28,8 +29,9 @@ class NewFriendTableViewCell: UITableViewCell {
     var yourportrait:String?
     func setData(data: NewFriendData){
         do {
-            let data = try Data(contentsOf: URL(string: data.userPortrait)!)
-            userPortrait.image = UIImage(data: data)
+            //let data = try Data(contentsOf: URL(string: data.userPortrait)!)
+            //userPortrait.image = UIImage(data: data)
+            userPortrait.sd_setImage(with: URL(string: data.userPortrait), placeholderImage: UIImage(named: "placeholder.png"))
             userPortrait.contentMode = .scaleAspectFill
             //设置遮罩
             userPortrait.layer.masksToBounds = true

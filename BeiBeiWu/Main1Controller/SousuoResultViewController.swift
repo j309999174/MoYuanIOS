@@ -22,6 +22,9 @@ class SousuoResultViewController: UIViewController {
     var userGender: String?
     var userProperty: String?
     
+    var pageindex = 1
+    var sousuo_ScrollBottom = false
+    
     var dataList:[ShenBianData] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +70,7 @@ class SousuoResultViewController: UIViewController {
         }else{
             var getUserInfo: Parameters
             if let latitude = UserDefaults().string(forKey: "latitude"),let longitude = UserDefaults().string(forKey: "longitude"){
-                getUserInfo = ["type": "getUserInfo","userAge":userAge ?? "","userRegion":userRegion ?? "","userGender":userGender ?? "","userProperty":userProperty ?? "","latitude":latitude,"longitude":longitude]
+                getUserInfo = ["type": "getUserInfo","userAge":userAge ?? "","userRegion":userRegion ?? "","userGender":userGender ?? "","userProperty":userProperty ?? "","latitude":latitude,"longitude":longitude,"pageindex":1]
             }else{
                 getUserInfo = ["type": "getUserInfo"]
             }
@@ -79,6 +82,10 @@ class SousuoResultViewController: UIViewController {
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print("Data: \(utf8Text)")
                     print("结束")
+                    if utf8Text == "[]" {
+                        self.sousuo_ScrollBottom = true
+                        return
+                    }
                 }
                 if let data = response.data {
                     let decoder = JSONDecoder()
@@ -107,7 +114,49 @@ class SousuoResultViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    func sousuopage(pageindex:Int) {
+        var getUserInfo: Parameters
+        if let latitude = UserDefaults().string(forKey: "latitude"),let longitude = UserDefaults().string(forKey: "longitude"){
+            getUserInfo = ["type": "getUserInfo","userAge":userAge ?? "","userRegion":userRegion ?? "","userGender":userGender ?? "","userProperty":userProperty ?? "","latitude":latitude,"longitude":longitude,"pageindex":pageindex]
+        }else{
+            getUserInfo = ["type": "getUserInfo"]
+        }
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=conditionsousuo&m=socialchat", method: .post, parameters: getUserInfo).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                print("结束")
+                if utf8Text == "[]" {
+                    self.sousuo_ScrollBottom = true
+                    return
+                }
+            }
+            if let data = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    if let jsonModel = try decoder.decode([TuiJianUserInfo]?.self, from: data){
+                        for index in 0..<jsonModel.count{
+                            let cell = ShenBianData(userID:jsonModel[index].id,userPortrait: jsonModel[index].portrait ?? "", userNickName: jsonModel[index].nickname ?? "未知", userAge: jsonModel[index].age ?? "未知", userGender: jsonModel[index].gender ?? "未知", userProperty: jsonModel[index].property ?? "未知", userDistance: jsonModel[index].location ?? "未知"
+                                , userRegion: jsonModel[index].region ?? "未知", userVIP: jsonModel[index].vip ?? "普通")
+                            self.dataList.append(cell)
+                        }
+                        self.sousuoTableView.reloadData()
+                    }else if let jsonModel = try decoder.decode(TuiJianUserInfo?.self, from: data){
+                        let cell = ShenBianData(userID:jsonModel.id,userPortrait: jsonModel.portrait ?? "", userNickName: jsonModel.nickname ?? "未知", userAge: jsonModel.age ?? "未知", userGender: jsonModel.gender ?? "未知", userProperty: jsonModel.property ?? "未知", userDistance: jsonModel.location ?? "未知"
+                            , userRegion: jsonModel.region ?? "未知", userVIP: jsonModel.vip ?? "普通")
+                        self.dataList.append(cell)
+                        self.sousuoTableView.reloadData()
+                    }
+                    
+                } catch {
+                    print("解析 JSON 失败oooo")
+                }
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 
@@ -145,5 +194,16 @@ extension SousuoResultViewController:UITableViewDelegate,UITableViewDataSource{
         self.present(vc, animated: true, completion: nil)
     }
     
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if dataList.count - 1 == indexPath.row {
+            print("身边到底了")
+            pageindex = pageindex + 1
+            if sousuo_ScrollBottom == false{
+                pageindex = pageindex + 1
+                sousuopage(pageindex: pageindex)
+            }
+        }
+    }
     
 }

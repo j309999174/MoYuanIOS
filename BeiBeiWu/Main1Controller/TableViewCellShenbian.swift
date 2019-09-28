@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class TableViewCellShenbian: UITableViewCell {
     @IBOutlet weak var userPortrait: UIImageView!
@@ -23,8 +24,9 @@ class TableViewCellShenbian: UITableViewCell {
     @IBOutlet weak var vipImage: UIImageView!
     func setData(data: ShenBianData){
         do {
-            let data = try Data(contentsOf: URL(string: data.userPortrait)!)
-            userPortrait.image = UIImage(data: data)
+            //let data = try Data(contentsOf: URL(string: data.userPortrait)!)
+            //userPortrait.image = UIImage(data: data)
+            userPortrait.sd_setImage(with: URL(string: data.userPortrait), placeholderImage: UIImage(named: "placeholder.png"))
             userPortrait.contentMode = .scaleAspectFill
             //设置遮罩
             userPortrait.layer.masksToBounds = true

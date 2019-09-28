@@ -128,22 +128,22 @@ class LuntanViewController: UIViewController {
             pagerView.automaticSlidingInterval = 3.0
         }
     }
-    var imageArr = [UIImage]()
+    var imageArr = [String]()
     var imageNameArr = [String]()
     var imageUrl = [String]()
-    var imageArr_1 = [UIImage]()
+    var imageArr_1 = [String]()
     var imageNameArr_1 = [String]()
     var imageUrl_1 = [String]()
-    var imageArr_2 = [UIImage]()
+    var imageArr_2 = [String]()
     var imageNameArr_2 = [String]()
     var imageUrl_2 = [String]()
-    var imageArr_3 = [UIImage]()
+    var imageArr_3 = [String]()
     var imageNameArr_3 = [String]()
     var imageUrl_3 = [String]()
-    var imageArr_4 = [UIImage]()
+    var imageArr_4 = [String]()
     var imageNameArr_4 = [String]()
     var imageUrl_4 = [String]()
-    var imageArr_5 = [UIImage]()
+    var imageArr_5 = [String]()
     var imageNameArr_5 = [String]()
     var imageUrl_5 = [String]()
     
@@ -212,33 +212,34 @@ class LuntanViewController: UIViewController {
                 do {
                     let jsonModel = try decoder.decode([SliderImages].self, from: data)
                     for index in 0..<jsonModel.count{
-                        let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
-                        self.imageArr.append(UIImage(data: data)!)
+                        //let data = try Data(contentsOf: URL(string: jsonModel[index].slidepicture)!)
+                        //self.imageArr.append(UIImage(data: data)!)
                         self.imageNameArr.append(jsonModel[index].slidename)
+                        self.imageArr.append(jsonModel[index].slidepicture)
                         self.imageUrl.append(jsonModel[index].slideurl ?? "")
                         switch self.subNav {
                         case "首页":
-                            self.imageArr_1.append(UIImage(data: data)!)
+                            self.imageArr_1.append(jsonModel[index].slidepicture)
                             self.imageNameArr_1.append(jsonModel[index].slidename)
                             self.imageUrl_1.append(jsonModel[index].slideurl ?? "")
                             break
                         case "自拍":
-                            self.imageArr_2.append(UIImage(data: data)!)
+                            self.imageArr_2.append(jsonModel[index].slidepicture)
                             self.imageNameArr_2.append(jsonModel[index].slidename)
                             self.imageUrl_2.append(jsonModel[index].slideurl ?? "")
                             break
                         case "真实":
-                            self.imageArr_3.append(UIImage(data: data)!)
+                            self.imageArr_3.append(jsonModel[index].slidepicture)
                             self.imageNameArr_3.append(jsonModel[index].slidename)
                             self.imageUrl_3.append(jsonModel[index].slideurl ?? "")
                             break
                         case "情感":
-                            self.imageArr_4.append(UIImage(data: data)!)
+                            self.imageArr_4.append(jsonModel[index].slidepicture)
                             self.imageNameArr_4.append(jsonModel[index].slidename)
                             self.imageUrl_4.append(jsonModel[index].slideurl ?? "")
                             break
                         case "大圈":
-                            self.imageArr_5.append(UIImage(data: data)!)
+                            self.imageArr_5.append(jsonModel[index].slidepicture)
                             self.imageNameArr_5.append(jsonModel[index].slidename)
                             self.imageUrl_5.append(jsonModel[index].slideurl ?? "")
                             break
@@ -343,7 +344,8 @@ extension LuntanViewController:FSPagerViewDataSource,FSPagerViewDelegate{
     }
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
-        cell.imageView?.image = self.imageArr[index]
+        //cell.imageView?.image = self.imageArr[index]
+        cell.imageView?.sd_setImage(with: URL(string: self.imageArr[index]), placeholderImage: UIImage(named: "placeholder.png"))
         cell.imageView?.contentMode = .scaleAspectFill
         cell.imageView?.clipsToBounds = true
         cell.textLabel?.text = imageNameArr[index]
@@ -378,10 +380,11 @@ extension LuntanViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath.row)
-        let oneOfList = LuntanData(id: dataList[indexPath.row].id, plateid: dataList[indexPath.row].plateid, platename: dataList[indexPath.row].platename, authid: dataList[indexPath.row].authid, authnickname: dataList[indexPath.row].authnickname, authportrait: dataList[indexPath.row].authportrait, posttip: dataList[indexPath.row].posttip ?? "", posttitle: dataList[indexPath.row].posttitle!, posttext: dataList[indexPath.row].posttext ?? "", postpicture: dataList[indexPath.row].postpicture ?? "", like: dataList[indexPath.row].like ?? "", favorite: dataList[indexPath.row].favorite ?? "", time: dataList[indexPath.row].time!,age: dataList[indexPath.row].age  ?? "?",gender: dataList[indexPath.row].gender  ?? "?",region: dataList[indexPath.row].region  ?? "?",property: dataList[indexPath.row].property ?? "?")
+        
         let oneOfList1 = dataList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "luntanCell") as! LuntanTableViewCell
-        if oneOfList.posttext?.count ?? 0 > 50 && isopen[indexPath.row] == false {
+        if oneOfList1.posttext?.count ?? 0 > 50 && isopen[indexPath.row] == false {
+            let oneOfList = LuntanData(id: dataList[indexPath.row].id, plateid: dataList[indexPath.row].plateid, platename: dataList[indexPath.row].platename, authid: dataList[indexPath.row].authid, authnickname: dataList[indexPath.row].authnickname, authportrait: dataList[indexPath.row].authportrait, posttip: dataList[indexPath.row].posttip ?? "", posttitle: dataList[indexPath.row].posttitle!, posttext: dataList[indexPath.row].posttext ?? "", postpicture: dataList[indexPath.row].postpicture ?? "", like: dataList[indexPath.row].like ?? "", favorite: dataList[indexPath.row].favorite ?? "", time: dataList[indexPath.row].time!,age: dataList[indexPath.row].age  ?? "?",gender: dataList[indexPath.row].gender  ?? "?",region: dataList[indexPath.row].region  ?? "?",property: dataList[indexPath.row].property ?? "?")
             print("省了\(String(describing: oneOfList.posttext))")
             oneOfList.posttext = String((oneOfList.posttext?.prefix(50) ?? "")) + "......"
             cell.delegate = self
@@ -432,6 +435,8 @@ extension LuntanViewController:UITableViewDelegate,UITableViewDataSource{
 
 
 extension LuntanViewController:LuntanTableViewCellDelegate{
+
+    
     func detail_content(posttext: UILabel!, post_detail_text: String!,sender:UIButton) {
 //        print("全文")
 //                if post_detail_text?.count ?? 0 > 50 {
@@ -448,7 +453,9 @@ extension LuntanViewController:LuntanTableViewCellDelegate{
         
     }
     
-    func pictureClick(pictureData: Data) {
+    func pictureClick(pictureurl: String) {
+        do {
+            let pictureData = try Data(contentsOf: URL(string: pictureurl)!)
             let image = UIImage(data: pictureData)
             // Create the dialog
             let popup = PopupDialog(title: nil, message: nil, image: image)
@@ -463,6 +470,9 @@ extension LuntanViewController:LuntanTableViewCellDelegate{
             
             // Present dialog
             self.present(popup, animated: true, completion: nil)
+        }catch let err{
+            print(err)
+        }
     }
     
     func like(postid: String,likebtn: UIButton) {
