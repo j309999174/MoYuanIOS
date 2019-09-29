@@ -36,6 +36,7 @@ struct TuiJianUserInfo: Codable {
 class Main1ViewController: UIViewController {
     
     
+    @IBOutlet weak var menu_sgement: UISegmentedControl!
     @IBAction func menuAction(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -355,17 +356,32 @@ class Main1ViewController: UIViewController {
     var imageNameArr_fujin = [String]()
     var imageUrl_fujin = [String]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
+        if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
+            self.tabBarController?.tabBar.items![1].badgeValue = nil
+        }else{
+            self.tabBarController?.tabBar.items![1].badgeValue = String(Int((RCIMClient.shared()?.getTotalUnreadCount())!))
+        }
+        
+      
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         
+        
         self.navigationItem.hidesBackButton = true
         self.tabBarController?.tabBar.isHidden = false
         
-        
-        
+        let font_normal = UIFont.systemFont(ofSize: 20)
+        let font_selected = UIFont.systemFont(ofSize: 25)
+        menu_sgement.setTitleTextAttributes([NSAttributedString.Key.font:font_normal], for: .normal)
+        menu_sgement.setTitleTextAttributes([NSAttributedString.Key.font:font_selected], for: .selected)
+
         //判断是否登录
         if UserDefaults().string(forKey: "userID") == nil{
             let sb = UIStoryboard(name: "Main1", bundle:nil)
@@ -476,6 +492,24 @@ class Main1ViewController: UIViewController {
             print("token不对")
         })
         
+        
+
+        let userID = userInfo.string(forKey: "userID")
+        let parameters: Parameters = ["myid": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "0" {
+                    self.tabBarController?.tabBar.items![2].badgeValue = nil
+                }else{
+                    self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                }
+            }
+        }
     }
     
     

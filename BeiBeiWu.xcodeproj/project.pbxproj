@@ -66,6 +66,8 @@
 		05A77F55230168FE0010BC83 /* PostheadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A77F54230168FE0010BC83 /* PostheadTableViewCell.swift */; };
 		05A77F572301690D0010BC83 /* PostlistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A77F562301690D0010BC83 /* PostlistTableViewCell.swift */; };
 		05A77F5923016D540010BC83 /* PostlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A77F5823016D540010BC83 /* PostlistViewController.swift */; };
+		05AAC634233FAA950000C8BB /* ConversationViewCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAC633233FAA950000C8BB /* ConversationViewCustomViewController.swift */; };
+		05AAC636233FB44F0000C8BB /* ConversationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAC635233FB44F0000C8BB /* ConversationSettingViewController.swift */; };
 		05C9B86922E6D6A90075364D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9B86822E6D6A90075364D /* AppDelegate.swift */; };
 		05C9B86B22E6D6A90075364D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9B86A22E6D6A90075364D /* ViewController.swift */; };
 		05C9B86E22E6D6A90075364D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C9B86C22E6D6A90075364D /* Main.storyboard */; };
@@ -139,6 +141,8 @@
 		05A77F54230168FE0010BC83 /* PostheadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostheadTableViewCell.swift; sourceTree = "<group>"; };
 		05A77F562301690D0010BC83 /* PostlistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostlistTableViewCell.swift; sourceTree = "<group>"; };
 		05A77F5823016D540010BC83 /* PostlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostlistViewController.swift; sourceTree = "<group>"; };
+		05AAC633233FAA950000C8BB /* ConversationViewCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewCustomViewController.swift; sourceTree = "<group>"; };
+		05AAC635233FB44F0000C8BB /* ConversationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSettingViewController.swift; sourceTree = "<group>"; };
 		05C9B86522E6D6A90075364D /* BeiBeiWu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeiBeiWu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C9B86822E6D6A90075364D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05C9B86A22E6D6A90075364D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				057B1FD222EA9072000B8811 /* Main2ViewController.swift */,
+				05AAC633233FAA950000C8BB /* ConversationViewCustomViewController.swift */,
+				05AAC635233FB44F0000C8BB /* ConversationSettingViewController.swift */,
 			);
 			path = Main2Controller;
 			sourceTree = "<group>";
@@ -496,6 +502,7 @@
 				05A57E6A2301D5F3001BC0F0 /* PostlistData.swift in Sources */,
 				057B1FD022EA8E36000B8811 /* UserSetViewController.swift in Sources */,
 				05090C622329675300DAB476 /* BlackListData.swift in Sources */,
+				05AAC634233FAA950000C8BB /* ConversationViewCustomViewController.swift in Sources */,
 				05115BD622FC1E0F00D7632A /* FriendsTableViewCell.swift in Sources */,
 				0522B1192300184B00D710C5 /* FabudongtaiViewController.swift in Sources */,
 				0512F530230380F200237ABC /* CircleViewController.swift in Sources */,
@@ -525,6 +532,7 @@
 				05090C6C232A3F4A00DAB476 /* SliderWebviewViewController.swift in Sources */,
 				050C87DC22FF12A50019D9B0 /* DongtaiData.swift in Sources */,
 				055A55AB2339A142008A341D /* PrivateSettingViewController.swift in Sources */,
+				05AAC636233FB44F0000C8BB /* ConversationSettingViewController.swift in Sources */,
 				057B1FD922EA90AE000B8811 /* Main4ViewController.swift in Sources */,
 				05115BE122FE097C00D7632A /* NewFriendTableViewCell.swift in Sources */,
 				05A77F572301690D0010BC83 /* PostlistTableViewCell.swift in Sources */,

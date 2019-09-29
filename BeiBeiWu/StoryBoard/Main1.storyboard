@@ -39,11 +39,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iMf-FO-tL6">
-                                <rect key="frame" x="0.0" y="64" width="375" height="28"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="46"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YhA-Do-A6q">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="29"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YhA-Do-A6q">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                         <color key="backgroundColor" name="graybackground"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="oC9-Jp-obM"/>
+                                        </constraints>
                                         <segments>
                                             <segment title="推荐"/>
                                             <segment title="附近"/>
@@ -98,14 +101,14 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ucn-wq-vbH">
-                                <rect key="frame" x="0.0" y="92" width="375" height="526"/>
+                                <rect key="frame" x="0.0" y="110" width="375" height="508"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="130" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hns-pS-m8m">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="526"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="508"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="separatorColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <view key="tableHeaderView" contentMode="scaleToFill" id="auv-sy-G7L" customClass="FSPagerView" customModule="FSPagerView">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
@@ -115,7 +118,7 @@
                                         </view>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" id="viq-Fy-zuv" customClass="TableViewCellShenbian" customModule="BeiBeiWu" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="128" width="375" height="130"/>
+                                                <rect key="frame" x="0.0" y="125" width="375" height="130"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="viq-Fy-zuv" id="e5p-om-bDW">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
@@ -288,6 +291,7 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="menu_sgement" destination="YhA-Do-A6q" id="dHc-Ug-5Bv"/>
                         <outlet property="pagerView" destination="auv-sy-G7L" id="usx-OD-4ns"/>
                         <outlet property="seewho_segment" destination="JmI-vz-Qw4" id="fJ2-qI-IEV"/>
                         <outlet property="shenBianTableView" destination="hns-pS-m8m" id="Q2F-zb-Tk3"/>
@@ -306,7 +310,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ad4-nJ-nku">
-                                <rect key="frame" x="0.0" y="20" width="375" height="534"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="477"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etf-uY-GYr">
                                         <rect key="frame" x="172" y="0.0" width="31" height="18"/>
@@ -321,9 +325,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="按手机号或昵称搜索" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYR-uH-Xk3">
-                                        <rect key="frame" x="1" y="60.5" width="373" height="56"/>
+                                        <rect key="frame" x="42.5" y="60.5" width="290" height="56"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="373" id="auT-2J-hPU"/>
+                                            <constraint firstAttribute="width" constant="290" id="auT-2J-hPU"/>
                                             <constraint firstAttribute="height" constant="56" id="ri5-Fy-q3Z"/>
                                         </constraints>
                                         <textInputTraits key="textInputTraits"/>
@@ -337,38 +341,55 @@
                                         <color key="textColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="Wuh-Wp-OTs">
-                                        <rect key="frame" x="87.5" y="159" width="200" height="29"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="cti-uE-2zK"/>
-                                        </constraints>
-                                        <segments>
-                                            <segment title="🙍‍♂️男"/>
-                                            <segment title="🧝‍♀️女"/>
-                                            <segment title="不限"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="userGender:" destination="9ym-Pf-HQT" eventType="valueChanged" id="4es-O2-oHB"/>
-                                        </connections>
-                                    </segmentedControl>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎂年龄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVn-5L-JDZ">
-                                        <rect key="frame" x="158.5" y="195" width="58" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zN-Ki-KAZ">
-                                        <rect key="frame" x="27.5" y="223.5" width="320" height="90"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="90" id="vNL-zm-sph"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="dataSource" destination="9ym-Pf-HQT" id="yaJ-Xf-V2O"/>
-                                            <outlet property="delegate" destination="9ym-Pf-HQT" id="nW0-Sn-MU8"/>
-                                        </connections>
-                                    </pickerView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jrz-Ue-b4W">
+                                        <rect key="frame" x="54.5" y="159" width="266" height="28"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👫性别" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJ0-z2-bhR">
+                                                <rect key="frame" x="0.0" y="4" width="58" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="Wuh-Wp-OTs">
+                                                <rect key="frame" x="66" y="0.0" width="200" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="cti-uE-2zK"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="🙍‍♂️男"/>
+                                                    <segment title="🧝‍♀️女"/>
+                                                    <segment title="不限"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="userGender:" destination="9ym-Pf-HQT" eventType="valueChanged" id="4es-O2-oHB"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1fB-V9-FTj">
+                                        <rect key="frame" x="54.5" y="195" width="266" height="90"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎂年龄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVn-5L-JDZ">
+                                                <rect key="frame" x="0.0" y="35" width="58" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zN-Ki-KAZ">
+                                                <rect key="frame" x="66" y="0.0" width="200" height="90"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="jlz-FC-5Kh"/>
+                                                    <constraint firstAttribute="height" constant="90" id="vNL-zm-sph"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="9ym-Pf-HQT" id="yaJ-Xf-V2O"/>
+                                                    <outlet property="delegate" destination="9ym-Pf-HQT" id="nW0-Sn-MU8"/>
+                                                </connections>
+                                            </pickerView>
+                                        </subviews>
+                                    </stackView>
                                     <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="不限" borderStyle="roundedRect" placeholder="年龄" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6OD-Qv-xKg">
-                                        <rect key="frame" x="87.5" y="317.5" width="200" height="0.0"/>
+                                        <rect key="frame" x="87.5" y="289" width="200" height="0.0"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="F8s-yH-45S"/>
                                         </constraints>
@@ -377,44 +398,61 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高级选项（会员专享）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZc-yu-v0t">
-                                        <rect key="frame" x="136.5" y="321.5" width="102.5" height="12"/>
+                                        <rect key="frame" x="136.5" y="293" width="102.5" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="H8g-Gr-zzo">
-                                        <rect key="frame" x="87.5" y="341.5" width="200" height="29"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="5fz-rQ-tfQ"/>
-                                        </constraints>
-                                        <segments>
-                                            <segment title="Z"/>
-                                            <segment title="B"/>
-                                            <segment title="双"/>
-                                            <segment title="不限"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="userProperty:" destination="9ym-Pf-HQT" eventType="valueChanged" id="5Pz-km-fk5"/>
-                                        </connections>
-                                    </segmentedControl>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🌍地区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v21-sI-Hbe">
-                                        <rect key="frame" x="158.5" y="377.5" width="58" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.66799789669999998" green="0.47512125970000002" blue="0.25860109930000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zA-if-cMe">
-                                        <rect key="frame" x="27.5" y="406" width="320" height="90"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="90" id="big-67-SYh"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="dataSource" destination="9ym-Pf-HQT" id="N5g-ni-kQL"/>
-                                            <outlet property="delegate" destination="9ym-Pf-HQT" id="f0A-m0-ALo"/>
-                                        </connections>
-                                    </pickerView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IhQ-pF-j1K">
+                                        <rect key="frame" x="54.5" y="313" width="266" height="28"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♊️属性" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cwp-6a-hwF">
+                                                <rect key="frame" x="0.0" y="4" width="58" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="H8g-Gr-zzo">
+                                                <rect key="frame" x="66" y="0.0" width="200" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="5fz-rQ-tfQ"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Z"/>
+                                                    <segment title="B"/>
+                                                    <segment title="双"/>
+                                                    <segment title="不限"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="userProperty:" destination="9ym-Pf-HQT" eventType="valueChanged" id="5Pz-km-fk5"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6zP-qt-IBc">
+                                        <rect key="frame" x="54.5" y="349" width="266" height="90"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🌍地区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v21-sI-Hbe">
+                                                <rect key="frame" x="0.0" y="35" width="58" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.66799789669999998" green="0.47512125970000002" blue="0.25860109930000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zA-if-cMe">
+                                                <rect key="frame" x="66" y="0.0" width="200" height="90"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="4ve-RK-f3n"/>
+                                                    <constraint firstAttribute="height" constant="90" id="big-67-SYh"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="9ym-Pf-HQT" id="N5g-ni-kQL"/>
+                                                    <outlet property="delegate" destination="9ym-Pf-HQT" id="f0A-m0-ALo"/>
+                                                </connections>
+                                            </pickerView>
+                                        </subviews>
+                                    </stackView>
                                     <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="不限-不限" borderStyle="roundedRect" placeholder="地区" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KdN-Sc-XpA">
-                                        <rect key="frame" x="87.5" y="500" width="200" height="0.0"/>
+                                        <rect key="frame" x="87.5" y="443" width="200" height="0.0"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="Szw-nl-Hlo"/>
                                         </constraints>
@@ -423,7 +461,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fwj-nh-50n">
-                                        <rect key="frame" x="161.5" y="504" width="52" height="30"/>
+                                        <rect key="frame" x="161.5" y="447" width="52" height="30"/>
                                         <state key="normal" title="🔍搜索"/>
                                         <connections>
                                             <action selector="submit:" destination="9ym-Pf-HQT" eventType="touchUpInside" id="i46-08-tMV"/>

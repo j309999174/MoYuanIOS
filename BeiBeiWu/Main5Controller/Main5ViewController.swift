@@ -72,7 +72,16 @@ class Main5ViewController: UIViewController {
     var userID:String?
     var userNickName:String?
     var userPortrait:String?
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
+        if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
+            self.tabBarController?.tabBar.items![1].badgeValue = nil
+        }else{
+            self.tabBarController?.tabBar.items![1].badgeValue = String(Int((RCIMClient.shared()?.getTotalUnreadCount())!))
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,6 +112,25 @@ class Main5ViewController: UIViewController {
         //刷新融云缓存
         let userinfo = RCUserInfo.init(userId: userID, name:userPortrait, portrait: userPortrait)
         RCIM.shared()?.refreshUserInfoCache(userinfo, withUserId: userID)
+        
+        
+
+        let userID = userInfo.string(forKey: "userID")
+        let parameters: Parameters = ["myid": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "0" {
+                    self.tabBarController?.tabBar.items![2].badgeValue = nil
+                }else{
+                    self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                }
+            }
+        }
     }
     
 

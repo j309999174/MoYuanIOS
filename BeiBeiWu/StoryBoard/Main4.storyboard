@@ -397,11 +397,14 @@
                                 <rect key="frame" x="8" y="96" width="398" height="725"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUp-DU-6PI">
-                                        <rect key="frame" x="183.5" y="0.0" width="31" height="30"/>
+                                        <rect key="frame" x="151.5" y="0.0" width="95" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="NXw-9o-BcD"/>
                                         </constraints>
-                                        <state key="normal" title="发布"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="📝发布">
+                                            <color key="titleColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="postRelease:" destination="Ypn-Ay-AUb" eventType="touchUpInside" id="nIx-Sd-FtG"/>
                                         </connections>
@@ -460,11 +463,17 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="内容" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mtu-EL-Ul1">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mtu-EL-Ul1">
                                         <rect key="frame" x="8" y="277" width="382" height="448"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" name="graybackground"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="内容"/>
+                                        </userDefinedRuntimeAttributes>
                                     </textView>
                                 </subviews>
                                 <constraints>
@@ -612,13 +621,13 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="CsM-bg-SY3">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="28"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MjX-ac-gc0">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="29"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="47"/>
                                                 <color key="backgroundColor" name="graybackground"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="28" id="K7y-Qz-CPW"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="aGi-RL-vAT"/>
                                                 </constraints>
                                                 <segments>
                                                     <segment title="首页"/>
@@ -635,14 +644,14 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公告" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTa-ka-XNn" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="46" width="414" height="20.5"/>
                                         <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="PrimaryNormal"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QpR-yb-ALr">
-                                        <rect key="frame" x="0.0" y="48.5" width="414" height="759.5"/>
+                                        <rect key="frame" x="0.0" y="66.5" width="414" height="741.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="fah-Hh-4Z0" customClass="FSPagerView" customModule="FSPagerView">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -938,6 +947,7 @@
                         <outlet property="luntanTableView" destination="QpR-yb-ALr" id="Hhe-WO-Tdm"/>
                         <outlet property="marqueeLabel" destination="MTa-ka-XNn" id="yUU-kd-EYf"/>
                         <outlet property="pagerView" destination="fah-Hh-4Z0" id="QrK-Sl-9Xb"/>
+                        <outlet property="plate_segment" destination="MjX-ac-gc0" id="Tkl-n9-apk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUs-fu-4d8" userLabel="First Responder" sceneMemberID="firstResponder"/>

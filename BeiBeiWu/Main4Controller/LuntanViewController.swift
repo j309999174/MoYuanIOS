@@ -47,6 +47,7 @@ class LuntanViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var plate_segment: UISegmentedControl!
     @IBAction func plateMenu(_ sender: UISegmentedControl) {
         subNav = sender.titleForSegment(at: sender.selectedSegmentIndex)!
         post_ScrollBottom = false
@@ -154,9 +155,25 @@ class LuntanViewController: UIViewController {
     var gonggao = ""
     var isopen:[Bool] = []
     var post_full_text = ""
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
+        if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
+            self.tabBarController?.tabBar.items![1].badgeValue = nil
+        }else{
+            self.tabBarController?.tabBar.items![1].badgeValue = String(Int((RCIMClient.shared()?.getTotalUnreadCount())!))
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
+        
+        
+        let font_normal = UIFont.systemFont(ofSize: 20)
+        let font_selected = UIFont.systemFont(ofSize: 25)
+        plate_segment.setTitleTextAttributes([NSAttributedString.Key.font:font_normal], for: .normal)
+        plate_segment.setTitleTextAttributes([NSAttributedString.Key.font:font_selected], for: .selected)
         //删除文件
         let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                            .userDomainMask, true)[0] as String

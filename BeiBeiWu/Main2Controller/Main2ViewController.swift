@@ -67,13 +67,29 @@ class Main2ViewController: RCConversationListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        let userInfo = UserDefaults()
+        let userID = userInfo.string(forKey: "userID")
+        let parameters: Parameters = ["myid": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "0" {
+                    self.tabBarController?.tabBar.items![2].badgeValue = nil
+                }else{
+                    self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                }
+            }
+        }
     }
     
     
     override
     func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
-        let vc = RCConversationViewController()
+        let vc = ConversationViewCustomViewController()
         vc.conversationType = model.conversationType
         vc.targetId = model.targetId
         vc.hidesBottomBarWhenPushed = true

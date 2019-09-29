@@ -1,19 +1,21 @@
 //
-//  ChatViewController.swift
+//  ConversationViewCustomViewController.swift
 //  BeiBeiWu
 //
-//  Created by 江东 on 2019/8/9.
+//  Created by 江东 on 2019/9/28.
 //  Copyright © 2019 江东. All rights reserved.
 //
 
 import UIKit
 
-class ChatViewController: RCConversationViewController {
+class ConversationViewCustomViewController: RCConversationViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationItem.setRightBarButton(UIBarButtonItem.init(title: "⚙️", style: UIBarButtonItem.Style.plain, target: nil, action: #selector(imAction)), animated: false)
+        
+        
         // Do any additional setup after loading the view.
     }
     
