@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RongContactCard
 
 class ConversationViewCustomViewController: RCConversationViewController {
 
@@ -18,7 +19,21 @@ class ConversationViewCustomViewController: RCConversationViewController {
         
         // Do any additional setup after loading the view.
     }
-    
+    //融云消息点击事件
+    override func didTapMessageCell(_ model: RCMessageModel!) {
+        super.didTapMessageCell(model)
+        
+        if model.content.isKind(of: RCContactCardMessage.self){
+            let cardMessage = model.content as! RCContactCardMessage
+            //不同的StoryBoard下
+            let sb = UIStoryboard(name: "Personal", bundle:nil)
+            let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
+            vc.userID = cardMessage.userId
+            vc.hidesBottomBarWhenPushed = true
+            self.show(vc, sender: nil)
+        }
+    }
+
     //点击事件方法
     @objc func imAction() -> Void {
         print("设置点击")

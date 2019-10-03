@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import RongContactCard
+
 class Main2ViewController: RCConversationListViewController {
     var dataList:[FriendsData] = [];
     
@@ -15,7 +17,8 @@ class Main2ViewController: RCConversationListViewController {
         super.viewWillAppear(animated)
         print("展示")
         self.navigationItem.title = "会话列表"
-    
+        //融云个人名片
+        RCContactCardKit.shareInstance()?.contactsDataSource = self as RCCCContactsDataSource
         //设置融云当前用户信息
         let userInfo = UserDefaults()
         let userID = userInfo.string(forKey: "userID")
@@ -133,5 +136,17 @@ extension Main2ViewController:RCIMUserInfoDataSource {
                 completion(userinfo)
             }
         }
+    }
+}
+
+
+extension Main2ViewController:RCCCContactsDataSource {
+    func getAllContacts(_ resultBlock: (([RCCCUserInfo]?) -> Void)!) {
+        var rcccUserInfo:[RCCCUserInfo] = [];
+        for index in 0..<dataList.count{
+            let userInfo = RCCCUserInfo.init(userId: dataList[index].userID, name: dataList[index].userNickName, portrait: dataList[index].userPortrait)
+            rcccUserInfo.append(userInfo!)
+        }
+        resultBlock(rcccUserInfo)
     }
 }

@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RCIM.shared()?.initWithAppKey("3argexb63qxke")
         RCIM.shared()?.enableMessageRecall = true
         RCIM.shared()?.enableTypingStatus = true
+        
         //注册微信
         WXApi.registerApp("wxc7ff179d403b7a51")
         //请求通知权限

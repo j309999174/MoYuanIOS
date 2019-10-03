@@ -8,22 +8,31 @@
 
 import UIKit
 
-class ChatViewController: RCConversationViewController {
+class ChatViewController: ConversationViewCustomViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.setRightBarButton(UIBarButtonItem.init(title: "⚙️", style: UIBarButtonItem.Style.plain, target: nil, action: #selector(imAction)), animated: false)
+        self.navigationItem.setRightBarButton(UIBarButtonItem.init(title: "⚙️", style: UIBarButtonItem.Style.plain, target: nil, action: #selector(rightbarAction)), animated: false)
         // Do any additional setup after loading the view.
     }
     
     //点击事件方法
-    @objc func imAction() -> Void {
+    @objc func rightbarAction() -> Void {
         print("设置点击")
         let sb = UIStoryboard(name: "Main2", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "ConversationSetting") as! ConversationSettingViewController
         //vc.hidesBottomBarWhenPushed = true
         vc.userid = self.targetId
+        self.show(vc, sender: nil)
+    }
+    
+    override func didTapCellPortrait(_ userId: String!) {
+        //不同的StoryBoard下
+        let sb = UIStoryboard(name: "Personal", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
+        vc.userID = userId
+        vc.hidesBottomBarWhenPushed = true
         self.show(vc, sender: nil)
     }
     /*

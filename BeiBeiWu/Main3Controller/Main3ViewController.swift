@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SDWebImage
+import RongContactCard
 
 struct FriendsStruct: Codable {
     let id: String
@@ -51,7 +52,8 @@ class Main3ViewController: UIViewController {
         super.viewDidLoad()
         Uniquelogin.compareUniqueLoginToken(view: self)
         RCIM.shared()?.userInfoDataSource = self
-        
+        //融云个人名片
+        RCContactCardKit.shareInstance()?.contactsDataSource = self as RCCCContactsDataSource
         self.navigationItem.title = "通讯录"
         //设置融云当前用户信息
         let userInfo = UserDefaults()
@@ -265,6 +267,17 @@ extension UILocalizedIndexedCollation{
         //将得到新的 分组数据以及标题数组
         finishCallback(dataArray, sectionTitleArray)
         
+    }
+}
+
+extension Main3ViewController:RCCCContactsDataSource {
+    func getAllContacts(_ resultBlock: (([RCCCUserInfo]?) -> Void)!) {
+        var rcccUserInfo:[RCCCUserInfo] = [];
+        for index in 0..<dataList.count{
+            let userInfo = RCCCUserInfo.init(userId: dataList[index].userID, name: dataList[index].userNickName, portrait: dataList[index].userPortrait)
+            rcccUserInfo.append(userInfo!)
+        }
+        resultBlock(rcccUserInfo)
     }
 }
 

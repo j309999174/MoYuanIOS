@@ -68,6 +68,8 @@
 		05A77F5923016D540010BC83 /* PostlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A77F5823016D540010BC83 /* PostlistViewController.swift */; };
 		05AAC634233FAA950000C8BB /* ConversationViewCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAC633233FAA950000C8BB /* ConversationViewCustomViewController.swift */; };
 		05AAC636233FB44F0000C8BB /* ConversationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAC635233FB44F0000C8BB /* ConversationSettingViewController.swift */; };
+		05AAC63D2346AA8F0000C8BB /* RongContactCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05AAC63C2346AA8F0000C8BB /* RongContactCard.framework */; };
+		05AAC63E2346AAAA0000C8BB /* RongContactCard.framework in Sources */ = {isa = PBXBuildFile; fileRef = 05AAC63C2346AA8F0000C8BB /* RongContactCard.framework */; settings = {COMPILER_FLAGS = "-ObjC"; }; };
 		05C9B86922E6D6A90075364D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9B86822E6D6A90075364D /* AppDelegate.swift */; };
 		05C9B86B22E6D6A90075364D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9B86A22E6D6A90075364D /* ViewController.swift */; };
 		05C9B86E22E6D6A90075364D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C9B86C22E6D6A90075364D /* Main.storyboard */; };
@@ -143,6 +145,7 @@
 		05A77F5823016D540010BC83 /* PostlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostlistViewController.swift; sourceTree = "<group>"; };
 		05AAC633233FAA950000C8BB /* ConversationViewCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewCustomViewController.swift; sourceTree = "<group>"; };
 		05AAC635233FB44F0000C8BB /* ConversationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSettingViewController.swift; sourceTree = "<group>"; };
+		05AAC63C2346AA8F0000C8BB /* RongContactCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RongContactCard.framework; sourceTree = "<group>"; };
 		05C9B86522E6D6A90075364D /* BeiBeiWu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeiBeiWu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C9B86822E6D6A90075364D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05C9B86A22E6D6A90075364D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 			files = (
 				057B1FE022EB9523000B8811 /* CoreLocation.framework in Frameworks */,
 				740B4CAEF0DF76821B768B06 /* Pods_BeiBeiWu.framework in Frameworks */,
+				05AAC63D2346AA8F0000C8BB /* RongContactCard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +324,7 @@
 				051FD02A230FD9CF00A374D3 /* PersonalPostViewController.swift */,
 				05090C6523298F9B00DAB476 /* Uniquelogin.swift */,
 				05090C6B232A3F4A00DAB476 /* SliderWebviewViewController.swift */,
+				05AAC63C2346AA8F0000C8BB /* RongContactCard.framework */,
 			);
 			path = BeiBeiWu;
 			sourceTree = "<group>";
@@ -489,6 +494,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05AAC63E2346AAAA0000C8BB /* RongContactCard.framework in Sources */,
 				05090C6623298F9B00DAB476 /* Uniquelogin.swift in Sources */,
 				05115BD222F03CF600D7632A /* SousuoResult.swift in Sources */,
 				053F3EEB22ECD788004C4864 /* ShenBianData.swift in Sources */,
@@ -697,6 +703,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y683GGLLBM;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BeiBeiWu",
+				);
 				INFOPLIST_FILE = BeiBeiWu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -723,6 +733,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y683GGLLBM;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BeiBeiWu",
+				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = BeiBeiWu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
