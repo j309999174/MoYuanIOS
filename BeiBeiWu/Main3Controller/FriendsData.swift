@@ -10,7 +10,7 @@ import Foundation
 class FriendsData {
     var userID: String
     var userPortrait:String
-    var userNickName: String
+    @objc var userNickName: String
     
     var age:String?
     var gender:String?
