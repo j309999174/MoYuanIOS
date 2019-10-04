@@ -163,6 +163,43 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXJ-rR-Hhj">
+                                        <rect key="frame" x="15" y="322.33333333333331" width="354" height="30"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kBW-qQ-oDs">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="30"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startconversation" translatesAutoresizingMaskIntoConstraints="NO" id="FRU-q7-gIM">
+                                                        <rect key="frame" x="162" y="0.0" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="0F3-Aw-hZi"/>
+                                                            <constraint firstAttribute="height" constant="30" id="FyD-qo-KU3"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ArV-P6-CJ3">
+                                                        <rect key="frame" x="146" y="30" width="62" height="0.0"/>
+                                                        <color key="backgroundColor" name="graybackground"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <state key="normal" title="发起会话">
+                                                            <color key="titleColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="graybackground"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="kBW-qQ-oDs" secondAttribute="bottom" id="PRK-6A-dy5"/>
+                                            <constraint firstItem="kBW-qQ-oDs" firstAttribute="top" secondItem="yXJ-rR-Hhj" secondAttribute="top" id="YZp-Oa-rAH"/>
+                                            <constraint firstItem="kBW-qQ-oDs" firstAttribute="leading" secondItem="yXJ-rR-Hhj" secondAttribute="leading" id="hdF-qB-7pa"/>
+                                            <constraint firstAttribute="trailing" secondItem="kBW-qQ-oDs" secondAttribute="trailing" id="kRK-6b-mzn"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hh-5q-uWn">
                                         <rect key="frame" x="15" y="326.33333333333331" width="354" height="60"/>
                                         <subviews>
@@ -176,16 +213,13 @@
                                                             <constraint firstAttribute="width" constant="30" id="rIz-fL-ljY"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDp-R7-uOb">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDp-R7-uOb">
                                                         <rect key="frame" x="146" y="30" width="62" height="30"/>
                                                         <color key="backgroundColor" name="graybackground"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <state key="normal" title="申请好友">
                                                             <color key="titleColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="addFriend:" destination="b2f-ko-6RO" eventType="touchUpInside" id="KRp-FX-eay"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -216,16 +250,13 @@
                                                             <constraint firstAttribute="width" constant="30" id="t6V-QC-sLJ"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWv-zX-9Hj" userLabel="加入黑名单">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWv-zX-9Hj" userLabel="加入黑名单">
                                                         <rect key="frame" x="138.66666666666666" y="30" width="77" height="30"/>
                                                         <color key="backgroundColor" name="graybackground"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <state key="normal" title="加入黑名单">
                                                             <color key="titleColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="addblacklist:" destination="b2f-ko-6RO" eventType="touchUpInside" id="WWV-qJ-iHO"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -236,6 +267,43 @@
                                             <constraint firstItem="YnO-Et-ele" firstAttribute="top" secondItem="2DD-CE-CuQ" secondAttribute="top" id="AN8-Ij-zSp"/>
                                             <constraint firstItem="YnO-Et-ele" firstAttribute="leading" secondItem="2DD-CE-CuQ" secondAttribute="leading" id="DgG-tJ-p9Z"/>
                                             <constraint firstAttribute="trailing" secondItem="YnO-Et-ele" secondAttribute="trailing" id="MKp-54-7EM"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1yC-lY-y6i">
+                                        <rect key="frame" x="15" y="458.33333333333337" width="354" height="30"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="D8a-6d-atb">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="30"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deletefriend" translatesAutoresizingMaskIntoConstraints="NO" id="E8w-xD-wW8">
+                                                        <rect key="frame" x="162" y="0.0" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="DKH-Ge-Two"/>
+                                                            <constraint firstAttribute="height" constant="30" id="t3a-ZH-sld"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mf7-tx-fix" userLabel="加入黑名单">
+                                                        <rect key="frame" x="146" y="30" width="62" height="0.0"/>
+                                                        <color key="backgroundColor" name="graybackground"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <state key="normal" title="删除好友">
+                                                            <color key="titleColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="graybackground"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="D8a-6d-atb" secondAttribute="bottom" id="Mhz-fx-jvZ"/>
+                                            <constraint firstItem="D8a-6d-atb" firstAttribute="leading" secondItem="1yC-lY-y6i" secondAttribute="leading" id="RgN-Le-DRD"/>
+                                            <constraint firstItem="D8a-6d-atb" firstAttribute="top" secondItem="1yC-lY-y6i" secondAttribute="top" id="jQ5-aS-k6j"/>
+                                            <constraint firstAttribute="trailing" secondItem="D8a-6d-atb" secondAttribute="trailing" id="wlW-Zm-mmp"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -259,16 +327,20 @@
                                 <color key="backgroundColor" name="graybackground"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="S9P-lQ-OMa" secondAttribute="trailing" id="05K-3j-9ru"/>
+                                    <constraint firstAttribute="trailing" secondItem="1yC-lY-y6i" secondAttribute="trailing" constant="15" id="1VB-z9-ful"/>
                                     <constraint firstAttribute="trailing" secondItem="2DD-CE-CuQ" secondAttribute="trailing" constant="15" id="3bY-pz-7Sn"/>
                                     <constraint firstAttribute="trailing" secondItem="ism-5H-Zzd" secondAttribute="trailing" id="4gY-1v-iCw"/>
                                     <constraint firstItem="8CG-CD-hYH" firstAttribute="leading" secondItem="fMn-1a-FbP" secondAttribute="leading" constant="15" id="7dj-QY-6Dy"/>
+                                    <constraint firstItem="1yC-lY-y6i" firstAttribute="leading" secondItem="fMn-1a-FbP" secondAttribute="leading" constant="15" id="9uF-vK-ItW"/>
                                     <constraint firstItem="2DD-CE-CuQ" firstAttribute="leading" secondItem="fMn-1a-FbP" secondAttribute="leading" constant="15" id="Crk-SX-OrC"/>
+                                    <constraint firstItem="yXJ-rR-Hhj" firstAttribute="leading" secondItem="fMn-1a-FbP" secondAttribute="leading" constant="15" id="Fbx-S7-MTF"/>
                                     <constraint firstItem="X8p-9o-eWz" firstAttribute="leading" secondItem="fMn-1a-FbP" secondAttribute="leading" constant="15" id="Fwg-Mv-4S5"/>
                                     <constraint firstAttribute="trailing" secondItem="8CG-CD-hYH" secondAttribute="trailing" constant="15" id="Gia-nw-wKq"/>
                                     <constraint firstItem="krQ-ME-5hz" firstAttribute="leading" secondItem="fMn-1a-FbP" secondAttribute="leading" constant="15" id="Joh-i8-KhE"/>
                                     <constraint firstItem="S9P-lQ-OMa" firstAttribute="leading" secondItem="fMn-1a-FbP" secondAttribute="leading" id="OAk-la-08f"/>
                                     <constraint firstAttribute="trailing" secondItem="krQ-ME-5hz" secondAttribute="trailing" constant="15" id="S1R-Xw-JXL"/>
                                     <constraint firstItem="2hh-5q-uWn" firstAttribute="leading" secondItem="fMn-1a-FbP" secondAttribute="leading" constant="15" id="Ual-7P-xv7"/>
+                                    <constraint firstAttribute="trailing" secondItem="yXJ-rR-Hhj" secondAttribute="trailing" constant="15" id="bMM-Bk-8F2"/>
                                     <constraint firstAttribute="trailing" secondItem="X8p-9o-eWz" secondAttribute="trailing" constant="15" id="cgN-a2-uYL"/>
                                     <constraint firstAttribute="trailing" secondItem="2hh-5q-uWn" secondAttribute="trailing" constant="15" id="sO5-Si-iNF"/>
                                     <constraint firstItem="ism-5H-Zzd" firstAttribute="leading" secondItem="fMn-1a-FbP" secondAttribute="leading" id="xSx-qr-jPQ"/>
@@ -287,6 +359,7 @@
                     <navigationItem key="navigationItem" id="znF-Ml-94h"/>
                     <connections>
                         <outlet property="addFriendBtn" destination="xDp-R7-uOb" id="rjz-25-7oi"/>
+                        <outlet property="addblacklist_btn" destination="DWv-zX-9Hj" id="LbA-0w-zwv"/>
                         <outlet property="leaveWords" destination="8CG-CD-hYH" id="4fI-LB-pFr"/>
                         <outlet property="userAge" destination="Sou-m9-UPG" id="RDB-tM-k6i"/>
                         <outlet property="userGender" destination="MKe-Yq-Ey7" id="JgU-sO-SIH"/>
@@ -297,8 +370,10 @@
                         <outlet property="userSignature" destination="S9P-lQ-OMa" id="Mwp-q5-nWh"/>
                         <outlet property="userinfobackground" destination="krQ-ME-5hz" id="1nz-yu-z4y"/>
                         <outlet property="viewClick_blacklist" destination="2DD-CE-CuQ" id="Umm-1i-qav"/>
+                        <outlet property="viewClick_deletefriend" destination="1yC-lY-y6i" id="Min-0j-BN7"/>
                         <outlet property="viewClick_friend" destination="2hh-5q-uWn" id="ayq-ai-MvQ"/>
                         <outlet property="viewClick_post" destination="X8p-9o-eWz" id="sbc-d0-6YS"/>
+                        <outlet property="viewClick_startconversation" destination="yXJ-rR-Hhj" id="nds-Bq-3xM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFX-KA-vNM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -583,8 +658,10 @@
     </scenes>
     <resources>
         <image name="blacklist" width="150" height="150"/>
+        <image name="deletefriend" width="200" height="200"/>
         <image name="makefriend" width="150" height="150"/>
         <image name="post" width="150" height="150"/>
+        <image name="startconversation" width="200" height="200"/>
         <namedColor name="graybackground">
             <color red="0.92941176470588238" green="0.94117647058823528" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -502,7 +502,7 @@ extension LuntanViewController:LuntanTableViewCellDelegate{
             
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)")
-                likebtn.setTitle("赞:\(utf8Text)", for: UIControl.State.normal)
+                likebtn.setTitle("赞:\(utf8Text)👍", for: UIControl.State.normal)
             }
         }
     }

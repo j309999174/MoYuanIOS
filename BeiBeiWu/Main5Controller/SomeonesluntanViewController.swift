@@ -17,7 +17,7 @@ class SomeonesluntanViewController: UIViewController {
     var isopen:[Bool] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "个人发帖和跟帖"
+        self.navigationItem.title = "个人发帖"
         //获取帖子数据
         if personid == nil {
             let userInfo = UserDefaults()

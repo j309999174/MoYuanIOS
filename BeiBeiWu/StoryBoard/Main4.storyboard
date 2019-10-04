@@ -645,7 +645,7 @@
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公告" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTa-ka-XNn" customClass="MarqueeLabel" customModule="MarqueeLabel">
                                         <rect key="frame" x="0.0" y="46" width="414" height="20.5"/>
-                                        <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="PrimaryNormal"/>
                                         <nil key="highlightedColor"/>
@@ -779,9 +779,10 @@
                                                                     <rect key="frame" x="0.0" y="306.5" width="398" height="0.0"/>
                                                                     <subviews>
                                                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UzB-tp-tyY">
-                                                                            <rect key="frame" x="398" y="-37.5" width="0.0" height="200"/>
+                                                                            <rect key="frame" x="398" y="-12.5" width="150" height="150"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="200" id="jFN-Mb-P4V"/>
+                                                                                <constraint firstAttribute="width" constant="150" id="XwB-3L-1lb"/>
+                                                                                <constraint firstAttribute="height" constant="150" id="jFN-Mb-P4V"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cI8-gK-vbJ">
@@ -832,7 +833,7 @@
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDO-S2-ESM">
                                                                             <rect key="frame" x="76" y="0.0" width="322" height="30"/>
-                                                                            <state key="normal" title="赞：199">
+                                                                            <state key="normal" title="赞：199👍">
                                                                                 <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             </state>
                                                                             <connections>
@@ -881,7 +882,7 @@
                                                     <outlet property="plateid" destination="h2s-JE-Dro" id="XZi-Mp-8Md"/>
                                                     <outlet property="platename" destination="jkC-0w-OkY" id="CP9-qj-CRe"/>
                                                     <outlet property="postid" destination="pFA-TF-PVO" id="MAP-pO-F8K"/>
-                                                    <outlet property="postpicture" destination="UzB-tp-tyY" id="VDA-SR-RCy"/>
+                                                    <outlet property="postpicture" destination="UzB-tp-tyY" id="d4n-Dc-iHQ"/>
                                                     <outlet property="postpicture1" destination="cI8-gK-vbJ" id="78K-Q8-nEX"/>
                                                     <outlet property="postpicture2" destination="6RR-aA-0Wj" id="nDf-e1-hvk"/>
                                                     <outlet property="postpicture3" destination="0uU-J9-9KR" id="U65-NN-Vjb"/>
@@ -913,7 +914,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yrf-zC-dvf">
-                                <rect key="frame" x="177" y="703" width="60" height="60"/>
+                                <rect key="frame" x="177" y="753" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="1Pj-MF-IFy"/>
@@ -936,7 +937,7 @@
                             <constraint firstAttribute="bottom" secondItem="5yq-y0-bwE" secondAttribute="bottom" id="19v-h9-ZnD"/>
                             <constraint firstItem="5yq-y0-bwE" firstAttribute="top" secondItem="XGw-WY-JUG" secondAttribute="top" id="GLX-Es-vxO"/>
                             <constraint firstItem="Yrf-zC-dvf" firstAttribute="centerX" secondItem="Gyx-t9-d72" secondAttribute="centerX" id="GO5-f3-liz"/>
-                            <constraint firstItem="XGw-WY-JUG" firstAttribute="bottom" secondItem="Yrf-zC-dvf" secondAttribute="bottom" constant="50" id="XgD-xA-uQd"/>
+                            <constraint firstItem="XGw-WY-JUG" firstAttribute="bottom" secondItem="Yrf-zC-dvf" secondAttribute="bottom" id="XgD-xA-uQd"/>
                             <constraint firstItem="5yq-y0-bwE" firstAttribute="leading" secondItem="Gyx-t9-d72" secondAttribute="leading" id="lQr-CJ-LKq"/>
                             <constraint firstItem="XGw-WY-JUG" firstAttribute="trailing" secondItem="5yq-y0-bwE" secondAttribute="trailing" id="rrq-GK-56M"/>
                         </constraints>

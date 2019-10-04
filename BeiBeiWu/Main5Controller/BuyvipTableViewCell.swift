@@ -25,10 +25,13 @@ class BuyvipTableViewCell: UITableViewCell {
     
     @IBOutlet weak var vipprice: UILabel!
     
+    @IBOutlet weak var weixin_image: UIImageView!
     
     @IBAction func weixinpay(_ sender: Any) {
         delegate?.weixinpay(vipid: vipidString!)
     }
+    
+    @IBOutlet weak var alipay_image: UIImageView!
     
     @IBAction func alipay(_ sender: Any) {
         delegate?.alipaypay(vipid: vipidString!)
@@ -43,5 +46,33 @@ class BuyvipTableViewCell: UITableViewCell {
         vipname.text = data.vipname
         viptime.text = "\(data.viptime)天"
         vipprice.text = "\(data.vipprice)元"
+        
+        
+        let imgClick = UITapGestureRecognizer(target: self, action: #selector(weixin_image_Action))
+        weixin_image.addGestureRecognizer(imgClick)
+        //开启 isUserInteractionEnabled 手势否则点击事件会没有反应
+        weixin_image.isUserInteractionEnabled = true
+        
+        
+        let imgClick1 = UITapGestureRecognizer(target: self, action: #selector(alipay_image_Action))
+        alipay_image.addGestureRecognizer(imgClick1)
+        //开启 isUserInteractionEnabled 手势否则点击事件会没有反应
+        alipay_image.isUserInteractionEnabled = true
+    }
+    
+    
+
+    
+    //点击事件方法
+    @objc func weixin_image_Action() -> Void {
+        print("图片点击事件")
+        delegate?.weixinpay(vipid: vipidString!)
+    }
+    
+    
+    //点击事件方法
+    @objc func alipay_image_Action() -> Void {
+        print("图片点击事件")
+        delegate?.alipaypay(vipid: vipidString!)
     }
 }

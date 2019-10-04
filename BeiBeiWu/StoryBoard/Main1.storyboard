@@ -687,19 +687,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="3Fj-gm-H7X">
-                                <rect key="frame" x="47" y="92" width="281" height="483.5"/>
+                                <rect key="frame" x="47" y="167.5" width="281" height="332.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-83.5" translatesAutoresizingMaskIntoConstraints="NO" id="dwV-ff-n6G">
-                                        <rect key="frame" x="57" y="0.0" width="167" height="167"/>
+                                        <rect key="frame" x="132.5" y="0.0" width="16" height="16"/>
                                     </imageView>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5f-cE-WI9">
-                                        <rect key="frame" x="123" y="182" width="35" height="0.0"/>
+                                        <rect key="frame" x="123" y="31" width="35" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="highlightedColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MqP-V6-GS6">
-                                        <rect key="frame" x="0.0" y="197" width="281" height="30"/>
+                                        <rect key="frame" x="0.0" y="46" width="281" height="30"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="QTV-eZ-fie">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -726,7 +726,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4WB-Q2-KOa">
-                                        <rect key="frame" x="0.0" y="257" width="281" height="30"/>
+                                        <rect key="frame" x="0.0" y="106" width="281" height="30"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password" translatesAutoresizingMaskIntoConstraints="NO" id="kuQ-pF-9Hh">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -753,7 +753,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="aVm-VU-zAv">
-                                        <rect key="frame" x="18" y="317" width="245" height="36"/>
+                                        <rect key="frame" x="18" y="166" width="245" height="36"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Guy-c0-zFo">
                                                 <rect key="frame" x="0.0" y="0.0" width="62" height="36"/>
@@ -785,7 +785,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SKa-IC-gew">
-                                        <rect key="frame" x="97" y="383" width="87" height="20.5"/>
+                                        <rect key="frame" x="97" y="232" width="87" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQ6-Jj-7h9">
                                                 <rect key="frame" x="0.0" y="0.0" width="87" height="20.5"/>
@@ -796,7 +796,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Etw-Ah-EOo">
-                                        <rect key="frame" x="115.5" y="433.5" width="50" height="50"/>
+                                        <rect key="frame" x="115.5" y="282.5" width="50" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IQM-Mz-Ufq">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>

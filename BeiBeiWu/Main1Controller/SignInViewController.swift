@@ -281,8 +281,20 @@ class SignInViewController: UIViewController {
             print("Failed to remove file.")
         }
         // Do any additional setup after loading the view.
+        //键盘遮挡问题
+        NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
-    
+    @objc func kbFrameChanged(_ notification : Notification){
+        let info = notification.userInfo
+        let kbRect = (info?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let offsetY = kbRect.origin.y - UIScreen.main.bounds.height
+        UIView.animate(withDuration: 0.3) {
+            self.view.transform = CGAffineTransform(translationX: 0, y: offsetY)
+            //键盘上弹时候, 将返回 button 下移同样的位置,确保在弹出键盘期间可以返回.
+            //self.backBt.transform = CGAffineTransform(translationX: 0, y: -offsetY)
+            }
+        }
+
     
     func getRongyunToken(userid:String,nickname:String,portrait:String){
         

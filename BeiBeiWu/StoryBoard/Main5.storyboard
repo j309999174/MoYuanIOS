@@ -1261,40 +1261,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="bd1-rc-mar">
-                                <rect key="frame" x="5" y="162.99999999999997" width="365" height="422.33333333333326"/>
+                                <rect key="frame" x="40" y="162.99999999999997" width="295" height="422.33333333333326"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="隐私设置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lg7-7z-4bR">
-                                        <rect key="frame" x="139.66666666666666" y="0.0" width="85.666666666666657" height="25.333333333333332"/>
+                                        <rect key="frame" x="104.66666666666666" y="0.0" width="85.666666666666657" height="25.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="textColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="201" translatesAutoresizingMaskIntoConstraints="NO" id="e1R-cF-VNj">
-                                        <rect key="frame" x="5" y="60.333333333333343" width="355" height="362"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="e1R-cF-VNj">
+                                        <rect key="frame" x="5" y="60.333333333333343" width="285" height="362"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="76" translatesAutoresizingMaskIntoConstraints="NO" id="eqs-gm-W7t">
-                                                <rect key="frame" x="0.0" y="0.0" width="105" height="362"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="104" height="362"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="允许查看群组" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fa2-KA-F2u">
-                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="20.333333333333332"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="104" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.66799789669999998" green="0.47512125970000002" blue="0.25860109930000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="允许查看位置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlu-dJ-wOf">
-                                                        <rect key="frame" x="0.0" y="113.99999999999997" width="105" height="20.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="113.99999999999997" width="104" height="20.333333333333343"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.66799789669999998" green="0.47512125970000002" blue="0.25860109930000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="允许查看状态" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0s-NL-Rpv">
-                                                        <rect key="frame" x="0.0" y="227.66666666666666" width="105" height="20.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="227.66666666666666" width="104" height="20.333333333333343"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.66799789669999998" green="0.47512125970000002" blue="0.25860109930000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="允许添加好友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20M-FO-XFc">
-                                                        <rect key="frame" x="0.0" y="341.66666666666663" width="105" height="20.333333333333314"/>
+                                                        <rect key="frame" x="0.0" y="341.66666666666663" width="104" height="20.333333333333314"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.66799789669999998" green="0.47512125970000002" blue="0.25860109930000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1302,7 +1302,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="76" translatesAutoresizingMaskIntoConstraints="NO" id="65u-hq-CbY">
-                                                <rect key="frame" x="306" y="5" width="49" height="352"/>
+                                                <rect key="frame" x="236" y="5" width="49" height="352"/>
                                                 <subviews>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gw7-c0-Hf0">
                                                         <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
@@ -1346,8 +1346,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="bd1-rc-mar" firstAttribute="top" secondItem="UbQ-Of-GOU" secondAttribute="top" constant="75" id="5Cd-8A-I1d"/>
-                            <constraint firstItem="UbQ-Of-GOU" firstAttribute="trailing" secondItem="bd1-rc-mar" secondAttribute="trailing" constant="5" id="Zje-12-jmS"/>
-                            <constraint firstItem="bd1-rc-mar" firstAttribute="leading" secondItem="UbQ-Of-GOU" secondAttribute="leading" constant="5" id="dNd-Mq-QVn"/>
+                            <constraint firstItem="UbQ-Of-GOU" firstAttribute="trailing" secondItem="bd1-rc-mar" secondAttribute="trailing" constant="40" id="Zje-12-jmS"/>
+                            <constraint firstItem="bd1-rc-mar" firstAttribute="leading" secondItem="UbQ-Of-GOU" secondAttribute="leading" constant="40" id="dNd-Mq-QVn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UbQ-Of-GOU"/>
                     </view>
@@ -1950,10 +1950,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="alipay_image" destination="5Di-pL-Ns3" id="mQt-PO-Gmd"/>
                                             <outlet property="vipid" destination="eiz-D3-gaK" id="Lg5-dk-TfU"/>
                                             <outlet property="vipname" destination="ckY-hM-haG" id="UOE-EL-IYd"/>
                                             <outlet property="vipprice" destination="d1B-Ee-ajA" id="Gaf-TZ-VV1"/>
                                             <outlet property="viptime" destination="X7I-IG-9j2" id="uWu-O7-4XJ"/>
+                                            <outlet property="weixin_image" destination="jB6-t3-TDd" id="Jly-oq-3I7"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

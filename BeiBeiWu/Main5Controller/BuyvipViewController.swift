@@ -88,6 +88,7 @@ extension BuyvipViewController:UITableViewDelegate,UITableViewDataSource{
         
         cell.setData(data: oneOfList)
         cell.delegate = self
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
     }
 }

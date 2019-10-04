@@ -33,7 +33,14 @@ class ConversationViewCustomViewController: RCConversationViewController {
             self.show(vc, sender: nil)
         }
     }
-
+    override func didTapCellPortrait(_ userId: String!) {
+        //不同的StoryBoard下
+        let sb = UIStoryboard(name: "Personal", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
+        vc.userID = userId
+        vc.hidesBottomBarWhenPushed = true
+        self.show(vc, sender: nil)
+    }
     //点击事件方法
     @objc func imAction() -> Void {
         print("设置点击")

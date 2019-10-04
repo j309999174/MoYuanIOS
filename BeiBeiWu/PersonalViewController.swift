@@ -8,6 +8,12 @@
 
 import UIKit
 import Alamofire
+import PopupDialog
+
+struct ifFriendInfo: Codable {
+    let blacklistinfo: String?
+    let friendinfo: String?
+}
 
 struct personalInfo: Codable {
     let portrait: String?
@@ -58,9 +64,15 @@ class PersonalViewController: UIViewController {
     
     @IBOutlet weak var viewClick_post: UIView!
     
+    @IBOutlet weak var viewClick_startconversation: UIView!
+    
+    
     @IBOutlet weak var viewClick_friend: UIView!
     
     @IBOutlet weak var viewClick_blacklist: UIView!
+    
+    @IBOutlet weak var viewClick_deletefriend: UIView!
+    
     
     @IBAction func personalPost_btn(_ sender: Any) {
         let sb = UIStoryboard(name: "Main5", bundle:nil)
@@ -71,27 +83,12 @@ class PersonalViewController: UIViewController {
     }
     
     @IBOutlet weak var addFriendBtn: UIButton!
-    @IBAction func addFriend(_ sender: Any) {
-        getFriendNumber()
-        addFriendBtn.isEnabled = false
-        addFriendBtn.setTitle("已申请，等待对方同意", for: UIControl.State.normal)
-    }
+
     
-    @IBAction func addblacklist(_ sender: Any) {
-        let parameters: Parameters = ["myid":yourid!,"yourid":userID!]
-        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=addblacklist&m=socialchat", method: .post, parameters: parameters).response { response in
-            print("Request: \(String(describing: response.request))")
-            print("Response: \(String(describing: response.response))")
-            print("Error: \(String(describing: response.error))")
-            
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)")
-                self.view.makeToast("拉黑成功")
-            }
-        }
-        addFriendBtn.isEnabled = false
-        addFriendBtn.setTitle("已加入黑名单", for: UIControl.State.normal)
-    }
+    @IBOutlet weak var addblacklist_btn: UIButton!
+
+    var blacklistinfo:String?
+    var friendinfo:String?
     
     func getFriendNumber(){
         let parameters: Parameters = ["myid": yourid!]
@@ -136,24 +133,160 @@ class PersonalViewController: UIViewController {
         self.show(vc, sender: nil)
     }
     @objc func friendClickFunc() -> Void {
-        getFriendNumber()
-        addFriendBtn.isEnabled = false
-        addFriendBtn.setTitle("已申请，等待对方同意", for: UIControl.State.normal)
+        // Prepare the popup assets
+        let title = "提示"
+        let message = "是否添加好友"
+        
+        // Create the dialog
+        let popup = PopupDialog(title: title, message: message, image: nil)
+        
+        // Create buttons
+        let buttonOne = CancelButton(title: "取消") {
+            print("You canceled the car dialog.")
+        }
+        
+        // This button will not the dismiss the dialog
+        let buttonTwo = DefaultButton(title: "确认", dismissOnTap: true) {
+            self.getFriendNumber()
+            self.addFriendBtn.isEnabled = false
+            self.addFriendBtn.setTitle("已申请，等待对方同意", for: UIControl.State.normal)
+            self.viewClick_friend.isUserInteractionEnabled = false
+        }
+        
+        // Add buttons to dialog
+        // Alternatively, you can use popup.addButton(buttonOne)
+        // to add a single button
+        popup.addButtons([buttonOne, buttonTwo])
+        popup.buttonAlignment = .horizontal
+        // Present dialog
+        self.present(popup, animated: true, completion: nil)
+        
     }
     @objc func blacklistClickFunc() -> Void {
-        let parameters: Parameters = ["myid":yourid!,"yourid":userID!]
-        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=addblacklist&m=socialchat", method: .post, parameters: parameters).response { response in
-            print("Request: \(String(describing: response.request))")
-            print("Response: \(String(describing: response.response))")
-            print("Error: \(String(describing: response.error))")
+        if addblacklist_btn.currentTitle == "加入黑名单"{
+            // Prepare the popup assets
+            let title = "提示"
+            let message = "是否加入黑名单"
             
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)")
-                self.view.makeToast("拉黑成功")
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message, image: nil)
+            
+            // Create buttons
+            let buttonOne = CancelButton(title: "取消") {
+                print("You canceled the car dialog.")
+            }
+            
+            // This button will not the dismiss the dialog
+            let buttonTwo = DefaultButton(title: "确认", dismissOnTap: true) {
+                let parameters: Parameters = ["myid":self.yourid!,"yourid":self.userID!]
+                Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=addblacklist&m=socialchat", method: .post, parameters: parameters).response { response in
+                    print("Request: \(String(describing: response.request))")
+                    print("Response: \(String(describing: response.response))")
+                    print("Error: \(String(describing: response.error))")
+                    
+                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                        print("Data: \(utf8Text)")
+                        self.view.makeToast("拉黑成功")
+                        self.addblacklist_btn.setTitle("移除黑名单", for: UIControl.State.normal)
+                    }
+                }
+            }
+            
+            // Add buttons to dialog
+            // Alternatively, you can use popup.addButton(buttonOne)
+            // to add a single button
+            popup.addButtons([buttonOne, buttonTwo])
+            popup.buttonAlignment = .horizontal
+            // Present dialog
+            self.present(popup, animated: true, completion: nil)
+        
+        }else{
+            // Prepare the popup assets
+            let title = "提示"
+            let message = "是否移除黑名单"
+            
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message, image: nil)
+            
+            // Create buttons
+            let buttonOne = CancelButton(title: "取消") {
+                print("You canceled the car dialog.")
+            }
+            
+            // This button will not the dismiss the dialog
+            let buttonTwo = DefaultButton(title: "确认", dismissOnTap: true) {
+                let parameters: Parameters = ["myid":self.yourid!,"yourid":self.userID!]
+                Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=deleteblacklist&m=socialchat", method: .post, parameters: parameters).response { response in
+                    print("Request: \(String(describing: response.request))")
+                    print("Response: \(String(describing: response.response))")
+                    print("Error: \(String(describing: response.error))")
+                    
+                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                        print("Data: \(utf8Text)")
+                        self.view.makeToast("移除成功")
+                        self.addblacklist_btn.setTitle("加入黑名单", for: UIControl.State.normal)
+                    }
+                }
+            }
+            
+            // Add buttons to dialog
+            // Alternatively, you can use popup.addButton(buttonOne)
+            // to add a single button
+            popup.addButtons([buttonOne, buttonTwo])
+            popup.buttonAlignment = .horizontal
+            // Present dialog
+            self.present(popup, animated: true, completion: nil)
+            
+        }
+        
+        
+    }
+    @objc func startconversationClickFunc() -> Void {
+        //同一个StoryBoard下
+        let vc = ChatViewController.init(conversationType: .ConversationType_PRIVATE, targetId: userID)!
+        vc.title = self.userNickName.text
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func deletefriendClickFunc() -> Void {
+        // Prepare the popup assets
+        let title = "提示"
+        let message = "是否删除好友"
+        
+        // Create the dialog
+        let popup = PopupDialog(title: title, message: message, image: nil)
+        
+        // Create buttons
+        let buttonOne = CancelButton(title: "取消") {
+            print("You canceled the car dialog.")
+        }
+        
+        // This button will not the dismiss the dialog
+        let buttonTwo = DefaultButton(title: "确认", dismissOnTap: true) {
+            // Present dialog
+            let parameters: Parameters = ["myid":self.yourid!,"yourid":self.userID!]
+            Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=deletefriend&m=socialchat", method: .post, parameters: parameters).response { response in
+                print("Request: \(String(describing: response.request))")
+                print("Response: \(String(describing: response.response))")
+                print("Error: \(String(describing: response.error))")
+                
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Data: \(utf8Text)")
+                    self.view.makeToast("删除成功")
+                    self.viewClick_friend.isHidden = false
+                    self.viewClick_deletefriend.isHidden = true
+                    self.viewClick_startconversation.isHidden = true
+                }
             }
         }
-        addFriendBtn.isEnabled = false
-        addFriendBtn.setTitle("已加入黑名单", for: UIControl.State.normal)
+        
+        // Add buttons to dialog
+        // Alternatively, you can use popup.addButton(buttonOne)
+        // to add a single button
+        popup.addButtons([buttonOne, buttonTwo])
+        popup.buttonAlignment = .horizontal
+        
+        self.present(popup, animated: true, completion: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,6 +299,11 @@ class PersonalViewController: UIViewController {
         viewClick_friend.addGestureRecognizer(friendClick)
         let blacklistClick = UITapGestureRecognizer(target: self, action: #selector(blacklistClickFunc))
         viewClick_blacklist.addGestureRecognizer(blacklistClick)
+        //删除好友和发起会话
+        let startconversationClick = UITapGestureRecognizer(target: self, action: #selector(startconversationClickFunc))
+        viewClick_startconversation.addGestureRecognizer(startconversationClick)
+        let deletefriendClick = UITapGestureRecognizer(target: self, action: #selector(deletefriendClickFunc))
+        viewClick_deletefriend.addGestureRecognizer(deletefriendClick)
         
         userinfobackground.layer.contents = UIImage.init(named: "hover")?.cgImage
         userinfobackground.contentMode = UIView.ContentMode.scaleToFill
@@ -229,10 +367,30 @@ class PersonalViewController: UIViewController {
             
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)")
-                if utf8Text != "还未申请好友" {
-                    self.addFriendBtn.isEnabled = false
-                    self.addFriendBtn.setTitle(utf8Text, for: UIControl.State.normal)
-                    self.view.makeToast(utf8Text)
+                
+            }
+            if let data = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let jsonModel = try decoder.decode(ifFriendInfo.self, from: data)
+                    self.blacklistinfo = jsonModel.blacklistinfo
+                    self.friendinfo = jsonModel.friendinfo
+                    
+                    if self.blacklistinfo == "已加入黑名单"{
+                        self.addblacklist_btn.setTitle("移除黑名单", for: UIControl.State.normal)
+                        self.view.makeToast(self.blacklistinfo)
+                    }
+                    if self.friendinfo == "已经是好友"{
+                        self.viewClick_friend.isHidden = true
+                        self.viewClick_deletefriend.isHidden = false
+                        self.viewClick_startconversation.isHidden = false
+                        self.view.makeToast(self.friendinfo)
+                    }else if self.friendinfo == "已申请，等待对方同意"{
+                        self.addFriendBtn.setTitle(self.friendinfo, for: UIControl.State.normal)
+                        self.viewClick_friend.isUserInteractionEnabled = false
+                    }
+                } catch {
+                    print("解析 JSON 失败")
                 }
             }
         }
