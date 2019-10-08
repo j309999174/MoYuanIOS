@@ -16,7 +16,18 @@ class Main2ViewController: RCConversationListViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("展示")
+        //        let type1:RCConversationType = .ConversationType_PRIVATE
+        //        let type2:RCConversationType = .ConversationType_DISCUSSION
+        //        let type3:RCConversationType = .ConversationType_CHATROOM
+        //        let type4:RCConversationType = .ConversationType_GROUP
+        //        let type5:RCConversationType = .ConversationType_APPSERVICE
+        //        let type6:RCConversationType = .ConversationType_SYSTEM
+        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
         self.navigationItem.title = "会话列表"
+        
         //融云个人名片
         RCContactCardKit.shareInstance()?.contactsDataSource = self as RCCCContactsDataSource
         //设置融云当前用户信息
@@ -44,7 +55,7 @@ class Main2ViewController: RCConversationListViewController {
                     let jsonModel = try decoder.decode([FriendsStruct].self, from: data)
                     self.dataList.removeAll()
                     for index in 0..<jsonModel.count{
-                        let cell = FriendsData(userID:jsonModel[index].id,userNickName: jsonModel[index].nickname,userPortrait: jsonModel[index].portrait,age: jsonModel[index].age  ?? "?",gender: jsonModel[index].gender  ?? "?",region: jsonModel[index].region  ?? "?",property: jsonModel[index].property ?? "?")
+                        let cell = FriendsData(userID:jsonModel[index].id,userNickName: jsonModel[index].nickname,userPortrait: jsonModel[index].portrait,age: jsonModel[index].age  ?? "?",gender: jsonModel[index].gender  ?? "?",region: jsonModel[index].region  ?? "?",property: jsonModel[index].property ?? "?",vip: jsonModel[index].vip ?? "?")
                         self.dataList.append(cell)
                         let userinfo = RCUserInfo.init(userId: jsonModel[index].id, name: jsonModel[index].nickname, portrait: jsonModel[index].portrait)
                         RCIM.shared()?.refreshUserInfoCache(userinfo, withUserId: jsonModel[index].id)
@@ -59,21 +70,9 @@ class Main2ViewController: RCConversationListViewController {
         
         self.setCollectionConversationType([7])
         Uniquelogin.compareUniqueLoginToken(view: self)
-        //        let type1:RCConversationType = .ConversationType_PRIVATE
-        //        let type2:RCConversationType = .ConversationType_DISCUSSION
-        //        let type3:RCConversationType = .ConversationType_CHATROOM
-        //        let type4:RCConversationType = .ConversationType_GROUP
-        //        let type5:RCConversationType = .ConversationType_APPSERVICE
-        //        let type6:RCConversationType = .ConversationType_SYSTEM
-        
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let userInfo = UserDefaults()
-        let userID = userInfo.string(forKey: "userID")
-        let parameters: Parameters = ["myid": userID!]
-        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters).response { response in
+
+        let parameters1: Parameters = ["myid": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters1).response { response in
             print("Request: \(String(describing: response.request))")
             print("Response: \(String(describing: response.response))")
             print("Error: \(String(describing: response.error))")
@@ -92,7 +91,7 @@ class Main2ViewController: RCConversationListViewController {
     
     override
     func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
-        let vc = ConversationViewCustomViewController()
+        let vc = ChatViewController()
         vc.conversationType = model.conversationType
         vc.targetId = model.targetId
         vc.hidesBottomBarWhenPushed = true
@@ -144,8 +143,8 @@ extension Main2ViewController:RCCCContactsDataSource {
     func getAllContacts(_ resultBlock: (([RCCCUserInfo]?) -> Void)!) {
         var rcccUserInfo:[RCCCUserInfo] = [];
         for index in 0..<dataList.count{
-            let userInfo = RCCCUserInfo.init(userId: dataList[index].userID, name: dataList[index].userNickName, portrait: dataList[index].userPortrait)
-            rcccUserInfo.append(userInfo!)
+            let userInfo = RCCCUserInfo.init(userId: dataList[index].userID, name: dataList[index].userNickName, portrait: dataList[index].userPortrait)!
+            rcccUserInfo.append(userInfo)
         }
         resultBlock(rcccUserInfo)
     }

@@ -7,16 +7,18 @@
 //
 
 import UIKit
+import RongContactCard
 
-class ChatViewController: ConversationViewCustomViewController {
+class ChatViewController: RCConversationViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.navigationItem.setRightBarButton(UIBarButtonItem.init(title: "⚙️", style: UIBarButtonItem.Style.plain, target: nil, action: #selector(rightbarAction)), animated: false)
         // Do any additional setup after loading the view.
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+    }
     //点击事件方法
     @objc func rightbarAction() -> Void {
         print("设置点击")
@@ -34,6 +36,20 @@ class ChatViewController: ConversationViewCustomViewController {
         vc.userID = userId
         vc.hidesBottomBarWhenPushed = true
         self.show(vc, sender: nil)
+    }
+    //融云消息点击事件
+    override func didTapMessageCell(_ model: RCMessageModel!) {
+        super.didTapMessageCell(model)
+        
+        if model.content.isKind(of: RCContactCardMessage.self){
+            let cardMessage = model.content as! RCContactCardMessage
+            //不同的StoryBoard下
+            let sb = UIStoryboard(name: "Personal", bundle:nil)
+            let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
+            vc.userID = cardMessage.userId
+            vc.hidesBottomBarWhenPushed = true
+            self.show(vc, sender: nil)
+        }
     }
     /*
     // MARK: - Navigation

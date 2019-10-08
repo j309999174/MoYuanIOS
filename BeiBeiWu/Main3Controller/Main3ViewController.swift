@@ -20,6 +20,8 @@ struct FriendsStruct: Codable {
     let gender:String?
     let region:String?
     let property:String?
+    
+    let vip:String?
 }
 
 class Main3ViewController: UIViewController {
@@ -78,7 +80,7 @@ class Main3ViewController: UIViewController {
                     let jsonModel = try decoder.decode([FriendsStruct].self, from: data)
                     self.dataList.removeAll()
                     for index in 0..<jsonModel.count{
-                        let cell = FriendsData(userID:jsonModel[index].id,userNickName: jsonModel[index].nickname,userPortrait: jsonModel[index].portrait,age: jsonModel[index].age  ?? "?",gender: jsonModel[index].gender  ?? "?",region: jsonModel[index].region  ?? "?",property: jsonModel[index].property ?? "?")
+                        let cell = FriendsData(userID:jsonModel[index].id,userNickName: jsonModel[index].nickname,userPortrait: jsonModel[index].portrait,age: jsonModel[index].age  ?? "?",gender: jsonModel[index].gender  ?? "?",region: jsonModel[index].region  ?? "?",property: jsonModel[index].property ?? "?",vip: jsonModel[index].vip ?? "?" )
                         self.dataList.append(cell)
                     }
                     self.currentDataList = self.dataList
@@ -101,7 +103,7 @@ class Main3ViewController: UIViewController {
             
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)")
-                self.newFriend_label.setTitle("👫+新朋友 \(utf8Text)", for: UIControl.State.normal)
+                self.newFriend_label.setTitle("+新朋友 \(utf8Text)", for: UIControl.State.normal)
                 if utf8Text == "0" {
                     self.tabBarController?.tabBar.items![2].badgeValue = nil
                 }else{
@@ -109,8 +111,16 @@ class Main3ViewController: UIViewController {
                 }
             }
         }
+        //点击空白处键盘收起
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(Main3ViewController.handleTap(sender:))))
     }
-    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            //当前TextView/当前TextField.resignFirstResponder()
+            searchBar.resignFirstResponder()
+        }
+        sender.cancelsTouchesInView = false
+    }
 
 }
 
@@ -158,12 +168,22 @@ extension Main3ViewController:UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else{
             currentDataList = dataList
+            UILocalizedIndexedCollation.getCurrentKeysAndObjectsData(needSortArray: self.currentDataList) { (dataArray,titleArray) in
+                self.objectsArray = dataArray   //分类后的数组合集
+                self.keysArray    = titleArray  //字母数组
+                self.friendsTableView.reloadData()
+            }
             friendsTableView.reloadData()
             return
         }
         currentDataList = dataList.filter({ friendsData -> Bool in
             friendsData.userNickName.contains(searchText)
         })
+        UILocalizedIndexedCollation.getCurrentKeysAndObjectsData(needSortArray: self.currentDataList) { (dataArray,titleArray) in
+            self.objectsArray = dataArray   //分类后的数组合集
+            self.keysArray    = titleArray  //字母数组
+            self.friendsTableView.reloadData()
+        }
         friendsTableView.reloadData()
     }
 }

@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import SDWebImage
+import PopupDialog
+
 struct PersonUserInfo: Codable {
     let id: String?
     let portrait: String?
@@ -63,40 +65,113 @@ class ConversationSettingViewController: UIViewController{
     }
     
     @IBAction func clearmessage(_ sender: Any) {
-        RCIMClient.shared()?.clearHistoryMessages(RCConversationType.ConversationType_PRIVATE, targetId: userid, recordTime: 0, clearRemote: true, success: {
-            
-        }, error: { (RCErrorCode) in
-            
-        })
-        self.view.makeToast("已删除聊天记录")
+        // Prepare the popup assets
+        let title = "提示"
+        let message = "是否删除聊天记录"
+        
+        // Create the dialog
+        let popup = PopupDialog(title: title, message: message, image: nil)
+        
+        // Create buttons
+        let buttonOne = CancelButton(title: "取消") {
+            print("You canceled the car dialog.")
+        }
+        
+        // This button will not the dismiss the dialog
+        let buttonTwo = DefaultButton(title: "确认", dismissOnTap: true) {
+            RCIMClient.shared()?.clearHistoryMessages(RCConversationType.ConversationType_PRIVATE, targetId: self.userid, recordTime: 0, clearRemote: true, success: {
+                
+            }, error: { (RCErrorCode) in
+                
+            })
+            self.view.makeToast("已删除聊天记录")
+        }
+        
+        // Add buttons to dialog
+        // Alternatively, you can use popup.addButton(buttonOne)
+        // to add a single button
+        popup.addButtons([buttonOne, buttonTwo])
+        popup.buttonAlignment = .horizontal
+        // Present dialog
+        self.present(popup, animated: true, completion: nil)
     }
     
     @IBAction func addblacklist(_ sender: Any) {
-        let parameters: Parameters = ["myid":myid!,"yourid":userid!]
-        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=addblacklist&m=socialchat", method: .post, parameters: parameters).response { response in
-            print("Request: \(String(describing: response.request))")
-            print("Response: \(String(describing: response.response))")
-            print("Error: \(String(describing: response.error))")
-            
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)")
-                self.view.makeToast("拉黑成功")
+        // Prepare the popup assets
+        let title = "提示"
+        let message = "是否加入黑名单"
+        
+        // Create the dialog
+        let popup = PopupDialog(title: title, message: message, image: nil)
+        
+        // Create buttons
+        let buttonOne = CancelButton(title: "取消") {
+            print("You canceled the car dialog.")
+        }
+        
+        // This button will not the dismiss the dialog
+        let buttonTwo = DefaultButton(title: "确认", dismissOnTap: true) {
+            let parameters: Parameters = ["myid":self.myid!,"yourid":self.userid!]
+            Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=addblacklist&m=socialchat", method: .post, parameters: parameters).response { response in
+                print("Request: \(String(describing: response.request))")
+                print("Response: \(String(describing: response.response))")
+                print("Error: \(String(describing: response.error))")
+                
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Data: \(utf8Text)")
+                    self.view.makeToast("拉黑成功")
+                }
             }
         }
+        
+        // Add buttons to dialog
+        // Alternatively, you can use popup.addButton(buttonOne)
+        // to add a single button
+        popup.addButtons([buttonOne, buttonTwo])
+        popup.buttonAlignment = .horizontal
+        // Present dialog
+        self.present(popup, animated: true, completion: nil)
+        
     }
     
     @IBAction func deletefriend(_ sender: Any) {
-        let parameters: Parameters = ["myid":myid!,"yourid":userid!]
-        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=deletefriend&m=socialchat", method: .post, parameters: parameters).response { response in
-            print("Request: \(String(describing: response.request))")
-            print("Response: \(String(describing: response.response))")
-            print("Error: \(String(describing: response.error))")
-            
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)")
-                self.view.makeToast("删除成功")
+        // Prepare the popup assets
+        let title = "提示"
+        let message = "是否删除好友"
+        
+        // Create the dialog
+        let popup = PopupDialog(title: title, message: message, image: nil)
+        
+        // Create buttons
+        let buttonOne = CancelButton(title: "取消") {
+            print("You canceled the car dialog.")
+        }
+        
+        // This button will not the dismiss the dialog
+        let buttonTwo = DefaultButton(title: "确认", dismissOnTap: true) {
+            RCIMClient.shared()?.remove(RCConversationType.ConversationType_PRIVATE, targetId: self.userid!)
+            // Present dialog
+            let parameters: Parameters = ["myid":self.myid!,"yourid":self.userid!]
+            Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=deletefriend&m=socialchat", method: .post, parameters: parameters).response { response in
+                print("Request: \(String(describing: response.request))")
+                print("Response: \(String(describing: response.response))")
+                print("Error: \(String(describing: response.error))")
+                
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Data: \(utf8Text)")
+                    self.view.makeToast("删除成功")
+                }
             }
         }
+        
+        // Add buttons to dialog
+        // Alternatively, you can use popup.addButton(buttonOne)
+        // to add a single button
+        popup.addButtons([buttonOne, buttonTwo])
+        popup.buttonAlignment = .horizontal
+        
+        self.present(popup, animated: true, completion: nil)
+        
     }
     
     var userid:String?

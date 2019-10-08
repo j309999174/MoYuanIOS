@@ -17,7 +17,9 @@ class FriendsData {
     var region:String?
     var property:String?
     
-    init(userID: String,userNickName:String,userPortrait:String,age:String,gender:String,region:String,property:String) {
+    var vip:String?
+    
+    init(userID: String,userNickName:String,userPortrait:String,age:String,gender:String,region:String,property:String,vip:String) {
         self.userID = userID
         self.userNickName = userNickName
         self.userPortrait = userPortrait
@@ -26,5 +28,7 @@ class FriendsData {
         self.gender = gender
         self.region = region
         self.property = property
+        
+        self.vip = vip
     }
 }

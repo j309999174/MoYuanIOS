@@ -38,10 +38,17 @@ class FriendsTableViewCell: UITableViewCell {
             userPortrait_img.layer.masksToBounds = true
             //设置圆角半径(宽度的一半)，显示成圆形。
             userPortrait_img.layer.cornerRadius = userPortrait_img.frame.width/2
+            
+            if data.vip == "VIP"{
+                let imageData = try Data(contentsOf: URL(string: data.userPortrait)!)
+                userPortrait_img.image = UIImage().waterMarkedImage(bg: imageData, logo: "vip", scale: 0.2, margin: 20)
+            }
         }catch let err{
             print(err)
         }
         userNickName_label.text = data.userNickName
         userID_label.text = data.userID
+        
+        
     }
 }

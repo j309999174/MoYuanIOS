@@ -55,7 +55,7 @@ class UserSetViewController: UIViewController {
     
     @IBOutlet weak var userSignature: UITextField!
     
-    
+    var ifPickImage = false   //判断是否点击了选择头像
     @IBAction func userProperty(_ sender: UISegmentedControl) {
         userPropertyString = sender.titleForSegment(at: sender.selectedSegmentIndex)!
     }
@@ -78,6 +78,20 @@ class UserSetViewController: UIViewController {
         userRegionString = self.userRegion.text!
         userSignatureString = self.userSignature.text!
         userReferralString = self.userReferral.text!
+            
+            if userNickNameString == "" {
+                self.view.makeToast("请输入昵称")
+                return
+            }
+            if ifPickImage == false{
+                self.view.makeToast("请选择头像")
+                return
+            }
+            if userSignatureString == "" {
+                self.view.makeToast("请输入个人签名")
+                return
+            }
+            
         Alamofire.upload( multipartFormData: { multipartFormData in
             multipartFormData.append(self.userPhone.data(using: String.Encoding.utf8)!, withName: "userAccount")
             multipartFormData.append(self.userPassword.data(using: String.Encoding.utf8)!, withName: "userPassword")
@@ -179,12 +193,35 @@ class UserSetViewController: UIViewController {
         } catch let error as Error? {
             print("读取本地数据出现错误!",error ?? "")
         }
-
+        
+        //键盘遮挡问题
+        NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(Main3ViewController.handleTap(sender:))))
     }
-    
+    @objc func kbFrameChanged(_ notification : Notification){
+        let info = notification.userInfo
+        let kbRect = (info?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let offsetY = kbRect.origin.y - UIScreen.main.bounds.height
+        UIView.animate(withDuration: 0.3) {
+            self.view.transform = CGAffineTransform(translationX: 0, y: offsetY)
+            //键盘上弹时候, 将返回 button 下移同样的位置,确保在弹出键盘期间可以返回.
+            //self.backBt.transform = CGAffineTransform(translationX: 0, y: -offsetY)
+        }
+    }
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            //当前TextView/当前TextField.resignFirstResponder()
+            userSignature.resignFirstResponder()
+            userNickName.resignFirstResponder()
+            userReferral.resignFirstResponder()
+        }
+        sender.cancelsTouchesInView = false
+    }
     //点击事件方法
     @objc func imAction() -> Void {
         print("图片点击事件")
+        ifPickImage = true
+        
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         

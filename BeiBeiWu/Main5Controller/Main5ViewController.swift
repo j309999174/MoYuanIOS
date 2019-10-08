@@ -72,6 +72,9 @@ class Main5ViewController: UIViewController {
     var userID:String?
     var userNickName:String?
     var userPortrait:String?
+    
+    var imageData:Data?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
@@ -94,8 +97,8 @@ class Main5ViewController: UIViewController {
 
         userNickName_label.text = userNickName
         do {
-            let data = try Data(contentsOf: URL(string: userPortrait!)!)
-            userPortrait_image.image = UIImage(data: data)
+            imageData = try Data(contentsOf: URL(string: userPortrait!)!)
+            userPortrait_image.image = UIImage(data: imageData!)
             userPortrait_image.contentMode = .scaleAspectFill
             //设置遮罩
             userPortrait_image.layer.masksToBounds = true
@@ -113,7 +116,7 @@ class Main5ViewController: UIViewController {
         let userinfo = RCUserInfo.init(userId: userID, name:userPortrait, portrait: userPortrait)
         RCIM.shared()?.refreshUserInfoCache(userinfo, withUserId: userID)
         
-        
+        initViptime()
 
         let userID = userInfo.string(forKey: "userID")
         let parameters: Parameters = ["myid": userID!]
@@ -133,7 +136,24 @@ class Main5ViewController: UIViewController {
         }
     }
     
-
+    func initViptime(){
+        //获取会员时间
+        let userInfo = UserDefaults()
+        let userID = userInfo.string(forKey: "userID")
+        let parameters: Parameters = ["id": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=viptimeinsousuo&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text != "会员已到期"{
+                    self.userPortrait_image.image = UIImage().waterMarkedImage(bg: self.imageData!, logo: "vip", scale: 0.2, margin: 20)
+                }
+            }
+        }
+    }
     
     /*
     // MARK: - Navigation

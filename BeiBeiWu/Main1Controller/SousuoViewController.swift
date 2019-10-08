@@ -105,7 +105,7 @@ class SousuoViewController: UIViewController {
                     self.property_segment.setEnabled(false, forSegmentAt: 1)
                     self.property_segment.setEnabled(false, forSegmentAt: 2)
                     self.property_segment.setEnabled(false, forSegmentAt: 3)
-                    self.userRegion.isUserInteractionEnabled = false
+                    self.regionpickview.isUserInteractionEnabled = false
                 }
             }
         }

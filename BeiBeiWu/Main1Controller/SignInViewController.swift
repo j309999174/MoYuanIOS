@@ -289,7 +289,7 @@ class SignInViewController: UIViewController {
         let kbRect = (info?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let offsetY = kbRect.origin.y - UIScreen.main.bounds.height
         UIView.animate(withDuration: 0.3) {
-            self.view.transform = CGAffineTransform(translationX: 0, y: offsetY)
+            self.view.transform = CGAffineTransform(translationX: 0, y: offsetY/2)
             //键盘上弹时候, 将返回 button 下移同样的位置,确保在弹出键盘期间可以返回.
             //self.backBt.transform = CGAffineTransform(translationX: 0, y: -offsetY)
             }

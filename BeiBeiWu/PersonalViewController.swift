@@ -23,6 +23,7 @@ struct personalInfo: Codable {
     let property: String?
     let region: String?
     let signature:String?
+    let vip:String?
 }
 
 class PersonalViewController: UIViewController {
@@ -263,6 +264,7 @@ class PersonalViewController: UIViewController {
         
         // This button will not the dismiss the dialog
         let buttonTwo = DefaultButton(title: "确认", dismissOnTap: true) {
+            RCIMClient.shared()?.remove(RCConversationType.ConversationType_PRIVATE, targetId: self.userID!)
             // Present dialog
             let parameters: Parameters = ["myid":self.yourid!,"yourid":self.userID!]
             Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=deletefriend&m=socialchat", method: .post, parameters: parameters).response { response in
@@ -330,7 +332,11 @@ class PersonalViewController: UIViewController {
                     let jsonModel = try decoder.decode(personalInfo.self, from: data)
                     self.userNickName.text = jsonModel.nickname
                     let imageData = try Data(contentsOf: URL(string: jsonModel.portrait!)!)
-                    self.userPortrait.image = UIImage(data: imageData)
+                    if jsonModel.vip == "VIP"{
+                        self.userPortrait.image = UIImage().waterMarkedImage(bg: imageData, logo: "vip", scale: 0.2, margin: 20)
+                    }else{
+                        self.userPortrait.image = UIImage.init(data: imageData)
+                    }
                     self.userRegion.text = jsonModel.region
                     self.userGender.text = jsonModel.gender
                     self.userAge.text = jsonModel.age
@@ -343,12 +349,22 @@ class PersonalViewController: UIViewController {
             
         }
         // Do any additional setup after loading the view.
-        
+        //键盘遮挡问题
+        NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
         
     }
     
-
+    @objc func kbFrameChanged(_ notification : Notification){
+        let info = notification.userInfo
+        let kbRect = (info?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let offsetY = kbRect.origin.y - UIScreen.main.bounds.height
+        UIView.animate(withDuration: 0.3) {
+            self.view.transform = CGAffineTransform(translationX: 0, y: offsetY/2)
+            //键盘上弹时候, 将返回 button 下移同样的位置,确保在弹出键盘期间可以返回.
+            //self.backBt.transform = CGAffineTransform(translationX: 0, y: -offsetY)
+        }
+    }
     /*
     // MARK: - Navigation
 

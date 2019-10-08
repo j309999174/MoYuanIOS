@@ -77,6 +77,11 @@ class ResetViewController: UIViewController {
             valueText.placeholder = titleType
             typeLabel.text = titleType
             break
+        case "签名反馈":
+            valueText.isHidden = false
+            valueText.placeholder = titleType
+            typeLabel.text = titleType
+            break
         case "年龄设置":
             valueText.text = "15"
             agepickview.isHidden = false

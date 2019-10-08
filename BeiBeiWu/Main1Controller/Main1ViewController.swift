@@ -225,6 +225,14 @@ class Main1ViewController: UIViewController {
         //获取幻灯片数据
         let getSlide: Parameters = ["type": "getSlide"]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=fujin&m=socialchat", method: .post, parameters: getSlide).response { response in
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "[]"{
+                    self.pagerView.isHidden = true
+                }else{
+                    self.pagerView.isHidden = false
+                }
+            }
             if let data = response.data {
                 let decoder = JSONDecoder()
                 do {
@@ -410,6 +418,14 @@ class Main1ViewController: UIViewController {
             //获取幻灯片数据
             let getSlide: Parameters = ["type": "getSlide"]
             Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getSlide).response { response in
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Data: \(utf8Text)")
+                    if utf8Text == "[]"{
+                        self.pagerView.isHidden = true
+                    }else{
+                        self.pagerView.isHidden = false
+                    }
+                }
                 if let data = response.data {
                     let decoder = JSONDecoder()
                     do {
@@ -479,37 +495,38 @@ class Main1ViewController: UIViewController {
                     }
                 }
             }
-        }
-        
-        let userInfo = UserDefaults()
-        let rongyunToken = userInfo.string(forKey: "rongyunToken")
-        //链接融云
-        RCIM.shared()?.connect(withToken: rongyunToken, success: { (ok) in
-            print("融云链接成功\(ok ?? "ok")")
-        }, error: { (code) in
-            print("融云链接失败\(code)")
-        }, tokenIncorrect: {
-            print("token不对")
-        })
-        
-        
-
-        let userID = userInfo.string(forKey: "userID")
-        let parameters: Parameters = ["myid": userID!]
-        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters).response { response in
-            print("Request: \(String(describing: response.request))")
-            print("Response: \(String(describing: response.response))")
-            print("Error: \(String(describing: response.error))")
+            let rongyunToken = userInfo.string(forKey: "rongyunToken")
+            //链接融云
+            RCIM.shared()?.connect(withToken: rongyunToken, success: { (ok) in
+                print("融云链接成功\(ok ?? "ok")")
+            }, error: { (code) in
+                print("融云链接失败\(code)")
+            }, tokenIncorrect: {
+                print("token不对")
+            })
             
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)")
-                if utf8Text == "0" {
-                    self.tabBarController?.tabBar.items![2].badgeValue = nil
-                }else{
-                    self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+            
+            
+            
+            let userID = userInfo.string(forKey: "userID")
+            let parameters: Parameters = ["myid": userID!]
+            Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters).response { response in
+                print("Request: \(String(describing: response.request))")
+                print("Response: \(String(describing: response.response))")
+                print("Error: \(String(describing: response.error))")
+                
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Data: \(utf8Text)")
+                    if utf8Text == "0" {
+                        self.tabBarController?.tabBar.items![2].badgeValue = nil
+                    }else{
+                        self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                    }
                 }
             }
         }
+        
+        
     }
     
     

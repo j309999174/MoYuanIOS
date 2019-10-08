@@ -46,6 +46,11 @@ class ResetPersonalInfoViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func signatureSet(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Reset") as! ResetViewController
+        vc.titleType = "签名设置"
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

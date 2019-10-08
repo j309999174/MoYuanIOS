@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import UserNotifications
+import RongContactCard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         //向APNs请求token
         UIApplication.shared.registerForRemoteNotifications()
+        
         return true
     }
     func checkLocationServices(){
@@ -317,5 +319,34 @@ extension UITextView {
         set {
             objc_setAssociatedObject(self, UITextView.RuntimeKey.hw_placeholderLabelKey!, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
+    }
+}
+
+
+extension UIImage{
+    func waterMarkedImage(bg:Data,logo:String,scale:CGFloat,margin:CGFloat)->UIImage{
+        //let bgImage = UIImage.init(named: bg)
+        let bgImage = UIImage(data: bg)
+        // 1.创建一个基于位图的上下文(开启一个基于位图的上下文)
+        UIGraphicsBeginImageContextWithOptions(bgImage!.size, false, 0.0)
+        // 2.画背景
+        bgImage?.draw(in: CGRect(x: 0, y: 0, width: bgImage!.size.width, height: bgImage!.size.height))
+        
+        // 3.画右下角的水印 设置缩放比例 和 距离右边和下边的距离
+        let waterImage = UIImage.init(named: logo)
+        let waterW = waterImage!.size.width * scale
+        let waterH = waterImage!.size.height * scale
+        let waterX = bgImage!.size.width - waterW - margin
+        let waterY = bgImage!.size.height - waterH - margin
+        waterImage?.draw(in: CGRect(x: waterX, y: waterY, width: waterW, height: waterH))
+        
+        // 4.从上下文中取得制作完毕的UIImage对象
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        // 5.结束上下文
+        UIGraphicsEndImageContext();
+        return newImage
+        
+        
     }
 }

@@ -224,6 +224,14 @@ class LuntanViewController: UIViewController {
         //获取幻灯片数据
         let getSlide: Parameters = ["type": "getSlide","slidesort":subNav]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat", method: .post, parameters: getSlide).response { response in
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "[]"{
+                    self.pagerView.isHidden = true
+                }else{
+                    self.pagerView.isHidden = false
+                }
+            }
             if let data = response.data {
                 let decoder = JSONDecoder()
                 do {

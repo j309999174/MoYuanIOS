@@ -43,6 +43,8 @@ class LuntanTableViewCell: UITableViewCell {
     @IBOutlet weak var postpicture3: UIImageView!
     
     
+    @IBOutlet weak var postpicturestackview: UIStackView!
+    
     @IBAction func detail_content(_ sender: UIButton) {
         print("内部")
         sender.isHidden = true
@@ -131,6 +133,7 @@ class LuntanTableViewCell: UITableViewCell {
                 print(arrayStrings[index])
             }
             if arrayStrings.count == 1{
+                postpicturestackview.isHidden = false
                 postpicture.isHidden = false
                 //data1 = try Data(contentsOf: URL(string: arrayStrings[0])!)
                 //postpicture1.image = UIImage(data: data1!)
@@ -141,6 +144,7 @@ class LuntanTableViewCell: UITableViewCell {
                 postpicture.addGestureRecognizer(imgClick4)
                 postpicture.isUserInteractionEnabled = true
             }else{
+                postpicturestackview.isHidden = true
                 postpicture.isHidden = true
             }
             if arrayStrings.count >= 2 {
