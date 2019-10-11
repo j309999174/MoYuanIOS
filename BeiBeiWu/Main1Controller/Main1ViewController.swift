@@ -398,9 +398,21 @@ class Main1ViewController: UIViewController {
             self.show(vc, sender: nil)
             
         }else{
-            Uniquelogin.compareUniqueLoginToken(view: self)
-            //保存定位
+           
             let userInfo = UserDefaults()
+            let rongyunToken = userInfo.string(forKey: "rongyunToken")
+            //链接融云
+            RCIM.shared()?.connect(withToken: rongyunToken, success: { (ok) in
+                print("融云链接成功\(ok ?? "ok")")
+            }, error: { (code) in
+                print("融云链接失败\(code)")
+            }, tokenIncorrect: {
+                print("token不对")
+            })
+
+            
+            Uniquelogin.compareUniqueLoginToken(view: self)
+             //保存定位
             if let latitude = userInfo.string(forKey: "latitude"),let longitude = userInfo.string(forKey: "longitude"),let userID = userInfo.string(forKey: "userID") {
                 let parameters: Parameters = ["userID": userID,"latitude": latitude,"longitude": longitude]
                 Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=updatelocation&m=socialchat", method: .post, parameters: parameters).response { response in
@@ -495,17 +507,6 @@ class Main1ViewController: UIViewController {
                     }
                 }
             }
-            let rongyunToken = userInfo.string(forKey: "rongyunToken")
-            //链接融云
-            RCIM.shared()?.connect(withToken: rongyunToken, success: { (ok) in
-                print("融云链接成功\(ok ?? "ok")")
-            }, error: { (code) in
-                print("融云链接失败\(code)")
-            }, tokenIncorrect: {
-                print("token不对")
-            })
-            
-            
             
             
             let userID = userInfo.string(forKey: "userID")

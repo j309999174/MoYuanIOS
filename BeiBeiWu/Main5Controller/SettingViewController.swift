@@ -51,7 +51,9 @@ class SettingViewController: UIViewController {
     
     @IBAction func lougout_btn(_ sender: Any) {
         let userInfo = UserDefaults()
-        userInfo.setValue("", forKey: "userID")
+        userInfo.removeObject(forKey: "userID")
+        userInfo.removeObject(forKey: "userNickName")
+        userInfo.removeObject(forKey: "userPortrait")
         let sb = UIStoryboard(name: "Main1", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
         vc.hidesBottomBarWhenPushed = true

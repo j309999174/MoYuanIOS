@@ -79,7 +79,32 @@ class SousuoViewController: UIViewController {
         } catch let error as Error? {
             print("读取本地数据出现错误!",error ?? "")
         }
+        
+        //键盘遮挡问题
+        NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(Main3ViewController.handleTap(sender:))))
     }
+    
+    @objc func kbFrameChanged(_ notification : Notification){
+        let info = notification.userInfo
+        let kbRect = (info?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let offsetY = kbRect.origin.y - UIScreen.main.bounds.height
+        UIView.animate(withDuration: 0.3) {
+            self.view.transform = CGAffineTransform(translationX: 0, y: offsetY)
+            //键盘上弹时候, 将返回 button 下移同样的位置,确保在弹出键盘期间可以返回.
+            //self.backBt.transform = CGAffineTransform(translationX: 0, y: -offsetY)
+        }
+    }
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            //当前TextView/当前TextField.resignFirstResponder()
+            searchBar.resignFirstResponder()
+        }
+        sender.cancelsTouchesInView = false
+    }
+    
+    
     func addLeftImageTo(txtField:UITextField,andImage img:UIImage){
         let leftImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 30, height: 30))
         leftImageView.image = img

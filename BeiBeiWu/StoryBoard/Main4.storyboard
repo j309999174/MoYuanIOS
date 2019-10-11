@@ -785,7 +785,7 @@
                                                                         <action selector="detail_content:" destination="4ag-Qk-1kg" eventType="touchUpInside" id="e1t-dk-Hwz"/>
                                                                     </connections>
                                                                 </button>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YsS-Dd-gcf">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YsS-Dd-gcf">
                                                                     <rect key="frame" x="0.0" y="306.5" width="398" height="0.0"/>
                                                                     <subviews>
                                                                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="fa5-2h-31S">

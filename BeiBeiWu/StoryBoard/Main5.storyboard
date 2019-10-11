@@ -443,6 +443,7 @@
                     <navigationItem key="navigationItem" id="XLL-fN-Old"/>
                     <connections>
                         <outlet property="beiyuanhao" destination="yaq-VO-WyQ" id="JoS-jR-J3G"/>
+                        <outlet property="personImage_click" destination="P6w-Vi-KLk" id="9Uq-a7-XRW"/>
                         <outlet property="userNickName_label" destination="XMb-LD-k7w" id="YeH-B5-Yve"/>
                         <outlet property="userPortrait_image" destination="JpV-dt-xbq" id="y4c-bB-AZ3"/>
                     </connections>
@@ -454,7 +455,7 @@
         <!--Reset Personal Info View Controller-->
         <scene sceneID="P2B-j2-MJE">
             <objects>
-                <viewController id="34w-lN-F77" customClass="ResetPersonalInfoViewController" customModule="BeiBeiWu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResetPersonalInfo" id="34w-lN-F77" customClass="ResetPersonalInfoViewController" customModule="BeiBeiWu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o6W-oK-nyh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -786,7 +787,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="43" translatesAutoresizingMaskIntoConstraints="NO" id="rwY-DW-Z1a">
-                                <rect key="frame" x="8" y="164" width="359" height="133"/>
+                                <rect key="frame" x="8" y="164" width="359" height="103"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvd-VY-OQQ">
                                         <rect key="frame" x="155.66666666666666" y="0.0" width="48" height="24"/>
@@ -855,9 +856,9 @@
                                         </connections>
                                     </pickerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="erA-lx-gvt">
-                                        <rect key="frame" x="104.66666666666669" y="67" width="150" height="66"/>
+                                        <rect key="frame" x="104.66666666666669" y="67" width="150" height="36"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="submit" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-pB-DBA">
+                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="submit" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-pB-DBA">
                                                 <rect key="frame" x="59.999999999999986" y="0.0" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="i1c-AC-HYv"/>
@@ -865,12 +866,12 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEe-vu-tv2">
-                                                <rect key="frame" x="0.0" y="30" width="150" height="36"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="JQy-LG-4Dl"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <state key="normal" title="提交"/>
+                                                <state key="normal" title="✐提交"/>
                                                 <connections>
                                                     <action selector="submitBtn:" destination="zBT-Rt-pM5" eventType="touchUpInside" id="NHa-lY-x8Q"/>
                                                 </connections>

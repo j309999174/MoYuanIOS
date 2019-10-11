@@ -21,6 +21,7 @@ class Main5ViewController: UIViewController {
     @IBAction func openVIP(_ sender: UIButton) {
         
     }
+    @IBOutlet weak var personImage_click: UIImageView!
     @IBAction func scoreQuery(_ sender: UIButton) {
         let userInfo = UserDefaults()
         let userID = userInfo.string(forKey: "userID")
@@ -108,6 +109,13 @@ class Main5ViewController: UIViewController {
             print(err)
         }
         beiyuanhao.text = "乐园号:\(userID!)"
+        
+        // Do any additional setup after loading the view.
+        let imgClick = UITapGestureRecognizer(target: self, action: #selector(imAction))
+        personImage_click.addGestureRecognizer(imgClick)
+        //开启 isUserInteractionEnabled 手势否则点击事件会没有反应
+        personImage_click.isUserInteractionEnabled = true
+
         // Do any additional setup after loading the view.
         //更新融云用户信息
         print("\(userNickName!)")
@@ -155,6 +163,12 @@ class Main5ViewController: UIViewController {
         }
     }
     
+    //点击事件方法
+    @objc func imAction() -> Void {
+        print("图片点击事件")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPersonalInfo") as! ResetPersonalInfoViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     /*
     // MARK: - Navigation
 

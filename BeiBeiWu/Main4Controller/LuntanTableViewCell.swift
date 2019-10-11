@@ -84,6 +84,8 @@ class LuntanTableViewCell: UITableViewCell {
         plateid.text = data.plateid
         platename.text = data.platename
         authid.text = data.authid
+        
+        like.setTitle("赞:\(data.like ?? "0")👍", for: UIControl.State.normal)
         do {
             //let data = try Data(contentsOf: URL(string: data.authportrait)!)
             //authportrait.image = UIImage(data: data)
@@ -132,23 +134,31 @@ class LuntanTableViewCell: UITableViewCell {
             for index in 0..<arrayStrings.count{
                 print(arrayStrings[index])
             }
-            if arrayStrings.count == 1{
-                postpicturestackview.isHidden = false
-                postpicture.isHidden = false
-                //data1 = try Data(contentsOf: URL(string: arrayStrings[0])!)
-                //postpicture1.image = UIImage(data: data1!)
-                pictureurl = arrayStrings[0]
-                postpicture.sd_setImage(with: URL(string: arrayStrings[0]), placeholderImage: UIImage(named: "placeholder.png"))
-                //图一点击
-                let imgClick4 = UITapGestureRecognizer(target: self, action: #selector(imAction4))
-                postpicture.addGestureRecognizer(imgClick4)
-                postpicture.isUserInteractionEnabled = true
-            }else{
-                postpicturestackview.isHidden = true
-                postpicture.isHidden = true
-            }
-            if arrayStrings.count >= 2 {
+            if arrayStrings.count > 0{
                 postpicture1.isHidden = false
+                postpicture2.isHidden = false
+                postpicture3.isHidden = false
+            }else{
+                postpicture1.isHidden = true
+                postpicture2.isHidden = true
+                postpicture3.isHidden = true
+            }
+//            if arrayStrings.count == 1{
+//                postpicturestackview.isHidden = false
+//                postpicture.isHidden = false
+//                //data1 = try Data(contentsOf: URL(string: arrayStrings[0])!)
+//                //postpicture1.image = UIImage(data: data1!)
+//                pictureurl = arrayStrings[0]
+//                postpicture.sd_setImage(with: URL(string: arrayStrings[0]), placeholderImage: UIImage(named: "placeholder.png"))
+//                //图一点击
+//                let imgClick4 = UITapGestureRecognizer(target: self, action: #selector(imAction4))
+//                postpicture.addGestureRecognizer(imgClick4)
+//                postpicture.isUserInteractionEnabled = true
+//            }else{
+//                postpicturestackview.isHidden = true
+//                postpicture.isHidden = true
+//            }
+            if arrayStrings.count == 1 {
                 //data1 = try Data(contentsOf: URL(string: arrayStrings[0])!)
                 //postpicture1.image = UIImage(data: data1!)
                 pictureurl1 = arrayStrings[0]
@@ -158,11 +168,17 @@ class LuntanTableViewCell: UITableViewCell {
                 postpicture1.addGestureRecognizer(imgClick1)
                 postpicture1.isUserInteractionEnabled = true
                 
-            }else{
-                postpicture1.isHidden = true
+                postpicture2.image = UIImage.init()
+                postpicture3.image = UIImage.init()
+                
             }
-            if arrayStrings.count >= 2{
-                postpicture2.isHidden = false
+            if arrayStrings.count == 2{
+                pictureurl1 = arrayStrings[0]
+                postpicture1.sd_setImage(with: URL(string: arrayStrings[0]), placeholderImage: UIImage(named: "placeholder.png"))
+                //图一点击
+                let imgClick1 = UITapGestureRecognizer(target: self, action: #selector(imAction1))
+                postpicture1.addGestureRecognizer(imgClick1)
+                postpicture1.isUserInteractionEnabled = true
                 //data2 = try Data(contentsOf: URL(string: arrayStrings[1])!)
                 //postpicture2.image = UIImage(data: data2!)
                 pictureurl2 = arrayStrings[1]
@@ -171,11 +187,24 @@ class LuntanTableViewCell: UITableViewCell {
                 let imgClick2 = UITapGestureRecognizer(target: self, action: #selector(imAction2))
                 postpicture2.addGestureRecognizer(imgClick2)
                 postpicture2.isUserInteractionEnabled = true
-            }else{
-                postpicture2.isHidden = true
+                
+                postpicture3.image = UIImage.init()
             }
             if arrayStrings.count >= 3{
-                postpicture3.isHidden = false
+                pictureurl1 = arrayStrings[0]
+                postpicture1.sd_setImage(with: URL(string: arrayStrings[0]), placeholderImage: UIImage(named: "placeholder.png"))
+                //图一点击
+                let imgClick1 = UITapGestureRecognizer(target: self, action: #selector(imAction1))
+                postpicture1.addGestureRecognizer(imgClick1)
+                postpicture1.isUserInteractionEnabled = true
+                //data2 = try Data(contentsOf: URL(string: arrayStrings[1])!)
+                //postpicture2.image = UIImage(data: data2!)
+                pictureurl2 = arrayStrings[1]
+                postpicture2.sd_setImage(with: URL(string: arrayStrings[1]), placeholderImage: UIImage(named: "placeholder.png"))
+                //图一点击
+                let imgClick2 = UITapGestureRecognizer(target: self, action: #selector(imAction2))
+                postpicture2.addGestureRecognizer(imgClick2)
+                postpicture2.isUserInteractionEnabled = true
                 //data3 = try Data(contentsOf: URL(string: arrayStrings[2])!)
                 //postpicture3.image = UIImage(data: data3!)
                 pictureurl3 = arrayStrings[2]
@@ -184,15 +213,12 @@ class LuntanTableViewCell: UITableViewCell {
                 let imgClick3 = UITapGestureRecognizer(target: self, action: #selector(imAction3))
                 postpicture3.addGestureRecognizer(imgClick3)
                 postpicture3.isUserInteractionEnabled = true
-                
-            }else{
-                postpicture3.isHidden = true
             }
         }catch let err{
             print(err)
         }
         
-        like.setTitle("赞:\(data.like ?? "0")👍", for: UIControl.State.normal)
+        
         //头像点击
         let imgClick = UITapGestureRecognizer(target: self, action: #selector(imAction))
         authportrait.addGestureRecognizer(imgClick)

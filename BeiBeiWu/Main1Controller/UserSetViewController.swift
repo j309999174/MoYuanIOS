@@ -238,10 +238,11 @@ class UserSetViewController: UIViewController {
         }))
         
         actionSheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        actionSheet.popoverPresentationController!.sourceView = self.view
-        actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            actionSheet.popoverPresentationController!.sourceView = self.view
+            actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+        }
         self.present(actionSheet, animated: true, completion: nil)
-
     }
     
     

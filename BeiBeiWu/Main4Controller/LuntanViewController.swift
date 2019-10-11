@@ -420,34 +420,34 @@ extension LuntanViewController:UITableViewDelegate,UITableViewDataSource{
             cell.delegate = self
             cell.setData(data: oneOfList1)
         }
-        
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isopen[indexPath.row] == false {
-            isopen[indexPath.row] = true
-        }else{
-            isopen[indexPath.row] = false
-        }
-        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
-        //同一个StoryBoard下
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostlistView") as! PostlistViewController
-//        vc.id = dataList[indexPath.row].id
-//        vc.plateid = dataList[indexPath.row].plateid
-//        vc.platename = dataList[indexPath.row].platename
-//        vc.authid = dataList[indexPath.row].authid
-//        vc.authnickname = dataList[indexPath.row].authnickname
-//        vc.authportrait = dataList[indexPath.row].authportrait
-//        vc.posttip = dataList[indexPath.row].posttip
-//        vc.posttitle = dataList[indexPath.row].posttitle
-//        vc.posttext = dataList[indexPath.row].posttext
-//        vc.postpicture = dataList[indexPath.row].postpicture
-//        vc.like = dataList[indexPath.row].like
-//        vc.favorite = dataList[indexPath.row].favorite
-//        vc.time = dataList[indexPath.row].time
-//        self.navigationController?.pushViewController(vc, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if isopen[indexPath.row] == false {
+//            isopen[indexPath.row] = true
+//        }else{
+//            isopen[indexPath.row] = false
+//        }
+//        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+//        //同一个StoryBoard下
+////        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostlistView") as! PostlistViewController
+////        vc.id = dataList[indexPath.row].id
+////        vc.plateid = dataList[indexPath.row].plateid
+////        vc.platename = dataList[indexPath.row].platename
+////        vc.authid = dataList[indexPath.row].authid
+////        vc.authnickname = dataList[indexPath.row].authnickname
+////        vc.authportrait = dataList[indexPath.row].authportrait
+////        vc.posttip = dataList[indexPath.row].posttip
+////        vc.posttitle = dataList[indexPath.row].posttitle
+////        vc.posttext = dataList[indexPath.row].posttext
+////        vc.postpicture = dataList[indexPath.row].postpicture
+////        vc.like = dataList[indexPath.row].like
+////        vc.favorite = dataList[indexPath.row].favorite
+////        vc.time = dataList[indexPath.row].time
+////        self.navigationController?.pushViewController(vc, animated: true)
+//    }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if dataList.count - 1 == indexPath.row && post_ScrollBottom == false {

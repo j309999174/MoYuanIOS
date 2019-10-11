@@ -70,7 +70,7 @@ class SignInViewController: UIViewController {
     var openid:String?
     //登陆类型，判断是手机还是微信
     var logintype:String?
-    
+    var wxloginiffirst:String?
     var isuniquetoken:Bool?
     @IBAction func weixinBtn(_ sender: Any) {
         let req = SendAuthReq()
@@ -198,45 +198,14 @@ class SignInViewController: UIViewController {
                     //保存用户信息
                     let userInfo = UserDefaults()
                     userInfo.setValue(jsonModel.id, forKey: "userID")
-                    userInfo.setValue(nickname, forKey: "userNickName")
-                    userInfo.setValue(portrait, forKey: "userPortrait")
+                    userInfo.setValue(jsonModel.nickname, forKey: "userNickName")
+                    userInfo.setValue(jsonModel.portrait, forKey: "userPortrait")
                     //调用融云，获取token
                     self.logintype = "weixinlogin"
-                    self.getRongyunToken(userid:jsonModel.id!, nickname: nickname, portrait: portrait)
+                    self.getRongyunToken(userid:jsonModel.id!, nickname: jsonModel.nickname!, portrait: jsonModel.portrait!)
                     
                     //判断是否首次登陆
-                    switch jsonModel.type {
-                    case "1":
-                        let userInfo = UserDefaults()
-                        userInfo.setValue(jsonModel.id, forKey: "userID")
-                        userInfo.setValue(jsonModel.nickname, forKey: "userNickName")
-                        userInfo.setValue(jsonModel.portrait, forKey: "userPortrait")
-                        //已存在，直接跳转
-//                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
-//                        self.navigationController?.show(vc, sender: true)
-                        let sb = UIStoryboard(name: "Main1", bundle:nil)
-                        let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
-                        vc.tabBarController?.tabBar.isHidden = false
-                        self.show(vc, sender: nil)
-                        break
-                    case "2":
-                        let userInfo = UserDefaults()
-                        userInfo.setValue(jsonModel.id, forKey: "userID")
-                        userInfo.setValue(jsonModel.nickname, forKey: "userNickName")
-                        userInfo.setValue(jsonModel.portrait, forKey: "userPortrait")
-                        //不存在，需要跳转设置页
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserSetIdentity") as! UserSetViewController
-                        vc.logtype = "2"
-                        vc.openid = self.openid!
-                        self.navigationController?.pushViewController(vc, animated: true)
-                        break
-                    case "3":
-                        //被禁言
-                        break
-                    default :
-                        break
-                    }
-
+                    self.wxloginiffirst = jsonModel.type
                 } catch {
                     print("解析 JSON 失败")
                 }
@@ -308,6 +277,7 @@ class SignInViewController: UIViewController {
                 let decoder = JSONDecoder()
                 do {
                     let jsonModel = try decoder.decode(RongyunToken.self, from: data)
+                    print("融云token是：")
                     print(jsonModel.token)
                     
                     //保存用户ID，名字，头像
@@ -319,6 +289,30 @@ class SignInViewController: UIViewController {
                        let sb = UIStoryboard(name: "Main", bundle:nil)
                        let vc = sb.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
                        self.present(vc, animated: true, completion: nil)
+                    }else{
+                        switch self.wxloginiffirst {
+                        case "1":
+                            //已存在，直接跳转
+                            //                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+                            //                        self.navigationController?.show(vc, sender: true)
+                            let sb = UIStoryboard(name: "Main1", bundle:nil)
+                            let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+                            vc.tabBarController?.tabBar.isHidden = false
+                            self.show(vc, sender: nil)
+                            break
+                        case "2":
+                            //不存在，需要跳转设置页
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserSetIdentity") as! UserSetViewController
+                            vc.logtype = "2"
+                            vc.openid = self.openid!
+                            self.navigationController?.pushViewController(vc, animated: true)
+                            break
+                        case "3":
+                            //被禁言
+                            break
+                        default :
+                            break
+                        }
                     }
                 } catch {
                     print("解析 JSON 失败")
