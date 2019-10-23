@@ -9,6 +9,7 @@
 import Foundation
 
 class LuntanData{
+    var indexPath:IndexPath?
     var id:String
     var plateid:String
     var platename:String
@@ -27,6 +28,29 @@ class LuntanData{
     var gender:String?
     var region:String?
     var property:String?
+    
+    init(indexPath:IndexPath,id:String,plateid:String,platename:String,authid: String,authnickname:String,authportrait:String,posttip:String,posttitle:String,posttext:String,postpicture:String,like:String,favorite:String,time:String,age:String,gender:String,region:String,property:String) {
+        self.indexPath = indexPath
+        self.id = id
+        self.plateid = plateid
+        self.platename = platename
+        self.authid = authid
+        self.authnickname = authnickname
+        self.authportrait = authportrait
+        self.posttip = posttip
+        self.posttitle = posttitle
+        self.posttext = posttext
+        self.postpicture = postpicture
+        self.like = like
+        self.favorite = favorite
+        self.time = time
+        
+        self.age = age
+        self.gender = gender
+        self.region = region
+        self.property = property
+        
+    }
     
     init(id:String,plateid:String,platename:String,authid: String,authnickname:String,authportrait:String,posttip:String,posttitle:String,posttext:String,postpicture:String,like:String,favorite:String,time:String,age:String,gender:String,region:String,property:String) {
         self.id = id

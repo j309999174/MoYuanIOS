@@ -363,23 +363,33 @@ class Main1ViewController: UIViewController {
     var imageArr_fujin = [String]()
     var imageNameArr_fujin = [String]()
     var imageUrl_fujin = [String]()
-    
+  
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
+        super.viewWillAppear(animated)
+        
         print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
         if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
             self.tabBarController?.tabBar.items![1].badgeValue = nil
         }else{
             self.tabBarController?.tabBar.items![1].badgeValue = String(Int((RCIMClient.shared()?.getTotalUnreadCount())!))
         }
-        
-      
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        if UserDefaults().string(forKey: "userID") == nil{
+            let sb = UIStoryboard(name: "Main1", bundle:nil)
+            let vc = sb.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
+            vc.hidesBottomBarWhenPushed = false
+            self.show(vc, sender: nil)
+        }
         
         
+        print("嘿")
+      
+    
+
         
         
         self.navigationItem.hidesBackButton = true
@@ -389,6 +399,10 @@ class Main1ViewController: UIViewController {
         let font_selected = UIFont.systemFont(ofSize: 25)
         menu_sgement.setTitleTextAttributes([NSAttributedString.Key.font:font_normal], for: .normal)
         menu_sgement.setTitleTextAttributes([NSAttributedString.Key.font:font_selected], for: .selected)
+        let color_normal = UIColor.init(named: "primarycolor")
+        menu_sgement.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:color_normal as Any], for: .normal)
+        let color_selected = UIColor.white
+        menu_sgement.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:color_selected], for: .selected)
 
         //判断是否登录
         if UserDefaults().string(forKey: "userID") == nil{
@@ -401,6 +415,7 @@ class Main1ViewController: UIViewController {
            
             let userInfo = UserDefaults()
             let rongyunToken = userInfo.string(forKey: "rongyunToken")
+            let userID = userInfo.string(forKey: "userID")
             //链接融云
             RCIM.shared()?.connect(withToken: rongyunToken, success: { (ok) in
                 print("融云链接成功\(ok ?? "ok")")
@@ -413,8 +428,8 @@ class Main1ViewController: UIViewController {
             
             Uniquelogin.compareUniqueLoginToken(view: self)
              //保存定位
-            if let latitude = userInfo.string(forKey: "latitude"),let longitude = userInfo.string(forKey: "longitude"),let userID = userInfo.string(forKey: "userID") {
-                let parameters: Parameters = ["userID": userID,"latitude": latitude,"longitude": longitude]
+            if let latitude = userInfo.string(forKey: "latitude"),let longitude = userInfo.string(forKey: "longitude") {
+                let parameters: Parameters = ["userID": userID!,"latitude": latitude,"longitude": longitude]
                 Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=updatelocation&m=socialchat", method: .post, parameters: parameters).response { response in
                     print("Request: \(String(describing: response.request))")
                     print("Response: \(String(describing: response.response))")
@@ -469,16 +484,16 @@ class Main1ViewController: UIViewController {
             //获取推荐列表
             var getUserInfo: Parameters
             if let latitude = UserDefaults().string(forKey: "latitude"),let longitude = UserDefaults().string(forKey: "longitude"){
-                getUserInfo = ["type": "getUserInfo","latitude":latitude,"longitude":longitude,"pageindex":1]
+                getUserInfo = ["type": "getUserInfo","myid": userID!,"latitude":latitude,"longitude":longitude,"pageindex":1]
             }else{
-                getUserInfo = ["type": "getUserInfo","pageindex":1]
+                getUserInfo = ["type": "getUserInfo","myid": userID!,"pageindex":1]
             }
             
             Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat", method: .post, parameters: getUserInfo).response { response in
                 print("Request: \(String(describing: response.request))")
                 print("Response: \(String(describing: response.response))")
                 print("Error: \(String(describing: response.error))")
-                
+                print("获取推荐列表")
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print("Data: \(utf8Text)")
                 }
@@ -486,6 +501,7 @@ class Main1ViewController: UIViewController {
                     let decoder = JSONDecoder()
                     do {
                         let jsonModel = try decoder.decode([TuiJianUserInfo].self, from: data)
+                        
                         for index in 0..<jsonModel.count{
                             self.userID.append(jsonModel[index].id)
                             self.userPortrait.append(jsonModel[index].portrait ?? "")
@@ -509,7 +525,6 @@ class Main1ViewController: UIViewController {
             }
             
             
-            let userID = userInfo.string(forKey: "userID")
             let parameters: Parameters = ["myid": userID!]
             Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters).response { response in
                 print("Request: \(String(describing: response.request))")

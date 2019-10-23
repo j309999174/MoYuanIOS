@@ -87,6 +87,7 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         //键盘遮挡问题
         NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(Main3ViewController.handleTap(sender:))))
         //textfield图
 //        let phoneImage = UIImage(named: "phone")!
 //        addLeftImageTo(txtField: userPhone, andImage: phoneImage)
@@ -105,7 +106,15 @@ class SignUpViewController: UIViewController {
             //self.backBt.transform = CGAffineTransform(translationX: 0, y: -offsetY)
         }
     }
-
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            //当前TextView/当前TextField.resignFirstResponder()
+            userPhone.resignFirstResponder()
+            userPassword.resignFirstResponder()
+            authCode.resignFirstResponder()
+        }
+        sender.cancelsTouchesInView = false
+    }
     
     func addLeftImageTo(txtField:UITextField,andImage img:UIImage){
         let leftImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 30, height: 30))

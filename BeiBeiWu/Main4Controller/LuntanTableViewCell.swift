@@ -14,7 +14,7 @@ protocol LuntanTableViewCellDelegate{
     func personpage(userID:String)
     func threepoints(postid:String,userID:String)
     func pictureClick(pictureurl:String)
-    func detail_content(posttext:UILabel!,post_detail_text:String!,sender:UIButton)
+    func detail_content(indexPath:IndexPath)
 }
 class LuntanTableViewCell: UITableViewCell {
 
@@ -46,11 +46,8 @@ class LuntanTableViewCell: UITableViewCell {
     @IBOutlet weak var postpicturestackview: UIStackView!
     
     @IBAction func detail_content(_ sender: UIButton) {
-        print("内部")
-        sender.isHidden = true
-        posttext.text = post_detail_text
-        
-        delegate?.detail_content(posttext: posttext,post_detail_text: post_detail_text,sender: sender)
+        print("详情")
+        delegate?.detail_content(indexPath:indexPath ?? IndexPath())
     }
     @IBOutlet weak var detail_btn: UIButton!
     
@@ -69,12 +66,15 @@ class LuntanTableViewCell: UITableViewCell {
 //    var data1:Data?
 //    var data2:Data?
 //    var data3:Data?
+    var indexPath:IndexPath?
     var pictureurl:String?
     var pictureurl1:String?
     var pictureurl2:String?
     var pictureurl3:String?
     var post_detail_text:String?
     func setData(data:LuntanData){
+        indexPath = data.indexPath
+        
         var attributesString = data.age! + " | " + data.gender!
         attributesString = attributesString + " | " + data.region!
         attributesString = attributesString + " | " + data.property!
@@ -118,7 +118,7 @@ class LuntanTableViewCell: UITableViewCell {
         posttext.numberOfLines = 0
         post_detail_text = data.posttext
         //posttext.text = data.posttext
-        detail_btn.isEnabled = false
+        detail_btn.isEnabled = true
         detail_btn.setTitleColor(UIColor?.init(UIColor.init(red: 0, green: 0, blue: 255, alpha: 1)), for: UIControl.State.normal)
         if data.posttext?.count ?? 0 == 56 {
             posttext.text = data.posttext

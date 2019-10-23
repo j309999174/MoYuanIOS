@@ -77,6 +77,7 @@ class SignInViewController: UIViewController {
         req.scope = "snsapi_userinfo"
         req.state = "wechat_sdk_demo"
         WXApi.send(req)
+        print("调起微信")
     }
     @IBAction func signUp_btn(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpIdentity") as! SignUpViewController
@@ -113,7 +114,8 @@ class SignInViewController: UIViewController {
                         //调用融云，获取token
                         self.getRongyunToken(userid: self.userID!, nickname: self.userNickName!, portrait: self.userPortrait!)
                     }else{
-                        self.view.makeToast(jsonModel.info)
+                        //self.view.makeToast(jsonModel.info)
+                        self.view.makeToast(jsonModel.info, duration: 3.0, position: .center)
                     }
                     
                     
@@ -130,7 +132,7 @@ class SignInViewController: UIViewController {
     @objc func WXLoginSuccess(notification:Notification) {
         self.view.makeToast("微信成功通知")
         let code = notification.object as! String
-        let url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxc7ff179d403b7a51&secret=1cac4e740d7d91d2c8a76eaf00acad02&code=\(code)&grant_type=authorization_code"
+        let url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxef862b4ad2079599&secret=efef7c0891675d0b1979d5dee348a88d&code=\(code)&grant_type=authorization_code"
         //获取access_token
         Alamofire.request(url, method: .post).response { response in
             print("Request: \(String(describing: response.request))")
@@ -147,6 +149,8 @@ class SignInViewController: UIViewController {
                 } catch {
                     print("解析 JSON 失败")
                 }
+                //退出后第二次登录时会多次调用通知，所以需要在通知结束时移除通知
+                NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "WXLoginSuccessNotification"), object: nil)
             }
         }
         
@@ -252,7 +256,13 @@ class SignInViewController: UIViewController {
         // Do any additional setup after loading the view.
         //键盘遮挡问题
         NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(Main3ViewController.handleTap(sender:))))
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super .viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "WXLoginSuccessNotification"), object: nil)
+    }
+    
     @objc func kbFrameChanged(_ notification : Notification){
         let info = notification.userInfo
         let kbRect = (info?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
@@ -263,7 +273,14 @@ class SignInViewController: UIViewController {
             //self.backBt.transform = CGAffineTransform(translationX: 0, y: -offsetY)
             }
         }
-
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            //当前TextView/当前TextField.resignFirstResponder()
+            userAccount_tf.resignFirstResponder()
+            password_tf.resignFirstResponder()
+        }
+        sender.cancelsTouchesInView = false
+    }
     
     func getRongyunToken(userid:String,nickname:String,portrait:String){
         
@@ -286,19 +303,26 @@ class SignInViewController: UIViewController {
                     
                     //手机则跳转首页
                     if self.logintype != "weixinlogin"{
-                       let sb = UIStoryboard(name: "Main", bundle:nil)
-                       let vc = sb.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
-                       self.present(vc, animated: true, completion: nil)
+//                       let sb = UIStoryboard(name: "Main", bundle:nil)
+//                       let vc = sb.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
+//                       self.present(vc, animated: true, completion: nil)
+                        let sb = UIStoryboard(name: "Main1", bundle:nil)
+                        let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+                        vc.tabBarController?.tabBar.isHidden = false
+                        self.show(vc, sender: nil)
                     }else{
                         switch self.wxloginiffirst {
                         case "1":
                             //已存在，直接跳转
                             //                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
                             //                        self.navigationController?.show(vc, sender: true)
-                            let sb = UIStoryboard(name: "Main1", bundle:nil)
-                            let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
-                            vc.tabBarController?.tabBar.isHidden = false
-                            self.show(vc, sender: nil)
+//                            let sb = UIStoryboard(name: "Main1", bundle:nil)
+//                            let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+//                            vc.tabBarController?.tabBar.isHidden = false
+//                            self.show(vc, sender: nil)
+                            //不存在，需要跳转设置页
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+                            self.navigationController?.pushViewController(vc, animated: true)
                             break
                         case "2":
                             //不存在，需要跳转设置页

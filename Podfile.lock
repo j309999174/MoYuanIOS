@@ -1,27 +1,27 @@
 PODS:
-  - Alamofire (4.8.2)
+  - Alamofire (4.9.0)
   - AlipaySDK-iOS (15.5.9)
-  - DynamicBlurView (3.0.1)
-  - FSPagerView (0.8.2)
+  - DynamicBlurView (4.0.0)
+  - FSPagerView (0.8.3)
   - MarqueeLabel (4.0.0)
-  - PopupDialog (1.1.0):
-    - DynamicBlurView (~> 3.0.1)
-  - RongCloudIM/IMKit (2.9.20):
+  - PopupDialog (1.1.1):
+    - DynamicBlurView (~> 4.0)
+  - RongCloudIM/IMKit (2.9.25):
     - RongCloudIM/IMLib
-  - RongCloudIM/IMLib (2.9.20)
-  - RongCloudIM/Sight (2.9.20):
+  - RongCloudIM/IMLib (2.9.25)
+  - RongCloudIM/Sight (2.9.25):
     - RongCloudIM/IMLib
-  - RongCloudRTC/RongCallKit (2.9.20):
-    - RongCloudIM/IMKit (~> 2.9.20)
-    - RongCloudIM/IMLib (~> 2.9.20)
+  - RongCloudRTC/RongCallKit (2.9.25):
+    - RongCloudIM/IMKit (~> 2.9.25)
+    - RongCloudIM/IMLib (~> 2.9.25)
     - RongCloudRTC/RongCallLib
-  - RongCloudRTC/RongCallLib (2.9.20):
-    - RongCloudIM/IMLib (~> 2.9.20)
-  - SDWebImage (5.0.6):
-    - SDWebImage/Core (= 5.0.6)
-  - SDWebImage/Core (5.0.6)
+  - RongCloudRTC/RongCallLib (2.9.25):
+    - RongCloudIM/IMLib (~> 2.9.25)
+  - SDWebImage (5.2.3):
+    - SDWebImage/Core (= 5.2.3)
+  - SDWebImage/Core (5.2.3)
   - Toast-Swift (5.0.0)
-  - WechatOpenSDK (1.8.4)
+  - WechatOpenSDK (1.8.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
@@ -39,7 +39,7 @@ DEPENDENCIES:
   - WechatOpenSDK
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - AlipaySDK-iOS
     - DynamicBlurView
@@ -53,18 +53,18 @@ SPEC REPOS:
     - WechatOpenSDK
 
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
   AlipaySDK-iOS: 1c5283b30977a24acecc0114662697f7dc78f618
-  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
-  FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
+  DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   MarqueeLabel: b55b26e690b6ad41faedd95cbf5eae6f1d1735b4
-  PopupDialog: 42fb7a0bc4fafdf89fef8b5b2b127a6023f3e1cc
-  RongCloudIM: 431486c630f375f74fa90d2c24f58a52b86ad76b
-  RongCloudRTC: f7e38a746e2d78c71f45df121513beed926d7fc5
-  SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
+  PopupDialog: 720c92befd8bc23c13442254945213db5612f149
+  RongCloudIM: cd6836aa86fbf6c02f7b6b5c895ea4caa894d67f
+  RongCloudRTC: 561024c315d3726a67e718fb99b59e50e4a5ee6c
+  SDWebImage: 46a7f73228f84ce80990c786e4372cf4db5875ce
   Toast-Swift: 36f4720243c8582c2be243a60a51e193c761f541
-  WechatOpenSDK: 9b721089507c895d05f997408c30bb6e6f5f9b60
+  WechatOpenSDK: 368ae03b72ee3ea1328c4f11326fbb5d2721d118
 
 PODFILE CHECKSUM: b94ae67ff1f88cf27ecb14d61c640a785f1e22f0
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3

@@ -25,12 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = UIColor.orange
         
         //注册融云
-        RCIM.shared()?.initWithAppKey("3argexb63qxke")
+        RCIM.shared()?.initWithAppKey("vnroth0kvbh7o")
         RCIM.shared()?.enableMessageRecall = true
         RCIM.shared()?.enableTypingStatus = true
         
         //注册微信
-        WXApi.registerApp("wxc7ff179d403b7a51")
+        WXApi.registerApp("wxef862b4ad2079599", universalLink: "https://www.banghua.xin/")
         //请求通知权限
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .sound, .badge]) {
@@ -249,7 +249,6 @@ extension Date {
     }
 }
 
-
 extension UIViewController{
     func removePictureFile(){
         //删除文件
@@ -350,3 +349,4 @@ extension UIImage{
         
     }
 }
+

@@ -69,6 +69,8 @@
 		05AAC636233FB44F0000C8BB /* ConversationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAC635233FB44F0000C8BB /* ConversationSettingViewController.swift */; };
 		05AAC63D2346AA8F0000C8BB /* RongContactCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05AAC63C2346AA8F0000C8BB /* RongContactCard.framework */; };
 		05AAC63E2346AAAA0000C8BB /* RongContactCard.framework in Sources */ = {isa = PBXBuildFile; fileRef = 05AAC63C2346AA8F0000C8BB /* RongContactCard.framework */; settings = {COMPILER_FLAGS = "-ObjC"; }; };
+		05B2B01D235123D400EEC142 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B2B01C235123D400EEC142 /* CallKit.framework */; };
+		05B2B01F2352859800EEC142 /* CommonSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B2B01E2352859800EEC142 /* CommonSettingViewController.swift */; };
 		05C9B86922E6D6A90075364D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9B86822E6D6A90075364D /* AppDelegate.swift */; };
 		05C9B86B22E6D6A90075364D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9B86A22E6D6A90075364D /* ViewController.swift */; };
 		05C9B86E22E6D6A90075364D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C9B86C22E6D6A90075364D /* Main.storyboard */; };
@@ -144,6 +146,8 @@
 		05A77F5823016D540010BC83 /* PostlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostlistViewController.swift; sourceTree = "<group>"; };
 		05AAC635233FB44F0000C8BB /* ConversationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSettingViewController.swift; sourceTree = "<group>"; };
 		05AAC63C2346AA8F0000C8BB /* RongContactCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RongContactCard.framework; sourceTree = "<group>"; };
+		05B2B01C235123D400EEC142 /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
+		05B2B01E2352859800EEC142 /* CommonSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSettingViewController.swift; sourceTree = "<group>"; };
 		05C9B86522E6D6A90075364D /* BeiBeiWu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeiBeiWu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C9B86822E6D6A90075364D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05C9B86A22E6D6A90075364D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05B2B01D235123D400EEC142 /* CallKit.framework in Frameworks */,
 				057B1FE022EB9523000B8811 /* CoreLocation.framework in Frameworks */,
 				740B4CAEF0DF76821B768B06 /* Pods_BeiBeiWu.framework in Frameworks */,
 				05AAC63D2346AA8F0000C8BB /* RongContactCard.framework in Frameworks */,
@@ -278,6 +283,7 @@
 				05090C5D2328F90C00DAB476 /* SomeonesluntanViewController.swift */,
 				05090C69232A3CFF00DAB476 /* HelpCenterViewController.swift */,
 				055A55AA2339A142008A341D /* PrivateSettingViewController.swift */,
+				05B2B01E2352859800EEC142 /* CommonSettingViewController.swift */,
 			);
 			path = Main5Controller;
 			sourceTree = "<group>";
@@ -338,6 +344,7 @@
 		D1907FE0D47A39E8F0BDBD60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05B2B01C235123D400EEC142 /* CallKit.framework */,
 				0530FD8022EE3B3F00E312D5 /* FSPagerView.framework */,
 				057B1FDF22EB9523000B8811 /* CoreLocation.framework */,
 				EF485232730B18E4C7AEA4B8 /* Pods_BeiBeiWu.framework */,
@@ -501,6 +508,7 @@
 				051FD02B230FD9CF00A374D3 /* PersonalPostViewController.swift in Sources */,
 				05A77F55230168FE0010BC83 /* PostheadTableViewCell.swift in Sources */,
 				05090C6023295CF600DAB476 /* BlackListViewController.swift in Sources */,
+				05B2B01F2352859800EEC142 /* CommonSettingViewController.swift in Sources */,
 				058218952300EA5D0032B86C /* LuntanTableViewCell.swift in Sources */,
 				05A57E6A2301D5F3001BC0F0 /* PostlistData.swift in Sources */,
 				057B1FD022EA8E36000B8811 /* UserSetViewController.swift in Sources */,
@@ -608,6 +616,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -628,6 +637,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -669,6 +679,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -682,6 +693,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

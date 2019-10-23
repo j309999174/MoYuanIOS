@@ -157,11 +157,11 @@ extension SomeonesluntanViewController:UITableViewDelegate,UITableViewDataSource
 
 
 extension SomeonesluntanViewController:LuntanTableViewCellDelegate{
-    func detail_content(posttext: UILabel!, post_detail_text: String!,sender:UIButton) {
-//        print("全文")
-//        posttext.text = post_detail_text
-//        sender.isHidden = true
+    func detail_content(indexPath: IndexPath) {
+        
     }
+    
+ 
     
     func pictureClick(pictureurl: String) {
         do {

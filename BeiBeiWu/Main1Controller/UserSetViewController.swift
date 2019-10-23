@@ -113,7 +113,7 @@ class UserSetViewController: UIViewController {
                     //回到登陆
                     let sb = UIStoryboard(name: "Main1", bundle:nil)
                     let vc = sb.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
-                    self.present(vc, animated: true, completion: nil)
+                    self.show(vc, sender: nil)
                   }
                 }
             case .failure(let encodingError):
@@ -122,6 +122,10 @@ class UserSetViewController: UIViewController {
           }
         )
         }else{
+            if userSignatureString == "" {
+                self.view.makeToast("请输入个人签名")
+                return
+            }
             print("进入微信注册")
             userAgeString = self.userAge.text!
             userRegionString = self.userRegion.text!
@@ -151,16 +155,16 @@ class UserSetViewController: UIViewController {
         //删除文件
         removePictureFile()
         //textfield图
-        let userNickNameImage = UIImage(named: "nickname")!
-        addLeftImageTo(txtField: userNickName, andImage: userNickNameImage)
-        let userAgeImage = UIImage(named: "age")!
-        addLeftImageTo(txtField: userAge, andImage: userAgeImage)
-        let userRegionImage = UIImage(named: "region")!
-        addLeftImageTo(txtField: userRegion, andImage: userRegionImage)
-        let userSignatureImage = UIImage(named: "signature")!
-        addLeftImageTo(txtField: userSignature, andImage: userSignatureImage)
-        let userReferralImage = UIImage(named: "Promotion code")!
-        addLeftImageTo(txtField: userReferral, andImage: userReferralImage)
+//        let userNickNameImage = UIImage(named: "nickname")!
+//        addLeftImageTo(txtField: userNickName, andImage: userNickNameImage)
+//        let userAgeImage = UIImage(named: "age")!
+//        addLeftImageTo(txtField: userAge, andImage: userAgeImage)
+//        let userRegionImage = UIImage(named: "region")!
+//        addLeftImageTo(txtField: userRegion, andImage: userRegionImage)
+//        let userSignatureImage = UIImage(named: "signature")!
+//        addLeftImageTo(txtField: userSignature, andImage: userSignatureImage)
+//        let userReferralImage = UIImage(named: "Promotion code")!
+//        addLeftImageTo(txtField: userReferral, andImage: userReferralImage)
         
         print("logtype=\(logtype)")
         if logtype == "2"{

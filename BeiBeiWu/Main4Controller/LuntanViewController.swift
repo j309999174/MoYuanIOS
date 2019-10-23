@@ -155,18 +155,22 @@ class LuntanViewController: UIViewController {
     var gonggao = ""
     var isopen:[Bool] = []
     var post_full_text = ""
+    
+    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
+        super.viewWillAppear(animated)
+        
         print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
         if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
             self.tabBarController?.tabBar.items![1].badgeValue = nil
         }else{
             self.tabBarController?.tabBar.items![1].badgeValue = String(Int((RCIMClient.shared()?.getTotalUnreadCount())!))
         }
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    
         self.navigationItem.hidesBackButton = true
         
         
@@ -174,6 +178,10 @@ class LuntanViewController: UIViewController {
         let font_selected = UIFont.systemFont(ofSize: 25)
         plate_segment.setTitleTextAttributes([NSAttributedString.Key.font:font_normal], for: .normal)
         plate_segment.setTitleTextAttributes([NSAttributedString.Key.font:font_selected], for: .selected)
+        let color_normal = UIColor.init(named: "primarycolor")
+        plate_segment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:color_normal as Any], for: .normal)
+        let color_selected = UIColor.white
+        plate_segment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:color_selected], for: .selected)
         //删除文件
         let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                            .userDomainMask, true)[0] as String
@@ -185,8 +193,7 @@ class LuntanViewController: UIViewController {
             try fileManager.removeItem(atPath: filePath1)
             try fileManager.removeItem(atPath: filePath2)
             try fileManager.removeItem(atPath: filePath3)
-            print("Success to remove file.")
-        }catch{
+            print("Success to remove file.")        }catch{
             print("Failed to remove file.")
         }
         //公告
@@ -221,6 +228,7 @@ class LuntanViewController: UIViewController {
     
     
     func initSlider(){
+        
         //获取幻灯片数据
         let getSlide: Parameters = ["type": "getSlide","slidesort":subNav]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat", method: .post, parameters: getSlide).response { response in
@@ -291,8 +299,10 @@ class LuntanViewController: UIViewController {
     var post_ScrollBottom = false
     var pageIndex = 1
     func initPost(pageindex:Int){
+        let userInfo = UserDefaults()
+        let userID = userInfo.string(forKey: "userID")
         //获取帖子数据
-        let getPost: Parameters = ["type": "getPostlist","platename":subNav,"pageindex":pageindex]
+        let getPost: Parameters = ["type": "getPostlist","myid": userID!,"platename":subNav,"pageindex":pageindex]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat", method: .post, parameters: getPost).response { response in
             if let data = response.data {
                 let decoder = JSONDecoder()
@@ -409,7 +419,7 @@ extension LuntanViewController:UITableViewDelegate,UITableViewDataSource{
         let oneOfList1 = dataList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "luntanCell") as! LuntanTableViewCell
         if oneOfList1.posttext?.count ?? 0 > 50 && isopen[indexPath.row] == false {
-            let oneOfList = LuntanData(id: dataList[indexPath.row].id, plateid: dataList[indexPath.row].plateid, platename: dataList[indexPath.row].platename, authid: dataList[indexPath.row].authid, authnickname: dataList[indexPath.row].authnickname, authportrait: dataList[indexPath.row].authportrait, posttip: dataList[indexPath.row].posttip ?? "", posttitle: dataList[indexPath.row].posttitle!, posttext: dataList[indexPath.row].posttext ?? "", postpicture: dataList[indexPath.row].postpicture ?? "", like: dataList[indexPath.row].like ?? "", favorite: dataList[indexPath.row].favorite ?? "", time: dataList[indexPath.row].time!,age: dataList[indexPath.row].age  ?? "?",gender: dataList[indexPath.row].gender  ?? "?",region: dataList[indexPath.row].region  ?? "?",property: dataList[indexPath.row].property ?? "?")
+            let oneOfList = LuntanData(indexPath:indexPath, id: dataList[indexPath.row].id, plateid: dataList[indexPath.row].plateid, platename: dataList[indexPath.row].platename, authid: dataList[indexPath.row].authid, authnickname: dataList[indexPath.row].authnickname, authportrait: dataList[indexPath.row].authportrait, posttip: dataList[indexPath.row].posttip ?? "", posttitle: dataList[indexPath.row].posttitle!, posttext: dataList[indexPath.row].posttext ?? "", postpicture: dataList[indexPath.row].postpicture ?? "", like: dataList[indexPath.row].like ?? "", favorite: dataList[indexPath.row].favorite ?? "", time: dataList[indexPath.row].time!,age: dataList[indexPath.row].age  ?? "?",gender: dataList[indexPath.row].gender  ?? "?",region: dataList[indexPath.row].region  ?? "?",property: dataList[indexPath.row].property ?? "?")
             print("省了\(String(describing: oneOfList.posttext))")
             oneOfList.posttext = String((oneOfList.posttext?.prefix(50) ?? "")) + "......"
             cell.delegate = self
@@ -462,8 +472,8 @@ extension LuntanViewController:UITableViewDelegate,UITableViewDataSource{
 extension LuntanViewController:LuntanTableViewCellDelegate{
 
     
-    func detail_content(posttext: UILabel!, post_detail_text: String!,sender:UIButton) {
-//        print("全文")
+    func detail_content(indexPath:IndexPath) {
+        print("全文")
 //                if post_detail_text?.count ?? 0 > 50 {
 //                    posttext.text = String((post_detail_text?.prefix(50))!) + "......"
 //                    sender.isHidden = false
@@ -474,7 +484,12 @@ extension LuntanViewController:LuntanTableViewCellDelegate{
 //                }
 //        posttext.text = post_detail_text
 //        sender.isHidden = true
-        
+                if isopen[indexPath.row] == false {
+                    isopen[indexPath.row] = true
+                }else{
+                    isopen[indexPath.row] = false
+                }
+        luntanTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         
     }
     

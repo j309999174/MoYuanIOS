@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3bC-gC-7kI">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3bC-gC-7kI">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +16,7 @@
                     <tabBarItem key="tabBarItem" title="消息" image="xiaoxi" id="JUT-St-sCX"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qez-Ft-kBh">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -54,7 +52,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Nz-dT-z4e">
-                                <rect key="frame" x="0.0" y="20" width="375" height="406"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="406"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="xJj-ts-tvb">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
@@ -63,14 +61,14 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FMj-0q-3G8">
-                                                        <rect key="frame" x="80" y="24" width="80" height="80"/>
+                                                        <rect key="frame" x="40" y="24" width="80" height="80"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="80" id="eQa-9p-uwG"/>
                                                             <constraint firstAttribute="height" constant="80" id="irr-Ni-Jrg"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogp-a3-hld">
-                                                        <rect key="frame" x="235.5" y="49" width="59.5" height="30"/>
+                                                        <rect key="frame" x="275.5" y="49" width="59.5" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                         <color key="textColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -78,11 +76,11 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="FMj-0q-3G8" firstAttribute="leading" secondItem="Jsc-GS-UVu" secondAttribute="leading" constant="80" id="4gO-r6-wIk"/>
+                                                    <constraint firstItem="FMj-0q-3G8" firstAttribute="leading" secondItem="Jsc-GS-UVu" secondAttribute="leading" constant="40" id="4gO-r6-wIk"/>
                                                     <constraint firstItem="FMj-0q-3G8" firstAttribute="top" secondItem="Jsc-GS-UVu" secondAttribute="top" constant="24" id="HLS-1h-NzV"/>
                                                     <constraint firstAttribute="bottom" secondItem="FMj-0q-3G8" secondAttribute="bottom" constant="24" id="SSX-VH-KKa"/>
                                                     <constraint firstItem="Ogp-a3-hld" firstAttribute="centerY" secondItem="Jsc-GS-UVu" secondAttribute="centerY" id="eTP-lB-eW8"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Ogp-a3-hld" secondAttribute="trailing" constant="80" id="pCI-4w-NNu"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Ogp-a3-hld" secondAttribute="trailing" constant="40" id="pCI-4w-NNu"/>
                                                 </constraints>
                                             </view>
                                         </subviews>

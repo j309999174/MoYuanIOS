@@ -54,10 +54,19 @@ class SettingViewController: UIViewController {
         userInfo.removeObject(forKey: "userID")
         userInfo.removeObject(forKey: "userNickName")
         userInfo.removeObject(forKey: "userPortrait")
-        let sb = UIStoryboard(name: "Main1", bundle:nil)
-        let vc = sb.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
-        vc.hidesBottomBarWhenPushed = true
-        self.show(vc, sender: nil)
+//        let sb = UIStoryboard(name: "Main1", bundle:nil)
+//        let vc = sb.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
+//        vc.hidesBottomBarWhenPushed = true
+//        self.show(vc, sender: nil)
+        //let sb = UIStoryboard(name: "Main", bundle:nil)
+        //let vc = sb.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
+        //self.present(vc, animated: true, completion: nil)
+        //self.show(vc, sender: nil)
+        self.navigationController?.tabBarController?.selectedIndex = 0
+//        let sb = UIStoryboard(name: "Main1", bundle:nil)
+//        let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+//        vc.tabBarController?.tabBar.isHidden = false
+//        self.show(vc, sender: nil)
     }
     
     override func viewDidLoad() {
