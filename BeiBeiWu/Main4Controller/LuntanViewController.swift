@@ -160,6 +160,8 @@ class LuntanViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        Uniquelogin.compareUniqueLoginToken(view: self)
+        
         print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
         if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
             self.tabBarController?.tabBar.items![1].badgeValue = nil

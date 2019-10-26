@@ -19,6 +19,19 @@ class SignUpViewController: UIViewController {
     
     var smscode:String?
     
+    @IBAction func policy_link(_ sender: Any) {
+        let sb = UIStoryboard(name: "Personal", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SliderWebview") as! SliderWebviewViewController
+        vc.url = "https://www.banghua.xin/privacypolicy.html"
+        vc.hidesBottomBarWhenPushed = true
+        self.show(vc, sender: nil)
+    }
+    
+    
+    @IBOutlet weak var policy_check: UISwitch!
+    
+    
+    
     @IBAction func verification_btn(_ sender: UIButton) {
         if userPhone.text != nil {
             let parameters: Parameters = ["phoneNumber": userPhone.text!]
@@ -68,7 +81,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signIn_btn(_ sender: Any) {
         
-        if ((userPhone?.text) != nil) && ((userPassword?.text) != nil) && ((authCode?.text) != nil){
+        if ((userPhone?.text) != nil) && ((userPassword?.text) != nil) && ((authCode?.text) != nil && policy_check.isOn){
         
             if (authCode?.text) == smscode {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserSetIdentity") as! UserSetViewController
@@ -80,6 +93,9 @@ class SignUpViewController: UIViewController {
                 self.view.makeToast("验证码错误")
             }
            
+        }else{
+            //self.view.makeToast("请输入手机号，密码，验证码，并同意用户协议")
+            self.view.makeToast("请输入手机号，密码，验证码，并同意用户协议", duration: 3.0, position: .center)
         }
     }
     

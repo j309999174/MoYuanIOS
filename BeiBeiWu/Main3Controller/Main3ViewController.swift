@@ -39,6 +39,9 @@ class Main3ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.viewDidLoad()
         super.viewWillAppear(false)
+        
+        Uniquelogin.compareUniqueLoginToken(view: self)
+        
         print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
         if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
             self.tabBarController?.tabBar.items![1].badgeValue = nil
@@ -52,7 +55,7 @@ class Main3ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Uniquelogin.compareUniqueLoginToken(view: self)
+        
         RCIM.shared()?.userInfoDataSource = self
         //融云个人名片
         RCContactCardKit.shareInstance()?.contactsDataSource = self as RCCCContactsDataSource

@@ -12,6 +12,10 @@ class Main5ViewController: UIViewController {
     @IBOutlet weak var userPortrait_image: UIImageView!
     @IBOutlet weak var userNickName_label: UILabel!
     @IBOutlet weak var beiyuanhao: UILabel!
+    
+    @IBOutlet weak var buyvip_view: UIView!
+    
+    
     @IBAction func gerenziliao(_ sender: UIButton) {
         
     }
@@ -78,6 +82,9 @@ class Main5ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
+        
+        Uniquelogin.compareUniqueLoginToken(view: self)
+        
         print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
         if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
             self.tabBarController?.tabBar.items![1].badgeValue = nil
@@ -89,7 +96,7 @@ class Main5ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Uniquelogin.compareUniqueLoginToken(view: self)
+        isHiddenBuyVip()
         
         let userInfo = UserDefaults()
         userID = userInfo.string(forKey: "userID")
@@ -139,6 +146,23 @@ class Main5ViewController: UIViewController {
                     self.tabBarController?.tabBar.items![2].badgeValue = nil
                 }else{
                     self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                }
+            }
+        }
+    }
+    
+    func isHiddenBuyVip() {
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=systemswitch&m=socialchat", method: .post).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "1" {
+                    self.buyvip_view.isHidden = true
+                }else{
+                    self.buyvip_view.isHidden = false
                 }
             }
         }

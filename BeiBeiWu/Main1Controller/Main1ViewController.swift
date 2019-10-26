@@ -367,23 +367,27 @@ class Main1ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
-        if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
-            self.tabBarController?.tabBar.items![1].badgeValue = nil
-        }else{
-            self.tabBarController?.tabBar.items![1].badgeValue = String(Int((RCIMClient.shared()?.getTotalUnreadCount())!))
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
         if UserDefaults().string(forKey: "userID") == nil{
             let sb = UIStoryboard(name: "Main1", bundle:nil)
             let vc = sb.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
             vc.hidesBottomBarWhenPushed = false
             self.show(vc, sender: nil)
         }
+        
+        print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
+        if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
+            self.tabBarController?.tabBar.items![1].badgeValue = nil
+        }else{
+            self.tabBarController?.tabBar.items![1].badgeValue = String(Int((RCIMClient.shared()?.getTotalUnreadCount())!))
+        }
+        
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        
         
         
         print("嘿")

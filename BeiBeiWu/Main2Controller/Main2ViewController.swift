@@ -16,6 +16,8 @@ class Main2ViewController: RCConversationListViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("展示")
+        
+        Uniquelogin.compareUniqueLoginToken(view: self)
         //        let type1:RCConversationType = .ConversationType_PRIVATE
         //        let type2:RCConversationType = .ConversationType_DISCUSSION
         //        let type3:RCConversationType = .ConversationType_CHATROOM
@@ -69,7 +71,7 @@ class Main2ViewController: RCConversationListViewController {
         self.setDisplayConversationTypes([1,2,3,4,6,7])
         
         self.setCollectionConversationType([7])
-        Uniquelogin.compareUniqueLoginToken(view: self)
+        
 
         let parameters1: Parameters = ["myid": userID!]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters1).response { response in

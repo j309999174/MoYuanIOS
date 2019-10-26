@@ -441,6 +441,7 @@
                     <navigationItem key="navigationItem" id="XLL-fN-Old"/>
                     <connections>
                         <outlet property="beiyuanhao" destination="yaq-VO-WyQ" id="JoS-jR-J3G"/>
+                        <outlet property="buyvip_view" destination="gYd-ua-85L" id="fxx-Yv-fJN"/>
                         <outlet property="personImage_click" destination="P6w-Vi-KLk" id="9Uq-a7-XRW"/>
                         <outlet property="userNickName_label" destination="XMb-LD-k7w" id="YeH-B5-Yve"/>
                         <outlet property="userPortrait_image" destination="JpV-dt-xbq" id="y4c-bB-AZ3"/>
@@ -2001,6 +2002,7 @@
                                             <outlet property="vipname" destination="ckY-hM-haG" id="UOE-EL-IYd"/>
                                             <outlet property="vipprice" destination="d1B-Ee-ajA" id="Gaf-TZ-VV1"/>
                                             <outlet property="viptime" destination="X7I-IG-9j2" id="uWu-O7-4XJ"/>
+                                            <outlet property="weixin_btn" destination="fEl-wP-Oqq" id="yNj-gW-Sot"/>
                                             <outlet property="weixin_image" destination="jB6-t3-TDd" id="Jly-oq-3I7"/>
                                         </connections>
                                     </tableViewCell>

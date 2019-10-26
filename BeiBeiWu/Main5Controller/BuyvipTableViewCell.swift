@@ -26,6 +26,7 @@ class BuyvipTableViewCell: UITableViewCell {
     @IBOutlet weak var vipprice: UILabel!
     
     @IBOutlet weak var weixin_image: UIImageView!
+    @IBOutlet weak var weixin_btn: UIButton!
     
     @IBAction func weixinpay(_ sender: Any) {
         delegate?.weixinpay(vipid: vipidString!)
@@ -47,6 +48,13 @@ class BuyvipTableViewCell: UITableViewCell {
         viptime.text = "\(data.viptime)天"
         vipprice.text = "\(data.vipprice)元"
         
+        if WXApi.isWXAppInstalled(){
+            weixin_image.isHidden = false
+            weixin_btn.isHidden = false
+        }else{
+            weixin_image.isHidden = true
+            weixin_btn.isHidden = true
+        }
         
         let imgClick = UITapGestureRecognizer(target: self, action: #selector(weixin_image_Action))
         weixin_image.addGestureRecognizer(imgClick)
