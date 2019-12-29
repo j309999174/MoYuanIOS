@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import StoreKit
 
 
 
@@ -33,18 +34,44 @@ class BuyvipViewController: UIViewController {
     @IBOutlet weak var buyvipTableView: UITableView!
     
     
+    var products = [SKProduct]()
+    
+    var request: SKProductsRequest!
+    
+    
     var dataList:[BuyvipData] = []
+    
+    var system_switch = "0"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "购买会员"
+        self.navigationItem.title = "购买"
         
         
+        //1.获取本地产品标识
+        guard let url = Bundle.main.url(forResource: "product_ids", withExtension: "plist") else { fatalError("Unable to resolve url for in the bundle.") }
+        do {
+            let data = try Data(contentsOf: url)
+            let productIdentifiers = try PropertyListSerialization.propertyList(from: data, options: .mutableContainersAndLeaves, format: nil) as? [String]
+            self.fetchProduct(productIdentifiers: productIdentifiers!)
+           } catch let error as NSError {
+            print("\(error.localizedDescription)")
+        }
         
-        initViplist()
+        
+        isHiddenBuyVip()
+        
+        
         //支付通知
         NotificationCenter.default.addObserver(self, selector: #selector(successnotify), name: NSNotification.Name(rawValue: "PaySuccessNotification"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(failnotify), name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
+    }
+    
+    func fetchProduct(productIdentifiers: [String]) {
+         let productIdentifiers = Set(productIdentifiers)
+         request = SKProductsRequest(productIdentifiers: productIdentifiers)
+         request.delegate = self
+         request.start()
     }
 
     @objc func successnotify(){
@@ -54,7 +81,21 @@ class BuyvipViewController: UIViewController {
         self.view.makeToast("支付失败")
     }
     
-    
+    func isHiddenBuyVip() {
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=systemswitch&m=socialchat", method: .post).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "1" {
+                    self.system_switch = "1"
+                }
+                self.initViplist()
+            }
+        }
+    }
     
     func initViplist(){
 
@@ -79,6 +120,27 @@ class BuyvipViewController: UIViewController {
 
 }
 
+extension BuyvipViewController:SKProductsRequestDelegate{
+    
+    // SKProductsRequestDelegate protocol method.
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        print("获取的vip数量\(response.products.count)")
+        if !response.products.isEmpty {
+        
+           products = response.products
+           // Custom method.
+            DispatchQueue.main.async {
+                print("main refresh")
+                //self.producttableview.reloadData()
+            }
+           
+        }
+        for invalidIdentifier in response.invalidProductIdentifiers {
+           // Handle any invalid product identifiers as appropriate.
+        }
+    }
+}
+
 
 extension BuyvipViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -90,11 +152,51 @@ extension BuyvipViewController:UITableViewDelegate,UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "BuyvipCell") as! BuyvipTableViewCell
         
-        cell.setData(data: oneOfList)
+        cell.setData(data: oneOfList,system_switch: self.system_switch)
         cell.delegate = self
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
     }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let oneOfList = dataList[indexPath.row]
+        print("vip数量\(products.count)")
+        switch oneOfList.vipname {
+        case "钻石会员":
+            for index in 0...2 {
+                let product = products[index]
+                if product.productIdentifier == "vip6" {
+                    let payment = SKMutablePayment(product: product)
+                    payment.quantity = 1
+                    SKPaymentQueue.default().add(payment)
+                }
+            }
+        case "黑金会员":
+            for index in 0...2 {
+                let product = products[index]
+                if product.productIdentifier == "vip5" {
+                    let payment = SKMutablePayment(product: product)
+                    payment.quantity = 1
+                    SKPaymentQueue.default().add(payment)
+                }
+            }
+        case "白金会员":
+            for index in 0...2 {
+                let product = products[index]
+                if product.productIdentifier == "vip4" {
+                    let payment = SKMutablePayment(product: product)
+                    payment.quantity = 1
+                    SKPaymentQueue.default().add(payment)
+                }
+            }
+        default:
+            break
+        }
+        
+    }
+    
+    
 }
 
 
@@ -153,9 +255,9 @@ extension BuyvipViewController:BuyvipTableViewCellDelegate{
             
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)")
-                AlipaySDK.defaultService()?.payOrder(utf8Text, fromScheme: "beibeiwualipay"){
-                    result in
-                }
+//                AlipaySDK.defaultService()?.payOrder(utf8Text, fromScheme: "beibeiwualipay"){
+//                    result in
+//                }
             }
         }
     }

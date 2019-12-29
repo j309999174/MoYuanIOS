@@ -15,6 +15,9 @@ protocol BuyvipTableViewCellDelegate{
 
 class BuyvipTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var watch_iamge: UIImageView!
+    
+    @IBOutlet weak var time_iamge: UIImageView!
     @IBOutlet weak var vipid: UILabel!
     
     @IBOutlet weak var vipname: UILabel!
@@ -41,12 +44,22 @@ class BuyvipTableViewCell: UITableViewCell {
     var delegate:BuyvipTableViewCellDelegate?
     
     var vipidString:String?
-    func setData(data:BuyvipData){
+    func setData(data:BuyvipData,system_switch:String){
+        
         vipidString = data.vipid
         vipid.text = data.vipid
         vipname.text = data.vipname
         viptime.text = "\(data.viptime)天"
         vipprice.text = "\(data.vipprice)元"
+        
+        if system_switch == "1" {
+            watch_iamge.isHidden = false
+            viptime.isHidden = true
+            time_iamge.isHidden = true
+            vipname.text = "贝贝情侣表"
+        }
+        
+        
         
         if WXApi.isWXAppInstalled(){
             weixin_image.isHidden = false

@@ -16,6 +16,8 @@ class Main5ViewController: UIViewController {
     @IBOutlet weak var buyvip_view: UIView!
     
     
+    @IBOutlet weak var whosawme_view: UIView!
+    
     @IBAction func gerenziliao(_ sender: UIButton) {
         
     }
@@ -25,6 +27,8 @@ class Main5ViewController: UIViewController {
     @IBAction func openVIP(_ sender: UIButton) {
         
     }
+    @IBOutlet weak var openvip_btn: UIButton!
+    
     @IBOutlet weak var personImage_click: UIImageView!
     @IBAction func scoreQuery(_ sender: UIButton) {
         let userInfo = UserDefaults()
@@ -160,10 +164,11 @@ class Main5ViewController: UIViewController {
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)")
                 if utf8Text == "1" {
-                    self.buyvip_view.isHidden = true
-                }else{
-                    self.buyvip_view.isHidden = false
+                    self.whosawme_view.isHidden = true
+                    self.openvip_btn.setTitle("购买周边", for: UIControl.State.normal)
                 }
+                
+                
             }
         }
     }

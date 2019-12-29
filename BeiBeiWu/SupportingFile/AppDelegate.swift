@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import UserNotifications
 import RongContactCard
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,9 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     let locationManager = CLLocationManager()
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        SKPaymentQueue.default().add(StoreObserver.shared)
+        
         checkLocationServices()
        
         UINavigationBar.appearance().backgroundColor = UIColor.orange
@@ -89,41 +94,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             WXApi.handleOpen(url, delegate: self)
         }
         //支付宝回调
-        if url.host == "safepay"{
-            AlipaySDK.defaultService().processOrder(withPaymentResult: url){
-                value in
-                let code = value!
-                let resultStatus = code["resultStatus"] as!String
-                var content = ""
-                switch resultStatus {
-                case "9000":
-                    content = "支付成功"
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PaySuccessNotification"), object: nil)
-                case "8000":
-                    content = "订单正在处理中"
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "aliPayUnknowStatus"), object: content)
-                case "4000":
-                    content = "支付失败"
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
-                case "5000":
-                    content = "重复请求"
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
-                case "6001":
-                    content = "中途取消"
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
-                case "6002":
-                    content = "网络连接出错"
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "aliPayDefault"), object: content)
-                case "6004":
-                    content = "支付结果未知"
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "aliPayUnknowStatus"), object: content)
-                default:
-                    content = "支付失败"
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
-                    break
-                }
-            }
-        }
+//        if url.host == "safepay"{
+//            AlipaySDK.defaultService().processOrder(withPaymentResult: url){
+//                value in
+//                let code = value!
+//                let resultStatus = code["resultStatus"] as!String
+//                var content = ""
+//                switch resultStatus {
+//                case "9000":
+//                    content = "支付成功"
+//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PaySuccessNotification"), object: nil)
+//                case "8000":
+//                    content = "订单正在处理中"
+//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "aliPayUnknowStatus"), object: content)
+//                case "4000":
+//                    content = "支付失败"
+//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
+//                case "5000":
+//                    content = "重复请求"
+//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
+//                case "6001":
+//                    content = "中途取消"
+//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
+//                case "6002":
+//                    content = "网络连接出错"
+//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "aliPayDefault"), object: content)
+//                case "6004":
+//                    content = "支付结果未知"
+//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "aliPayUnknowStatus"), object: content)
+//                default:
+//                    content = "支付失败"
+//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PayFailNotification"), object: nil)
+//                    break
+//                }
+//            }
+//        }
         return true
     }
     func applicationWillResignActive(_ application: UIApplication) {
@@ -146,6 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        SKPaymentQueue.default().remove(StoreObserver.shared)
     }
 
 

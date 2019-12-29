@@ -442,9 +442,11 @@
                     <connections>
                         <outlet property="beiyuanhao" destination="yaq-VO-WyQ" id="JoS-jR-J3G"/>
                         <outlet property="buyvip_view" destination="gYd-ua-85L" id="fxx-Yv-fJN"/>
+                        <outlet property="openvip_btn" destination="cGU-75-3Y3" id="8bv-k4-QUw"/>
                         <outlet property="personImage_click" destination="P6w-Vi-KLk" id="9Uq-a7-XRW"/>
                         <outlet property="userNickName_label" destination="XMb-LD-k7w" id="YeH-B5-Yve"/>
                         <outlet property="userPortrait_image" destination="JpV-dt-xbq" id="y4c-bB-AZ3"/>
+                        <outlet property="whosawme_view" destination="egz-4q-kMI" id="Ktp-hn-jrn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KI2-IE-jHO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1893,6 +1895,9 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tqs-9S-9f2">
                                                                     <rect key="frame" x="0.0" y="55" width="94" height="30"/>
                                                                     <subviews>
+                                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watch" translatesAutoresizingMaskIntoConstraints="NO" id="ZNg-gQ-YAf">
+                                                                            <rect key="frame" x="-4" y="0.0" width="0.0" height="30"/>
+                                                                        </imageView>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="aFi-Gw-77v">
                                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                             <constraints>
@@ -1929,9 +1934,15 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ti0-eq-gGv">
-                                                            <rect key="frame" x="281" y="24" width="84" height="68"/>
+                                                            <rect key="frame" x="281" y="61.666666666666679" width="84" height="30.333333333333336"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="knj-jh-5a3">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💵购买" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2u-2U-Djn">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="84" height="30.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="22"/>
+                                                                    <color key="textColor" name="PrimaryDark"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="knj-jh-5a3">
                                                                     <rect key="frame" x="0.0" y="0.0" width="84" height="30"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weixin" translatesAutoresizingMaskIntoConstraints="NO" id="jB6-t3-TDd">
@@ -1956,8 +1967,8 @@
                                                                         <constraint firstItem="fEl-wP-Oqq" firstAttribute="leading" secondItem="jB6-t3-TDd" secondAttribute="trailing" constant="23" id="JO7-Ow-Ia2"/>
                                                                     </constraints>
                                                                 </stackView>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="b6u-S5-JqG">
-                                                                    <rect key="frame" x="0.0" y="38" width="84" height="30"/>
+                                                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="b6u-S5-JqG">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="84" height="30"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhifubao" translatesAutoresizingMaskIntoConstraints="NO" id="5Di-pL-Ns3">
                                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -1998,10 +2009,12 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="alipay_image" destination="5Di-pL-Ns3" id="mQt-PO-Gmd"/>
+                                            <outlet property="time_iamge" destination="aFi-Gw-77v" id="tUt-h6-6pd"/>
                                             <outlet property="vipid" destination="eiz-D3-gaK" id="Lg5-dk-TfU"/>
                                             <outlet property="vipname" destination="ckY-hM-haG" id="UOE-EL-IYd"/>
                                             <outlet property="vipprice" destination="d1B-Ee-ajA" id="Gaf-TZ-VV1"/>
                                             <outlet property="viptime" destination="X7I-IG-9j2" id="uWu-O7-4XJ"/>
+                                            <outlet property="watch_iamge" destination="ZNg-gQ-YAf" id="0VQ-Bz-KyS"/>
                                             <outlet property="weixin_btn" destination="fEl-wP-Oqq" id="yNj-gW-Sot"/>
                                             <outlet property="weixin_image" destination="jB6-t3-TDd" id="Jly-oq-3I7"/>
                                         </connections>
@@ -2390,6 +2403,7 @@
         <image name="threepoints" width="150" height="150"/>
         <image name="time" width="150" height="150"/>
         <image name="vip" width="150" height="150"/>
+        <image name="watch" width="485" height="241"/>
         <image name="weixin" width="150" height="150"/>
         <image name="wode" width="25" height="25"/>
         <image name="zhifubao" width="150" height="150"/>

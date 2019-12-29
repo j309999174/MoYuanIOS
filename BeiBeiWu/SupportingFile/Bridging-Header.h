@@ -15,7 +15,7 @@
 #import <RongIMKit/RongIMKit.h>
 #import "WXApi.h"
 #import "WXApiObject.h"
-#import <AlipaySDK/AlipaySDK.h>
+//#import <AlipaySDK/AlipaySDK.h>
 
 @interface AppDelegate : UIResponder<UIApplicationDelegate, WXApiDelegate>
 

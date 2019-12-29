@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (4.9.0)
-  - AlipaySDK-iOS (15.5.9)
   - DynamicBlurView (4.0.0)
   - FSPagerView (0.8.3)
   - MarqueeLabel (4.0.0)
@@ -25,7 +24,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
-  - AlipaySDK-iOS
   - FSPagerView
   - MarqueeLabel
   - PopupDialog (~> 1.1)
@@ -41,7 +39,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
-    - AlipaySDK-iOS
     - DynamicBlurView
     - FSPagerView
     - MarqueeLabel
@@ -54,7 +51,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
-  AlipaySDK-iOS: 1c5283b30977a24acecc0114662697f7dc78f618
   DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   MarqueeLabel: b55b26e690b6ad41faedd95cbf5eae6f1d1735b4
@@ -65,6 +61,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 36f4720243c8582c2be243a60a51e193c761f541
   WechatOpenSDK: 368ae03b72ee3ea1328c4f11326fbb5d2721d118
 
-PODFILE CHECKSUM: b94ae67ff1f88cf27ecb14d61c640a785f1e22f0
+PODFILE CHECKSUM: bc4899d54c091b4d49d7a5e06d8649b69b3ccb8b
 
 COCOAPODS: 1.8.3
