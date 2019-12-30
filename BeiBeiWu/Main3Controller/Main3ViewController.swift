@@ -106,11 +106,18 @@ class Main3ViewController: UIViewController {
             
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)")
-                self.newFriend_label.setTitle("+新朋友 \(utf8Text)", for: UIControl.State.normal)
+                
                 if utf8Text == "0" {
                     self.tabBarController?.tabBar.items![2].badgeValue = nil
                 }else{
-                    self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                    let newFriendNumber = UserDefaults().string(forKey: "no")
+                    if(newFriendNumber ?? "0" == utf8Text){
+                        self.tabBarController?.tabBar.items![2].badgeValue = nil
+                        self.newFriend_label.setTitle("+新朋友", for: UIControl.State.normal)
+                    }else{
+                        self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                        self.newFriend_label.setTitle("+新朋友 \(utf8Text)", for: UIControl.State.normal)
+                    }
                 }
             }
         }

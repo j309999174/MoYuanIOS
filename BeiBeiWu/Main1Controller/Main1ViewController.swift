@@ -536,11 +536,16 @@ class Main1ViewController: UIViewController {
                 print("Error: \(String(describing: response.error))")
                 
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                    print("Data: \(utf8Text)")
+                    print("newFriendNumber1: \(utf8Text)")
                     if utf8Text == "0" {
                         self.tabBarController?.tabBar.items![2].badgeValue = nil
                     }else{
-                        self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                        let newFriendNumber = UserDefaults().string(forKey: "no")
+                        if(newFriendNumber ?? "0" == utf8Text){
+                            self.tabBarController?.tabBar.items![2].badgeValue = nil
+                        }else{
+                            self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                        }
                     }
                 }
             }

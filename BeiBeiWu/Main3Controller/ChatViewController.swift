@@ -18,6 +18,13 @@ class ChatViewController: RCConversationViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
+        
+        print("未读信息数\(String(describing: RCIMClient.shared()?.getTotalUnreadCount()))")
+        if RCIMClient.shared()?.getTotalUnreadCount() == 0 {
+            self.tabBarController?.tabBar.items![1].badgeValue = nil
+        }else{
+            self.tabBarController?.tabBar.items![1].badgeValue = String(Int((RCIMClient.shared()?.getTotalUnreadCount())!))
+        }
     }
     //点击事件方法
     @objc func rightbarAction() -> Void {

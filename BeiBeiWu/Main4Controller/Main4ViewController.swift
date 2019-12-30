@@ -134,7 +134,12 @@ class Main4ViewController: UIViewController {
                 if utf8Text == "0" {
                     self.tabBarController?.tabBar.items![2].badgeValue = nil
                 }else{
-                    self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                    let newFriendNumber = UserDefaults().string(forKey: "no")
+                    if(newFriendNumber ?? "0" == utf8Text){
+                        self.tabBarController?.tabBar.items![2].badgeValue = nil
+                    }else{
+                        self.tabBarController?.tabBar.items![2].badgeValue = utf8Text
+                    }
                 }
             }
         }

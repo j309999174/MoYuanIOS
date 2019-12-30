@@ -18,7 +18,7 @@ struct NewFriendStruct: Codable {
     let agree: String
 }
 
-class NewFriendViewController: UIViewController {
+class NewFriendViewController: UIViewController,UIGestureRecognizerDelegate {
 
     
     @IBOutlet weak var newFriendTableView: UITableView!
@@ -28,6 +28,29 @@ class NewFriendViewController: UIViewController {
     var userNickName:String?
     var userPortrait:String?
     var dataList:[NewFriendData] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        //保存当前申请好友数
+        let parameters: Parameters = ["myid": userID!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=friendsapplynumber&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+                if utf8Text == "0" {
+                    self.tabBarController?.tabBar.items![2].badgeValue = nil
+                }else{
+                    let newFriendNumber = UserDefaults()
+                    newFriendNumber.setValue(utf8Text, forKey: "no")
+                    self.tabBarController?.tabBar.items![2].badgeValue = nil
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userID = userInfo.string(forKey: "userID")
@@ -56,6 +79,56 @@ class NewFriendViewController: UIViewController {
             
         }
         // Do any additional setup after loading the view.
+        
+        
+        
+        
+        
+        //长按删除
+        setupLongPressGesture()
+        
+    }
+
+   func setupLongPressGesture() {
+        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress))
+        longPressGesture.minimumPressDuration = 1.0 // 1 second press
+        longPressGesture.delegate = self
+        self.newFriendTableView.addGestureRecognizer(longPressGesture)
+    }
+
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
+        if gestureRecognizer.state == .ended {
+            let touchPoint = gestureRecognizer.location(in: self.newFriendTableView)
+            if let indexPath = newFriendTableView.indexPathForRow(at: touchPoint) {
+                print("长按了\(dataList[indexPath[1]].userID)")
+                print("长按了\(dataList[indexPath[1]].userNickName)")
+                //删除申请的好友
+                let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+                
+                actionSheet.addAction(UIAlertAction(title: "删除", style: .default, handler: {(action: UIAlertAction) in
+                    let parameters: Parameters = ["myid": self.dataList[indexPath[1]].userID,"yourid":self.userID!]
+                    Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=DeleteFriendsapply&m=socialchat", method: .post, parameters: parameters).response { response in
+                        print("Request: \(String(describing: response.request))")
+                        print("Response: \(String(describing: response.response))")
+                        print("Error: \(String(describing: response.error))")
+
+                        self.dataList.remove(at: indexPath[1])
+                        self.newFriendTableView.reloadData()
+                        print("已删除新好友项")
+                        
+                        
+                    }
+                }))
+                
+                
+                actionSheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    actionSheet.popoverPresentationController!.sourceView = self.view
+                    actionSheet.popoverPresentationController!.sourceRect = CGRect(x: 0,y: 0,width: 1.0,height: 1.0);
+                }
+                self.present(actionSheet, animated: true, completion: nil)
+            }
+        }
     }
     
 }
