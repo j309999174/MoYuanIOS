@@ -171,7 +171,10 @@ class SignInViewController: UIViewController {
                     let jsonModel = try decoder.decode(WXUserinfo.self, from: data)
                     //http转为https
                     var portrait:String = jsonModel.headimgurl!
-                    portrait.insert("s", at: (portrait.index(portrait.startIndex, offsetBy: 4)))
+                    if !portrait.contains("https") {
+                        portrait.insert("s", at: (portrait.index(portrait.startIndex, offsetBy: 4)))
+                    }
+                    
                     //微信已获取到用户信息，现在需要保存到数据库
                     self.openid = jsonModel.openid!
                     self.uploadWXUserinfo(openid: jsonModel.openid!, nickname: jsonModel.nickname!, portrait: portrait)

@@ -64,6 +64,11 @@
 		057B1FDE22EA99A2000B8811 /* AlterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B1FDD22EA99A2000B8811 /* AlterButton.swift */; };
 		057B1FE022EB9523000B8811 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057B1FDF22EB9523000B8811 /* CoreLocation.framework */; };
 		058218952300EA5D0032B86C /* LuntanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058218942300EA5D0032B86C /* LuntanTableViewCell.swift */; };
+		059B164823BBBDBA0068C9DE /* DestinyUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059B164723BBBDBA0068C9DE /* DestinyUserInfo.swift */; };
+		05A11DA523BB364C00F39CF6 /* CardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A11DA423BB364C00F39CF6 /* CardLayout.swift */; };
+		05A11DA923BB373200F39CF6 /* BasicsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A11DA823BB373100F39CF6 /* BasicsCell.swift */; };
+		05A11DB523BB450600F39CF6 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A11DB423BB450600F39CF6 /* CardViewController.swift */; };
+		05A11DB723BB453C00F39CF6 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A11DB623BB453B00F39CF6 /* DataManager.swift */; };
 		05A57E6A2301D5F3001BC0F0 /* PostlistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A57E692301D5F3001BC0F0 /* PostlistData.swift */; };
 		05A77F55230168FE0010BC83 /* PostheadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A77F54230168FE0010BC83 /* PostheadTableViewCell.swift */; };
 		05A77F572301690D0010BC83 /* PostlistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A77F562301690D0010BC83 /* PostlistTableViewCell.swift */; };
@@ -145,6 +150,11 @@
 		057B1FDD22EA99A2000B8811 /* AlterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlterButton.swift; sourceTree = "<group>"; };
 		057B1FDF22EB9523000B8811 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		058218942300EA5D0032B86C /* LuntanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuntanTableViewCell.swift; sourceTree = "<group>"; };
+		059B164723BBBDBA0068C9DE /* DestinyUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinyUserInfo.swift; sourceTree = "<group>"; };
+		05A11DA423BB364C00F39CF6 /* CardLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLayout.swift; sourceTree = "<group>"; };
+		05A11DA823BB373100F39CF6 /* BasicsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicsCell.swift; sourceTree = "<group>"; };
+		05A11DB423BB450600F39CF6 /* CardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		05A11DB623BB453B00F39CF6 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		05A57E692301D5F3001BC0F0 /* PostlistData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostlistData.swift; sourceTree = "<group>"; };
 		05A77F54230168FE0010BC83 /* PostheadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostheadTableViewCell.swift; sourceTree = "<group>"; };
 		05A77F562301690D0010BC83 /* PostlistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostlistTableViewCell.swift; sourceTree = "<group>"; };
@@ -207,6 +217,11 @@
 				0542B99F22E77CE900E1AC34 /* Main4.storyboard */,
 				0542B9A122E77CF400E1AC34 /* Main5.storyboard */,
 				05115BC722EF853C00D7632A /* Personal.storyboard */,
+				05A11DA823BB373100F39CF6 /* BasicsCell.swift */,
+				05A11DA423BB364C00F39CF6 /* CardLayout.swift */,
+				05A11DB423BB450600F39CF6 /* CardViewController.swift */,
+				05A11DB623BB453B00F39CF6 /* DataManager.swift */,
+				059B164723BBBDBA0068C9DE /* DestinyUserInfo.swift */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -509,6 +524,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05A11DB523BB450600F39CF6 /* CardViewController.swift in Sources */,
 				05AAC63E2346AAAA0000C8BB /* RongContactCard.framework in Sources */,
 				05090C6623298F9B00DAB476 /* Uniquelogin.swift in Sources */,
 				05115BD222F03CF600D7632A /* SousuoResult.swift in Sources */,
@@ -521,6 +537,7 @@
 				05A77F55230168FE0010BC83 /* PostheadTableViewCell.swift in Sources */,
 				05090C6023295CF600DAB476 /* BlackListViewController.swift in Sources */,
 				05B2B01F2352859800EEC142 /* CommonSettingViewController.swift in Sources */,
+				05A11DA923BB373200F39CF6 /* BasicsCell.swift in Sources */,
 				058218952300EA5D0032B86C /* LuntanTableViewCell.swift in Sources */,
 				05A57E6A2301D5F3001BC0F0 /* PostlistData.swift in Sources */,
 				057B1FD022EA8E36000B8811 /* UserSetViewController.swift in Sources */,
@@ -559,11 +576,14 @@
 				05115BE122FE097C00D7632A /* NewFriendTableViewCell.swift in Sources */,
 				05A77F572301690D0010BC83 /* PostlistTableViewCell.swift in Sources */,
 				0502531B230201D700E8F3FE /* FabugentieViewController.swift in Sources */,
+				05A11DB723BB453C00F39CF6 /* DataManager.swift in Sources */,
 				05A77F5923016D540010BC83 /* PostlistViewController.swift in Sources */,
 				05119F2B230762F100545CF3 /* BuyvipData.swift in Sources */,
 				05115BDD22FE056A00D7632A /* NewFriendViewController.swift in Sources */,
 				05115BCE22F03C5400D7632A /* SousuoResultViewController.swift in Sources */,
 				0512F5382306748400237ABC /* SettingViewController.swift in Sources */,
+				05A11DA523BB364C00F39CF6 /* CardLayout.swift in Sources */,
+				059B164823BBBDBA0068C9DE /* DestinyUserInfo.swift in Sources */,
 				05119F292307624D00545CF3 /* BuyvipTableViewCell.swift in Sources */,
 				05119F272307622F00545CF3 /* BuyvipViewController.swift in Sources */,
 				050C87D822FE6B2A0019D9B0 /* LuntanViewController.swift in Sources */,

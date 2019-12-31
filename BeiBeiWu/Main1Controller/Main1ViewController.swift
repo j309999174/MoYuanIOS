@@ -36,6 +36,14 @@ struct TuiJianUserInfo: Codable {
 class Main1ViewController: UIViewController {
     
     
+    @IBAction func destiny_btn(_ sender: UIButton) {
+        //不同的StoryBoard下
+        let sb = UIStoryboard(name: "Personal", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "CardView") as! CardViewController
+        vc.hidesBottomBarWhenPushed = true
+        self.show(vc, sender: nil)
+    }
+    
     @IBOutlet weak var menu_sgement: UISegmentedControl!
     @IBAction func menuAction(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
