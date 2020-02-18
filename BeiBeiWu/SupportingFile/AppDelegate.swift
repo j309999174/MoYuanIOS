@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         checkLocationServices()
        
         UINavigationBar.appearance().backgroundColor = UIColor.orange
-        
+        IQKeyboardManager.shared.enable = true
         //注册融云
         RCIM.shared()?.initWithAppKey("vnroth0kvbh7o")
         RCIM.shared()?.enableMessageRecall = true
@@ -139,6 +139,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        print("进入后台")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

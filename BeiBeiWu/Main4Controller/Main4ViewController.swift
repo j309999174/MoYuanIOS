@@ -68,6 +68,8 @@ class Main4ViewController: UIViewController {
         super.viewDidLoad()
         Uniquelogin.compareUniqueLoginToken(view: self)
         
+        self.navigationItem.title = "贴"
+        self.navigationItem.hidesBackButton = false
         //获取幻灯片数据
         let getSlide: Parameters = ["type": "getSlide"]
         Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=guangchang&m=socialchat", method: .post, parameters: getSlide).response { response in

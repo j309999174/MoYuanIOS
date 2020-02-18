@@ -173,7 +173,9 @@ class LuntanViewController: UIViewController {
         super.viewDidLoad()
         
     
-        self.navigationItem.hidesBackButton = true
+        self.navigationItem.title = "贴"
+        self.navigationItem.hidesBackButton = false
+        self.tabBarController?.tabBar.isHidden = true
         
         
         let font_normal = UIFont.systemFont(ofSize: 20)

@@ -140,8 +140,12 @@ class UserSetViewController: UIViewController {
                 
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print("Data: \(utf8Text)")
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
-                    self.navigationController?.pushViewController(vc, animated: true)
+//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+//                    self.navigationController?.pushViewController(vc, animated: true)
+                    let sb = UIStoryboard(name: "YuanCard", bundle:nil)
+                    let vc = sb.instantiateViewController(withIdentifier: "YuanCard") as! CardViewController
+                    vc.hidesBottomBarWhenPushed = false
+                    self.show(vc, sender: nil)
                 }
             }
             
@@ -199,7 +203,7 @@ class UserSetViewController: UIViewController {
         }
         
         //键盘遮挡问题
-        NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        //NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(Main3ViewController.handleTap(sender:))))
     }
     @objc func kbFrameChanged(_ notification : Notification){

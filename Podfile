@@ -1,4 +1,5 @@
 # Uncomment the next line to define a global platform for your project
+source 'https://git.coding.net/CocoaPods/Specs.git'
 platform :ios, '10.0'
 
 target 'BeiBeiWu' do
@@ -19,5 +20,6 @@ pod 'RongCloudRTC/RongCallKit', '~> 2.9.20'
 pod 'RongCloudIM/Sight', '~> 2.9.20'
 pod 'PopupDialog', '~> 1.1'
 pod 'SDWebImage', '~> 5.0'
+#pod 'IQKeyboardManagerSwift'
 
 end

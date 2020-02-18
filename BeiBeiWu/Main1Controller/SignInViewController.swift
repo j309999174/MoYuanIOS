@@ -258,7 +258,7 @@ class SignInViewController: UIViewController {
         }
         // Do any additional setup after loading the view.
         //键盘遮挡问题
-        NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        //NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(Main3ViewController.handleTap(sender:))))
     }
     override func viewDidDisappear(_ animated: Bool) {
@@ -309,9 +309,14 @@ class SignInViewController: UIViewController {
 //                       let sb = UIStoryboard(name: "Main", bundle:nil)
 //                       let vc = sb.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
 //                       self.present(vc, animated: true, completion: nil)
-                        let sb = UIStoryboard(name: "Main1", bundle:nil)
-                        let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
-                        vc.tabBarController?.tabBar.isHidden = false
+                        //首页改为缘分
+//                        let sb = UIStoryboard(name: "Main1", bundle:nil)
+//                        let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+//                        vc.tabBarController?.tabBar.isHidden = false
+//                        self.show(vc, sender: nil)
+                        let sb = UIStoryboard(name: "YuanCard", bundle:nil)
+                        let vc = sb.instantiateViewController(withIdentifier: "YuanCard") as! CardViewController
+                        vc.hidesBottomBarWhenPushed = false
                         self.show(vc, sender: nil)
                     }else{
                         switch self.wxloginiffirst {
@@ -324,8 +329,12 @@ class SignInViewController: UIViewController {
 //                            vc.tabBarController?.tabBar.isHidden = false
 //                            self.show(vc, sender: nil)
                             //不存在，需要跳转设置页
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
-                            self.navigationController?.pushViewController(vc, animated: true)
+//                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+//                            self.navigationController?.pushViewController(vc, animated: true)
+                            let sb = UIStoryboard(name: "YuanCard", bundle:nil)
+                            let vc = sb.instantiateViewController(withIdentifier: "YuanCard") as! CardViewController
+                            vc.hidesBottomBarWhenPushed = false
+                            self.show(vc, sender: nil)
                             break
                         case "2":
                             //不存在，需要跳转设置页

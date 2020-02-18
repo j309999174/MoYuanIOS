@@ -37,7 +37,7 @@ DEPENDENCIES:
   - WechatOpenSDK
 
 SPEC REPOS:
-  trunk:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Alamofire
     - DynamicBlurView
     - FSPagerView
@@ -61,6 +61,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 36f4720243c8582c2be243a60a51e193c761f541
   WechatOpenSDK: 368ae03b72ee3ea1328c4f11326fbb5d2721d118
 
-PODFILE CHECKSUM: bc4899d54c091b4d49d7a5e06d8649b69b3ccb8b
+PODFILE CHECKSUM: 0d168619b4465f7124b4fb6db8b5d3c203a69df3
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4

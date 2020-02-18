@@ -54,6 +54,7 @@ class NewFriendTableViewCell: UITableViewCell {
         print("同意按钮")
         if agreeBtn.title(for: UIControl.State.normal) == "同意"{
             delegate?.didAgree(yourid: yourid!, yournickname: yournickname!, yourportrait: yourportrait!,agreebtn: agreeBtn)
+            agreeBtn.setTitle("已同意", for: UIControl.State.normal)
       }
     }
 }

@@ -44,7 +44,7 @@ class SettingViewController: UIViewController {
     }
     
     @IBAction func version_btn(_ sender: Any) {
-        self.view.makeToast("当前版本：1.0.0")
+        self.view.makeToast("当前版本：2.0.0")
     }
     
     

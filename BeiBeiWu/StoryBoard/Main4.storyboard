@@ -10,18 +10,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--动态-->
+        <!--Navigation Controller-->
         <scene sceneID="f1P-hN-DlK">
             <objects>
                 <navigationController id="uPl-Fu-i1n" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="动态" image="dongtai" id="yio-jG-QNz"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s3E-VY-A0a">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="aaP-Iu-Smd" kind="relationship" relationship="rootViewController" id="RT4-sl-pbH"/>
+                        <segue destination="aaP-Iu-Smd" kind="relationship" relationship="rootViewController" id="43j-RK-cWi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bt-TH-vrk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -277,7 +276,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LEj-vm-bll" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="416" y="139"/>
+            <point key="canvasLocation" x="436" y="147"/>
         </scene>
         <!--Fabudongtai View Controller-->
         <scene sceneID="qPB-EL-BpT">
@@ -501,6 +500,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SIs-VH-81R"/>
                     </view>
+                    <navigationItem key="navigationItem" id="28M-6x-qee"/>
                     <connections>
                         <outlet property="postContent" destination="Mtu-EL-Ul1" id="LoF-Bq-Ssg"/>
                         <outlet property="postPicture1" destination="34C-qC-Obr" id="jNo-OW-KIa"/>
@@ -1304,7 +1304,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dongtai" width="25" height="25"/>
         <image name="plus" width="201" height="200"/>
         <image name="threepoints" width="150" height="150"/>
         <namedColor name="PrimaryNormal">

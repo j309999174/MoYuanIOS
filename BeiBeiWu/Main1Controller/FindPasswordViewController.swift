@@ -101,7 +101,7 @@ class FindPasswordViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         //键盘遮挡问题
-        NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        //NotificationCenter.default.addObserver(self,selector:#selector(self.kbFrameChanged(_:)),name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     @objc func kbFrameChanged(_ notification : Notification){
