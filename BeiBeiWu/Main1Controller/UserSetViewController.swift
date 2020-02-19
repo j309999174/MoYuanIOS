@@ -122,16 +122,16 @@ class UserSetViewController: UIViewController {
           }
         )
         }else{
-            if userSignatureString == "" {
-                self.view.makeToast("请输入个人签名")
-                return
-            }
             print("进入微信注册")
             userAgeString = self.userAge.text!
             userRegionString = self.userRegion.text!
             userSignatureString = self.userSignature.text!
             userReferralString = self.userReferral.text!
             print(openid+userAgeString+userRegionString+userSignatureString+userReferralString)
+            if userSignatureString == "" {
+                self.view.makeToast("请输入个人签名")
+                return
+            }
             let parameters: Parameters = ["openid": openid,"userAge": userAgeString,"userGender": userGenderString,"userProperty": userPropertyString,"userRegion": userRegionString,"userSignature": userSignatureString,"referral": userReferralString]
             Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=signupwx&m=socialchat", method: .post, parameters: parameters).response { response in
                 print("Request: \(String(describing: response.request))")
