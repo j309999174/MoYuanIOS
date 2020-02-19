@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = UIColor.orange
         IQKeyboardManager.shared.enable = true
         //注册融云
-        RCIM.shared()?.initWithAppKey("vnroth0kvbh7o")
+        RCIM.shared()?.initWithAppKey("m7ua80gbmo0km")
         RCIM.shared()?.enableMessageRecall = true
         RCIM.shared()?.enableTypingStatus = true
         
