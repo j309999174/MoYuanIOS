@@ -103,6 +103,7 @@ class PersonalViewController: UIViewController {
                 if utf8Text == "好友人数未超过限制"{
                     self.makefriend()
                 }else{
+                    self.addFriendBtn.setTitle(utf8Text, for: UIControl.State.normal)
                     self.view.makeToast(utf8Text)
                 }
             }

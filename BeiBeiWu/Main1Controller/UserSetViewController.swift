@@ -23,6 +23,7 @@ struct 市: Codable {
 }
 
 class UserSetViewController: UIViewController {
+    var if_submited: Int = 0
     
     var logtype: String = ""
     var openid: String = ""
@@ -91,7 +92,10 @@ class UserSetViewController: UIViewController {
                 self.view.makeToast("请输入个人签名")
                 return
             }
-            
+            if if_submited == 1 {
+                return
+            }
+            if_submited = 1
         Alamofire.upload( multipartFormData: { multipartFormData in
             multipartFormData.append(self.userPhone.data(using: String.Encoding.utf8)!, withName: "userAccount")
             multipartFormData.append(self.userPassword.data(using: String.Encoding.utf8)!, withName: "userPassword")
@@ -132,6 +136,12 @@ class UserSetViewController: UIViewController {
                 self.view.makeToast("请输入个人签名")
                 return
             }
+            
+            if if_submited == 1 {
+                return
+            }
+            if_submited = 1
+            
             let parameters: Parameters = ["openid": openid,"userAge": userAgeString,"userGender": userGenderString,"userProperty": userPropertyString,"userRegion": userRegionString,"userSignature": userSignatureString,"referral": userReferralString]
             Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=signupwx&m=socialchat", method: .post, parameters: parameters).response { response in
                 print("Request: \(String(describing: response.request))")
