@@ -52,7 +52,7 @@ class LuntanViewController: UIViewController {
         subNav = sender.titleForSegment(at: sender.selectedSegmentIndex)!
         post_ScrollBottom = false
         pageIndex = 1
-        if subNav == "大圈" {
+        if subNav == "精华" {
             initViptime()
         }else{
             switch self.subNav {
@@ -96,7 +96,7 @@ class LuntanViewController: UIViewController {
                     initSlider()
                 }
                 break
-            case "大圈":
+            case "精华":
                 if imageArr_5.count > 0 {
                     imageArr = imageArr_5
                     imageNameArr = imageNameArr_5
@@ -173,9 +173,9 @@ class LuntanViewController: UIViewController {
         super.viewDidLoad()
         
     
-        self.navigationItem.title = "贴"
+        self.navigationItem.title = "贴子"
         self.navigationItem.hidesBackButton = false
-        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
         
         
         let font_normal = UIFont.systemFont(ofSize: 20)
@@ -275,7 +275,7 @@ class LuntanViewController: UIViewController {
                             self.imageNameArr_4.append(jsonModel[index].slidename)
                             self.imageUrl_4.append(jsonModel[index].slideurl ?? "")
                             break
-                        case "大圈":
+                        case "精华":
                             self.imageArr_5.append(jsonModel[index].slidepicture)
                             self.imageNameArr_5.append(jsonModel[index].slidename)
                             self.imageUrl_5.append(jsonModel[index].slideurl ?? "")

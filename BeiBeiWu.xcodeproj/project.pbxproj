@@ -103,6 +103,7 @@
 		05CB09C32326494C004036E6 /* addr_china.json in Resources */ = {isa = PBXBuildFile; fileRef = 05CB09C12326494B004036E6 /* addr_china.json */; };
 		05CB09C42326494C004036E6 /* addr_china_selected.json in Resources */ = {isa = PBXBuildFile; fileRef = 05CB09C22326494C004036E6 /* addr_china_selected.json */; };
 		05CDEB9B232810FE00424224 /* InformReasonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CDEB9A232810FE00424224 /* InformReasonViewController.swift */; };
+		05D30EB22412F0DB00698948 /* SoundSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D30EB12412F0DB00698948 /* SoundSet.swift */; };
 		05E3C58323004AF700BB8B05 /* LuntanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E3C58223004AF700BB8B05 /* LuntanData.swift */; };
 		740B4CAEF0DF76821B768B06 /* Pods_BeiBeiWu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF485232730B18E4C7AEA4B8 /* Pods_BeiBeiWu.framework */; };
 /* End PBXBuildFile section */
@@ -210,6 +211,7 @@
 		05CB09C12326494B004036E6 /* addr_china.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = addr_china.json; sourceTree = "<group>"; };
 		05CB09C22326494C004036E6 /* addr_china_selected.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = addr_china_selected.json; sourceTree = "<group>"; };
 		05CDEB9A232810FE00424224 /* InformReasonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformReasonViewController.swift; sourceTree = "<group>"; };
+		05D30EB12412F0DB00698948 /* SoundSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSet.swift; sourceTree = "<group>"; };
 		05E3C58223004AF700BB8B05 /* LuntanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuntanData.swift; sourceTree = "<group>"; };
 		15C42B00886E99ADF178D9E6 /* Pods-BeiBeiWu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeiBeiWu.debug.xcconfig"; path = "Target Support Files/Pods-BeiBeiWu/Pods-BeiBeiWu.debug.xcconfig"; sourceTree = "<group>"; };
 		3C099B84176829EE3B77CD43 /* Pods-BeiBeiWu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeiBeiWu.release.xcconfig"; path = "Target Support Files/Pods-BeiBeiWu/Pods-BeiBeiWu.release.xcconfig"; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				05090C69232A3CFF00DAB476 /* HelpCenterViewController.swift */,
 				055A55AA2339A142008A341D /* PrivateSettingViewController.swift */,
 				05B2B01E2352859800EEC142 /* CommonSettingViewController.swift */,
+				05D30EB12412F0DB00698948 /* SoundSet.swift */,
 			);
 			path = Main5Controller;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				05115BD622FC1E0F00D7632A /* FriendsTableViewCell.swift in Sources */,
 				0522B1192300184B00D710C5 /* FabudongtaiViewController.swift in Sources */,
 				0512F530230380F200237ABC /* CircleViewController.swift in Sources */,
+				05D30EB22412F0DB00698948 /* SoundSet.swift in Sources */,
 				05115BCC22F031BE00D7632A /* SousuoViewController.swift in Sources */,
 				057B1FCC22EA8E18000B8811 /* SignInViewController.swift in Sources */,
 				05090C6A232A3CFF00DAB476 /* HelpCenterViewController.swift in Sources */,
@@ -855,7 +859,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeiBeiWu/BeiBeiWu.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U79V8ACC9B;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -867,7 +871,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.4;
 				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "DRUNTIME_IL2CPP=1";
 				PRODUCT_BUNDLE_IDENTIFIER = xin.banghua.xiao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -887,7 +891,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeiBeiWu/BeiBeiWu.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U79V8ACC9B;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -900,7 +904,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.4;
 				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "DRUNTIME_IL2CPP=1";
 				PRODUCT_BUNDLE_IDENTIFIER = xin.banghua.xiao;
 				PRODUCT_NAME = "$(TARGET_NAME)";

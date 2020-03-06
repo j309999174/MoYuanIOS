@@ -14,6 +14,7 @@ class SomeonesluntanViewController: UIViewController {
     var personid:String?
     var userID:String?
     @IBOutlet weak var someoneslluntanTableView: UITableView!
+    
     var isopen:[Bool] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +103,7 @@ extension SomeonesluntanViewController:UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let oneOfList = LuntanData(id: dataList[indexPath.row].id, plateid: dataList[indexPath.row].plateid, platename: dataList[indexPath.row].platename, authid: dataList[indexPath.row].authid, authnickname: dataList[indexPath.row].authnickname, authportrait: dataList[indexPath.row].authportrait, posttip: dataList[indexPath.row].posttip ?? "", posttitle: dataList[indexPath.row].posttitle!, posttext: dataList[indexPath.row].posttext ?? "", postpicture: dataList[indexPath.row].postpicture ?? "", like: dataList[indexPath.row].like ?? "", favorite: dataList[indexPath.row].favorite ?? "", time: dataList[indexPath.row].time!,age: dataList[indexPath.row].age  ?? "?",gender: dataList[indexPath.row].gender  ?? "?",region: dataList[indexPath.row].region  ?? "?",property: dataList[indexPath.row].property ?? "?")
+        let oneOfList = LuntanData(indexPath:indexPath,id: dataList[indexPath.row].id, plateid: dataList[indexPath.row].plateid, platename: dataList[indexPath.row].platename, authid: dataList[indexPath.row].authid, authnickname: dataList[indexPath.row].authnickname, authportrait: dataList[indexPath.row].authportrait, posttip: dataList[indexPath.row].posttip ?? "", posttitle: dataList[indexPath.row].posttitle!, posttext: dataList[indexPath.row].posttext ?? "", postpicture: dataList[indexPath.row].postpicture ?? "", like: dataList[indexPath.row].like ?? "", favorite: dataList[indexPath.row].favorite ?? "", time: dataList[indexPath.row].time!,age: dataList[indexPath.row].age  ?? "?",gender: dataList[indexPath.row].gender  ?? "?",region: dataList[indexPath.row].region  ?? "?",property: dataList[indexPath.row].property ?? "?")
         let oneOfList1 = dataList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "someonesluntanCell") as! LuntanTableViewCell
         if oneOfList.posttext?.count ?? 0 > 50 && isopen[indexPath.row] == false {
@@ -116,16 +117,19 @@ extension SomeonesluntanViewController:UITableViewDelegate,UITableViewDataSource
             cell.delegate = self
             cell.setData(data: oneOfList1)
         }
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isopen[indexPath.row] == false {
-            isopen[indexPath.row] = true
-        }else{
-            isopen[indexPath.row] = false
-        }
-        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+        print("行按钮")
+        print(indexPath.row)
+//        if isopen[indexPath.row] == false {
+//            isopen[indexPath.row] = true
+//        }else{
+//            isopen[indexPath.row] = false
+//        }
+//        someoneslluntanTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         //同一个StoryBoard下
 //        let sb = UIStoryboard(name: "Main4", bundle:nil)
 //        let vc = sb.instantiateViewController(withIdentifier: "PostlistView") as! PostlistViewController
@@ -158,7 +162,14 @@ extension SomeonesluntanViewController:UITableViewDelegate,UITableViewDataSource
 
 extension SomeonesluntanViewController:LuntanTableViewCellDelegate{
     func detail_content(indexPath: IndexPath) {
-        
+        print("详情按钮")
+        print(indexPath.row)
+        if isopen[indexPath.row] == false {
+            isopen[indexPath.row] = true
+        }else{
+            isopen[indexPath.row] = false
+        }
+        someoneslluntanTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
     }
     
  
@@ -194,7 +205,7 @@ extension SomeonesluntanViewController:LuntanTableViewCellDelegate{
             
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)")
-                likebtn.setTitle("赞:\(utf8Text)", for: UIControl.State.normal)
+                likebtn.setTitle("赞:\(utf8Text)👍", for: UIControl.State.normal)
             }
         }
     }

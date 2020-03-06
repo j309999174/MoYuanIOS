@@ -150,18 +150,18 @@ class UserSetViewController: UIViewController {
                 
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print("Data: \(utf8Text)")
-//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
-//                    self.navigationController?.pushViewController(vc, animated: true)
-                    let sb = UIStoryboard(name: "YuanCard", bundle:nil)
-                    let vc = sb.instantiateViewController(withIdentifier: "YuanCard") as! CardViewController
-                    vc.hidesBottomBarWhenPushed = false
-                    self.show(vc, sender: nil)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+                    self.navigationController?.pushViewController(vc, animated: true)
+//                    let sb = UIStoryboard(name: "YuanCard", bundle:nil)
+//                    let vc = sb.instantiateViewController(withIdentifier: "YuanCard") as! CardViewController
+//                    vc.hidesBottomBarWhenPushed = false
+//                    self.show(vc, sender: nil)
                 }
             }
             
         }
     }
-    var ageArray:[String] = ["15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"]
+    var ageArray:[String] = ["18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"]
     var countriesarray:[String] = Array()
     var states:[[市]] = Array()
     override func viewDidLoad() {

@@ -244,6 +244,7 @@ class PersonalViewController: UIViewController {
         
     }
     @objc func startconversationClickFunc() -> Void {
+        print("发起会话拉")
         //同一个StoryBoard下
         let vc = ChatViewController.init(conversationType: .ConversationType_PRIVATE, targetId: userID)!
         vc.title = self.userNickName.text

@@ -70,7 +70,13 @@ class Main5ViewController: UIViewController {
         
     }
     @IBAction func myPromotionCode(_ sender: UIButton) {
-        self.view.makeToast("您的推广码是\(userID!)")
+        //self.view.makeToast("您的推广码是\(userID!)")
+        let sb = UIStoryboard(name: "Personal", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SliderWebview") as! SliderWebviewViewController
+        vc.url = "https://applet.banghua.xin/app/index.php?i=99999&c=entry&do=referralgetscore_page&m=socialchat&userid="+userID!
+        vc.hidesBottomBarWhenPushed = true
+        self.show(vc, sender: nil)
+        
     }
     @IBAction func whoSawMe(_ sender: UIButton) {
         
@@ -126,6 +132,13 @@ class Main5ViewController: UIViewController {
         personImage_click.addGestureRecognizer(imgClick)
         //开启 isUserInteractionEnabled 手势否则点击事件会没有反应
         personImage_click.isUserInteractionEnabled = true
+        
+        
+        // Do any additional setup after loading the view.
+        let imgClick2 = UITapGestureRecognizer(target: self, action: #selector(imAction2))
+        userPortrait_image.addGestureRecognizer(imgClick2)
+        //开启 isUserInteractionEnabled 手势否则点击事件会没有反应
+        userPortrait_image.isUserInteractionEnabled = true
 
         // Do any additional setup after loading the view.
         //更新融云用户信息
@@ -135,7 +148,7 @@ class Main5ViewController: UIViewController {
         let userinfo = RCUserInfo.init(userId: userID, name:userPortrait, portrait: userPortrait)
         RCIM.shared()?.refreshUserInfoCache(userinfo, withUserId: userID)
         
-        initViptime()
+        //initViptime()
 
         let userID = userInfo.string(forKey: "userID")
         let parameters: Parameters = ["myid": userID!]
@@ -201,6 +214,13 @@ class Main5ViewController: UIViewController {
     @objc func imAction() -> Void {
         print("图片点击事件")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPersonalInfo") as! ResetPersonalInfoViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    //点击事件方法
+    @objc func imAction2() -> Void {
+        print("图片点击事件")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Reset") as! ResetViewController
+        vc.titleType = "头像设置"
         self.navigationController?.pushViewController(vc, animated: true)
     }
     /*

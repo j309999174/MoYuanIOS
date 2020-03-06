@@ -310,14 +310,14 @@ class SignInViewController: UIViewController {
 //                       let vc = sb.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
 //                       self.present(vc, animated: true, completion: nil)
                         //首页改为缘分
-//                        let sb = UIStoryboard(name: "Main1", bundle:nil)
-//                        let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
-//                        vc.tabBarController?.tabBar.isHidden = false
-//                        self.show(vc, sender: nil)
-                        let sb = UIStoryboard(name: "YuanCard", bundle:nil)
-                        let vc = sb.instantiateViewController(withIdentifier: "YuanCard") as! CardViewController
-                        vc.hidesBottomBarWhenPushed = false
+                        let sb = UIStoryboard(name: "Main1", bundle:nil)
+                        let vc = sb.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+                        vc.tabBarController?.tabBar.isHidden = false
                         self.show(vc, sender: nil)
+//                        let sb = UIStoryboard(name: "YuanCard", bundle:nil)
+//                        let vc = sb.instantiateViewController(withIdentifier: "YuanCard") as! CardViewController
+//                        vc.hidesBottomBarWhenPushed = false
+//                        self.show(vc, sender: nil)
                     }else{
                         switch self.wxloginiffirst {
                         case "1":
@@ -329,12 +329,12 @@ class SignInViewController: UIViewController {
 //                            vc.tabBarController?.tabBar.isHidden = false
 //                            self.show(vc, sender: nil)
                             //不存在，需要跳转设置页
-//                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
-//                            self.navigationController?.pushViewController(vc, animated: true)
-                            let sb = UIStoryboard(name: "YuanCard", bundle:nil)
-                            let vc = sb.instantiateViewController(withIdentifier: "YuanCard") as! CardViewController
-                            vc.hidesBottomBarWhenPushed = false
-                            self.show(vc, sender: nil)
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShenBian") as! Main1ViewController
+                            self.navigationController?.pushViewController(vc, animated: true)
+//                            let sb = UIStoryboard(name: "YuanCard", bundle:nil)
+//                            let vc = sb.instantiateViewController(withIdentifier: "YuanCard") as! CardViewController
+//                            vc.hidesBottomBarWhenPushed = false
+//                            self.show(vc, sender: nil)
                             break
                         case "2":
                             //不存在，需要跳转设置页

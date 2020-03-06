@@ -17,8 +17,8 @@ class ResetViewController: UIViewController {
     @IBOutlet weak var portraitImage: UIImageView!
     @IBOutlet weak var valueText: UITextField!
     
-    @IBOutlet weak var ageOutlet: UISegmentedControl!
-    @IBAction func ageSegment(_ sender: UISegmentedControl) {
+    @IBOutlet weak var genderOutlet: UISegmentedControl!
+    @IBAction func genderSegment(_ sender: UISegmentedControl) {
         value = sender.titleForSegment(at: sender.selectedSegmentIndex)
     }
     
@@ -51,7 +51,7 @@ class ResetViewController: UIViewController {
         }
     }
     
-    var ageArray:[String] = ["15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"]
+    var ageArray:[String] = ["18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"]
     var countriesarray:[String] = Array()
     var states:[[市]] = Array()
     override func viewDidLoad() {
@@ -63,7 +63,7 @@ class ResetViewController: UIViewController {
             portraitImage.isHidden = false
             break
         case "性别设置":
-            ageOutlet.isHidden = false
+            genderOutlet.isHidden = false
             value = "男"
             typeLabel.text = titleType
             break
@@ -126,6 +126,64 @@ class ResetViewController: UIViewController {
         } catch let error as Error? {
             print("读取本地数据出现错误!",error ?? "")
         }
+        
+        let userInfo = UserDefaults()
+        let myid = userInfo.string(forKey: "userID")
+        //获取用户信息
+        let parameters: Parameters = ["userid": myid!]
+        Alamofire.request("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=personage&m=socialchat", method: .post, parameters: parameters).response { response in
+            print("Request: \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Error: \(String(describing: response.error))")
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)")
+            }
+            if let data = response.data {
+                let decoder = JSONDecoder()
+                do {
+                    let jsonModel = try decoder.decode(PersonUserInfo.self, from: data)
+                    self.portraitImage.sd_setImage(with: URL(string: jsonModel.portrait!), placeholderImage: UIImage(named: "placeholder.png"))
+                    
+                    
+                    switch self.titleType {
+                    case "头像设置":
+                        self.portraitImage.sd_setImage(with: URL(string: jsonModel.portrait!), placeholderImage: UIImage(named: "placeholder.png"))
+                        break
+                    case "性别设置":
+                        switch jsonModel.gender {
+                        case "男":
+                            self.genderOutlet.selectedSegmentIndex = 0
+                        case "女":
+                            self.genderOutlet.selectedSegmentIndex = 1
+                        default:
+                            self.genderOutlet.selectedSegmentIndex = 0
+                        }
+                        break
+                    case "属性设置":
+                        switch jsonModel.property {
+                        case "Z":
+                            self.propertyOutlet.selectedSegmentIndex = 0
+                        case "B":
+                            self.propertyOutlet.selectedSegmentIndex = 1
+                        case "双":
+                            self.propertyOutlet.selectedSegmentIndex = 2
+                        default:
+                            self.propertyOutlet.selectedSegmentIndex = 0
+                        }
+                        break
+                    case "昵称设置":
+                        self.valueText.placeholder = jsonModel.nickname
+                        break
+                    default:
+                        break
+                    }
+                } catch {
+                    print("解析 JSON 失败")
+                }
+            }
+        }
+        
     }
     //点击事件方法
     @objc func imAction() -> Void {

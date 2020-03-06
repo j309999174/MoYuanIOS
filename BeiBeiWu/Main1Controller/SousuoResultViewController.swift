@@ -190,8 +190,8 @@ extension SousuoResultViewController:UITableViewDelegate,UITableViewDataSource{
         //不同的StoryBoard下
         let sb = UIStoryboard(name: "Personal", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "Personal") as! PersonalViewController
-        vc.userID = dataList[indexPath.row].userID
-        self.present(vc, animated: true, completion: nil)
+        vc.userID = dataList[indexPath.row].userID 
+        self.show(vc, sender: nil)
     }
     
     
