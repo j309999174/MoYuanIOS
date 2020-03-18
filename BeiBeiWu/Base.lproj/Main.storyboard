@@ -35,7 +35,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7aF-Qc-c5r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1526" y="27"/>
+            <point key="canvasLocation" x="-1444" y="31"/>
         </scene>
         <!--Main3-->
         <scene sceneID="afl-Ya-bXh">
@@ -45,7 +45,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l6k-6M-lMT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1231" y="27"/>
+            <point key="canvasLocation" x="-1197" y="31"/>
         </scene>
         <!--Main4-->
         <scene sceneID="avK-JH-YAe">
@@ -78,8 +78,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="gKZ-ZQ-gBE" kind="relationship" relationship="viewControllers" id="Daq-0a-1k4"/>
-                        <segue destination="I3P-3F-CSd" kind="relationship" relationship="viewControllers" id="LCS-LL-dJI"/>
                         <segue destination="PJV-Oj-ATN" kind="relationship" relationship="viewControllers" id="St0-iS-IiZ"/>
+                        <segue destination="I3P-3F-CSd" kind="relationship" relationship="viewControllers" id="LCS-LL-dJI"/>
                         <segue destination="eME-Q5-TmC" kind="relationship" relationship="viewControllers" id="sAG-YT-ETb"/>
                         <segue destination="phI-3H-bqk" kind="relationship" relationship="viewControllers" id="4nH-db-TLv"/>
                     </connections>

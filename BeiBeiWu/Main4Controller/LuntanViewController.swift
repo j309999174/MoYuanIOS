@@ -362,6 +362,7 @@ class LuntanViewController: UIViewController {
                     self.view.makeToast("此版块需要开通会员")
                 }else{
                     self.dataList.removeAll()
+                    self.dataList_original.removeAll()
                     self.imageArr.removeAll()
                     self.imageNameArr.removeAll()
                     self.imageUrl.removeAll()

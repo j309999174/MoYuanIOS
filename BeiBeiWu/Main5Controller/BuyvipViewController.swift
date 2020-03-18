@@ -33,6 +33,7 @@ class BuyvipViewController: UIViewController {
 
     @IBOutlet weak var buyvipTableView: UITableView!
     
+    var if_submit = 0
     
     var products = [SKProduct]()
     
@@ -42,6 +43,7 @@ class BuyvipViewController: UIViewController {
     var dataList:[BuyvipData] = []
     
     var system_switch = "0"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +61,7 @@ class BuyvipViewController: UIViewController {
         }
         
         
-        isHiddenBuyVip()
+        //isHiddenBuyVip()
         
         
         //支付通知
@@ -126,12 +128,34 @@ extension BuyvipViewController:SKProductsRequestDelegate{
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         print("获取的vip数量\(response.products.count)")
         if !response.products.isEmpty {
+            var viptime = ""
         
            products = response.products
+            for product in products {
+                switch product.localizedTitle {
+                case "钻石会员":
+                    viptime = "30"
+                    break
+                case "黑金会员":
+                    viptime = "180"
+                    break
+                case "白金会员":
+                    viptime = "360"
+                    break
+                default:
+                    break
+                }
+               // Handle any invalid product identifiers as appropriate.
+                let cell = BuyvipData(vipid: product.productIdentifier, vipname: product.localizedTitle, viptime: viptime, vipprice: product.price.stringValue)
+                self.dataList.append(cell)
+                
+            }
+            
            // Custom method.
             DispatchQueue.main.async {
                 print("main refresh")
                 //self.producttableview.reloadData()
+                self.buyvipTableView.reloadData()
             }
            
         }
@@ -160,39 +184,69 @@ extension BuyvipViewController:UITableViewDelegate,UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let oneOfList = dataList[indexPath.row]
-        print("vip数量\(products.count)")
-        switch oneOfList.vipname {
-        case "钻石会员":
-            for index in 0...2 {
-                let product = products[index]
-                if product.productIdentifier == "vip6" {
-                    let payment = SKMutablePayment(product: product)
-                    payment.quantity = 1
-                    SKPaymentQueue.default().add(payment)
-                }
-            }
-        case "黑金会员":
-            for index in 0...2 {
-                let product = products[index]
-                if product.productIdentifier == "vip5" {
-                    let payment = SKMutablePayment(product: product)
-                    payment.quantity = 1
-                    SKPaymentQueue.default().add(payment)
-                }
-            }
-        case "白金会员":
-            for index in 0...2 {
-                let product = products[index]
-                if product.productIdentifier == "vip4" {
-                    let payment = SKMutablePayment(product: product)
-                    payment.quantity = 1
-                    SKPaymentQueue.default().add(payment)
-                }
-            }
-        default:
-            break
+        
+        print("是否可点击\(if_submit)")
+        if if_submit == 0 {
+            let payment = SKMutablePayment(product: products[indexPath.row])
+            payment.quantity = 1
+            SKPaymentQueue.default().add(payment)
+            
+            if_submit = 1
         }
+        
+        var time = 3
+        let codeTimer = DispatchSource.makeTimerSource(flags: .init(rawValue: 0), queue: DispatchQueue.global())
+        codeTimer.schedule(deadline: .now(), repeating: .milliseconds(1000))  //此处方法与Swift 3.0 不同
+        codeTimer.setEventHandler {
+            
+            time = time - 1
+            
+            if time == 0 {
+                codeTimer.cancel()
+                DispatchQueue.main.async {
+                    self.if_submit = 0
+                    print("计时完成\(self.if_submit)")
+                }
+                return
+            }
+            
+        }
+        codeTimer.activate()
+        
+//        let oneOfList = dataList[indexPath.row]
+//        print("vip数量\(products.count)")
+//
+//        switch oneOfList.vipname {
+//        case "钻石会员":
+//            for index in 0...2 {
+//                let product = products[index]
+//                if product.productIdentifier == "vip6" {
+//                    let payment = SKMutablePayment(product: product)
+//                    payment.quantity = 1
+//                    SKPaymentQueue.default().add(payment)
+//                }
+//            }
+//        case "黑金会员":
+//            for index in 0...2 {
+//                let product = products[index]
+//                if product.productIdentifier == "vip5" {
+//                    let payment = SKMutablePayment(product: product)
+//                    payment.quantity = 1
+//                    SKPaymentQueue.default().add(payment)
+//                }
+//            }
+//        case "白金会员":
+//            for index in 0...2 {
+//                let product = products[index]
+//                if product.productIdentifier == "vip4" {
+//                    let payment = SKMutablePayment(product: product)
+//                    payment.quantity = 1
+//                    SKPaymentQueue.default().add(payment)
+//                }
+//            }
+//        default:
+//            break
+//        }
         
     }
     

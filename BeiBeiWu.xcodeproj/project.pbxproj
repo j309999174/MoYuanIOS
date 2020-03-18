@@ -871,7 +871,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.6;
 				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "DRUNTIME_IL2CPP=1";
 				PRODUCT_BUNDLE_IDENTIFIER = xin.banghua.xiao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -904,7 +904,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.6;
 				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "DRUNTIME_IL2CPP=1";
 				PRODUCT_BUNDLE_IDENTIFIER = xin.banghua.xiao;
 				PRODUCT_NAME = "$(TARGET_NAME)";

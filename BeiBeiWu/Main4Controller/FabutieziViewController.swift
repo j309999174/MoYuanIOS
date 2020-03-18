@@ -42,6 +42,8 @@ class FabutieziViewController: UIViewController {
         postTitleString = self.postTitle.text!
         postContentString = self.postContent.text!
         
+        self.view.makeToast("已发布成功，等待审核")
+        
         Alamofire.upload( multipartFormData: { multipartFormData in
             multipartFormData.append(userID!.data(using: String.Encoding.utf8)!, withName: "authid")
             multipartFormData.append(self.postTitleString!.data(using: String.Encoding.utf8)!, withName: "posttitle")
@@ -65,6 +67,7 @@ class FabutieziViewController: UIViewController {
                     if let data = response.data, let utf8Text = String(data: data, encoding: .utf8){
                         print("Data: \(utf8Text)")
                         //同一个StoryBoard下
+                        Thread.sleep(forTimeInterval: 1.5)
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Luntan") as! LuntanViewController
                         self.navigationController?.pushViewController(vc, animated: true)
                     }

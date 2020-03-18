@@ -19,6 +19,7 @@ struct PersonUserInfo: Codable {
     let gender: String?
     let property: String?
     let region: String?
+    let signature: String?
     let vip: String?
     let latitude:String?
     let longitude:String?
@@ -207,13 +208,12 @@ class ConversationSettingViewController: UIViewController{
                 }
             }
         }
-        
-
-        
-        if RCIMClient().getConversation(RCConversationType.ConversationType_PRIVATE, targetId: userid)!.isTop {
+        if (RCIMClient().getConversation(RCConversationType.ConversationType_PRIVATE, targetId: userid) != nil) {
+        if RCIMClient().getConversation(RCConversationType.ConversationType_PRIVATE, targetId: userid).isTop {
             iftop.isOn = true
         }else{
             iftop.isOn = false
+        }
         }
         
         RCIMClient().getConversationNotificationStatus(RCConversationType.ConversationType_PRIVATE, targetId: userid, success: { (RCConversationNotificationStatus) in

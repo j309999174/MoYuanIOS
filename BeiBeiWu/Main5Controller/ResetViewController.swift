@@ -22,6 +22,8 @@ class ResetViewController: UIViewController {
         value = sender.titleForSegment(at: sender.selectedSegmentIndex)
     }
     
+    @IBOutlet weak var current_address: UILabel!
+    
     @IBOutlet weak var agepickview: UIPickerView!
     @IBOutlet weak var regionpickview: UIPickerView!
     
@@ -91,6 +93,7 @@ class ResetViewController: UIViewController {
         case "地区设置":
             valueText.text = "北京-北京"
             regionpickview.isHidden = false
+            current_address.isHidden = false
             valueText.placeholder = titleType
             typeLabel.text = titleType
             break
@@ -174,6 +177,16 @@ class ResetViewController: UIViewController {
                         break
                     case "昵称设置":
                         self.valueText.placeholder = jsonModel.nickname
+                        break
+                    case "签名设置":
+                        self.valueText.placeholder = jsonModel.signature
+                        break
+                    case "地区设置":
+                        self.current_address.text = "当前地址："+(jsonModel.region ?? "北京-北京")
+                        break
+                    case "年龄设置":
+                        self.valueText.placeholder = jsonModel.age
+                        self.agepickview.selectRow(self.ageArray.index(of: jsonModel.age ?? "18") ?? 0, inComponent: 0, animated: false)
                         break
                     default:
                         break
